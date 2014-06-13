@@ -25,6 +25,17 @@
 ## i3
 .i3/*.sock
 
+### .config {{{
+# .config/fcitx
+.config/fcitx/clipboard/
+.config/fcitx/data
+.config/fcitx/dbus
+.config/fcitx/log
+.config/fcitx/pinyin
+.config/fcitx/table
+
+### .config }}}
+
 
 ### C {{{
 # Object files

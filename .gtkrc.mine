@@ -6,10 +6,10 @@
 gtk-font-name = "Sans 10"
 
 ## theme
-#gtk-theme-name = "Clearlooks"
+gtk-theme-name = "Clearlooks"
 #gtk-theme-name = "FlatStudioLight"
 #gtk-theme-name = "FlatStudioGray"
-gtk-theme-name = "FlatStudioDark"
+#gtk-theme-name = "FlatStudioDark"
 
 ## icon
 #gtk-icon-theme-name = "AwOken"
