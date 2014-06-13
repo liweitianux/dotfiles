@@ -1,0 +1,25 @@
+##
+## ~/.gtkrc.mine
+##
+
+## font
+gtk-font-name = "Sans 10"
+
+## theme
+#gtk-theme-name = "Clearlooks"
+#gtk-theme-name = "FlatStudioLight"
+#gtk-theme-name = "FlatStudioGray"
+gtk-theme-name = "FlatStudioDark"
+
+## icon
+#gtk-icon-theme-name = "AwOken"
+gtk-icon-theme-name = "AwOkenWhite"
+#gtk-icon-theme-name = "AwOkenDark"
+
+## toolbar
+# GTK_TOOLBAR_ICONS: only icons
+# GTK_TOOLBAR_TEXT: only text
+# GTK_TOOLBAR_BOTH: both icon and text
+# GTK_TOOLBAR_BOTH_HORIZ: icon and text next to the icon
+gtk-toolbar-style = GTK_TOOLBAR_ICONS
+

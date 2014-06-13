@@ -1,0 +1,21 @@
+# ~/.lftp/rc
+# ~/.lftprc
+#
+# lftp configurations
+#
+# Weitian LI <liweitianux@gmail.com>
+# 2014/05/17
+#
+
+### character set {{{
+set file:charset "utf-8"
+set ftp:charset "gbk"
+### charset }}}
+
+### ssl {{{
+# fix certificate verification not trusted
+set ssl:verify-certificate no
+### ssl }}}
+
+
+#  vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=lftp: #

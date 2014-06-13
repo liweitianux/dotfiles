@@ -1,0 +1,23 @@
+;;; ~/.sbclrc
+
+;;; The following lines added by ql:add-to-init-file:
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames "~/.quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
+;;; http://common-lisp.net/project/linedit/
+;;; Check for --no-linedit command-line option.
+(if (member "--no-linedit" sb-ext:*posix-argv* :test 'equal)
+    (setf sb-ext:*posix-argv* 
+	  (remove "--no-linedit" sb-ext:*posix-argv* :test 'equal))
+    (when (interactive-stream-p *terminal-io*)
+      (require :sb-aclrepl)
+      (require :linedit)
+      (funcall (intern "INSTALL-REPL" :linedit) :wrap-current t)))
+
+;;; https://gist.github.com/bdsatish/5403002
+;; Don't break into debugger, but just display error message and return to top-level loop (REPL)
+(setf *debugger-hook* #'(lambda (c h) (declare (ignore h)) (print c) (abort)))
+

@@ -1,0 +1,89 @@
+# — Conky settings — #
+
+background yes
+
+update_interval 1
+total_run_times 0
+net_avg_samples 2
+
+override_utf8_locale yes
+
+double_buffer yes
+no_buffers yes
+
+text_buffer_size 2048
+imlib_cache_size 0
+
+temperature_unit celsius
+
+# — Window specifications — #
+
+own_window_class Conky
+own_window yes
+own_window_type desktop
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+border_inner_margin 0
+border_outer_margin 0
+
+minimum_size 300 330
+maximum_width 300
+
+alignment top_right
+
+gap_x 30
+gap_y 75
+
+
+# — Graphics settings — #
+draw_shades no
+draw_outline no
+draw_borders no
+draw_graph_borders no
+
+# — Text settings — #
+use_xft yes
+xftfont hooge 05_53:size=6
+xftalpha 0.5
+
+default_color FFFFFF
+
+uppercase no
+use_spacer right
+
+color0 white
+color1 orange
+color2 green
+
+# — Lua Load — #
+
+lua_load $HOME/.conky/cronograph/scripts/clock_rings.lua
+lua_draw_hook_pre clock_rings
+lua_load $HOME/.conky/cronograph/scripts/multi_rings.lua
+lua_draw_hook_post main
+
+TEXT
+${execi 600 sh $HOME/.conky/cronograph/accuweather/accuweather.sh}
+#${voffset 29}${offset 120}BAT:
+${voffset 29}${goto 109}GENTOO${goto 157}Linux
+${voffset 17}${goto 65}${font hooge 05_53:size=12}${time %H:%M}${font}${goto 185}UPTIME:
+${voffset 2}${goto 65}${time %a %d %b}${goto 185}${uptime}
+${voffset 2}${goto 65}${time %Y}
+${voffset -6}${goto 145}HD
+${voffset 12}${alignc}${fs_free}/${fs_size}
+${voffset 36}${goto 91}${cpu cpu0}%${goto 221}${memperc}%
+${voffset 10}${goto 76}CPU${goto 205}MEM
+${voffset 16}${goto 82}${font hooge 05_53:size=12}${execpi 600 sed -n '4p' $HOME/.conky/cronograph/accuweather/curr_cond}°C${font}${voffset -30}${goto 125}${font ConkyWeather:size=40}${execpi 600 sed -n '2p' $HOME/.conky/cronograph/accuweather/curr_cond}${font}${voffset -16}${goto 185}${execpi 600 sed -n '3p' $HOME/.conky/cronograph/accuweather/curr_cond}${voffset 12}${goto 185}${font ConkyWeather:size=20}${voffset 1}${goto 80}${execpi 600 sed -n '7p' $HOME/.conky/cronograph/accuweather/tod_ton}${goto 135}${execpi 600 sed -n '12p' $HOME/.conky/cronograph/accuweather/tod_ton}${goto 185}${execpi 600 sed -n '17p' $HOME/.conky/cronograph/accuweather/tod_ton}${font}${voffset 6}${goto 84}${execpi 600 sed -n '9p' $HOME/.conky/cronograph/accuweather/tod_ton}°/${execpi 600 sed -n '10p' $HOME/.conky/cronograph/accuweather/tod_ton}°${goto 140}${execpi 600 sed -n '14p' $HOME/.conky/cronograph/accuweather/tod_ton}°/${execpi 600 sed -n '15p' $HOME/.conky/cronograph/accuweather/tod_ton}°${goto 190}${execpi 600 sed -n '19p' $HOME/.conky/cronograph/accuweather/tod_ton}°/${execpi 600 sed -n '20p' $HOME/.conky/cronograph/accuweather/tod_ton}°${voffset 7}${goto 85}${execpi 600 sed -n '6p' $HOME/.conky/cronograph/accuweather/tod_ton}${goto 140}${execpi 600 sed -n '11p' $HOME/.conky/cronograph/accuweather/tod_ton}${goto 190}${execpi 600 sed -n '16p' $HOME/.conky/cronograph/accuweather/tod_ton}
+${if_match ${battery_percent BAT0}>0}${if_match ${battery_percent BAT0}<=15}${image $HOME/.conky/cronograph/images/Red.png -p 129,18 -s 40x40}${endif}${endif}
+${if_match ${battery_percent BAT0}>15}${if_match ${battery_percent BAT0}<=20}${image $HOME/.conky/cronograph/images/Orange.png -p 129,18 -s 40x40}${endif}${endif}
+${if_match ${battery_percent BAT0}>20}${if_match ${battery_percent BAT0}<=35}${image $HOME/.conky/cronograph/images/Yellow.png -p 129,18 -s 40x40}${endif}${endif}
+${if_match ${battery_percent BAT0}>35}${if_match ${battery_percent BAT0}<=100}${image $HOME/.conky/cronograph/images/Dark_Green.png -p 129,18 -s 40x40}${endif}${endif}
+${execpi 30 cat $HOME/.conky/cronograph/scripts/blinkingLED}
+## mpd ##
+${if_mpd_playing}${voffset 6}${goto 10}${font Sans:size=8:bold}${mpd_artist}${font}${voffset -5}${font Sans:size=8} - ${mpd_title}${font}
+${voffset 4}${goto 10}${mpd_bar 5,220}${alignr 10}${mpd_elapsed}/${mpd_length}
+${else}${voffset 6}${goto 10}${font hooge 05_53:size=8}MPD: stopped${font}
+${endif}
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=conkyrc: #

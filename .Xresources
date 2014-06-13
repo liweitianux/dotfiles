@@ -1,0 +1,315 @@
+! ---------------------------------------------------------
+! $HOME/.Xresources
+!
+! Weitian LI <liweitianux@gmail.com>
+! 2014/05/10
+!
+! Syntax:
+! name.Class.resource: value
+!
+! Ref: https://wiki.archlinux.org/index.php/X_resources
+! ---------------------------------------------------------
+
+!!! xft settings {{{
+Xft.dpi:            96
+Xft.antialias:      true
+Xft.rgba:           rgb
+Xft.hinting:        true
+Xft.hintstyle:      hintmedium
+!!! xft settings }}}
+
+!!! color scheme {{{
+!! foreground & background
+! XXX: NOT set background and foreground globally
+!      to avoid conflicts with Tcl/Tk applications. (e.g. ds9)
+!*background:                #1b1b1b
+!*foreground:                #e0e0e0
+!! other colors
+*cursorColor:               #eeeeee
+*colorBD:                   #cfcfcf
+*colorUL:                   #969696
+*colorIT:                   #969696
+!
+!! zenburn: http://xcolors.net/dl/zenburn {{{
+! Black
+*color0:                    #1e2320
+*color8:                    #709080
+! Red
+*color1:                    #705050
+*color9:                    #dca3a3
+! Green
+*color2:                    #60b48a
+*color10:                   #c3bf9f
+! Yellow
+*color3:                    #dfaf8f
+*color11:                   #f0dfaf
+! Blue
+*color4:                    #506070
+*color12:                   #94bff3
+! Magenta
+*color5:                    #dc8cc3
+*color13:                   #ec93d3
+! Cyan
+*color6:                    #8cd0d3
+*color14:                   #93e0e3
+! White
+*color7:                    #dcdccc
+*color15:                   #ffffff
+! zenburn }}}
+!
+!! clound: http://xcolors.net/dl/cloud {{{
+!!black
+!*color0:                    #222827
+!*color8:                    #5D6F74
+!!red
+!*color1:                    #D5A8E3
+!*color9:                    #CD749C
+!!green
+!*color2:                    #9C75DD
+!*color10:                   #63B0B0
+!!yellow
+!*color3:                    #9898AE
+!*color11:                   #C0C0DD
+!!blue
+!*color4:                    #654A96
+!*color12:                   #5786BC
+!!magenta
+!*color5:                    #625566
+!*color13:                   #3F3442
+!!cyan
+!*color6:                    #A9D1DF
+!*color14:                   #849DA2
+!!white
+!*color7:                    #E6EBE5
+!*color15:                   #D9D6CF
+!! clound }}}
+!
+!! kori colorscheme: http://dotshare.it/dots/659/ {{{
+!!Black
+!*color0:                    #3D3D3D
+!*color8:                    #4D4D4D 
+!!Red
+!*color1:                    #6673BF
+!*color9:                    #899AFF 
+!!Green
+!*color2:                    #3EA290
+!*color10:                   #52AD91
+!!Yellow
+!*color3:                    #B0EAD9
+!*color11:                   #98C9BB
+!!Blue
+!*color4:                    #31658C
+!*color12:                   #477AB3
+!!Magenta
+!*color5:                    #596196
+!*color13:                   #7882BF
+!!Cyan
+!*color6:                    #8292B2
+!*color14:                   #95A7CC
+!!White
+!*color7:                    #C8CACC
+!*color15:                   #EDEFF2
+!! }}}
+!
+!! unknown {{{
+!*color0:                    #353535
+!*color8:                    #666666
+!!red
+!*color1:                    #D81860
+!*color9:                    #F00060
+!!green
+!*color2:                    #B7CE42
+!*color10:                   #BDE077
+!!brown/yellow
+!*color3:                    #FEA63C
+!*color11:                   #FFE863
+!!blue
+!*color4:                    #6F99B4
+!*color12:                   #7C96B0
+!!magenta
+!*color5:                    #8B7B8B
+!*color13:                   #D8BFD8
+!!cyan
+!*color6:                    #A7A15E
+!*color14:                   #F0E68C
+!!white
+!*color7:                    #DDDDDD
+!*color15:                   #FFFFFF
+!! }}}
+!
+!!! color scheme }}}
+ 
+!!! rxvt-unicode settings {{{
+!! urxvt background true transparent
+! set to 32-bit for real transparency (compositing required [see xcompmgr])
+! xdpyinfo | grep Composite
+URxvt.depth:                32
+! transparent=0000, opaque=ffff
+URxvt.background:           rgba:1111/1111/1111/dddd
+! foreground
+URxvt.foreground:           #e0e0e0
+!
+!! urxvt font settings
+!URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=16,xft:WenQuanYi Micro Hei Mono:pixelsize=16
+URxvt.font:                 xft:Terminus:size=12,xft:WenQuanYi Bitmap Song:size=10
+URxvt.xftAntialias:         true
+!
+!! urxvt settings
+!URxvt.termName:             rxvt-256color
+!URxvt.title:                aly rxvt
+URxvt.geometry:             92x26
+URxvt.cursorBlink:          true
+URxvt.underlineColor:       green
+URxvt.buffered:             true
+URxvt.jumpScroll:           false
+URxvt.secondaryScroll:      true
+URxvt.saveLines:            4000
+URxvt.scrollBar:            true
+URxvt.scrollBar_right:      true
+URxvt.scrollstyle:          plain
+URxvt.scrollTtyKeypress:    true
+URxvt.scrollTtyOutput:      false
+! scroll with scrollback buffer
+URxvt.scrollWithBuffer:     true
+!URxvt.scrollColor:          AntiqueWhite
+!
+!! urxvt keysym
+! M: Meta   S; Shift   C: Control
+! Mod4: Win
+! \002: Control-B
+! \015: Enter
+!
+!! urxvt perl extension settings
+URxvt.perl-lib:             ~/.urxvt/ext/
+URxvt.perl-ext-common:      default,tabbed,clipboard,keyboard-select,url-select
+!! tabbed color
+URxvt.tabbed.tabbar-fg:     5
+URxvt.tabbed.tabbar-bg:     0
+URxvt.tabbed.tab-fg:        14
+URxvt.tabbed.tab-bg:        0
+!! copy/paste
+URxvt.keysym.Mod4-c:        perl:clipboard:copy
+URxvt.keysym.Mod4-v:        perl:clipboard:paste
+URxvt.keysym.Mod4-S-v:      perl:clipboard:paste_escaped
+URxvt.clipboard.copycmd:    xclip -i -selection clipboard
+URxvt.clipboard.pastecmd:   xclip -o -selection clipboard
+!! keyboard-select
+URxvt.keysym.Mod4-Escape:   perl:keyboard-select:activate
+URxvt.keysym.Mod4-s:        perl:keyboard-select:search
+!! url-select
+URxvt.keysym.Mod4-u:        perl:url-select:select_next
+URxvt.url-select.underline: true
+URxvt.url-select.button:    1
+URxvt.url-select.launcher:  firefox -new-tab
+!
+!! urxvt misc settings
+!URxvt.loginShell:           true
+URxvt.mapAlert:             true
+URxvt.pointerBlank:         true
+URxvt.urgentOnBell:         true
+URxvt.utmpInhibit:          true
+! preeditType: OverTheSpot, OffTheSpot, Root
+URxvt.preeditType:          root
+! reduce the distance between characters
+!URxvt.letterSpace:          -1
+URxvt.inputMethod:          fcitx
+!!! rxvt-unicdoe settings }}}
+
+!!! xterm settings {{{
+XTerm.background:           #1b1b1b
+XTerm.foreground:           #e0e0e0
+!XTerm.geometry:             80x25
+!XTerm.faceName:             xft:Dejavu Sans Mono:pixelsize=16:antialias=true
+XTerm.faceName:             xft:Terminus:pixelsize=18
+XTerm.dynamicColors:        true
+XTerm.utf8:                 2
+XTerm.eightBitInput:        true
+XTerm.saveLines:            4000
+XTerm.scrollTtyOutput:      false
+XTerm.scrollKey:            true
+XTerm.scrollBar:            true
+XTerm.rightScrollBar:       true
+!XTerm.loginShell:           true
+XTerm.jumpScroll:           false
+XTerm.multiScroll:          true
+XTerm.toolBar:              true
+!!! xterm settings }}}
+
+!!! Xcursor {{{
+! Vanilla-DMZ: white
+! Vanilla-DMZ-AA: black
+!Xcursor.theme:              Vanilla-DMZ-AA
+Xcursor.theme:              Vanilla-DMZ
+Xcursor.size:		    32
+!!! Xcursor }}}
+
+!!! xfontsel {{{
+XFontSel.background:        #1b1b1b
+XFontSel.foreground:        #e0e0e0
+!!! xfontsel }}}
+
+!!! x11-ssh-askpass {{{
+x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+x11-ssh-askpass*background:             #000000
+x11-ssh-askpass*foreground:             #ffffff
+x11-ssh-askpass.Button*background:      #000000
+x11-ssh-askpass.Indicator*foreground:   #ff9900
+x11-ssh-askpass.Indicator*background:   #090909
+x11-ssh-askpass*topShadowColor:         #000000
+x11-ssh-askpass*bottomShadowColor:      #000000
+x11-ssh-askpass.*borderWidth:           1
+!!! x11-ssh-askpass }}}
+
+!!! xscreensaver settings {{{
+!! font settings
+xscreensaver.Dialog.headingFont:            -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.bodyFont:               -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.labelFont:              -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.unameFont:              -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.buttonFont:             -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.Dialog.dateFont:               -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
+xscreensaver.passwd.passwdFont:             -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
+!! general dialog box (affects main hostname, username, password text)
+xscreensaver.Dialog.foreground:             #ffffff
+xscreensaver.Dialog.background:             #111111
+xscreensaver.Dialog.topShadowColor:         #111111
+xscreensaver.Dialog.bottomShadowColor:      #111111
+xscreensaver.Dialog.Button.foreground:      #666666
+xscreensaver.Dialog.Button.background:      #ffffff
+!! username/password input box and date text colour
+xscreensaver.Dialog.text.foreground:        #666666
+xscreensaver.Dialog.text.background:        #ffffff
+xscreensaver.Dialog.internalBorderWidth:    24
+xscreensaver.Dialog.borderWidth:            20
+xscreensaver.Dialog.shadowThickness:        2
+!! timeout bar (background is actually determined by Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground: #ff0000
+xscreensaver.passwd.thermometer.background: #000000
+xscreensaver.passwd.thermometer.width:      8
+!! datestamp format - see strftime(3) manual page for details
+xscreensaver.dateFormat:                    %I:%M%P %a %b %d, %Y
+!! preferences
+xscreensaver.mode:                          blank
+xscreensaver.timeout:                       0:10:00
+xscreensaver.cycle:                         0:10:00
+xscreensaver.lock:                          True
+xscreensaver.lockTimeout:                   0:01:00
+xscreensaver.passwdTimeout:                 0:00:30
+xscreensaver.dpmsEnabled:                   True
+xscreensaver.dpmsQuickoff:                  True
+xscreensaver.dpmsStandby:                   0:10:00
+xscreensaver.dpmsSuspend:                   0:10:00
+xscreensaver.dpmsOff:                       0:15:00
+xscreensaver.fade:                          True
+xscreensaver.unfade:                        False
+xscreensaver.fadeSeconds:                   0:00:03
+xscreensaver.fadeTicks:                     20
+!! user switching from lock screen
+! Lightdm: dm-tool switch-to-greeter
+! LXDM:    lxdm -c USER_SWITCH
+! GDM:     gdmflexiserver -ls
+! KDM:     kdmctl reverse
+xscreensaver.newLoginCommand:               dm-tool switch-to-greeter
+!!! xscreensaver }}}
+
+! vim: set ts=8 sw=4 tw=78 ft=xdefaults: !

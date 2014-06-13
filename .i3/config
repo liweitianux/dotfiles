@@ -1,0 +1,362 @@
+###########################################################
+## ~/.i3/config
+##
+## i3 config file (v4)
+## Ref: http://i3wm.org/docs/userguide.html
+##
+## Weitian LI <liweitianux@gmail.com>
+## 2014/05/10
+###########################################################
+
+###### NOTES ###### {{{
+# To get a config file with the same key positions, but for your current
+# layout, use the `i3-config-wizard'
+###### NOTES ###### }}}
+
+###### variables ###### {{{
+## modifier
+# Mod1: Alt
+# Mod4: Win
+set $mod Mod1
+set $sup Mod4
+
+# variables used in this config
+set $i3_scripts ~/.i3/scripts
+set $i3_images  ~/.i3/images
+
+# screenshots directory
+set $shots_dir  ~/pictures/screenshots
+###### variables ###### }}}
+
+###### settings ###### {{{
+# Font for window titles. (also for bar if not specified)
+# ISO 10646: Unicode
+# Use pango to choose FreeType fonts
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font pango:DejaVu Sans Mono 10
+font pango:Terminus, WenQuanYi Bitmap Song, Icons, FontAwesome, 10
+
+# use `Mouse+$mod' to drag floating windows
+floating_modifier $mod
+
+# focus follows mouse (default yes)
+#focus_follows_mouse no
+
+# timeout of urgency hint on workspace change (default 500ms)
+force_display_urgency_hint 1000 ms
+
+# ipc (`i3-msg' to run i3 commands)
+ipc-socket ~/.i3/i3-ipc.sock
+###### settings ###### }}}
+
+###### appearance ###### {{{
+# border style
+#new_window 1pixel
+bindsym $mod+t border normal
+bindsym $mod+y border 1pixel
+bindsym $mod+u border none
+
+# orientation for new workspaces
+default_orientation auto
+
+# hide vertical borders adjacent to the screen edge
+#hide_edge_borders vertical
+
+### colors
+## solarized colorscheme (customized) {{{
+client.background        #1e2320
+# colorclass             border  background text    indicator
+client.focused           #859900 #859900    #fdf6e3 #2e9ef4
+client.focused_inactive  #268bd2 #268bd2    #fdf6e3 #484e50
+client.unfocused         #93a1a1 #93a1a1    #fdf6e3 #292d2e
+client.urgent            #cb4b16 #cb4b16    #fdf6e3 #2e9ef4
+## colorscheme }}}
+#
+###### appearance ###### }}}
+
+###### workspace ###### {{{
+# name workspace
+set $ws1  1gentoo
+set $ws2  2term
+set $ws3  3vim
+set $ws4  4web
+set $ws5  5work
+set $ws6  6media
+set $ws7  7game
+set $ws8  8sys
+set $ws9  9misc
+set $ws0  0float
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws0
+# auto back-and-forth when switched to the current workspace
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws0
+# move to provided workspace
+bindsym $mod+Shift+m exec i3-input -F 'move container to workspace "%s"' -P 'move to workspace: '
+
+# assign workspace for applications
+assign [class="Gvim"] $ws3
+assign [class="Firefox" instance="Navigator"] $ws4
+assign [class="Vlc"] $ws6
+
+# switch workspace
+bindsym $mod+Tab        workspace back_and_forth
+bindsym $mod+Ctrl+Left  workspace prev
+bindsym $mod+Ctrl+Right workspace next
+# also bind ThinkPad 'XF86Back' and 'XF86Forward' keys
+#bindsym XF86Back        workspace prev
+#bindsym XF86Forward     workspace next
+###### workspace ###### }}}
+
+###### key bindings ###### {{{
+# start a terminal
+bindsym $mod+Return exec urxvtc || i3-sensible-terminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym $mod+F4      kill
+
+# change focus (h/j/k/l)
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window (h/j/k/l)
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+Shift+v split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+c focus child
+
+## scratchpad
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+###### key bindings ###### }}}
+
+###### i3 modes ###### {{{
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the window's width.
+        # Pressing right will grow the window's width.
+        # Pressing up will shrink the window's height.
+        # Pressing down will grow the window's height.
+        bindsym h           resize shrink width  10 px or 10 ppt
+        bindsym j           resize grow   height 10 px or 10 ppt
+        bindsym k           resize shrink height 10 px or 10 ppt
+        bindsym l           resize grow   width  10 px or 10 ppt
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width  10 px or 10 ppt
+        bindsym Down        resize grow   height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow   width  10 px or 10 ppt
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# mode_system: prompt for lock, logout, suspend, shutdown, etc.
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l       exec --no-startup-id $i3_scripts/i3exit.sh lock,      mode "default"
+    bindsym e       exec --no-startup-id $i3_scripts/i3exit.sh logout,    mode "default"
+    bindsym s       exec --no-startup-id $i3_scripts/i3exit.sh suspend,   mode "default"
+    bindsym h       exec --no-startup-id $i3_scripts/i3exit.sh hibernate, mode "default"
+    bindsym r       exec --no-startup-id $i3_scripts/i3exit.sh reboot,    mode "default"
+    bindsym Shift+s exec --no-startup-id $i3_scripts/i3exit.sh shutdown,  mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Ctrl+Delete mode "$mode_system"
+###### i3 modes ###### }}}
+
+###### applications bindings ###### {{{
+## NOTE: (Mod4: Win)
+## Some Mod4-keys binded for urxvt (~/.Xresources)
+## Mod4-c, Mod4-v, Mod4-Shift-v
+## Mod4-Escape, Mode4-s, Mod4-u
+
+# dmenu & i3-dmenu-desktop
+bindsym $mod+d  exec --no-startup-id dmenu_run
+bindsym $mod+F2 exec --no-startup-id dmenu_run
+# `i3-dmenu-desktop' only displays applications with a .desktop file
+bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
+
+# lock screen (i3lock)
+bindsym $mod+Ctrl+l exec --no-startup-id $i3_scripts/i3exit.sh lock
+# turn off display
+bindsym $mod+Ctrl+b exec --no-startup-id sleep 1 && xset dpms force off
+
+# screenshots
+bindsym Print      exec --no-startup-id scrot -e 'mv $f $shots_dir/$f'
+bindsym $mod+Print exec --no-startup-id scrot -s -e 'mv $f $shots_dir/$f'
+
+# terminal
+bindsym $sup+t exec urxvtc || urxvt || i3-sensible-terminal
+# file manager
+bindsym $sup+f exec thunar
+# web browser
+bindsym $sup+w exec ~/bin/firefox || firefox
+
+## dropdown terminal
+# auto start urxvt if closed
+exec --no-startup-id "while true; do urxvt -name 'dropdown_term'; done"
+#for_window [instance="dropdown_term"] floating enable, border 1pixel
+#for_window [instance="dropdown_term"] move scratchpad; [instance="dropdown_term"] scratchpad show; resize shrink height 100px; resize grow width 626px; move position 1px 20px; move scratchpad
+for_window [instance="dropdown_term"] floating enable, border 1pixel, resize shrink height 100px, resize grow width 626px, move position 1px 20px
+for_window [instance="dropdown_term"] move scratchpad
+bindsym $mod+backslash [instance="dropdown_term"] scratchpad show
+###### applications bindings ###### }}}
+
+###### window control ###### {{{
+## floating
+for_window [window_role="pop-up"] floating enable
+for_window [class="Feh"] floating enable
+for_window [class="XFontSel"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Xfce4-notifyd"] floating enable
+for_window [class="Xscreensaver-demo"] floating enable
+for_window [class="Pinentry-gtk-2"] floating enable
+for_window [class="Ds9"] floating enable
+for_window [class="Toplevel"] floating enable
+for_window [class="Firefox" instance="Places"] floating enable
+for_window [class="Firefox" instance="Browser"] floating enable
+for_window [class="Firefox" instance="Update"] floating enable
+## floating by title
+# xbindkeys
+for_window [title="^XBindKey:.*Hit.*"] floating enable
+# xev
+for_window [title="^Event Tester$"] floating enable
+# thunar copy files
+for_window [title="^File Operation Progress$"] floating enable
+
+## adjust window border
+for_window [class="URxvt"] border 1pixel
+for_window [class="Firefox"] border 1pixel
+for_window [class="Xfce4-notifyd"] border none
+###### window control ###### }}}
+
+###### i3bar ###### {{{
+# i3bar (plus the system information i3status finds out, if available)
+bar {
+    #status_command py3status -c ~/.i3/py3status.conf
+    status_command py3status -s -c ~/.i3/py3status.conf
+    position top
+    # whether show the current binding mode indicator (default yes)
+    #binding_mode_indicator no
+
+    ## color theme
+    colors {
+        ## zenburn colorscheme (customized) {{{
+        background         #1e2320
+        statusline         #dcdccc
+        separator          #94bff3
+        # colorclass       border  background text
+        focused_workspace  #506070 #506070    #ffffff
+        active_workspace   #dcdccc #506070    #ffffff
+        inactive_workspace #dcdccc #1e2320    #dcdccc
+        urgent_workspace   #dcdccc #cb4b16    #dcdccc
+        ## colorscheme }}}
+        #
+        ## solarized colorscheme {{{
+        #background         #073642
+        #statusline         #eee8d5
+        #focused_workspace  #cb4b16 #cb4b16 #eee8d5
+        #active_workspace   #cb4b16 #cb4b16 #eee8d5
+        #inactive_workspace #b58900 #b58900 #eee8d5
+        ## solarized }}}
+    }
+}
+###### i3bar ###### }}}
+
+###### autostart ###### {{{
+## run applications on startup
+## if need to run command when restarting i3, use `exec_always'
+# disable bell
+exec --no-startup-id xset b off
+exec --no-startup-id xrdb -load ~/.Xresources
+exec --no-startup-id sh ~/.fehbg
+exec --no-startup-id xcompmgr
+exec --no-startup-id xbindkeys
+exec --no-startup-id urxvtd -q -o -f
+exec --no-startup-id parcellite
+exec --no-startup-id fcitx
+exec --no-startup-id nm-applet
+exec --no-startup-id xbacklight -set 80
+exec --no-startup-id xscreensaver -no-splash
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id mpd
+###### autostart ###### }}}
+
+#  vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=conf: #

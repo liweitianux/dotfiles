@@ -1,0 +1,8 @@
+##
+## ~/.gtkrc-2.0
+##
+
+## NOTE: cannot use `~' and `$HOME' here
+
+include "/home/aly/.gtkrc.mine"
+
