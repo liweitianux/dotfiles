@@ -1,0 +1,41 @@
+#############################################################################
+##
+## .tcshrc.local
+##
+## Author: Simos Xenitellis (simos.lists@googlemail.com)
+##
+## This is the .tcshrc.local file, part of the TCSHRC project
+## at http://tcshrc.sourceforge.net
+##
+## Here you add your aliases, sets, completions and bindkeys that you want
+## to override from the default settings.
+
+### TeXLive
+if ( -d /usr/local/texlive/bin/x86_64-linux ) then
+    set -f path = ( /usr/local/texlive/bin/x86_64-linux $path )
+endif
+
+### ConTeXt
+setenv OSFONTDIR "$HOME/.fonts;/usr/share/fonts"
+
+### DS9 settings
+#if ( -x ~/bin/ds9 ) then
+#    alias ds9       '~/bin/ds9'
+#endif
+
+# astro CALDB
+if ( $?CALDB == 0 ) then
+    setenv CALDB "$HOME/local/CALDB"
+    setenv CALDBALIAS "${CALDB}/software/tools/alias_config.fits"
+    setenv CALDBCONFIG "${CALDB}/software/tools/caldb.config"
+endif
+
+setenv HEADAS       "/opt/heasoft/heasoft-6.12/x86_64-unknown-linux-gnu"
+setenv CIAO_PATH    "/opt/ciao/ciao-4.4"
+#setenv SAS_DIR      "/opt/xmmsas/xmmsas_20110223_1801"
+alias  heainit      'source ~/.tcsh/heainit.csh'
+alias  ciaoinit     'source ~/.tcsh/ciaoinit.csh'
+#alias  sasinit      'source ~/.tcsh/sasinit.csh'
+
+### misc settings
+

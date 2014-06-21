@@ -4,8 +4,7 @@
 *.swp
 *.orig
 
-
-### vifm
+## vifm
 .vifm/Trash/
 .vifm/vifminfo
 
@@ -36,7 +35,6 @@
 
 ### .config }}}
 
-
 ### C {{{
 # Object files
 *.o
@@ -66,4 +64,35 @@
 ### python
 __pycache__/
 *.py[cod]
+
+### private {{{
+# ssh
+.ssh/
+
+# abook
+.abook/address*
+
+# msmtp
+.msmtp/
+
+# offlineimap
+.offlineimap/Account-*
+.offlineimap/Repository-*
+.offlineimap/*.gpg
+.offlineimap/pid
+.offlineimap/lock
+
+# mutt
+.mutt/aliases
+.mutt/*.muttrc
+.mutt/cache/
+.mutt/tmp/
+
+# todo
+.todo/todo.txt
+.todo/done.txt
+.todo/report.txt
+
+.netrc
+### private }}}
 

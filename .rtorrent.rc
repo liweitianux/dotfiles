@@ -1,0 +1,193 @@
+#
+# rtorrent configure file
+#
+
+### shortcuts ###
+# Ctrl-q: closes rTorrent, done twice makes the program shutdown
+#         without waiting to send stopping information to the trackers
+# Left arrow: returns to the previous screen
+# Right arrow: goes to the next screen
+# a|s|d: increase global upload throttle about 1|5|50 KB/s
+# A|S|D: increase global download throttle about 1|5|50 KB/s
+# z|x|c: decrease global upload throttle about 1|5|50 KB/s
+# Z|X|C: decrease global download throttle about 1|5|50 KB/s
+# Ctrl-S: starts download
+# Ctrl-D: stops an active download, removes a stopped download
+# + or -: changes the download priority of selected torrent
+# Backspace: adds the specified .torrent. after pressing this button
+#            write fuul path or URL of .torrent file
+
+# This is an example resource file for rTorrent. Copy to
+# ~/.rtorrent.rc and enable/modify the options as needed. Remember to
+# uncomment the options you wish to enable.
+
+# Maximum and minimum number of peers to connect to per torrent.
+#min_peers = 40
+max_peers = 52
+
+# Same as above but for seeding completed torrents (-1 = same as downloading)
+#min_peers_seed = 10
+max_peers_seed = 52
+
+# Maximum number of simultanious uploads per torrent.
+max_uploads = 8
+
+# Global upload and download rate in KiB. "0" for unlimited.
+download_rate = 0
+upload_rate = 0
+
+# Default directory to save the downloaded torrents.
+#directory = /home/[user]/torrents/
+#directory = ~/downloads/torrents
+
+# Default session directory. Make sure you don't run multiple instance
+# of rtorrent using the same session directory. Perhaps using a
+# relative path?
+session = ~/downloads/torrents/.session/
+
+# Watch a directory for new torrents, and stop those that have been detected
+#schedule = watch_directory,5,5,load_start="~/downloads/torrents/*.torrent"
+# stop downloading after the torrent file removed
+schedule = untied_directory,5,5,stop_untied=
+schedule = tied_directory,5,5,start_tied=
+
+# Close torrents when diskspace is low.
+schedule = low_diskspace,5,60,close_low_diskspace=2000M
+
+# Stop torrents when reaching upload ratio in percent,
+# when also reaching total upload in bytes, or when
+# reaching final upload ratio in percent.
+# example: stop at ratio 2.0 with at least 200 MB uploaded, or else ratio 20.0
+### error ###
+#schedule = ratio,60,60,stop_on_ratio=200,200M,2000
+
+# The ip address reported to the tracker.
+#ip = 127.0.0.1
+#ip = rakshasa.no
+
+# The ip address the listening socket and outgoing connections is
+# bound to.
+#bind = 127.0.0.1
+#bind = rakshasa.no
+
+# Port range to use for listening.
+port_range = 42396-43000
+
+# Start opening ports at a random position within the port range.
+port_random = yes
+
+# Encryption options, set to none (default) or any combination of the following:
+# allow_incoming, try_outgoing, require, require_RC4, enable_retry, prefer_plaintext
+#
+# The example value allows incoming encrypted connections, starts unencrypted
+# outgoing connections but retries with encryption if they fail, preferring
+# plaintext to RC4 encryption after the encrypted handshake
+#
+# encryption = allow_incoming,enable_retry,prefer_plaintext
+encryption = allow_incoming,try_outgoing,enable_retry
+
+# Enable DHT support for trackerless torrents or when all trackers are down.
+# May be set to "disable" (completely disable DHT), "off" (do not start DHT),
+# "auto" (start and stop DHT as needed), or "on" (start DHT immediately).
+# The default is "off". For DHT to work, a session directory must be defined.
+dht = auto
+
+# UDP port to use for DHT.
+dht_port = 6881
+
+# Enable peer exchange (for torrents not marked private)
+peer_exchange = yes
+
+# Check hash for finished torrents. Might be usefull until the bug is
+# fixed that causes lack of diskspace not to be properly reported.
+check_hash = yes
+
+use_udp_trackers = yes
+
+# Alternative calls to bind and ip that should handle dynamic ip's.
+#schedule = ip_tick,0,1800,ip=rakshasa
+#schedule = bind_tick,0,1800,bind=rakshasa
+
+# for chinese support
+encoding_list = UTF-8
+
+# press 9 in your rtorrent client to see the changes in action
+schedule = filter_active,30,30,"view_filter = active,\"or={d.get_up_rate=,d.get_down_rate=}\""
+
+# for remote management
+#scgi_port = localhost:5000
+
+
+#### Automatically Move Completed Torrent Data to 'Completed' Folders
+
+# location where new torrent data is placed, and where you should place your
+# 'complete' data before you place your *.torrent file into the watch folder
+directory = ~/downloads/torrents/incomplete
+
+# schedule a timer event named 'watch_directory_1':
+# 1) triggers 10 seconds after rtorrent starts
+# 2) triggers at 10 second intervals thereafter
+# 3) Upon trigger, attempt to load (and start) new *.torrent files found in /home/user/torrents/watch/
+# 4) set a variable named 'custom1' with the value "/home/user/torrents/complete"
+# NOTE: if you don't want it to automatically start the torrent, change 'load_start' to 'load'
+schedule = watch_directory_1,10,10,"load_start=~/downloads/torrents/watch/*.torrent,d.set_custom1=~/downloads/torrents/complete"
+
+# insert a method with the alias 'checkdirs1'
+# 1) returns true if the current path of the torrent data is not equal to the value of custom1
+# 2) otherwise, returns false
+system.method.insert=checkdirs1,simple,"not=\"$equal={d.get_custom1=,d.get_base_path=}\""
+
+# insert a method with the alias 'movecheck1'
+# 1) returns true if all 3 commands return true ('result of checkdirs1' && 'torrent is 100% done', 'custom1 variable is set')
+# 2) otherwise, returns false
+system.method.insert=movecheck1,simple,"and={checkdirs1=,d.get_complete=,d.get_custom1=}"
+
+# insert a method with the alias 'movedir1'
+# (a series of commands, separated by ';') 
+# 1) "set path of torrent to equal the value of custom1";
+# 2) "mv -u <current data path> <custom1 path>";
+# 3) "clear custom1", "stop the torrent","resume the torrent"
+# 4) stop the torrent
+# 5) start the torrent (to get the torrent to update the 'base path')
+system.method.insert=movedir1,simple,"d.set_directory=$d.get_custom1=;execute=mv,-u,$d.get_base_path=,$d.get_custom1=;d.set_custom1=;d.stop=;d.start="
+
+# set a key with the name 'move_hashed1' that is triggered by the hash_done event.
+# 1) When hashing of a torrent completes, this custom key will be triggered.
+# 2) when triggered, execute the 'movecheck1' method and check the return value.
+# 3) if the 'movecheck' method returns 'true', execute the 'movedir1' method we inserted above.
+# NOTE: 'branch' is an 'if' conditional statement: if(movecheck1){movedir1}
+system.method.set_key=event.download.hash_done,move_hashed1,"branch={$movecheck1=,movedir1=}"
+
+
+#
+# Do not modify the following parameters unless you know what you're doing.
+#
+# Hash read-ahead controls how many MB to request the kernel to read
+# ahead. If the value is too low the disk may not be fully utilized,
+# while if too high the kernel might not be able to keep the read
+# pages in memory thus end up trashing.
+#hash_read_ahead = 10
+
+# Interval between attempts to check the hash, in milliseconds.
+#hash_interval = 100
+
+# Number of attempts to check the hash while using the mincore status,
+# before forcing. Overworked systems might need lower values to get a
+# decent hash checking rate.
+#hash_max_tries = 10
+
+# Max number of files to keep open simultaniously.
+#max_open_files = 128
+
+# Number of sockets to simultaneously keep open.
+#max_open_sockets = <no default>
+
+
+# Example of scheduling commands: Switch between two ip's every 5
+# seconds.
+#schedule = "ip_tick1,5,10,ip=torretta"
+#schedule = "ip_tick2,10,10,ip=lampedusa"
+
+# Remove a scheduled event.
+#schedule_remove = "ip_tick1"
+
