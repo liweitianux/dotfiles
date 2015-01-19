@@ -1,0 +1,113 @@
+#
+# offlineimap configuration file
+#
+# LIweitiaNux
+# February 6, 2012
+#
+# Ref: http://pbrisbin.com/posts/two_accounts_in_mutt
+#
+
+[general]
+# mailpasswd
+pythonfile = ~/.offlineimap/offlineimap.py
+# This should contain a comma delimited list of all
+# identifiers of the accounts that are to be synced
+#accounts = gmail, lavabit
+accounts = autistici
+# Control how many accuonts may be synced simulaneously
+maxsyncaccounts = 1
+# UI, NOTE: cron job calls the quiet UI with -u
+#ui = blinkenlights
+ui = ttyui
+#ui = quiet         # This will suppress anything but errors
+
+
+[Account autistici]
+localrepository  = autistici-local
+remoterepository = autistici-remote
+#autorefresh     = 10
+#
+[Repository autistici-local]
+type             = Maildir
+localfolders     = ~/Maildir/autistici
+#
+[Repository autistici-remote]
+type             = IMAP
+remotehost       = mail.autistici.org
+ssl              = yes
+#cert_fingerprint = eea375e1c67a1464ecc6c3a7e6ca9596d1c2dae5
+sslcacertfile    = ~/.msmtp/autistici_ca.crt
+remoteport       = 993
+remoteuser       = liweitianux@autistici.org
+#remotepass       = password
+remotepasseval   = mailpasswd("autistici")
+
+
+[Account gmail]
+# The identifier for the local repository; e.g., the
+# maildir that offlineimap will sync with an IMAP server
+localrepository = gmail-local
+# The identifier for the remote repository. This is
+# the actual IMAP, which is usually foreign to the system
+remoterepository = gmail-remote
+# Minutes between syncs
+#autorefresh = 10
+# Number of quick-syncs between autorefreshes. Quick-syncs
+# do not update if the only changes were to IMAP flags
+#quick = 10
+
+[Repository gmail-local]
+# offlineimap now only supports Maildir and IMAP for local repositories
+type = Maildir
+localfolders = ~/Maildir/gmail
+
+[Repository gmail-remote]
+# Remote repository can be IMAP or Gmail
+type = Gmail
+remotehost = imap.gmail.com
+ssl = yes
+remoteport = 993
+#remoteuser = username
+#remotepass = password
+nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
+                               re.sub ('sent_mail', 'sent',
+                               re.sub ('starred', 'flagged',
+                               re.sub (' ', '_', foldername.lower()))))
+folderfilter = lambda foldername: foldername not in '[Gmail]/All Mail'
+# Instead of closing the connection once a sync is complete,
+# offlineimap will send empty data to the server to hold the
+# connection open. A value of 60 attempts to hold the connection
+# for a minute between syncs (both quick and autorefresh)
+#keepalive = 60
+
+
+[Account lavabit]
+localrepository = lavabit-local
+remoterepository = lavabit-remote
+#autorefresh = 10
+#quick = 10
+
+[Repository lavabit-local]
+type = Maildir
+localfolders = ~/Maildir/lavabit
+
+[Repository lavabit-remote]
+type = IMAP
+remotehost = imap.lavabit.com
+ssl = yes
+remoteport = 993
+#remoteuser = username
+#remotepass = password
+
+
+# Generate a muttrc fragment containing the mailboxes
+# that it syncs
+# NOTE: add "source ~/.mutt/mailboxes" to "muttrc"
+[mbnames]
+enabled = yes
+filename = ~/.mutt/mailboxes
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+sep = " "
+footer = "\n"
+

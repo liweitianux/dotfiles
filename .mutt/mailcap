@@ -1,0 +1,36 @@
+# $Id$
+#
+# mutt mailcap configuration file
+#
+# Weitian LI <liweitianux@gmail.com>
+# 2014/07/13
+#
+
+## 'copiousoutput' tells mutt the cmd passes possibly large amounts
+## of text, causes mutt to invoke a pager. also denote non-interactive.
+
+#text/html;          firefox -remote 'openURL(%s)'; test=RunningFirefox
+text/html;          w3m -T text/html -I %{charset} -dump %s; nametemplate=%s.html;  copiousoutput
+
+image/jpeg;         feh %s
+image/png;          feh %s
+image/gif;          feh %s
+image/*;            feh %s
+
+video/*;            vlc %s
+
+application/x-compressed-tar;   tar -tf %s; copiousoutput
+application/x-gnuzip;           gzcat; copiousoutput
+application/x-bzip;             bunzip2 -c %s | tar -tf -; copiousoutput
+application/x-tar-gz;           gunzip -c %s | tar -tf -; copiousoutput
+application/x-7z-compressed;    7z l %s; copiousoutput
+
+# application/postscript;     ps2ascii %s; copiousoutput
+# application/pdf;            apvlv %s; copiousoutput
+# application/pdf;            mupdf %s; copiousoutput
+application/pdf;            pdftotext '%s' -; copiousoutput; description="PDF Document"; nametemplate="%s.pdf"
+application/msword;         wvHtml --charset=gb2312 %s - | w3m -dump %s; nametemplate=%s.html; copiousoutput
+# application/vnd.ms-excel;
+
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=mailcap: #

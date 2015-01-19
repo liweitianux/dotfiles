@@ -1,0 +1,202 @@
+# $Id$
+#
+###########################################################
+## mutt configuration file                               ##
+##                                                       ##
+## Weitian LI <liweitianux@gmail.com>                    ##
+## 2014/07/13                                            ##
+###########################################################
+
+### personal settings
+set realname            = "Weitian LI"
+### mailboxes
+# from 'offlineimap'
+source ~/.mutt/mailboxes
+### gmail, use as default
+source ~/.mutt/gmail.muttrc
+### account specific sources
+folder-hook 'gmail.*'   source ~/.mutt/gmail.muttrc
+folder-hook 'lavabit.*' source ~/.mutt/lavabit.muttrc
+folder-hook 'autistici.*' source ~/.mutt/autistici.muttrc
+
+### files and directories
+set alias_file          = ~/.mutt/aliases
+#set header_cache        = ~/.mutt/cache/headers    # needs external db lib
+set message_cachedir    = ~/.mutt/cache
+set certificate_file    = ~/.mutt/certificates
+set mailcap_path        = ~/.mutt/mailcap
+set signature           = ~/.mutt/signature
+set history_file        = ~/.mutt/history
+set tmpdir              = ~/.mutt/tmp
+
+### settings
+set mbox_type       = Maildir
+set folder          = ~/Maildir
+set mail_check      = 300       # how often (in s) look for new mail
+set timeout         = 15        # prompt timeout until abort waiting for input
+#set sendmail_wait   = -1        # always put sendmail in the bkg without waiting
+set sleep_time      = 0         # time to pause while displaying certain info msgs
+set wait_key                    # wait after an external cmd invoked
+set history         = 128       # control the size of the string history buffer
+set save_history    = 128       # control the size of the 'history_file'
+unset confirmappend             # don't ask me if i want to append to mailboxes
+set beep_new                    # beep when receive a new msg while mailbox open
+set copy                        # always save a copy of outgoing messages
+set delete                      # purge deleted messages without asking
+set quit            = ask-yes   # ask for confirmation when quit mutt
+set wrap_search                 # searches wrap around the end
+set help                        # show the help lines
+set use_from                    # always generate the `From:' header field
+set read_inc        = 25        # specify at which rate to update progress counters
+set write_inc       = 25
+set print           = ask-yes   # ask me if I really want to print messages
+set print_command   = /usr/bin/false    # how to print things (I like to save trees)
+
+### index settings
+#set date_format     = "%m/%d/%y at %I:%M"
+#set index_format = "%4C %Z %{%m/%d} %-15.15F (%4c) %s" # format of the index
+set to_chars    = " +TCFL"      # char used to indicate mail addressed to you
+set sort        = threads       # primary sorting method
+set sort_aux    = reverse-date-received
+set uncollapse_jump             # don't collapse on an unread message
+set sort_re                     # thread based on regex
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+### pager settings
+set pager_format="-%S- %-20.20f %s"     # format of the pager status bar
+set pager_index_lines   = 5     # number of index lines to show
+set pager_context       = 5     # number of context lines to show
+set pager_stop                  # don't go to next message automatically
+set menu_scroll                 # scroll in menus
+set smart_wrap                  # don't split words
+set tilde                       # show tildes like in vim
+unset markers                   # no ugly '+' signs for wrapped lines
+set noprompt_after              # ask me for a command after the external pager exits
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+
+### composing mail
+set editor              = "vim +/^$ -c 'set syntax=mail ft=mail enc=utf-8'"
+set visual              = "vim +/^$ -c 'set syntax=mail ft=mail enc=utf-8'"
+set envelope_from               # which from?
+set sig_dashes                  # dashes before my 'signature'
+set autoedit                    # go to the editor right away when composing
+                                # set, cannot use 'send-hooks' depend on recipients
+set edit_headers                # show headers when composing
+set askcc                       # ask for CC:
+set askbcc                      # ask for BCC:
+set fcc_attach                  # save attachments with the body
+set forward_format      = "Fwd: %s"
+set forward_quote               # include message in forwards
+set forward_decode              # decode when forwarding
+unset mime_forward              # forward attachments as part of body
+set attribution         = "On %d, %n wrote: "
+#set metoo                       # sends a copy to all recipients and myself
+set fast_reply                  # skip to compose when replying
+set reply_to                    # reply to 'Reply to:' field
+set reverse_name                # reply as whomever it was to
+set nosave_empty                # remove files when no messages are left
+#set postpone                    # auto postpone message not sent when exit
+#set recall                      # prompt to recall postponed messages
+set include                     # include message in replies
+#set post_indent_string = '---end quoted text---'
+unset bounce_delivered          # not include 'Delivered-To' headers, 'postfix'
+## charset
+set send_charset        = "utf-8" # for messages that we send
+set assumed_charset     = "iso-8859-1" # if no charset given on incoming messages
+
+### headers settings
+ignore *                        # ignore all headers
+unignore from: to cc bcc date subject       # show only these headers
+hdr_order from: to cc date subject
+
+### aliases
+# set alias_file = ~/.mutt/aliases
+set sort_alias      = alias     # sort alias file by alias
+set reverse_alias               # show names from alias file in index
+#set alias_format    = "%4n %t %-20a  %r"
+source $alias_file              # enable auto-completion
+
+### abook
+set query_command   = "abook --mutt-query '%s'"
+macro generic,index,pager \Ca "<shell-escape>abook<return>" "launch abook"
+macro index,pager A "<pipe-message>abook --add-email<return>" "add the sender address to abook"
+
+### key bindings
+bind index,pager    \#          noop
+bind index          i           noop
+
+bind pager          i           exit
+bind pager          /           search
+bind pager          <UP>        previous-line
+bind pager          <DOWN>      next-line
+bind pager          k           previous-line
+bind pager          j           next-line
+bind pager          gg          top
+bind pager          G           bottom
+bind pager          K           previous-undeleted
+bind pager          J           next-undeleted
+bind index,browser  gg          first-entry
+bind index,browser  G           last-entry
+bind index          K           previous-unread
+bind index          J           next-unread
+bind index,pager    R           group-reply
+
+### macros
+macro pager   ';' "<exit><tag-prefix>"              "q+ ;"
+macro index   q   "<sync-mailbox><change-folder>?<toggle-mailboxes>"    "Leaves Index to folder list"
+macro browser q   "<exit><quit>"                    "Exit mutt"
+macro browser <Tab> "<toggle-mailboxes><check-new>" "Check New"
+macro index   \Cr "<tag-prefix><clear-flag>N"       "mark tagged messages as read"
+macro index   B   "<limit>~b "                      "search message bodies"
+macro index   I   "<change-folder>!<enter>"         "go to Inbox"
+# save a decoded copy in ~
+macro index   P   "<pipe-message>cat > ~/"          "save message as"
+# quick-sync with offlineimap
+macro index,browser Z   "<shell-escape>offlineimap -o -u ttyui<enter>"    "offlineimap sync ..."
+# urlview
+macro pager   \Cu "<pipe-entry>urlview<enter>"      "Follow links with urlview"
+
+
+###########################################################
+## Misc settings                                         ##
+###########################################################
+## mailing lists: lists and subscribe
+set followup_to                 # generate 'Mail-Followup-To:' header field
+set honor_followup_to           # 'Mail-Followup-To' header is honored
+source ~/.mutt/mailinglists
+
+## mutt colors definitions
+source ~/.mutt/colors
+#set arrow_cursor                # use '->' instead of hiliting the whole line
+
+## GnuPG
+source ~/.mutt/gpg.rc
+
+## auto view
+auto_view text/html application/x-gunzip application/x-bzip application/x-tar-gz \
+        application/x-compressed-tar application/msword application/postscript
+
+## MIME multipart/alternative
+## The 'multipart/alternative' container type only has child MIME parts
+## which represent the same content in an alternative way. often used to
+## send HTML msgs which contain an alternative plain text representation.
+alternative_order text/plain text/enriched text/html application/postscript
+
+## MIME lookup, mime-lookup
+## specifies a list of MIME types that should *not* be treated
+## according to their mailcap entry
+mime_lookup application/octet-stream application/X-Lotus-Manuscript
+
+## attachment searching and counting
+## attachments { +|- } disposition mime-type
+## 'disposition': inline(I), attachment(A)
+source ~/.mutt/attachments
+
+## cope with encodings
+# attachment encodeing
+set rfc2047_parameters = yes
+# some mail without 'charset', then set 'us-ascii' as an alias to 'gb2312'
+charset-hook ^us-ascii$ gb2312
+
+#
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=muttrc: #

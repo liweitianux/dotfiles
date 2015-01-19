@@ -1,0 +1,17 @@
+# $Id$
+#
+# mailing lists settings
+# lists and subscribe
+#
+# LIweitiaNux
+# February 9, 2012
+#
+
+## lists
+lists ^opensourcesjtu2010@googlegroups\.com$
+
+## subscribe
+subscribe ^astro-ph@arXiv\.org$
+subscribe en@bsdmag\.org$
+
+# vim: filetype=muttrc

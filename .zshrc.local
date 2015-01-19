@@ -1,0 +1,118 @@
+## ~/.zshrc.local
+## ZSH local configuration file
+##
+## Weitian LI <liweitianux@gmail.com>
+## 2014/05/31
+
+### locale {{{
+export LANG="en_US.utf8"
+export LC_CTYPE="zh_CN.utf8"
+export LC_COLLATE="C"
+### }}}
+
+### environments {{{
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+# admin
+if `groups | grep -qE '\b(wheel|adm|sudo)\b'`; then
+    export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+fi
+
+# GREP_OPTIONS deprecated
+unset GREP_OPTIONS
+alias grep='grep --color=auto'
+### environments }}}
+
+### vi mode {{{
+# oh-my-zsh: plugin: vi-mode
+# Vim's text-objects-ish for zsh: https://github.com/hchbaw/opp.zsh
+
+#bindkey -v
+# Reduce <ESC> delay to 0.1 seconds
+export KEYTIMEOUT=1
+## Key Bindings
+# Use vim cli mode
+bindkey '^P' up-history
+bindkey '^N' down-history
+# backspace and ^h working even after
+# returning from command mode
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+# ctrl-w removed word backwards
+bindkey '^w' backward-kill-word
+# ctrl-r starts searching history backward
+bindkey '^r' history-incremental-search-backward
+### vi mode }}}
+
+### python-virtualenv {{{
+if [ -x /usr/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME="$HOME/.virtualenvs"
+    export PROJECT_HOME="$HOME/web"
+    source /usr/bin/virtualenvwrapper.sh
+fi
+### python-virtualenv }}}
+
+### astro {{{
+## DS9 settings
+#if [ -x $HOME/bin/ds9 ]; then
+#    alias ds9="$HOME/bin/ds9"
+#fi
+
+# backup LD_LIBRARY_PATH settings
+LD_LIBRARY_PATH_BAK="${LD_LIBRARY_PATH}"
+
+## HEASOFT settings
+export HEADAS="$HOME/local/heasoft/heasoft-6.16/x86_64-unknown-linux-gnu"
+function heainit() {
+    if [ "x${CALDB}" = "x" ]; then
+        export CALDB="$HOME/local/CALDB"
+        export CALDBALIAS="${CALDB}/software/tools/alias_config.fits"
+        export CALDBCONFIG="${CALDB}/software/tools/caldb.config"
+    fi
+    HEA_STATE="`echo $PATH | tr ':' '\n' | grep 'heasoft'`"
+    if [ "x${HEA_STATE}" = "x" ]; then
+        source $HEADAS/headas-init.sh > /dev/null
+    fi
+    unset HEA_STATE
+    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH_BAK}"
+}
+
+## CIAO settings
+export CIAO_PATH="$HOME/local/ciao/ciao-4.6"
+function ciaoinit() {
+    HEA_STATE="`echo $PATH | tr ':' '\n' | grep 'heasoft'`"
+    CIAO_STATE="`echo $PATH | tr ':' '\n' | grep 'ciao'`"
+    if [ "x${HEA_STATE}" = "x" ]; then
+        heainit > /dev/null
+    fi
+    if [ "x${CIAO_STATE}" = "x" ]; then
+        source $CIAO_PATH/bin/ciao.bash > /dev/null
+    else
+        source $CIAO_PATH/bin/ciao.bash -o
+    fi
+    unset HEA_STATE
+    unset CIAO_STATE
+    export CIAO_LD_LIBRARY_PATH="${ASCDS_INSTALL}/ots/lib"
+}
+
+## chandra_acis_process scripts
+export MASS_PROFILE_DIR="$HOME/bin/mass"
+export CHANDRA_SCRIPT_DIR="$HOME/bin"
+### astro }}}
+
+### aliases {{{
+alias qmass='qdp summary_mass_profile.qdp'
+alias qnfw='qdp nfw_fit_center.qdp'
+alias qsbp='qdp sbp_fit_center.qdp'
+alias qtpro='qdp wang2012_fit_center.qdp'
+alias fitwang="${MASS_PROFILE_DIR}/fit_wang2012_model tcl_temp_profile.txt"
+alias fitmass="${MASS_PROFILE_DIR}/fit_mass.sh"
+alias fitnfw="${MASS_PROFILE_DIR}/fit_nfw_mass mass_int.dat"
+alias fitsbp="${MASS_PROFILE_DIR}/fit_sbp.sh"
+alias calclxfx="${MASS_PROFILE_DIR}/calc_lxfx_simple.sh"
+alias getlxfx="${MASS_PROFILE_DIR}/get_lxfx_data.sh"
+alias chcld="${CHANDRA_SCRIPT_DIR}/chandra_collect_data_v3.sh"
+alias chr500="${CHANDRA_SCRIPT_DIR}/ciao_r500avgt_v3.sh"
+### aliases }}}
+

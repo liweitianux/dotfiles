@@ -84,12 +84,17 @@ __pycache__/
 
 # mutt
 .mutt/aliases
-.mutt/*.muttrc
+.mutt/certificates
+.mutt/history
+.mutt/signature
+.mutt/gmail.muttrc
+.mutt/lavabit.muttrc
 .mutt/cache/
 .mutt/tmp/
 
 # todo
 .todo/todo.txt
+.todo/todo.txt.bak
 .todo/done.txt
 .todo/report.txt
 

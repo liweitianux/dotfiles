@@ -18,11 +18,15 @@ export QT4_IM_MODULE="fcitx"
 
 ###### PATH ######
 # $HOME/bin
-export PATH=$HOME/bin:$PATH
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+# admin
+if `groups | grep -qE '\b(wheel|adm|sudo)\b'`; then
+    export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+fi
 # TeXlive
 export PATH=$PATH:/usr/local/texlive/bin/x86_64-linux
-# admin
-export PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
 
 ###### gpg agent ######
 eval "$(gpg-agent --daemon)"
