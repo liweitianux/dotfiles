@@ -29,7 +29,15 @@ fi
 export PATH=$PATH:/usr/local/texlive/bin/x86_64-linux
 
 ###### gpg agent ######
-eval "$(gpg-agent --daemon)"
+gpgenv="$HOME/.gnupg/gpg-agent.env"
+if [ -e "${gpgenv}" ] && kill -0 $(grep GPG_AGENT_INFO "${gpgenv}" \
+        | cut -d: -f 2) 2>/dev/null; then
+    eval "$(cat "${gpgenv}")"
+else
+    eval "$(gpg-agent --daemon --enable-ssh-support --write-env-file "${gpgenv}")"
+fi
+export GPG_AGENT_INFO
+export SSH_AUTH_SOCK    # enable gpg-agent for ssh
 
 # This file is sourced by bash for login shells.  The following line
 # runs your .bashrc and is recommended by the bash info pages.
