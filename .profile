@@ -17,16 +17,22 @@ export QT_IM_MODULE="fcitx"
 export QT4_IM_MODULE="fcitx"
 
 ###### PATH ######
-# $HOME/bin
-if [ -d "$HOME/bin" ]; then
-    export PATH="$HOME/bin:$PATH"
-fi
 # admin
 if `groups | grep -qE '\b(wheel|adm|sudo)\b'`; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 fi
+# $HOME/bin
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+# npm
+if [ -d "$HOME/npm" ]; then
+    export PATH="$PATH:$HOME/npm"
+fi
 # TeXlive
-export PATH=$PATH:/usr/local/texlive/bin/x86_64-linux
+if [ -d "/usr/local/texlive/bin/x86_64-linux" ]; then
+    export PATH="$PATH:/usr/local/texlive/bin/x86_64-linux"
+fi
 
 ###### gpg agent ######
 gpgenv="$HOME/.gnupg/gpg-agent.env"
