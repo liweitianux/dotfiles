@@ -1,12 +1,11 @@
-# $Id$
-#
-# mutt attchment searching and counting configuration
-#
-# LIweitiaNux
-# February 8, 2012
-#
-# Ref: file:///usr/local/share/doc/mutt/html/mimesupport.html
-#
+##
+## Mutt attchment searching and counting configuration
+##
+## Weitian Li
+## 2012/02/08
+##
+## Ref: file:///usr/local/share/doc/mutt/html/mimesupport.html
+##
 
 # Removing a pattern from a list removes that pattern literally. It
 # does not remove any type matching the pattern.
