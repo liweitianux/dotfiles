@@ -1,113 +1,218 @@
-#
-# offlineimap configuration file
-#
-# LIweitiaNux
-# February 6, 2012
-#
-# Ref: http://pbrisbin.com/posts/two_accounts_in_mutt
-#
+##
+## OfflineIMAP Configuration
+## ~/.offlineimaprc
+##
+## Weitian LI <liweitianux@gmail.com>
+## 2015/02/03
+##
+## Reference:
+## [1] ArchWiki - OfflineIMAP
+##     https://wiki.archlinux.org/index.php/OfflineIMAP
+##
 
 [general]
-# mailpasswd
-pythonfile = ~/.offlineimap/offlineimap.py
-# This should contain a comma delimited list of all
-# identifiers of the accounts that are to be synced
-#accounts = gmail, lavabit
-accounts = autistici
+# Function 'mailpasswd': invoke gpg to decrypt passwords.
+pythonfile          = ~/.offlineimap/offlineimap.py
+#
+# List of accounts to be synced, separated by a comma.
+accounts = gmail-aly, gmail-li, outlook-aly, outlook-li, sjtu, autistici
+#accounts = outlook-aly, outlook-li, sjtu, autistici
+#
 # Control how many accuonts may be synced simulaneously
-maxsyncaccounts = 1
-# UI, NOTE: cron job calls the quiet UI with -u
-#ui = blinkenlights
-ui = ttyui
-#ui = quiet         # This will suppress anything but errors
+# NOTE: if you are using autorefresh and have more than one account,
+# your must set this number to be >= to the number of accounts you
+# have; since any given sync run never "finishes" due to a timer,
+# you will never sync your additional accounts if this is 1.
+maxsyncaccounts     = 6
+#
+# UI: blinkenlights, ttyui, quiet (suppress anything but errors)
+ui                  = TTY.TTYUI, Noninteractive.Basic, Noninteractive.Quiet
+
+
+[Account example]
+localrepository     = example-local
+remoterepository    = example-remote
+# Status cache
+status_backend      = sqlite
+# Minutes between sycns
+autorefresh         = 15
+# Number of quick-syncs between autorefreshes.
+# Quick-syncs do not update if the only changes were to IMAP flags.
+quick               = 5
+# pre and post sync hook to execute a external command.
+#presynchook         = imapfilter
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository example-local]
+type                = Maildir
+localfolders        = ~/Mail/example
+#
+[Repository example-remote]
+# Remote repository can be IMAP or Gmail
+type                = IMAP
+remotehost          = imap.example.com
+ssl                 = yes
+sslcacertfile       = ~/.offlineimap/ca-certificates.crt
+remoteport          = 993
+remoteuser          = username@example.com
+#remotepass          = password
+remotepasseval      = mailpasswd("example")
+# Hold the connection open, instead of closing the connection once
+# a sync is complete. (unit: seconds)
+keepalive           = 60
+# Keep connection open between refreshes.
+holdconnectionopen  = yes
+
+
+[Account gmail-aly]
+localrepository     = gmail-aly-local
+remoterepository    = gmail-aly-remote
+status_backend      = sqlite
+autorefresh         = 30
+quick               = 5
+postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository gmail-aly-local]
+type                = Maildir
+localfolders        = ~/Mail/gmail-aly
+#
+[Repository gmail-aly-remote]
+type                = Gmail
+remoteuser          = aaronly.me@gmail.com
+remotepasseval      = mailpasswd("gmail-aly")
+keepalive           = 60
+holdconnectionopen  = yes
+sslcacertfile       = ~/.offlineimap/ca-certificates.crt
+# Not sync the 'All Mail' folder
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+
+
+[Account gmail-li]
+localrepository     = gmail-li-local
+remoterepository    = gmail-li-remote
+status_backend      = sqlite
+autorefresh         = 15
+quick               = 5
+postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository gmail-li-local]
+type                = Maildir
+localfolders        = ~/Mail/gmail-li
+#
+[Repository gmail-li-remote]
+type                = Gmail
+remoteuser          = liweitianux@gmail.com
+remotepasseval      = mailpasswd("gmail-li")
+keepalive           = 60
+holdconnectionopen  = yes
+sslcacertfile       = ~/.offlineimap/ca-certificates.crt
+# Not sync the 'All Mail' folder
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+
+
+[Account outlook-aly]
+localrepository     = outlook-aly-local
+remoterepository    = outlook-aly-remote
+status_backend      = sqlite
+autorefresh         = 30
+quick               = 5
+postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository outlook-aly-local]
+type                = Maildir
+localfolders        = ~/Mail/outlook-aly
+#
+[Repository outlook-aly-remote]
+type                = IMAP
+remotehost          = imap-mail.outlook.com
+ssl                 = yes
+sslcacertfile       = ~/.offlineimap/ca-certificates.crt
+remoteport          = 993
+remoteuser          = aaronly.me@outlook.com
+remotepasseval      = mailpasswd("outlook-aly")
+keepalive           = 60
+holdconnectionopen  = yes
+
+
+[Account outlook-li]
+localrepository     = outlook-li-local
+remoterepository    = outlook-li-remote
+status_backend      = sqlite
+autorefresh         = 15
+quick               = 5
+postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository outlook-li-local]
+type                = Maildir
+localfolders        = ~/Mail/outlook-li
+#
+[Repository outlook-li-remote]
+type                = IMAP
+remotehost          = imap-mail.outlook.com
+ssl                 = yes
+sslcacertfile       = ~/.offlineimap/ca-certificates.crt
+remoteport          = 993
+remoteuser          = liweitianux@live.com
+remotepasseval      = mailpasswd("outlook-li")
+keepalive           = 60
+holdconnectionopen  = yes
+
+
+[Account sjtu]
+localrepository     = sjtu-local
+remoterepository    = sjtu-remote
+status_backend      = sqlite
+autorefresh         = 15
+quick               = 5
+postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository sjtu-local]
+type                = Maildir
+localfolders        = ~/Mail/sjtu
+#
+[Repository sjtu-remote]
+type                = IMAP
+remotehost          = imap.sjtu.edu.cn
+ssl                 = yes
+sslcacertfile       = ~/.offlineimap/ca-certificates.crt
+remoteport          = 993
+remoteuser          = liweitianux@sjtu.edu.cn
+remotepasseval      = mailpasswd("sjtu")
+keepalive           = 60
+holdconnectionopen  = yes
 
 
 [Account autistici]
-localrepository  = autistici-local
-remoterepository = autistici-remote
-#autorefresh     = 10
+localrepository     = autistici-local
+remoterepository    = autistici-remote
+status_backend      = sqlite
+autorefresh         = 60
+quick               = 5
+postsynchook        = ~/.offlineimap/postsync.sh
 #
 [Repository autistici-local]
-type             = Maildir
-localfolders     = ~/Maildir/autistici
+type                = Maildir
+localfolders        = ~/Mail/autistici
 #
 [Repository autistici-remote]
-type             = IMAP
-remotehost       = mail.autistici.org
-ssl              = yes
-#cert_fingerprint = eea375e1c67a1464ecc6c3a7e6ca9596d1c2dae5
-sslcacertfile    = ~/.msmtp/autistici_ca.crt
-remoteport       = 993
-remoteuser       = liweitianux@autistici.org
-#remotepass       = password
-remotepasseval   = mailpasswd("autistici")
+type                = IMAP
+remotehost          = mail.autistici.org
+ssl                 = yes
+sslcacertfile       = ~/.offlineimap/autistici_ca.crt
+remoteport          = 993
+remoteuser          = liweitianux@autistici.org
+remotepasseval      = mailpasswd("autistici")
+keepalive           = 60
+holdconnectionopen  = yes
 
 
-[Account gmail]
-# The identifier for the local repository; e.g., the
-# maildir that offlineimap will sync with an IMAP server
-localrepository = gmail-local
-# The identifier for the remote repository. This is
-# the actual IMAP, which is usually foreign to the system
-remoterepository = gmail-remote
-# Minutes between syncs
-#autorefresh = 10
-# Number of quick-syncs between autorefreshes. Quick-syncs
-# do not update if the only changes were to IMAP flags
-#quick = 10
-
-[Repository gmail-local]
-# offlineimap now only supports Maildir and IMAP for local repositories
-type = Maildir
-localfolders = ~/Maildir/gmail
-
-[Repository gmail-remote]
-# Remote repository can be IMAP or Gmail
-type = Gmail
-remotehost = imap.gmail.com
-ssl = yes
-remoteport = 993
-#remoteuser = username
-#remotepass = password
-nametrans = lambda foldername: re.sub ('^\[gmail\]', 'bak',
-                               re.sub ('sent_mail', 'sent',
-                               re.sub ('starred', 'flagged',
-                               re.sub (' ', '_', foldername.lower()))))
-folderfilter = lambda foldername: foldername not in '[Gmail]/All Mail'
-# Instead of closing the connection once a sync is complete,
-# offlineimap will send empty data to the server to hold the
-# connection open. A value of 60 attempts to hold the connection
-# for a minute between syncs (both quick and autorefresh)
-#keepalive = 60
-
-
-[Account lavabit]
-localrepository = lavabit-local
-remoterepository = lavabit-remote
-#autorefresh = 10
-#quick = 10
-
-[Repository lavabit-local]
-type = Maildir
-localfolders = ~/Maildir/lavabit
-
-[Repository lavabit-remote]
-type = IMAP
-remotehost = imap.lavabit.com
-ssl = yes
-remoteport = 993
-#remoteuser = username
-#remotepass = password
-
-
-# Generate a muttrc fragment containing the mailboxes
-# that it syncs
+# Generate a muttrc fragment containing the mailboxes that it syncs.
 # NOTE: add "source ~/.mutt/mailboxes" to "muttrc"
 [mbnames]
-enabled = yes
-filename = ~/.mutt/mailboxes
-header = "mailboxes "
-peritem = "+%(accountname)s/%(foldername)s"
-sep = " "
-footer = "\n"
+enabled             = yes
+filename            = ~/.mutt/mailboxes.offlineimap
+header              = "mailboxes "
+peritem             = "+%(accountname)s/%(foldername)s"
+sep                 = " "
+footer              = "\n"
 

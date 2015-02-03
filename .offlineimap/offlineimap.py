@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 #
-# Ref:
-#   Encrypt OfflineIMAP Password
-#   http://unix.stackexchange.com/questions/44214/encrypt-offlineimap-password
+# Add support of encrypting password with gpg2 for OfflineIMAP.
+# Provide function 'mailpasswd' to decrypt the password.
 #
 # Configurations:
 #   [general]
@@ -12,7 +11,11 @@
 #   remotepasseval = mailpasswd("<accountname>")
 #   ...
 #
-# 2014/06/20
+# Reference:
+# [1] Encrypt OfflineIMAP Password
+#     http://unix.stackexchange.com/questions/44214/encrypt-offlineimap-password
+#
+# Updated: 2015/02/02
 #
 
 import os
@@ -21,7 +24,8 @@ import subprocess
 def mailpasswd(account):
     account = os.path.basename(account)
     path = '{0}/.offlineimap/{1}.gpg'.format(os.environ['HOME'], account)
-    args = ['gpg', '--use-agent', '--quiet', '--batch', '-d', path]
+    args = ['gpg2', '--for-your-eyes-only', '--no-tty',
+            '--quiet', '--batch', '--decrypt', path]
     try:
         return subprocess.check_output(args).strip()
     except subprocess.CalledProcessError:
@@ -32,7 +36,8 @@ def mailpasswd(account):
 #def mailpasswd(account):
 #    account = os.path.basename(account)
 #    path = '{0}/.offlineimap/{1}.gpg'.format(os.environ['HOME'], account)
-#    args = ['gpg', '--use-agent', '--quiet', '--batch', '-d', path]
+#    args = ['gpg2', '--for-your-eyes-only', '--no-tty',
+#            '--quiet', '--batch', '--decrypt', path]
 #    proc = subprocess.Popen(args, stdout=subprocess.PIPE)
 #    output = proc.communicate()[0].strip()
 #    retcode = proc.wait()
