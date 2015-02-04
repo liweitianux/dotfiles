@@ -1,0 +1,15 @@
+# read main config
+source ~/.mutt/muttrc
+
+# remove hooks, headers and sig, they are already in the draft
+unhook send-hook
+unset signature
+unmy_hdr *
+
+set edit_headers                # show headers when composing
+
+# call the right editor immediately
+set autoedit
+set editor = "vim +/^$/+1 -c 'set ft=mail enc=utf-8 tw=72'"
+
+#  vim: set ts=8 sw=4 tw=0 fenc= ft=muttrc: #

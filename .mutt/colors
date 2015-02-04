@@ -100,11 +100,6 @@ color body       brightwhite   red     "^gpg: BAD signature from.*"
 mono  body       bold                  "^gpg: Good signature"
 mono  body       bold                  "^gpg: BAD signature from.*"
 
-# Various smilies and the like
-color body       brightwhite   default "<[Gg]>"             # <g>
-color body       brightwhite   default "<[Bb][Gg]>"         # <bg>
-color body       brightwhite   default " [;:]-*[})>{(<|]"   # :-) etc...
-
 # *bold*
 color body       brightblue  default "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
 mono  body       bold                "(^|[[:space:][:punct:]])\\*[^*]+\\*([[:space:][:punct:]]|$)"
@@ -115,7 +110,19 @@ mono  body       underline           "(^|[[:space:][:punct:]])_[^_]+_([[:space:]
 color body       brightblue  default "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
 mono  body       underline           "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
 
+# Various smilies and the like
+color body       brightwhite   default "<[Gg]>"             # <g>
+color body       brightwhite   default "<[Bb][Gg]>"         # <bg>
+color body       brightwhite   default " [;:]-*[})>{(<|]"   # :-) etc...
+
 # Border lines.
 color body       blue        default "( *[-+=#*~_]){6,}"
+
+## Custom highlights
+# arXiv number
+color body       brightyellow  default "(^|[[:space:]])arXiv:[[:space:]0-9\.]+$"
+# arXiv title
+color body       brightwhite   default "(^|[[:space:]])Title:\ .+$"
+
 
 #  vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=muttrc: #

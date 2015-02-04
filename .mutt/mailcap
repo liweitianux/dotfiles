@@ -1,36 +1,111 @@
-# $Id$
 #
-# mutt mailcap configuration file
+# mailcap - MIME configuration file
 #
-# Weitian LI <liweitianux@gmail.com>
-# 2014/07/13
+# Reference:
+# [1] Gray Johnson's Mutt Page
+#     http://www.spocom.com/users/gjohnson/mutt/
+#
+# Modified: 2015/02/02
 #
 
-## 'copiousoutput' tells mutt the cmd passes possibly large amounts
-## of text, causes mutt to invoke a pager. also denote non-interactive.
 
-#text/html;          firefox -remote 'openURL(%s)'; test=RunningFirefox
-text/html;          w3m -T text/html -I %{charset} -dump %s; nametemplate=%s.html;  copiousoutput
+# From the attachment menu, if X is running, HTML attachments are sent
+# to netscape for viewing; otherwise, they are sent to w3m.  For
+# in-line viewing, the HTML is converted to text. 
+#
+# [Comment-out next line so that we can use w3m even within X.]
+#text/html;                      mutt_netscape %s; test=RunningX
+text/html;                      w3m -T text/html -I %{charset} -dump %s; \
+                                    nametemplate=%s.html;  copiousoutput
 
-image/jpeg;         feh %s
-image/png;          feh %s
-image/gif;          feh %s
-image/*;            feh %s
+# Add capability to edit attachments from the compose menu.
+#
+# Mutt can only edit attachments if they have a mailcap edit entry.
+# (This would be a good thing to fix.)  However, a mailcap entry
+# apparently must include the display function--it can't be defaulted.
+# The combination "cat; copiousoutput" comes close to the default in
+# that in invokes the default pager on the output of cat.  However,
+# there is apparently no way to specify the default editor--a shell
+# environment variable such as $VISUAL or $EDITOR is as close as we can
+# get.
+#
+text/plain;                     ~/.mutt/mutt_bgrun.sh gvim -f %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+text/plain;                     vim %s
+text/*;                         cat; copiousoutput; edit=$EDITOR %s
 
-video/*;            vlc %s
+message/rfc822;	                cat; copiousoutput; edit=$EDITOR %s
 
+# The following Microsoft application MIME attachments are viewed from
+# the attachment menu using LibreOffice.
+#
+application/msword;             ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/msword;             word2text %s; copiousoutput
+application/vnd.msword;	        ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/vnd.msword;         word2text %s; copiousoutput
+#
+application/excel;              ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/excel;              excel2text %s; copiousoutput
+application/msexcel;            ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/msexcel;            excel2text %s; copiousoutput
+application/vnd.ms-excel;       ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/vnd.ms-excel;       excel2text %s; copiousoutput
+application/x-excel;            ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/x-excel;            excel2text %s; copiousoutput
+application/x-msexcel;          ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/x-msexcel;          excel2text %s; copiousoutput
+application/ms-Excel;           ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/ms-Excel;           excel2text %s; copiousoutput
+#
+application/vnd.ms-powerpoint;  ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/vnd.ms-powerpoint;  ppt2text %s; copiousoutput
+application/x-mspowerpoint;     ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/x-mspowerpoint;     ppt2text %s; copiousoutput
+application/ppt;                ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/ppt;                ppt2text %s; copiousoutput
+
+
+application/pdf;                ~/.mutt/mutt_bgrun.sh evince %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/pdf;                pdftotext %s -; copiousoutput
+
+application/postscript;         ~/.mutt/mutt_bgrun.sh evince %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/postscript;         ps2ascii %s; copiousoutput
+
+application/rtf;                ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/rtf;                rtf2text %s; copiousoutput
+
+#application/ms-tnef;            tnef -w %s
+
+#application/octet-stream;       mutt_octet_view -x %s; test=RunningX
+#application/octet-stream;       mutt_octet_view -v %s
+#application/octet-stream;       mutt_octet_view %s; copiousoutput
+
+image/*;                        ~/.mutt/mutt_bgrun.sh feh %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+
+video/*;                        ~/.mutt/mutt_bgrun.sh vlc %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+
+# Show archive conents.
+#
 application/x-compressed-tar;   tar -tf %s; copiousoutput
 application/x-gnuzip;           gzcat; copiousoutput
 application/x-bzip;             bunzip2 -c %s | tar -tf -; copiousoutput
 application/x-tar-gz;           gunzip -c %s | tar -tf -; copiousoutput
 application/x-7z-compressed;    7z l %s; copiousoutput
-
-# application/postscript;     ps2ascii %s; copiousoutput
-# application/pdf;            apvlv %s; copiousoutput
-# application/pdf;            mupdf %s; copiousoutput
-application/pdf;            pdftotext '%s' -; copiousoutput; description="PDF Document"; nametemplate="%s.pdf"
-application/msword;         wvHtml --charset=gb2312 %s - | w3m -dump %s; nametemplate=%s.html; copiousoutput
-# application/vnd.ms-excel;
-
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=mailcap: #
