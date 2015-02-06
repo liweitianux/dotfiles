@@ -45,6 +45,9 @@ application/msword;             word2text %s; copiousoutput
 application/vnd.msword;	        ~/.mutt/mutt_bgrun.sh libreoffice %s; \
                                     test=sh -c 'test -n "${DISPLAY}"'
 application/vnd.msword;         word2text %s; copiousoutput
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; \
+                                ~/.mutt/mutt_bgrun.sh libreoffice %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
 #
 application/excel;              ~/.mutt/mutt_bgrun.sh libreoffice %s; \
                                     test=sh -c 'test -n "${DISPLAY}"'
@@ -103,8 +106,8 @@ video/*;                        ~/.mutt/mutt_bgrun.sh vlc %s; \
 # Show archive conents.
 #
 application/x-compressed-tar;   tar -tf %s; copiousoutput
-application/x-gnuzip;           gzcat; copiousoutput
-application/x-bzip;             bunzip2 -c %s | tar -tf -; copiousoutput
+application/x-bzip-compressed-tar;  \
+                                bunzip2 -c %s | tar -tf -; copiousoutput
 application/x-tar-gz;           gunzip -c %s | tar -tf -; copiousoutput
 application/x-7z-compressed;    7z l %s; copiousoutput
 

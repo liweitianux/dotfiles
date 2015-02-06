@@ -88,9 +88,9 @@ unset mime_forward              # forward attachments as part of body
 
 ### Headers
 ignore      *
-unignore    from: to: cc: bcc: date: subject:
+unignore    from: to: cc: bcc: date: subject: X-Label:
 unhdr_order *
-hdr_order   from: to: cc: date: subject:
+hdr_order   from: to: cc: date: subject: X-Label:
 
 ### Encoding
 set send_charset        = "us-ascii:utf-8"
@@ -101,7 +101,7 @@ set rfc2047_parameters          # to fix attachment filename encoding
 ### Index view
 # first bang ("!") to expand month week names in the C locale
 set date_format         = "!%a %m/%d %I:%M"
-set index_format        = "[%Z] %d %3M %-15.15L (%4c) %s"
+set index_format        = "[%Z] %d %2M %-15.15L %4c%?X?[%X]&   ? %s"
 set folder_format       = "%2C %t %N %8s %f"
 set sort                = threads
 set sort_aux            = reverse-last-date-received
@@ -166,7 +166,7 @@ macro index         B       "<limit>~b " \
 macro index         I       "<change-folder>!<enter>" \
         "go to Inbox"
 # Save a decoded copy in ~/
-macro index         >       "<pipe-message>cat > ~/" \
+macro index,pager   >       "<pipe-message>cat > ~/" \
         "save message as"
 # Open in vim
 macro index,pager   V       "<pipe-message>vim -c 'setlocal ft=mail buftype=nofile' -<enter>" \
@@ -188,6 +188,11 @@ macro pager         ';'     "<exit><tag-prefix>" \
 # notmuch
 macro index         s       "<enter-command>unset wait_key<enter><shell-escape>~/.mutt/mutt-notmuch.py -G $folder/search<enter><change-folder-readonly>+search<enter>" \
         "search mail (using notmuch)"
+# labels
+macro index,pager   x       '<enter-command>set my_oldeditor=$editor<enter><enter-command>set editor="~/.mutt/mutt-xlabel.py"<enter><edit><previous-undeleted><clear-flag>N<sync-mailbox><enter-command>set editor=$my_oldeditor<enter>' \
+        "edit X-Label"
+macro index         \Cx     "<limit>~y " \
+        "limit view to label"
 
 ### aliases
 set sort_alias      = alias     # sort alias file by alias
@@ -216,7 +221,7 @@ macro index,pager   P       "<shell-escape>tmux new-window -a -t mutt 'mutt -F ~
         "recall postponed message in new tmux window"
 # Set the editor for for editing messages in-place,
 # allows re-editing before sending, e.g. for use in forwarding messages.
-macro compose       E       '<enter-command>set my_oldeditor=$editor<enter><enter-command>set editor="vim"<enter><edit-message><enter-command>set editor=$my_oldeditor<enter>' \
+macro compose       E       '<enter-command>set my_oldeditor=$editor<enter><enter-command>set editor="vim"<enter><edit><enter-command>set editor=$my_oldeditor<enter>' \
         "edit message in-place"
 # open mailbox listing in a new window
 macro index,pager   Y       '<shell-escape>tmux new-window -a -t mutt "mutt -y"<enter>' \
@@ -232,8 +237,8 @@ source ~/.mutt/colors
 source ~/.mutt/gpg.rc
 
 ## auto view
-auto_view text/html application/x-gunzip application/x-bzip \
-          application/x-tar-gz application/x-compressed-tar
+auto_view text/html application/x-tar-gz application/x-compressed-tar \
+          application/x-bzip-compressed-tar
 
 ## MIME types that should *not* be treated according to their mailcap entry
 mime_lookup application/octet-stream application/X-Lotus-Manuscript

@@ -88,7 +88,7 @@ do
     shift
 done
 
-file=$1
+file="$1"
 
 # Create a temporary directory for our copy of the temporary file.
 #
@@ -99,6 +99,8 @@ tmpdir=/tmp/$LOGNAME$$
 umask 077
 mkdir "$tmpdir" || exit 1
 tmpfile="$tmpdir/${file##*/}"
+#echo "file: ${file}" > ~/debug.$$.log
+#echo "tmpfile: ${tmpfile}" >> ~/debug.$$.log
 
 # Copy mutt's temporary file to our temporary directory so that we can
 # let mutt overwrite and delete it when we exit.

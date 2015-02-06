@@ -36,6 +36,7 @@ color header     brightmagenta default "^(From|Subject):"
 color header     brightyellow  default "^Date:"
 color header     brightblue    default "^To:"
 color header     brightcyan    default "^Cc:"
+color header     brightblue    default "^X-Label:"
 mono  header     bold                   "^(From|Subject):"
 
 
