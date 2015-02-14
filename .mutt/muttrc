@@ -114,7 +114,7 @@ set status_chars  = " *%A"
 set status_format = "---[ Folder: %f %r ]---[ Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l? ]---%>-(%P)---"
 
 ### Pager
-#set pager_format        = "-%S- %-20.20f %s"
+set pager_format        = "[%Z] %C/%m: %-20.20n | %s%* -- (%P)"
 set pager_index_lines   = 8     # number of index lines to show
 set pager_context       = 8     # number of context lines to show
 set pager_stop                  # don't go to next message automatically
@@ -127,16 +127,17 @@ alternative_order       text/plain text/enriched text/html
 
 ### Key bindings
 bind index          i           noop
-bind index          <TAB>       sync-mailbox
 bind index          <SPACE>     collapse-thread
 bind index          p           recall-message
 bind index          K           previous-unread
 bind index          J           next-unread
 bind index,browser  gg          first-entry
 bind index,browser  G           last-entry
+#bind index,pager    D           delete-message
 bind index,pager    R           group-reply
 bind index,pager    N           search-opposite
 bind index,pager    \#          noop
+bind index,pager    <TAB>       sync-mailbox
 bind pager          i           exit
 bind pager          /           search
 bind pager          <UP>        previous-line
@@ -147,6 +148,7 @@ bind pager          gg          top
 bind pager          G           bottom
 bind pager          K           previous-undeleted
 bind pager          J           next-undeleted
+bind pager          \Cj         next-unread
 bind attach         <RETURN>    view-mailcap
 bind compose        p           pgp-menu
 bind editor         <TAB>       complete-query

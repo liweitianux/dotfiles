@@ -103,6 +103,11 @@ image/*;                        ~/.mutt/mutt_bgrun.sh feh %s; \
 video/*;                        ~/.mutt/mutt_bgrun.sh vlc %s; \
                                     test=sh -c 'test -n "${DISPLAY}"'
 
+# Open scripts
+application/x-shellscript;      ~/.mutt/mutt_bgrun.sh gvim -f %s; \
+                                    test=sh -c 'test -n "${DISPLAY}"'
+application/x-shellscript;      vim %s
+
 # Show archive conents.
 #
 application/x-compressed-tar;   tar -tf %s; copiousoutput

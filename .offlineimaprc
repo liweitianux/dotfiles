@@ -26,7 +26,7 @@ accounts = gmail-aly, gmail-li, outlook-aly, outlook-li, sjtu, autistici
 maxsyncaccounts     = 6
 #
 # UI: blinkenlights, ttyui, quiet (suppress anything but errors)
-ui                  = TTY.TTYUI, Noninteractive.Basic, Noninteractive.Quiet
+ui                  = ttyui
 
 
 [Account example]
@@ -70,7 +70,7 @@ remoterepository    = gmail-aly-remote
 status_backend      = sqlite
 autorefresh         = 30
 quick               = 5
-postsynchook        = ~/.offlineimap/postsync.sh
+#postsynchook        = ~/.offlineimap/postsync.sh
 #
 [Repository gmail-aly-local]
 type                = Maildir
@@ -116,7 +116,7 @@ remoterepository    = outlook-aly-remote
 status_backend      = sqlite
 autorefresh         = 30
 quick               = 5
-postsynchook        = ~/.offlineimap/postsync.sh
+#postsynchook        = ~/.offlineimap/postsync.sh
 #
 [Repository outlook-aly-local]
 type                = Maildir
@@ -188,7 +188,7 @@ remoterepository    = autistici-remote
 status_backend      = sqlite
 autorefresh         = 60
 quick               = 5
-postsynchook        = ~/.offlineimap/postsync.sh
+#postsynchook        = ~/.offlineimap/postsync.sh
 #
 [Repository autistici-local]
 type                = Maildir
