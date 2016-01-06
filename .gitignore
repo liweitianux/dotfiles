@@ -3,6 +3,8 @@
 *~
 *.swp
 *.orig
+*.bak
+*_bak
 
 ## vifm
 .vifm/Trash/
@@ -87,7 +89,8 @@ __pycache__/
 # mutt
 .mutt/aliases
 .mutt/certificates
-.mutt/history
+.mutt/xlabels
+.mutt/*history
 .mutt/mailboxes*
 .mutt/signature
 .mutt/accounts/

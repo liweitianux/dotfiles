@@ -5,8 +5,8 @@
 ## 2014/05/31
 
 ### locale {{{
-export LANG="en_US.utf8"
-export LC_CTYPE="zh_CN.utf8"
+export LANG="en_US.UTF-8"
+export LC_CTYPE="zh_CN.UTF-8"
 export LC_COLLATE="C"
 ### }}}
 
@@ -15,7 +15,7 @@ if [ -d "$HOME/bin" ]; then
     export PATH="$HOME/bin:$PATH"
 fi
 # admin
-if `groups | grep -qE '\b(wheel|adm|sudo)\b'`; then
+if groups | grep -qE '\b(wheel|adm|sudo)\b'; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 fi
 
@@ -54,11 +54,6 @@ fi
 ### python-virtualenv }}}
 
 ### astro {{{
-## DS9 settings
-#if [ -x $HOME/bin/ds9 ]; then
-#    alias ds9="$HOME/bin/ds9"
-#fi
-
 # backup LD_LIBRARY_PATH settings
 LD_LIBRARY_PATH_BAK="${LD_LIBRARY_PATH}"
 
@@ -87,7 +82,7 @@ function ciaoinit() {
         heainit > /dev/null
     fi
     if [ "x${CIAO_STATE}" = "x" ]; then
-        source $CIAO_PATH/bin/ciao.bash > /dev/null
+        source $CIAO_PATH/bin/ciao.bash
     else
         source $CIAO_PATH/bin/ciao.bash -o
     fi

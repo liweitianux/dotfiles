@@ -1,0 +1,30 @@
+#
+# ~/.inputrc
+#
+# readline configurations
+#
+# Reference:
+# [1] ArchWiki - Readline
+#     https://wiki.archlinux.org/index.php/Readline
+#
+# Aaron LI
+# 2015-09-26
+#
+
+#$include /etc/inputrc
+
+# vi mode
+set editing-mode vi
+$if mode=vi
+set keymap vi-command
+# these are for vi-command mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+set keymap vi-insert
+# these are for vi-insert mode
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+$endif
+
+
+#  vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=readline: #
