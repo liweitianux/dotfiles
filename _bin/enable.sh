@@ -9,9 +9,10 @@
 
 usage() {
     echo "Usage:"
-    echo "    `basename $0` [ -fhknv ] [ -H <home> ] <df1> ..."
+    echo "    `basename $0` [ -Ffhknv ] [ -H <home> ] <df1> ..."
     echo ""
     echo "    -h: show this help"
+    echo "    -F: do not use find to list files, take the df* as is"
     echo "    -f: overwrite target links of already exists"
     echo "    -H: use the specified target home instead of $HOME"
     echo "    -k: keep the beginning underscore '_'"
@@ -31,10 +32,11 @@ enable_dotfile() {
         df_dir=`dirname   ${df} | sed 's|^_|.|'`
         df_base=`basename ${df} | sed 's|^_|.|'`
     fi
-    ( cd ${home}; curdir=`realpath .`; \
-        df_rel=`${this_dir}/relpath.sh "${curdir}" "${df_abs}"`; \
+    ( cd ${home}; \
         if [ ! -d "${df_dir}" ]; then mkdir -p "${df_dir}"; fi; \
-        eval ${enable_cmd} "${df_rel}" "${df_dir}/${df_base}"; \
+        cd "${df_dir}"; curdir=`realpath .`; \
+        df_rel=`${this_dir}/relpath.sh "${curdir}" "${df_abs}"`; \
+        eval ${enable_cmd} "${df_rel}" "${df_base}"; \
     )
 }
 
@@ -43,6 +45,7 @@ this=`realpath $0`
 this_dir=`dirname ${this}`
 
 # default arguments
+arg_nofind=no
 arg_force=no
 arg_home="$HOME"
 arg_keep_us=no
@@ -50,7 +53,7 @@ arg_dry=no
 arg_verbose=no
 
 # should NOT use "$@" here
-args=`getopt fhH:knv $*`
+args=`getopt FfhH:knv $*`
 if [ $? != 0 ]; then
     usage
     exit 1
@@ -61,6 +64,9 @@ for i; do
         -h)
             usage
             exit 0;;
+        -F)
+            arg_nofind=yes
+            shift;;
         -f)
             arg_force=yes
             shift;;
@@ -86,6 +92,7 @@ if [ $# -eq 0 ]; then
     exit 2
 fi
 
+echo "no_find: ${arg_nofind}"
 echo "force: ${arg_force}"
 echo "target_home: ${arg_home}"
 echo "keep_underscore: ${arg_keep_us}"
@@ -100,12 +107,17 @@ if [ "x${arg_dry}" = "xyes" ]; then
 fi
 
 for dotfile in $@; do
-    for df in `find "${dotfile}" \( -type f -o -type l \)`; do
-        # strip the beginning './'
-        df=`echo "${df}" | sed 's|^\./||'`
-        echo "enabling: '${df}'"
-        enable_dotfile "${df}" "${arg_home}"
-    done
+    if [ "x${arg_nofind}" = "xyes" ]; then
+        echo "enabling: '${dotfile}'"
+        enable_dotfile "${dotfile}" "${arg_home}"
+    else
+        for df in `find "${dotfile}" \( -type f -o -type l \)`; do
+            # strip the beginning './'
+            df=`echo "${df}" | sed 's|^\./||'`
+            echo "enabling: '${df}'"
+            enable_dotfile "${df}" "${arg_home}"
+        done
+    fi
 done
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #
