@@ -1,7 +1,6 @@
-#####################################################
-## this is example key configuration file, copy it ##
-## to ~/.ncmpcpp/keys and set up your preferences  ##
-#####################################################
+##
+## ~/.ncmpcpp/keys
+## key configuration file for ncmpcpp
 ##
 ## Tips:
 ## - it's possible to bind maximum two keys to a command
@@ -11,10 +10,15 @@
 ## Note: First bind of volume_up/down
 ## will be used to switch between columns.
 ##
+## Configure ncmpcpp to have vim-like key bindings
+##
+## Aaron LI
+## 2015-12-29
+##
 #
-#key_up = 259 'k'
+key_up = 259 'k'
 #
-#key_down = 258 'j'
+key_down = 258 'j'
 #
 #key_up_album = '['
 #
@@ -28,9 +32,9 @@
 #
 #key_page_down = 338
 #
-#key_home = 262
+key_home = 262 'g'
 #
-#key_end = 360
+key_end = 360 'G'
 #
 #key_space = 32
 #
@@ -43,8 +47,10 @@
 #key_volume_down = 260 '-'
 #
 #key_prev_column = 260
+key_prev_column = 'h'
 #
 #key_next_column = 261
+key_next_column = 'l'
 #
 #key_toggle_space_mode = 't'
 #
@@ -122,8 +128,10 @@ key_pause = 'p'
 #key_find_backward = '?'
 #
 #key_next_found_position = '.'
+key_next_found_position = 'n'
 #
 #key_prev_found_position = ','
+key_prev_found_position = 'N'
 #
 #key_toggle_find_mode = 'w'
 #
@@ -136,6 +144,7 @@ key_pause = 'p'
 #key_artist_info = 'I'
 #
 #key_lyrics = 'l'
+key_lyrics = '.'
 #
 #key_reverse_selection = 'v'
 #
@@ -150,8 +159,10 @@ key_pause = 'p'
 #key_crop = 'C'
 #
 #key_move_song_up = 'm'
+key_move_song_up = 'K'
 #
 #key_move_song_down = 'n'
+key_move_song_down = 'J'
 #
 #key_move_to = 'M'
 #
