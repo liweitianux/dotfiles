@@ -3,10 +3,13 @@ dotfiles
 
 Personal & collected dotfiles ~~~
 
+* `linux`: `Linux-specific configurations
+* `freebsd`: FreeBSD-specific configurations
+
 Distributed under MIT License.
 
 
-Weitian LI
-GnuPG key: Weitian LI <liweitianux@gmail.com>
-Fingerprint: F00D 615C 9984 147B 450F  56EA F81B F453 5F26 EBF6
+Aaron LI
+GnuPG key: Aaron LI <aaronly.me@gmail.com>
+Fingerprint: AC34 64FA DAAE 6321 8609  9CA6 240E 2A63 5D72 729A
 
