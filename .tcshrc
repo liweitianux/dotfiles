@@ -1,50 +1,28 @@
-#####################################################################
-### /etc/csh.cshrc
-### $HOME/.tcshrc
-### LY4ever
-### June 30, 2011
+##
+## ~/.tcshrc
+##
+## Aaron LI
+## Created: 2011-06-30
+## Updated: 2016-01-06
+##
 
 
-### "root" environment (basic) ######################################
-if ($LOGNAME == "root") then
-    set -f path = ( $path /sbin )
-    set -f path = ( $path /usr/sbin )
-    set -l path = ( $path /usr/local/sbin )
+### PATH ###
+if ( -d ~/bin ) then
+    set path = ( ~/bin $path )
 endif
 
-### "ly" environment (basic) ########################################
-if ($LOGNAME == "ly") then
-    set -f path = ( ~/bin $path )
-    set -f path = ( $path /sbin )
-    set -f path = ( $path /usr/sbin )
-    set -l path = ( $path /usr/local/sbin )
+## admin
+groups | grep -qE '\b(wheel|adm|sudo)\b'
+if ( $status == 0 ) then
+    set path = ( $path /sbin /usr/sbin /usr/local/sbin )
 endif
 
-### "user" + "root" environment (basic) #############################
-set -f path = ( $path /bin )
-set -f path = ( $path /usr/bin )
-set -f path = ( $path /usr/local/bin )
 
-### "user" + "root" environment (misc) ##############################
-set -l path = ( $path /usr/games )
-
-
-### Environment settings ############################################
+### Environments ###
 # colors for 'ls'
-setenv LSCOLORS     ExGxFxdxCxegedabagExEx
 setenv CLICOLOR     yes
-# colors for 'grep'
-setenv GREP_OPTIONS '--color=auto'
-
-# locale
-setenv LANG         en_US.UTF-8
-setenv LC_CTYPE     zh_CN.UTF-8
-setenv LC_COLLATE   C
-
-# settings for 'fcitx'
-setenv XMODIFIERS       @im=fcitx
-setenv QT_IM_MODULE     xim
-setenv GTK_IM_MODULE    xim
+setenv LSCOLORS     ExGxFxdxCxegedabagExEx
 
 # Misc
 setenv PAGER less
@@ -53,12 +31,11 @@ setenv EDITOR vim
 setenv VISUAL vim
 
 
-#####################################################################
-###  skip remaining setup if not an interactive shell
-if ($?USER == 0 || $?prompt == 0) exit
+## skip remaining setup if not an interactive shell
+if ( $?USER == 0 || $?prompt == 0 ) exit
 
 
-### color code ######################################################
+### color code ###
 # 1 for brighter colors
 # 4 for underlined text
 # 5 for flashing text
@@ -96,9 +73,7 @@ if ($?USER == 0 || $?prompt == 0) exit
 #set rprompt = "%~"
 
 
-### prompt ##########################################################
-# Source: "UNIX Power Tools" from O'Reilly
-# Note from Tim Cera (timcera@sourceforge.net).
+### prompt ###
 set prompt='\
 %B%n%b@%U%m%u %B%S%/%s%b\
 %B%#%b '
@@ -108,7 +83,7 @@ set prompt2="%R? "
 set prompt3="CORRECT> %B%R%b (y|n|e)? "
 
 
-### bindkey #########################################################
+### bindkey ###
 bindkey '\e[1~' beginning-of-line        # Home
 bindkey '\e[3~' delete-char              # Delete
 bindkey '\e[4~' end-of-line              # End
@@ -119,17 +94,14 @@ bindkey -k down history-search-forward   # PageDown
 #bindkey -v
 
 
-### Tcsh settings ###################################################
+### Tcsh settings ###
 set ignoreeof
 set listlinks
 set nobeep
-set noclobber
+#set noclobber
 
-set history = 512
-set savehist = 512
-
-# Watch any(1) other users every 0 seconds from any(2) console, 
-set watch=(0 any any)
+set history=512
+set savehist=512
 
 # Format of output string when someone logins or logouts
 set who="%n has %a %l from %M."
@@ -146,7 +118,7 @@ set complete=enhance
 set correct=cmd
 
 #set autologout = (30 5)
-unset autologout
+#unset autologout
 
 # Symbolic links are expanded to their true values : chase
 # (possible values 'chase' 'ignore' 'expand')
@@ -156,7 +128,7 @@ set symlinks=chase
 set listjobs
 
 # If the exit value is non-zero, print it
-set printexitvalue
+#set printexitvalue
 
 # Ask for confirmation when 'rm *'
 set rmstar
@@ -164,80 +136,35 @@ set rmstar
 # Files that are to be ignored from completion.
 set fignore=(.o)
 
-set time=(8 "\
-Time spent in user mode   (CPU seconds) : %Us\
-Time spent in kernel mode (CPU seconds) : %Ss\
-Total time                              : %Es\
-CPU utilisation (percentage)            : %P\
-Times the process was swapped           : %W\
-Times of major page faults              : %F\
-Times of minor page faults              : %R")
+#set time=(8 "\
+#Time spent in user mode   (CPU seconds) : %Us\
+#Time spent in kernel mode (CPU seconds) : %Ss\
+#Total time                              : %Es\
+#CPU utilisation (percentage)            : %P\
+#Times the process was swapped           : %W\
+#Times of major page faults              : %F\
+#Times of minor page faults              : %R")
 
 # Before printing prompt after a command, do
 #alias precmd date
 
-# Other values are bsd, sysv, etc.
-# This way, both 'set -n' and set '\003' styles will work.
+# Both 'set -n' and set '\003' styles will work.
 set echo_style=both
 
 
-### Tcsh aliases ####################################################
-# for a better habit
+### Aliases ###
 #alias rm 'rm -iv'
 #alias mv 'mv -iv'
 #alias cp 'cp -iv'
 
-alias md    'mkdir -v -p'
-alias rd    'rmdir -v'
-
-alias today "date '+%d%h%y'"
-alias mess  'clear ; tail -f /var/log/messages'
-
-alias x     'exit'
-alias ff    'find . -name $*'
-
-#alias .     'pwd'
-alias ..    'cd ..'
-alias ../   'cd ../'
-alias ...   'cd ../..'
-alias .../  'cd ../../'
-alias -     'cd -'
-alias /     'cd /'
-alias ls    'ls -F --color=auto'
-alias la    'ls -AF'
-alias lla   'ls -AlF'
-alias ll    'ls -Flh'
-alias lld   'ls -dlh'
-
-alias df    'df -haT'
-#alias grep  'grep -i'
-
-# show
-alias show-ifstat    'systat -ifstat'      # net interface
-alias show-geom      'gstat'               # I/O state
-alias show-thermal   'sysctl dev.acpi_ibm.0.thermal'
-alias show-cpufreq   'sysctl dev.cpu.0.freq'
-alias show-cpulevels 'sysctl dev.cpu.0.freq_levels'
-alias show-battery   'sysctl hw.acpi.battery.life && sysctl hw.acpi.battery.time'
-alias show-alldep    'make all-depends-list'         # exec under 'ports' dirs
-alias show-dep       'portmaster --show-work ./ | sort'
-
-# misc
-alias v     'vim'
-alias a     'alias'
-alias h     'history | less'
-alias ox    'oxford'
-#alias valgrind-checkmem 'valgrind --tool=memcheck --leak-check=full'  # check 'memory leak'
-
-# aliases for typos
-alias maek  'make'
-alias alais 'alias'
+alias la    'ls -lAh'
+alias ll    'ls -lh'
 
 # for security
 alias del   'mv \!* ~/tmp'
 
-### Tcsh completion #################################################
-# ~/.tcsh_completion dir
+
+## Tcsh completion
 if ( -d ~/.tcsh/completion ) then
     foreach tcsh_comp ( ~/.tcsh/completion/*.tcsh )
         source $tcsh_comp
@@ -246,34 +173,15 @@ endif
 unset tcsh_comp
 
 
-### Misc ############################################################
-### cdargs
-# Just the basic cdargs functionality for tcshell
-alias cv 'cdargs \!* && cd `cat $HOME/.cdargsresult`'
-# add current directory with description:
-alias ca 'cdargs --add=:\!*":"$cwd'
-complete cv 'n@*@`cat -s ~/.cdargs | sed -e "s/ .*//"`@'
-
-
-### Tcsh special aliases ############################################
-## tcsh  period
-# Every # seconds, do 'command'.
-# set tperiod = 2
-# alias periodic 'tput bel'
-#unset tperiod
-#unalias periodic
-
-### ly4ever local ###################################################
 ## local settings
 if ( -e ~/.tcshrc.local ) then
     source ~/.tcshrc.local
 endif
 
-## tcsh sched
-# sched +8:00 set prompt='Has trabajado mucho. Llama la novia\! :> '
 
 ## run commands
 #fortune -s | cowsay -f ~/.littleprince.cow -W 48
-calendar
-date
+#calendar
 
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=tcsh: #
