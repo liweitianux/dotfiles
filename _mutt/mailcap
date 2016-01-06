@@ -11,7 +11,7 @@
 
 # From the attachment menu, if X is running, HTML attachments are sent
 # to netscape for viewing; otherwise, they are sent to w3m.  For
-# in-line viewing, the HTML is converted to text. 
+# in-line viewing, the HTML is converted to text.
 #
 # [Comment-out next line so that we can use w3m even within X.]
 #text/html;                      mutt_netscape %s; test=RunningX
