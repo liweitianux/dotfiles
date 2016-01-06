@@ -1,14 +1,16 @@
-! ---------------------------------------------------------
-! $HOME/.Xresources
-!
-! Weitian LI <liweitianux@gmail.com>
-! 2014/05/10
+!----------------------------------------------------------
+! ~/.Xresources
 !
 ! Syntax:
 ! name.Class.resource: value
 !
-! Ref: https://wiki.archlinux.org/index.php/X_resources
-! ---------------------------------------------------------
+! References:
+! [1] https://wiki.archlinux.org/index.php/X_resources
+
+! Aaron LI <aaronly.me@outlook.com>
+! Created: 2014-05-10
+! Updated: 2015-12-18
+!----------------------------------------------------------
 
 !!! xft settings {{{
 Xft.dpi:            96
@@ -19,139 +21,187 @@ Xft.hintstyle:      hintmedium
 !!! xft settings }}}
 
 !!! color scheme {{{
-!! foreground & background
-! XXX: NOT set background and foreground globally
-!      to avoid conflicts with Tcl/Tk applications. (e.g. ds9)
-!*background:                #1b1b1b
-!*foreground:                #e0e0e0
-!! other colors
-*cursorColor:               #eeeeee
-*colorBD:                   #cfcfcf
-*colorUL:                   #969696
-*colorIT:                   #969696
+!
+!! Molokai {{{
+#define black           #1b1d1e
+#define white           #f8f8f2
+#define dark_gray       #303030
+#define light_gray      #9999aa
+#define red             #b60050
+#define light_red       #f92672
+#define green           #88bb22
+#define light_green     #80ff00
+#define brown           #c47f2c
+#define yellow          #ffba68
+#define blue            #30309b
+#define light_blue      #7070f0
+#define purple          #7e40a5
+#define light_purple    #bb88dd
+#define cyan            #4699af
+#define light_cyan      #66d9ef
+
+*background:    black
+*foreground:    white
+*cursorColor:   white
+
+!! colors 0-7:  normal colors;
+!! colors 8-15: bright counterparts of colors 0-7
+! Black
+*color0:        black
+*color8:        dark_gray
+! Red
+*color1:        red
+*color9:        light_red
+! Green
+*color2:        green
+*color10:       light_green
+! Yellow
+*color3:        brown
+*color11:       yellow
+! Blue
+*color4:        blue
+*color12:       light_blue
+! Magenta / Purple
+*color5:        purple
+*color13:       light_purple
+! Cyan
+*color6:        cyan
+*color14:       light_cyan
+! White
+*color7:        light_gray
+*color15:       white
+!! molokai }}}
+!
+!! gruvbox-dark: https://github.com/morhetz/gruvbox-contrib {{{
+!! hard contrast:
+!*background: #1d2021
+!! medium contrast:
+!!*background:                #282828
+!! soft contrast:
+!! *background: #32302f
+!*foreground:                #ebdbb2
+!! Black + DarkGrey
+!*color0:                    #282828
+!*color8:                    #928374
+!! DarkRed + Red
+!*color1:                    #cc241d
+!*color9:                    #fb4934
+!! DarkGreen + Green
+!*color2:                    #98971a
+!*color10:                   #b8bb26
+!! DarkYellow + Yellow
+!*color3:                    #d79921
+!*color11:                   #fabd2f
+!! DarkBlue + Blue
+!*color4:                    #458588
+!*color12:                   #83a598
+!! DarkMagenta + Magenta
+!*color5:                    #b16286
+!*color13:                   #d3869b
+!! DarkCyan + Cyan
+!*color6:                    #689d6a
+!*color14:                   #8ec07c
+!! LightGrey + White
+!*color7:                    #a89984
+!*color15:                   #ebdbb2
+!! }}}
 !
 !! zenburn: http://xcolors.net/dl/zenburn {{{
-! Black
-*color0:                    #1e2320
-*color8:                    #709080
-! Red
-*color1:                    #705050
-*color9:                    #dca3a3
-! Green
-*color2:                    #60b48a
-*color10:                   #c3bf9f
-! Yellow
-*color3:                    #dfaf8f
-*color11:                   #f0dfaf
-! Blue
-*color4:                    #506070
-*color12:                   #94bff3
-! Magenta
-*color5:                    #dc8cc3
-*color13:                   #ec93d3
-! Cyan
-*color6:                    #8cd0d3
-*color14:                   #93e0e3
-! White
-*color7:                    #dcdccc
-*color15:                   #ffffff
+!! Black
+!*color0:                    #1e2320
+!*color8:                    #709080
+!! Red
+!*color1:                    #705050
+!*color9:                    #dca3a3
+!! Green
+!*color2:                    #60b48a
+!*color10:                   #c3bf9f
+!! Yellow
+!*color3:                    #dfaf8f
+!*color11:                   #f0dfaf
+!! Blue
+!*color4:                    #506070
+!*color12:                   #94bff3
+!! Magenta
+!*color5:                    #dc8cc3
+!*color13:                   #ec93d3
+!! Cyan
+!*color6:                    #8cd0d3
+!*color14:                   #93e0e3
+!! White
+!*color7:                    #dcdccc
+!*color15:                   #ffffff
 ! zenburn }}}
 !
 !! clound: http://xcolors.net/dl/cloud {{{
-!!black
+!! black
 !*color0:                    #222827
 !*color8:                    #5D6F74
-!!red
+!! red
 !*color1:                    #D5A8E3
 !*color9:                    #CD749C
-!!green
+!! green
 !*color2:                    #9C75DD
 !*color10:                   #63B0B0
-!!yellow
+!! yellow
 !*color3:                    #9898AE
 !*color11:                   #C0C0DD
-!!blue
+!! blue
 !*color4:                    #654A96
 !*color12:                   #5786BC
-!!magenta
+!! magenta
 !*color5:                    #625566
 !*color13:                   #3F3442
-!!cyan
+!! cyan
 !*color6:                    #A9D1DF
 !*color14:                   #849DA2
-!!white
+!! white
 !*color7:                    #E6EBE5
 !*color15:                   #D9D6CF
 !! clound }}}
 !
-!! kori colorscheme: http://dotshare.it/dots/659/ {{{
-!!Black
+!! kori: http://dotshare.it/dots/659/ {{{
+!! Black
 !*color0:                    #3D3D3D
-!*color8:                    #4D4D4D 
-!!Red
+!*color8:                    #4D4D4D
+!! Red
 !*color1:                    #6673BF
-!*color9:                    #899AFF 
-!!Green
+!*color9:                    #899AFF
+!! Green
 !*color2:                    #3EA290
 !*color10:                   #52AD91
-!!Yellow
+!! Yellow
 !*color3:                    #B0EAD9
 !*color11:                   #98C9BB
-!!Blue
+!! Blue
 !*color4:                    #31658C
 !*color12:                   #477AB3
-!!Magenta
+!! Magenta
 !*color5:                    #596196
 !*color13:                   #7882BF
-!!Cyan
+!! Cyan
 !*color6:                    #8292B2
 !*color14:                   #95A7CC
-!!White
+!! White
 !*color7:                    #C8CACC
 !*color15:                   #EDEFF2
 !! }}}
 !
-!! unknown {{{
-!*color0:                    #353535
-!*color8:                    #666666
-!!red
-!*color1:                    #D81860
-!*color9:                    #F00060
-!!green
-!*color2:                    #B7CE42
-!*color10:                   #BDE077
-!!brown/yellow
-!*color3:                    #FEA63C
-!*color11:                   #FFE863
-!!blue
-!*color4:                    #6F99B4
-!*color12:                   #7C96B0
-!!magenta
-!*color5:                    #8B7B8B
-!*color13:                   #D8BFD8
-!!cyan
-!*color6:                    #A7A15E
-!*color14:                   #F0E68C
-!!white
-!*color7:                    #DDDDDD
-!*color15:                   #FFFFFF
-!! }}}
-!
 !!! color scheme }}}
- 
-!!! rxvt-unicode settings {{{
+
+!!! rxvt-unicode (URxvt) {{{
 !! urxvt background true transparent
 ! set to 32-bit for real transparency (compositing required [see xcompmgr])
 ! xdpyinfo | grep Composite
 URxvt.depth:                32
 ! transparent=0000, opaque=ffff
 URxvt.background:           rgba:1111/1111/1111/dddd
-! foreground
-URxvt.foreground:           #e0e0e0
 !
 !! urxvt font settings
 !URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=16,xft:WenQuanYi Micro Hei Mono:pixelsize=16
 URxvt.font:                 xft:Terminus:size=12,xft:WenQuanYi Bitmap Song:size=10
+!URxvt.font:                 xft:xos4 Terminus:size=12,xft:WenQuanYi WenQuanYi Bitmap Song:size=10
+!URxvt.font:                 -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
 URxvt.xftAntialias:         true
 !
 !! urxvt settings
@@ -216,8 +266,6 @@ URxvt.inputMethod:          fcitx
 !!! rxvt-unicdoe settings }}}
 
 !!! xterm settings {{{
-XTerm.background:           #1b1b1b
-XTerm.foreground:           #e0e0e0
 !XTerm.geometry:             80x25
 !XTerm.faceName:             xft:Dejavu Sans Mono:pixelsize=16:antialias=true
 XTerm.faceName:             xft:Terminus:pixelsize=18
@@ -242,23 +290,6 @@ XTerm.toolBar:              true
 Xcursor.theme:              Vanilla-DMZ
 Xcursor.size:		    32
 !!! Xcursor }}}
-
-!!! xfontsel {{{
-XFontSel.background:        #1b1b1b
-XFontSel.foreground:        #e0e0e0
-!!! xfontsel }}}
-
-!!! x11-ssh-askpass {{{
-x11-ssh-askpass*font:                   -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
-x11-ssh-askpass*background:             #000000
-x11-ssh-askpass*foreground:             #ffffff
-x11-ssh-askpass.Button*background:      #000000
-x11-ssh-askpass.Indicator*foreground:   #ff9900
-x11-ssh-askpass.Indicator*background:   #090909
-x11-ssh-askpass*topShadowColor:         #000000
-x11-ssh-askpass*bottomShadowColor:      #000000
-x11-ssh-askpass.*borderWidth:           1
-!!! x11-ssh-askpass }}}
 
 !!! xscreensaver settings {{{
 !! font settings
@@ -311,5 +342,34 @@ xscreensaver.fadeTicks:                     20
 ! KDM:     kdmctl reverse
 xscreensaver.newLoginCommand:               dm-tool switch-to-greeter
 !!! xscreensaver }}}
+
+!!! Tcl/Tk {{{
+*TkTheme:                           clam
+
+*Text.background:                   white
+*Text.selectForeground:             white
+*Text.selectBackground:             #4a6984
+
+*Listbox.background:                white
+*Listbox.selectForeground:          white
+*Listbox.selectBackground:          #4a6984
+
+*Entry.background:                  white
+*Entry.foreground:                  black
+*Entry.selectForeground:            white
+*Entry.selectBackground:            #4a6984
+
+*Menu.activeBackground:             #4a6984
+*Menu.activeForeground:             white
+
+*MenuButton.activeBackground:       #4a6984
+*MenuButton.activeForeground:       white
+
+*troughColor:                       #bdb6ad
+!!! Tcl/Tk }}}
+
+!!! rofi {{{
+rofi.highlightbg:           #676d3d
+!!! rofi }}}
 
 ! vim: set ts=8 sw=4 tw=78 ft=xdefaults: !
