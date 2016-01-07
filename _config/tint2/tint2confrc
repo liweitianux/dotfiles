@@ -1,7 +1,0 @@
-#---------------------------------------------
-# TINT2CONF CONFIG FILE
-default_theme = /home/ly/.config/tint2/default.tint2rc
-cmd_property = python /usr/local/bin/tintwizard.py
-width = 500
-height = 350
-
