@@ -1,0 +1,78 @@
+##
+## ~/.ncmpcpp/bindings
+## bindings/keys configuration file for ncmpcpp (>= 0.6)
+##
+## See /usr/share/doc/ncmpcpp/examples/bindings.gz for more details.
+##
+## Tweak ncmpcpp to be vi-like.
+##
+## Aaron LI
+## 2016-01-08
+##
+
+def_key "j"
+  scroll_down
+
+def_key "k"
+  scroll_up
+
+def_key "ctrl_j"
+  move_selected_items_down
+
+def_key "ctrl_k"
+  move_selected_items_up
+
+def_key "h"
+  previous_column
+
+def_key "h"
+  master_screen
+
+def_key "l"
+  next_column
+
+def_key "l"
+  slave_screen
+
+def_key "g"
+  move_home
+
+def_key "G"
+  move_end
+
+def_key "n"
+  next_found_item
+
+def_key "N"
+  previous_found_item
+
+def_key "I"
+  jump_to_browser
+
+def_key "d"
+  delete_playlist_items
+
+def_key "'"
+  jump_to_playing_song
+
+def_key "space"
+  pause
+
+def_key ","
+  previous
+
+def_key "."
+  next
+
+def_key ";"
+  show_lyrics
+
+def_key "o"
+  show_clock
+
+def_key "-"
+  volume_down
+
+def_key "="
+  volume_up
+

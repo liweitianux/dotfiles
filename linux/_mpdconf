@@ -332,7 +332,7 @@ audio_output {
 ## configuration (it has to be put into mpd.conf):
 audio_output {
        type            "fifo"
-       name            "My FIFO"
+       name            "MPD FIFO"
        path            "/tmp/mpd.fifo"
        format          "44100:16:2"
 }
