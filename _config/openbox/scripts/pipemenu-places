@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 # Recursively browse filesystem through openbox3 pipe menus
 #### Usage: add
 # <menu id="browse" label="Browse" execute="obpipemenu-places ~" />
@@ -8,7 +8,7 @@
 # 4 and 5 in the morning. Quality may have suffered.
 ####
 # Script by dircha from ob list on 05/17/04
-# suggested improvements by John Russell on 05/17/04 implemented 
+# suggested improvements by John Russell on 05/17/04 implemented
 # a year later by Kacper Wysocki.
 # 05/30/05 - Kacper Wysocki
 # - opens files with 'rox', which launches appropriate file handler
@@ -34,7 +34,7 @@ sub mk_menu_element {
     my ($path, @files) = @_;
 
     print "<openbox_pipe_menu>\n";
-    
+
     # "Browse here..." lauches this dir
     print "<item label=\"Browse here..\">".
            "\n\t<action name=\"Execute\">".

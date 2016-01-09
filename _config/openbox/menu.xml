@@ -1,236 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
-    <menu id="root-menu" label="Debian">
-        <!--
-        <item label="Install">
-            <action name="Execute">
-                <execute>
-                    xterm -T &quot;Install ArchBang&quot; -e &quot;gksudo ab-install&quot;
-                </execute>
-            </action>
-        </item>
-        <item label="cp2ram">
-            <action name="Execute">
-                <execute>
-                    xterm -T &quot;Copy to ram&quot; -e &quot;gksudo cp2ram&quot;
-                </execute>
-            </action>
-        </item>
-        <separator/>
-        -->
-        <item label="Run Program">
-            <action name="Execute">
-                <execute>
-                    dmenu.sh
-                </execute>
-            </action>
-        </item>
-        <separator/>
-        <item label="Terminal">
-            <action name="Execute">
-                <execute>
-                    urxvtc
-                </execute>
-            </action>
-        </item>
-        <item label="Web Browser">
-            <action name="Execute">
-                <execute>
-                    firefox
-                </execute>
-            </action>
-        </item>
-        <item label="File Manager">
-            <action name="Execute">
-                <execute>
-                    thunar
-                </execute>
-            </action>
-        </item>
-        <item label="Text Editor">
-            <action name="Execute">
-                <execute>
-                    leafpad
-                </execute>
-            </action>
-        </item>
-        <separator/>
-        <menu id="accessories" label="Accessories">
-            <item label="Archive Manager">
-                <action name="Execute">
-                    <execute>
-                        xarchiver
-                    </execute>
-                </action>
-            </item>
-            <item label="GVim">
-                <action name="Execute">
-                    <execute>
-                        gvim
-                    </execute>
-                </action>
-            </item>
-            <item label="Leafpad">
-                <action name="Execute">
-                    <execute>
-                        leafpad
-                    </execute>
-                </action>
-            </item>
-            <item label="LXTerminal">
-                <action name="Execute">
-                    <execute>
-                        lxterminal
-                    </execute>
-                </action>
-            </item>
-            <menu id="graphicsScreenshots" label="Take Screenshot">
-                <item label="Now">
-                    <action name="Execute">
-                        <execute>
-                            scrot 'ly_%Y%m%d_$wx$h.png' -e 'mv $f ~/ &amp; geeqie ~/$f'
-                        </execute>
-                    </action>
-                </item>
-                <item label="In 3 Seconds...">
-                    <action name="Execute">
-                        <execute>
-                            scrot -d 3 'ly_%Y%m%d_$wx$h.png' -e 'mv $f ~/ &amp; geeqie ~/$f'
-                        </execute>
-                    </action>
-                </item>
-                <item label="In 10 Seconds...">
-                    <action name="Execute">
-                        <execute>
-                            scrot -d 10 'ly_%Y%m%d_$wx$h.png' -e 'mv $f ~/ &amp; geeqie ~/$f'
-                        </execute>
-                    </action>
-                </item>
-                <item label="Selected Area... (click &amp; drag mouse)">
-                    <action name="Execute">
-                        <execute>
-                            scrot -s 'ly_%Y%m%d_$wx$h.png' -e 'mv $f ~/ &amp; geeqie ~/$f'
-                        </execute>
-                    </action>
-                </item>
-                <item label="Active Window">
-                    <action name="Execute">
-                        <execute>
-                            scrot -bud 3 'ly_%Y%m%d_$wx$h.png' -e 'mv $f ~/ &amp; geeqie ~/$f'
-                        </execute>
-                    </action>
-                </item>
-            </menu>
-        </menu>
-        <separator/>
-        <menu execute="~/.config/openbox/pipemenus/obpipemenu-places ~/" id="places" label="Places"/>
-        <menu execute="python ~/.config/openbox/scripts/xdg-menu" id="apps-menu" label="XDG-Menus"/>
-        <separator/>
-        <menu id="settings" label="Preferences">
-            <menu id="settings-162352" label="Effects">
-                <item label="No effects">
-                    <action name="Execute">
-                        <execute>
-                            ~/.config/openbox/scripts/xcompmgr.sh unset
-                        </execute>
-                    </action>
-                </item>
-                <item label="Transparency">
-                    <action name="Execute">
-                        <execute>
-                            ~/.config/openbox/scripts/xcompmgr.sh set
-                        </execute>
-                    </action>
-                </item>
-                <item label="Transparency, fading">
-                    <action name="Execute">
-                        <execute>
-                            ~/.config/openbox/scripts/xcompmgr.sh setshaded
-                        </execute>
-                    </action>
-                </item>
-                <item label="Transparancy, fading shadows">
-                    <action name="Execute">
-                        <execute>
-                            ~/.config/openbox/scripts/xcompmgr.sh setshadowshade
-                        </execute>
-                    </action>
-                </item>
-            </menu>
-            <menu id="obConfig" label="Openbox Config">
-                <item label="Edit menu.xml">
-                    <action name="Execute">
-                        <execute>
-                            gvim ~/.config/openbox/menu.xml
-                        </execute>
-                    </action>
-                </item>
-                <item label="Edit rc.xml">
-                    <action name="Execute">
-                        <execute>
-                            gvim ~/.config/openbox/rc.xml
-                        </execute>
-                    </action>
-                </item>
-                <item label="Edit autostart.sh">
-                    <action name="Execute">
-                        <execute>
-                            gvim ~/.config/openbox/autostart.sh
-                        </execute>
-                    </action>
-                </item>
-                <!--
-                <item label="GUI Menu Editor">
-                    <action name="Execute">
-                        <execute>
-                            obmenu
-                        </execute>
-                    </action>
-                </item>
-                -->
-                <item label="GUI Config Tool">
-                    <action name="Execute">
-                        <execute>
-                            obconf
-                        </execute>
-                    </action>
-                </item>
-            </menu>
-            <item label="tint2 Panel Config">
-                <action name="Execute">
-                    <execute>
-                        gvim ~/.config/tint2/tint2rc
-                    </execute>
-                </action>
-            </item>
-            <item label="GTK Appearance">
-                <action name="Execute">
-                    <execute>
-                        lxappearance
-                    </execute>
-                </action>
-            </item>
-        </menu>
-        <separator/>
-        <menu id="Session" label="Session">
-            <item label="Reconfigure">
-                <action name="Reconfigure"/>
-            </item>
-            <item label="Restart">
-                <action name="Restart"/>
-            </item>
-            <item label="Exit">
-                <action name="Exit"/>
-            </item>
-            <!--
-            <item label="Logout">
-                <action name="Execute">
-                    <execute>
-                        oblogout
-                    </execute>
-                </action>
-            </item>
-            -->
-        </menu>
-    </menu>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~/.config/openbox/menu.xml
+  openbox menu configuration
+
+  Aaron LI
+  2015-01-09
+-->
+
+<openbox_menu xmlns="http://openbox.org/"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://openbox.org/
+                                  file:///usr/share/openbox/menu.xsd">
+
+<menu id="root-menu" label="OPENBOX 3">
+  <item label="_Run Program">
+    <action name="Execute">
+      <execute>rofi -show run</execute>
+    </action>
+  </item>
+  <separator />
+  <item label="_Terminal">
+    <action name="Execute">
+      <execute>urxvtc || urxvt || x-terminal-emulator</execute>
+    </action>
+  </item>
+  <item label="_Web browser">
+    <action name="Execute">
+      <execute>x-www-browser</execute>
+    </action>
+  </item>
+  <item label="_File Manager">
+    <action name="Execute">
+      <execute>thunar</execute>
+    </action>
+  </item>
+  <item label="_Editor">
+    <action name="Execute">
+      <execute>gvim || mousepad</execute>
+    </action>
+  </item>
+  <separator />
+  <menu id="screenshots" label="_Screenshot...">
+    <item label="_now">
+      <action name="Execute">
+        <execute>scrot -e 'mv $f ~/pictures'</execute>
+      </action>
+    </item>
+    <item label="in _3 seconds...">
+      <action name="Execute">
+        <execute>scrot -d 3 -e 'mv $f ~/pictures'</execute>
+      </action>
+    </item>
+    <item label="_select window/region">
+      <action name="Execute">
+        <execute>scrot -s -e 'mv $f ~/pictures'</execute>
+      </action>
+    </item>
+    <item label="_active window">
+      <action name="Execute">
+        <execute>scrot -bud 2 -e 'mv $f ~/pictures'</execute>
+      </action>
+    </item>
+  </menu>
+  <separator />
+  <menu id="places" label="_Places" execute="~/.config/openbox/scripts/pipemenu-places ~/" />
+  <separator />
+  <menu id="client-list-menu" />
+  <separator />
+  <item label="_Configure">
+    <action name="Execute"><execute>obconf</execute></action>
+  </item>
+  <menu id="session" label="Session">
+    <item label="Reconfigure">
+      <action name="Reconfigure" />
+    </item>
+    <item label="Restart">
+      <action name="Restart" />
+    </item>
+    <separator />
+    <item label="Exit">
+      <action name="Exit" />
+    </item>
+  </menu>
+</menu>
+
 </openbox_menu>
+
+<!-- vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=xml: -->

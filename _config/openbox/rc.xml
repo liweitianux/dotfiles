@@ -53,7 +53,7 @@
 </placement>
 
 <theme>
-  <name>Clearlooks</name>
+  <name>1977-Black</name>
   <titleLayout>DSLIMC</titleLayout>
   <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -416,13 +416,13 @@
   <!-- Display -->
   <keybind key="W-p">
     <action name="Execute">
-      <command>xrandr --output VGA1 --auto --right-of LVDS1</command>
+      <command>arandr</command>
     </action>
   </keybind>
   <!-- Blank screen -->
   <keybind key="W-b">
     <action name="Execute">
-      <command>( sleep 0.5 &amp;&amp; xset dpms force off )</command>
+      <command>sh -c "sleep 0.5 &amp;&amp; xset dpms force off"</command>
     </action>
   </keybind>
   <!-- Screen lock/saver -->
