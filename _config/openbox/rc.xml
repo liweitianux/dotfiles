@@ -383,7 +383,18 @@
       <command>scrot -s -e 'mv $f ~/pictures'</command>
     </action>
   </keybind>
-  <!-- Application launch -->
+  <!-- Launch applications -->
+  <keybind key="W-t">
+    <action name="Execute">
+      <command>sh -c 'urxvtc || urxvt || x-terminal-emulator'</command>
+    </action>
+  </keybind>
+  <!-- Quake-like terminal -->
+  <keybind key="W-grave">
+    <action name="Execute">
+      <command>~/.config/openbox/scripts/urxvtq.sh</command>
+    </action>
+  </keybind>
   <keybind key="W-f">
     <action name="Execute">
       <command>thunar</command>
@@ -392,16 +403,6 @@
   <keybind key="W-k">
     <action name="Execute">
       <command>xkill</command>
-    </action>
-  </keybind>
-  <keybind key="W-t">
-    <action name="Execute">
-      <command>urxvtc || urxvt || x-terminal-emulator</command>
-    </action>
-  </keybind>
-  <keybind key="W-Enter">
-    <action name="Execute">
-      <command>urxvtc || urxvt || x-terminal-emulator</command>
     </action>
   </keybind>
   <keybind key="C-A-Delete">
@@ -956,6 +957,20 @@
 
   # end of the example
 -->
+
+  <!-- Quake-like terminal with urxvt -->
+  <application name="urxvtq">
+    <decor>no</decor>
+    <position force="yes">
+      <x>center</x>
+      <y>0</y>
+    </position>
+    <desktop>all</desktop>
+    <layer>above</layer>
+    <skip_pager>yes</skip_pager>
+    <skip_taskbar>yes</skip_taskbar>
+    <maximized>Horizontal</maximized>
+  </application>
 </applications>
 
 </openbox_config>

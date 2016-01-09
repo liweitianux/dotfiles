@@ -22,7 +22,7 @@
   <separator />
   <item label="_Terminal">
     <action name="Execute">
-      <execute>urxvtc || urxvt || x-terminal-emulator</execute>
+      <command>sh -c 'urxvtc || urxvt || x-terminal-emulator'</command>
     </action>
   </item>
   <item label="_Web browser">
@@ -37,7 +37,7 @@
   </item>
   <item label="_Editor">
     <action name="Execute">
-      <execute>gvim || mousepad</execute>
+      <execute>sh -c 'gvim || mousepad'</execute>
     </action>
   </item>
   <separator />
@@ -64,7 +64,7 @@
     </item>
   </menu>
   <separator />
-  <menu id="places" label="_Places" execute="~/.config/openbox/scripts/pipemenu-places ~/" />
+  <menu id="places" label="_Places" execute="~/.config/openbox/scripts/pipemenu-places.pl ~/" />
   <separator />
   <menu id="client-list-menu" />
   <separator />
@@ -78,7 +78,6 @@
     <item label="Restart">
       <action name="Restart" />
     </item>
-    <separator />
     <item label="Exit">
       <action name="Exit" />
     </item>
