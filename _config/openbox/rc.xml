@@ -395,6 +395,11 @@
       <command>~/.config/openbox/scripts/urxvtq.sh</command>
     </action>
   </keybind>
+  <keybind key="A-grave">
+    <action name="Execute">
+      <command>~/.config/openbox/scripts/urxvtq.sh</command>
+    </action>
+  </keybind>
   <keybind key="W-f">
     <action name="Execute">
       <command>thunar</command>

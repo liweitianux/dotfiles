@@ -1,19 +1,17 @@
 #!/bin/sh
-feh --bg-fill '/home/ly/pictures/wallpapers/.current' &
-#nitrogen --restore &
-#ibus-daemon -d -x
-pgrep fcitx || fcitx &
-pkill tint2
-tint2 &
-#xcompmgr -CfF &
-pgrep xcompmgr || xcompmgr &
-pgrep xscreensaver || xscreensaver -no-splash &
-#wicd-client &
-#scrolling.sh &
-#xfce4-volumed
-#xmms2-launcher
-#mpd &
-#parcellite &
-pgrep urxvtd || urxvtd -q -f -o &
-#/usr/bin/conky -q &
+
+xset -b
+
+#feh --bg-fill "$HOME/pictures/wallpapers/.current" &
+nitrogen --restore &
+
+pgrep -x urxvtd || urxvtd -q -f -o &
+pgrep -x fcitx || fcitx &
+pgrep -x tint2 || tint2 &
+pgrep -x xcompmgr || xcompmgr &
+pgrep -x xscreensaver || xscreensaver -no-splash &
+pgrep -x mpd || mpd &
+
+# pgrep -x parcellite || parcellite &
 #xfce4-power-manager &
+
