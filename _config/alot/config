@@ -1,0 +1,137 @@
+##
+## ~/.config/alot/config
+## Configuration for alot MUA
+##
+## Aaron LI
+## Created: 2016-01-11
+## Updated: 2016-01-11
+##
+
+
+### Global configurations {{{
+# ask for subject when compose
+#ask_subject = False
+
+# confirm exit
+bug_on_exit = True
+
+# headers that get displayed by default
+displayed_headers = From, To, Cc, Bcc, Subject
+
+# editor command
+# if unset, alot will first try the `EDITOR`, then `/usr/bin/editor`
+editor_cmd = 'gvim -f -c "set tw=72 spell"'
+# call editor in separate thread.
+# In case your editor doesn't run in the same window as alot, setting true here
+# will make alot non-blocking during edits
+editor_in_thread = True
+
+# prefer plaintext alternatives over html content in multipart/alternative
+prefer_plaintext = True
+
+# number of spaces used to replace tab characters
+tabwidth = 4
+
+# set terminal command used for spawning shell commands
+terminal_cmd = urxvt -e
+
+# name of the theme to use
+theme = solarized_dark
+
+### Global }}}
+
+
+# The list of addresses associated to the mailinglists you are subscribed to
+mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbsd.org, tech@openbsd.org
+
+
+# NOTE: blocks should be placed *AFTER* the global configurations
+
+[accounts]
+
+    [[gmail-aly]]
+        realname = Aaron LI
+        address = aaronly.me@gmail.com
+        gpg_key = 5D72729A
+        sendmail_command = msmtp --read-recipients --account=gmail-aly
+        sent_box = maildir:///home/aly/Mail/sent
+        draft_box = maildir:///home/aly/Mail/gmail-aly/[Gmail].Drafts
+        signature = ~/.signature-aly
+
+    [[outlook-aly]]
+        realname = Aaron LI
+        address = aaronly.me@outlook.com
+        gpg_key = 5D72729A
+        sendmail_command = msmtp --read-recipients --account=outlook-aly
+        sent_box = maildir:///home/aly/Mail/sent
+        draft_box = maildir:///home/aly/Mail/outlook-aly/Drafts
+        signature = ~/.signature-aly
+
+    [[outlook-li]]
+        realname = Weitian LI
+        address = liweitianux@live.com
+        aliases = liweitianux@live.cn, liweitianux@outlook.com
+        gpg_key = 5F26EBF6
+        sendmail_command = msmtp --read-recipients --account=outlook-li
+        sent_box = maildir:///home/aly/Mail/sent
+        draft_box = maildir:///home/aly/Mail/outlook-li/Drafts
+        signature = ~/.signature-li
+
+
+[tags]
+    [[flagged]]
+        translated = ⚑
+        normal = '', '', 'light red', '', 'light red', ''
+        focus  = '', '', 'light red', '', 'light red', ''
+
+    [[todo]]
+        translated = TODO
+        normal = '', '', 'white', 'light red', 'white', '#d66'
+
+    [[unread]]
+        translated = ✉
+
+    [[drafts]]
+        translated = ✎
+
+    [[replied]]
+        translated = ⏎
+
+    [[sent]]
+        translated = ➥
+
+    [[signed]]
+        translated = ✍
+
+    [[encrypted]]
+        translated = ⚷
+
+    [[killed]]
+        translated = ✗
+
+    [[attachment]]
+        translated = ✂
+
+
+### Key bindings
+[bindings]
+c = compose
+F = search tag:flagged
+I = search tag:inbox AND tag:unread AND NOT tag:killed
+i = search tag:inbox AND NOT tag:killed
+S = search tag:sent
+T = search tag:todo
+
+    [[envelope]]
+    E = toggleencrypt
+
+    [[search]]
+    D = toggletags delete
+    t = toggletags todo
+
+    [[thread]]
+    a = toggletags inbox
+    t = toggletags todo
+
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=python: #
