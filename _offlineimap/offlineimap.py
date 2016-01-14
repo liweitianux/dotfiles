@@ -11,15 +11,23 @@
 #   remotepasseval = mailpasswd("<accountname>")
 #   ...
 #
+# Create encrypted password file:
+# > echo "password" | gpg2 -e -r foo@bar.com > account.gpg
+#
 # Reference:
 # [1] Encrypt OfflineIMAP Password
-#     http://unix.stackexchange.com/questions/44214/encrypt-offlineimap-password
+#     http://unix.stackexchange.com/a/48355
 #
-# Updated: 2015/02/02
 #
+# Aaron LI
+# Created: 2015-02-02
+# Updated: 2016-01-11
+#
+
 
 import os
 import subprocess
+
 
 def mailpasswd(account):
     account = os.path.basename(account)

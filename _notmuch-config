@@ -1,10 +1,11 @@
 ##
-## Configuration file for the notmuch mail system
 ## ~/.notmuch-config
+## Configuration file for the notmuch mail system
 ## http://notmuchmail.org
 ##
-## Weitian LI <liweitianux@gmail.com>
-## 2015/02/02
+## Aaron LI <aaronly@gmail.com>
+## Created: 2015-02-02
+## Updated: 2016-01-14
 ##
 
 # Database configuration
@@ -16,7 +17,8 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/home/aly/Mail
+# Default: $HOME/mail
+path=$HOME/Mail
 
 # User configuration
 #
