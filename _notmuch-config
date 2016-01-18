@@ -18,7 +18,8 @@
 #
 [database]
 # Default: $HOME/mail
-path=$HOME/Mail
+# NOTE: $HOME environment variables are NOT supported.
+path=/home/aly/Mail
 
 # User configuration
 #
