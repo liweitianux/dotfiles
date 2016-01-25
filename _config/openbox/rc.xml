@@ -4,7 +4,8 @@
   ~/.config/openbox/rc.xml: Openbox configuration file
 
   Aaron LI
-  2015-01-09
+  Created: 2016-01-09
+  Updated: 2016-01-25
 -->
 
 <openbox_config xmlns="http://openbox.org/3.4/rc"
@@ -363,6 +364,12 @@
   <keybind key="A-F2">
     <action name="Execute">
       <command>rofi -show run</command>
+    </action>
+  </keybind>
+  <!-- Window switcher -->
+  <keybind key="A-F3">
+    <action name="Execute">
+      <command>rofi -show window</command>
     </action>
   </keybind>
   <!-- Screenshot -->
