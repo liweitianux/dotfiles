@@ -38,9 +38,9 @@ folder-hook 'autistici.*'   source ~/.mutt/accounts/autistici
 source ~/.mutt/accounts/default
 
 ### Files and directories
+set mailcap_path        = ~/.mailcap
 set alias_file          = ~/.mutt/aliases
 set certificate_file    = ~/.mutt/certificates
-set mailcap_path        = ~/.mutt/mailcap
 set history_file        = ~/.mutt/history
 set header_cache        = ~/.mutt/cache/headers
 set message_cachedir    = ~/.mutt/cache/bodies

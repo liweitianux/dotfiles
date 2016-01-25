@@ -1,11 +1,12 @@
 #
-# mailcap - MIME configuration file
+# ~/.mailcap
+# Mail MIME configuration file
 #
 # Reference:
 # [1] Gray Johnson's Mutt Page
 #     http://www.spocom.com/users/gjohnson/mutt/
 #
-# Modified: 2015/02/02
+# Created: 2015-02-02
 #
 
 
