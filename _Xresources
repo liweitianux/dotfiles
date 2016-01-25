@@ -9,7 +9,7 @@
 
 ! Aaron LI <aaronly.me@outlook.com>
 ! Created: 2014-05-10
-! Updated: 2015-12-18
+! Updated: 2016-01-25
 !----------------------------------------------------------
 
 !!! xft settings {{{
@@ -369,7 +369,37 @@ xscreensaver.newLoginCommand:               dm-tool switch-to-greeter
 !!! Tcl/Tk }}}
 
 !!! rofi {{{
-rofi.highlightbg:           #676d3d
+! Location on screen
+!   1 2 3
+!   8 0 4
+!   7 6 5
+rofi.location:          6
+! Window width
+rofi.width:             100
+! Number of lines
+rofi.lines:             10
+! Y-offset relative to location
+rofi.yoffset:           -22
+! X-offset relative to location
+rofi.xoffset:           0
+! Padding
+rofi.padding:           5
+! Font to use
+rofi.font:              terminus 11
+! Separator style (none, dash, solid)
+rofi.separator-style:   dash
+! Hide scroll-bar
+rofi.hide-scrollbar:    true
+! Fake transparency
+rofi.fake-transparency: true
+! Use extended color scheme
+rofi.color-enabled:     true
+! Color scheme window
+rofi.color-window:      argb:ee0F3B5F, #CC9752, #CC9752
+! State                 background     fg       alt-bg         hl-bg    hl-fg
+rofi.color-normal:      argb:00111111, #E5DBCF, argb:00111111, #CC9752, #0F3B5F
+rofi.color-urgent:      argb:00111111, #af652f, argb:00111111, #af652f, #0F3B5F
+rofi.color-active:      argb:00111111, #70a16c, argb:00111111, #70a16c, #0F3B5F
 !!! rofi }}}
 
 ! vim: set ts=8 sw=4 tw=78 ft=xdefaults: !
