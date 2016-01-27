@@ -1,12 +1,13 @@
 ##
 ## ~/.zshrc
-## Zsh configuration file
+## ZSH configuration file
 ## oh-my-zsh: http://ohmyz.sh/
 ##
 ## Zsh reads this file in all interactive shells, whether they are
 ## login shells or not.
 ##
 ## Aaron LI
+## Created: 2014-05-31
 ## Updated: 2016-01-26
 ##
 

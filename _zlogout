@@ -4,7 +4,9 @@
 #
 
 # clear console
-if which tput >/dev/null 2>&1; then
+if which clear >/dev/null 2>&1; then
+    clear
+elif which tput >/dev/null 2>&1; then
     tput clear
 fi
 
