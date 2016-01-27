@@ -4,4 +4,4 @@
 
 [ -f ~/.profile ] && . ~/.profile
 
-#  vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #

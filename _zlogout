@@ -1,0 +1,11 @@
+#
+# ~/.zlogout
+# executed when a login zsh shell exits
+#
+
+# clear console
+if which tput >/dev/null 2>&1; then
+    tput clear
+fi
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #

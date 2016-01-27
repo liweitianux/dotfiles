@@ -14,14 +14,16 @@ export LC_COLLATE="C"
 if [ -d "$HOME/bin" ]; then
     export PATH="$HOME/bin:$PATH"
 fi
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 # admin
 if groups | grep -qE '\b(wheel|adm|sudo)\b'; then
     export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 fi
 
-# GREP_OPTIONS deprecated
-unset GREP_OPTIONS
-alias grep='grep --color=auto'
+# ls colors
+[ -x /usr/bin/dircolors ] && eval `dircolors -b`
 ### environments }}}
 
 ### vi mode {{{
