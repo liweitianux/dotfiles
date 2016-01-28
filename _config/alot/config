@@ -4,7 +4,7 @@
 ##
 ## Aaron LI
 ## Created: 2016-01-11
-## Updated: 2016-01-11
+## Updated: 2016-01-25
 ##
 
 
@@ -54,8 +54,8 @@ mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbs
         address = aaronly.me@gmail.com
         gpg_key = 5D72729A
         sendmail_command = msmtp --read-recipients --account=gmail-aly
-        sent_box = maildir:///home/aly/Mail/sent
-        draft_box = maildir:///home/aly/Mail/gmail-aly/[Gmail].Drafts
+        sent_box = maildir:///home/aly/mail/sent
+        draft_box = maildir:///home/aly/mail/drafts
         signature = ~/.signature-aly
 
     [[outlook-aly]]
@@ -63,9 +63,18 @@ mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbs
         address = aaronly.me@outlook.com
         gpg_key = 5D72729A
         sendmail_command = msmtp --read-recipients --account=outlook-aly
-        sent_box = maildir:///home/aly/Mail/sent
-        draft_box = maildir:///home/aly/Mail/outlook-aly/Drafts
+        sent_box = maildir:///home/aly/mail/sent
+        draft_box = maildir:///home/aly/mail/drafts
         signature = ~/.signature-aly
+
+    [[gmail-li]]
+        realname = Weitian LI
+        address = liweitianux@gmail.com
+        gpg_key = 5F26EBF6
+        sendmail_command = msmtp --read-recipients --account=gmail-li
+        sent_box = maildir:///home/aly/mail/sent
+        draft_box = maildir:///home/aly/mail/drafts
+        signature = ~/.signature-li
 
     [[outlook-li]]
         realname = Weitian LI
@@ -73,8 +82,17 @@ mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbs
         aliases = liweitianux@live.cn, liweitianux@outlook.com
         gpg_key = 5F26EBF6
         sendmail_command = msmtp --read-recipients --account=outlook-li
-        sent_box = maildir:///home/aly/Mail/sent
-        draft_box = maildir:///home/aly/Mail/outlook-li/Drafts
+        sent_box = maildir:///home/aly/mail/sent
+        draft_box = maildir:///home/aly/mail/drafts
+        signature = ~/.signature-li
+
+    [[sjtu]]
+        realname = Weitian LI
+        address = liweitianux@sjtu.edu.cn
+        gpg_key = 5F26EBF6
+        sendmail_command = msmtp --read-recipients --account=sjtu
+        sent_box = maildir:///home/aly/mail/sjtu/sent
+        draft_box = maildir:///home/aly/mail/sjtu/drafts
         signature = ~/.signature-li
 
 
@@ -88,20 +106,26 @@ mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbs
         translated = TODO
         normal = '', '', 'white', 'light red', 'white', '#d66'
 
+    [[inbox]]
+        translated = ¶
+
     [[unread]]
         translated = ✉
+
+    [[to-me]]
+        translated = ☻
 
     [[drafts]]
         translated = ✎
 
     [[replied]]
-        translated = ⏎
+        translated = ✓
 
     [[sent]]
         translated = ➥
 
     [[signed]]
-        translated = ✍
+        translated = §
 
     [[encrypted]]
         translated = ⚷
@@ -110,7 +134,7 @@ mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbs
         translated = ✗
 
     [[attachment]]
-        translated = ✂
+        translated = @
 
 
 ### Key bindings
@@ -126,10 +150,12 @@ T = search tag:todo
     E = toggleencrypt
 
     [[search]]
-    D = toggletags delete
+    A = toggletags archived
+    D = toggletags deleted
     t = toggletags todo
 
     [[thread]]
+    A = toggletags archived
     a = toggletags inbox
     t = toggletags todo
 

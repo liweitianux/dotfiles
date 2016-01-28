@@ -99,7 +99,7 @@
     [[threadline]]
         normal = 'default','default','%(16_base1)s','%(16_base03)s','%(256_base1)s','%(256_base03)s'
         focus = 'standout','default','%(16_base02)s','%(16_yellow)s','%(256_base02)s','%(256_yellow)s'
-        parts = date,mailcount,tags,authors,subject
+        parts = date,mailcount,authors,subject,tags
         [[[date]]]
             normal = 'default','default','%(16_base1)s','%(16_base03)s','%(256_base1)s','%(256_base03)s'
             focus = 'standout','default','%(16_base02)s,bold','%(16_yellow)s','%(256_base02)s,bold','%(256_yellow)s'
@@ -113,6 +113,7 @@
         [[[tags]]]
             normal = 'bold','default','%(16_yellow)s','%(16_base03)s','%(256_yellow)s','%(256_base03)s'
             focus = 'standout','default','%(16_base02)s,bold','%(16_yellow)s','%(256_base02)s,bold','%(256_yellow)s'
+            alignment = right
         [[[authors]]]
             normal = 'default,underline','default','%(16_cyan)s','%(16_base03)s','%(256_cyan)s','%(256_base03)s'
             focus = 'standout','default','%(16_base02)s','%(16_yellow)s','%(256_base02)s','%(256_yellow)s'
