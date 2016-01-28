@@ -1,0 +1,135 @@
+#
+# ~/.Rprofile
+# configuration for R session
+#
+# Aaron LI
+# Created: 2015-08-20
+# Updated: 2016-01-28
+#
+
+# set common options
+options(papersize="a4")
+
+# change the prompt format
+options(prompt="R> ")
+
+
+# set the default CRAN mirror
+local({
+    r <- getOption("repos")
+    r["CRAN"] <- "https://cran.r-project.org"
+    #r["CRAN"] <- "https://cran.rstudio.com"
+    #r["CRAN"] <- "https://mirrors.ustc.edu.cn/CRAN"
+    options(repos=r)
+})
+
+
+# "Vim-R-plugin" related settings
+# http://www.lepem.ufc.br/jaa/r-plugin.html
+# Note to start Vim with: ``vim --severname VIM``
+if (interactive()) {
+    # Colorize the R output.
+    # http://www.lepem.ufc.br/jaa/colorout.html
+    require(colorout)
+    # Adjust the value of options("width") whenever the terminal is resized.
+    require(setwidth)
+    # "vimcom" creates a server on R to allow the communication with Vim
+    # through the "Vim-R-plugin"
+    # http://www.lepem.ufc.br/jaa/vimcom.html
+    options(vimcom.verbose=1)
+    require(vimcom)
+}
+
+
+# skewness
+skew <- function(x, na.rm=FALSE) {
+    if (na.rm) {
+        x <- x[!is.na(x)]
+    }
+    n <- length(x)
+    m <- mean(x)
+    s <- sd(x)
+    skew <- sum((x-m)^3 / s^3) / n
+    return(skew)
+}
+
+# kurtosis
+kurt <- function(x, na.rm=FALSE) {
+    if (na.rm) {
+        x <- x[!is.na(x)]
+    }
+    n <- length(x)
+    m <- mean(x)
+    s <- sd(x)
+    kurt <- sum((x-m)^4 / s^4) / n - 3
+    return(kurt)
+}
+
+# IQR mean: mean value of the elements within the interquantile range
+# IQR: 25% - 75%
+mean.iqr <- function(x, na.rm=TRUE) {
+    if (na.rm) {
+        x <- x[!is.na(x)]
+    }
+    x.sorted <- sort(x)
+    n <- length(x.sorted)
+    idx.quantile.bottom <- 1 + floor(n * 0.25)
+    idx.quantile.top <- n - floor(n * 0.25)
+    m.iqr <- mean(x.sorted[idx.quantile.bottom:idx.quantile.top])
+    return(m.iqr)
+}
+
+# Tricks to manage the available memory in an R session
+# http://stackoverflow.com/q/1358003/4856091
+.ls.objects <- function(pos=1, pattern, order.by,
+                        decreasing=FALSE, pretty.size=FALSE,
+                        head=FALSE, n=10) {
+    napply <- function(names, fn) {
+        sapply(names, function(x) fn(get(x, pos=pos)))
+    }
+    names <- ls(pos=pos, pattern=pattern)
+    obj.class <- napply(names, function(x) as.character(class(x))[1])
+    obj.mode <- napply(names, mode)
+    obj.type <- ifelse(is.na(obj.class), obj.mode, obj.class)
+    obj.size.bytes <- napply(names, object.size)
+    if (pretty.size) {
+        obj.size <- napply(names, function(x) {
+                               format(object.size(x), units="auto")
+                           })
+    } else {
+        obj.size <- obj.size.bytes
+    }
+    obj.dim <- t(napply(names, function(x) as.numeric(dim(x))[1:2]))
+    vec <- is.na(obj.dim)[, 1] & (obj.type != "function")
+    obj.dim[vec, 1] <- napply(names, length)[vec]
+    out <- data.frame(obj.type, obj.size, obj.dim)
+    names(out) <- c("Type", "Size", "Rows", "Columns")
+    if (! missing(order.by))
+        if (order.by == "Size") {
+            out <- out[order(obj.size.bytes, decreasing=decreasing), ]
+        } else {
+            out <- out[order(out[[order.by]], decreasing=decreasing), ]
+        }
+    if (head)
+        out <- head(out, n)
+    out
+}
+# shorthand
+lsobjs <- function(..., n=10) {
+    .ls.objects(..., order.by="Size", decreasing=TRUE,
+                pretty.size=TRUE, head=TRUE, n=n)
+}
+
+
+# .First(): executed when start R session
+#.First <- function() {
+#    cat("\nWelcome to R ~~~ (", date(), ")\n", sep="")
+#}
+
+
+# .Last(): executed before exit R session
+#.Last <- function() {
+#    cat("\nGoodbye ~~~ (", date(), ")\n", sep="")
+#}
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=r: #
