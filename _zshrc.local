@@ -4,29 +4,8 @@
 ##
 ## Aaron LI
 ## Created: 2014-05-31
-## Updated: 2016-01-27
+## Updated: 2016-01-30
 ##
-
-### vi mode {{{
-# oh-my-zsh: plugin: vi-mode
-# Vim's text-objects-ish for zsh: https://github.com/hchbaw/opp.zsh
-
-#bindkey -v
-# Reduce <ESC> delay to 0.1 seconds
-export KEYTIMEOUT=1
-## Key Bindings
-# Use vim cli mode
-bindkey '^P' up-history
-bindkey '^N' down-history
-# backspace and ^h working even after
-# returning from command mode
-bindkey '^?' backward-delete-char
-bindkey '^h' backward-delete-char
-# ctrl-w removed word backwards
-bindkey '^w' backward-kill-word
-# ctrl-r starts searching history backward
-bindkey '^r' history-incremental-search-backward
-### vi mode }}}
 
 ### python-virtualenv {{{
 if [ -x /usr/bin/virtualenvwrapper.sh ]; then
@@ -77,9 +56,7 @@ function ciaoinit() {
 ## chandra_acis_process scripts
 export MASS_PROFILE_DIR="$HOME/bin/mass"
 export CHANDRA_SCRIPT_DIR="$HOME/bin"
-### astro }}}
 
-### aliases {{{
 alias qmass='qdp summary_mass_profile.qdp'
 alias qnfw='qdp nfw_fit_center.qdp'
 alias qsbp='qdp sbp_fit_center.qdp'
@@ -92,6 +69,7 @@ alias calclxfx="${MASS_PROFILE_DIR}/calc_lxfx_simple.sh"
 alias getlxfx="${MASS_PROFILE_DIR}/get_lxfx_data.sh"
 alias chcld="${CHANDRA_SCRIPT_DIR}/chandra_collect_data_v3.sh"
 alias chr500="${CHANDRA_SCRIPT_DIR}/ciao_r500avgt_v3.sh"
-### aliases }}}
+### astro }}}
+
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
