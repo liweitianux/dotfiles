@@ -1,0 +1,105 @@
+#
+# ~/.config/afew/config
+# afew is an initial tagging script for notmuch mail
+# https://github.com/teythoon/afew
+#
+# Aaron LI
+# Created: 2016-01-25
+# Updated: 2016-01-25
+#
+
+# NOTE:
+# Make sure that '~/.notmuch-config' reads:
+#   [new]
+#   tags=new
+
+# global configuration
+[global]
+
+
+[MailMover]
+# Which folders should be checked for mails that are to be moved
+#folders = inbox junk
+# Only check mails *at most* 15 days old
+#max_age = 15
+#
+# rules
+#inbox = 'tag:spam':junk 'NOT tag:inbox':archive
+#junk  = 'NOT tag:spam AND tag:inbox':inbox 'NOT tag:spam':archive
+
+
+# This is the default filter chain
+#[SpamFilter]
+#[ClassifyingFilter]
+[KillThreadsFilter]
+[ListMailsFilter]
+#[ArchiveSentMailsFilter]
+
+[Filter.1]
+message = Tagging all mails sent directly to me
+query = to:aaronly.me@ OR to:liweitianux@ OR to:527922216@qq.com
+tags = +to-me
+
+[Filter.2]
+message = Tagging all mails sent by me
+query = from:aaronly.me@ OR from:liweitianux@ OR from:527922216@qq.com
+tags = +sent
+
+[Filter.3]
+message = Tagging all mails sent from arXiv/astro-ph
+query = from:no-reply@arxiv.org AND subject:"astro-ph daily"
+tags = +arxiv +arxiv/astro-ph
+
+[Filter.4]
+message = Tagging all mails sent from arXiv/cs
+query = from:no-reply@arxiv.org AND subject:"cs daily"
+tags = +arxiv +arxiv/cs
+
+[Filter.5]
+message = Tagging all mails sent to 'freebsd-current@'
+query = to:freebsd-current@freebsd.org
+tags = +freebsd-current
+
+[Filter.6]
+message = Tagging all mails sent to 'freebsd-x11@'
+query = to:freebsd-x11@freebsd.org
+tags = +freebsd-x11
+
+[Filter.7]
+message = Tagging all mails sent to openbsd: misc@, tech@
+query = to:misc@openbsd.org OR to:tech@openbsd.org
+tags = +openbsd
+
+[Filter.8]
+message = Tagging all mails from 'China Digital Times'
+query = from:cdtchinese@chinadigitaltimes.net
+tags = +cdtchinese
+
+[Filter.9]
+message = Tagging all mails from 'Bank of China'
+query = from:@bank-of-china.com
+tags = +boc
+
+[Filter.10]
+message = Tagging all mails from 'Bank of Communications'
+query = from:@bocomcc.com
+tags = +bankcomm
+
+[Filter.11]
+message = Tagging all mails from "SJTU - Department of Physics and Astronomy"
+query = from:physics@sjtu.edu.cn OR from:physics_sjtu@163.com OR xueying@sjtu.edu.cn OR lujiaming@sjtu.edu.cn OR zhaofeng210@sjtu.edu.cn
+tags = +sjtu +sjtu/physics
+
+[Filter.12]
+message = Tagging all mails from "SJTU - Center for Astronomy and Astrophysics"
+query = from:liuyunjia1101@ OR miaoqiuyue@126.com OR from:dylan.tweed@gmail.com OR from:dtweed@sjtu.edu.cn
+tags = +sjtu +sjtu/caa
+
+[Filter.13]
+message = Tagging all mails from "Amazon"
+query = from:@amazon.com OR from:@amazon.cn
+tags = +amazon
+
+
+[InboxFilter]
+
