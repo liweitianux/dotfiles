@@ -1,0 +1,323 @@
+#
+# ~/.mbsyncrc
+#
+# NOTE: empty lines between sections are matters!
+#
+# Aaron LI
+# Created: 2016-01-29
+# Updated: 2016-01-29
+#
+
+
+## Global configuration section
+Expunge         Both
+# auto create missing mailboxes, both locally and on the server
+Create          Both
+# save the synchronization state files in the relevant directory
+SyncState       *
+
+
+## Account "gmail-aly" {{{
+IMAPAccount     gmail-aly
+Host            imap.gmail.com
+User            aaronly.me@gmail.com
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/gmail-aly.gpg"
+UseIMAPS        yes
+
+# remote store
+IMAPStore       gmail-aly-remote
+Account         gmail-aly
+
+# local store
+MaildirStore    gmail-aly-local
+Path            ~/mail/gmail-aly/
+
+# Connections between remote and local folders
+#Channel         gmail-aly-inbox
+#Master          :gmail-aly-remote:"INBOX"
+#Slave           :gmail-aly-local:inbox
+
+Channel         gmail-aly-archive
+Master          :gmail-aly-remote:"[Gmail]/All Mail"
+Slave           :gmail-aly-local:archive
+
+Channel         gmail-aly-drafts
+Master          :gmail-aly-remote:"[Gmail]/Drafts"
+Slave           :gmail-aly-local:drafts
+
+Channel         gmail-aly-junk
+Master          :gmail-aly-remote:"[Gmail]/Spam"
+Slave           :gmail-aly-local:junk
+
+Channel         gmail-aly-trash
+Master          :gmail-aly-remote:"[Gmail]/Trash"
+Slave           :gmail-aly-local:trash
+
+# Groups put together channels
+Group           gmail-aly
+Channels        gmail-aly-archive gmail-aly-drafts gmail-aly-junk gmail-aly-trash
+## "gmail-aly" }}}
+
+
+## Account "gmail-li" {{{
+IMAPAccount     gmail-li
+Host            imap.gmail.com
+User            liweitianux@gmail.com
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/gmail-li.gpg"
+UseIMAPS        yes
+
+IMAPStore       gmail-li-remote
+Account         gmail-li
+
+MaildirStore    gmail-li-local
+Path            ~/mail/gmail-li/
+
+#Channel         gmail-li-inbox
+#Master          :gmail-li-remote:"INBOX"
+#Slave           :gmail-li-local:inbox
+
+Channel         gmail-li-archive
+Master          :gmail-li-remote:"[Gmail]/All Mail"
+Slave           :gmail-li-local:archive
+
+Channel         gmail-li-drafts
+Master          :gmail-li-remote:"[Gmail]/Drafts"
+Slave           :gmail-li-local:drafts
+
+Channel         gmail-li-junk
+Master          :gmail-li-remote:"[Gmail]/Spam"
+Slave           :gmail-li-local:junk
+
+Channel         gmail-li-trash
+Master          :gmail-li-remote:"[Gmail]/Trash"
+Slave           :gmail-li-local:trash
+
+Group           gmail-li
+Channels        gmail-li-archive gmail-li-drafts gmail-li-junk gmail-li-trash
+## "gmail-li" }}}
+
+
+## Account "outlook-aly" {{{
+IMAPAccount     outlook-aly
+Host            imap-mail.outlook.com
+User            aaronly.me@outlook.com
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/outlook-aly.gpg"
+UseIMAPS        yes
+
+IMAPStore       outlook-aly-remote
+Account         outlook-aly
+
+MaildirStore    outlook-aly-local
+Path            ~/mail/outlook-aly/
+
+Channel         outlook-aly-inbox
+Master          :outlook-aly-remote:Inbox
+Slave           :outlook-aly-local:inbox
+
+Channel         outlook-aly-sent
+Master          :outlook-aly-remote:Sent
+Slave           :outlook-aly-local:sent
+
+Channel         outlook-aly-archive
+Master          :outlook-aly-remote:Archive
+Slave           :outlook-aly-local:archive
+
+Channel         outlook-aly-drafts
+Master          :outlook-aly-remote:Drafts
+Slave           :outlook-aly-local:drafts
+
+Channel         outlook-aly-junk
+Master          :outlook-aly-remote:Junk
+Slave           :outlook-aly-local:junk
+
+Channel         outlook-aly-trash
+Master          :outlook-aly-remote:Deleted
+Slave           :outlook-aly-local:trash
+
+Channel         outlook-aly-freebsd
+Master          :outlook-aly-remote:FreeBSD
+Slave           :outlook-aly-local:freebsd
+
+Channel         outlook-aly-openbsd
+Master          :outlook-aly-remote:openbsd
+Slave           :outlook-aly-local:openbsd
+
+Group           outlook-aly
+Channels        outlook-aly-inbox outlook-aly-sent outlook-aly-archive outlook-aly-drafts outlook-aly-junk outlook-aly-trash outlook-aly-freebsd outlook-aly-openbsd
+## "outlook-aly" }}}
+
+
+## Account "outlook-li" {{{
+IMAPAccount     outlook-li
+Host            imap-mail.outlook.com
+User            liweitianux@live.com
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/outlook-li.gpg"
+UseIMAPS        yes
+
+IMAPStore       outlook-li-remote
+Account         outlook-li
+
+MaildirStore    outlook-li-local
+Path            ~/mail/outlook-li/
+
+Channel         outlook-li-inbox
+Master          :outlook-li-remote:Inbox
+Slave           :outlook-li-local:inbox
+
+Channel         outlook-li-sent
+Master          :outlook-li-remote:Sent
+Slave           :outlook-li-local:sent
+
+Channel         outlook-li-archive
+Master          :outlook-li-remote:Archive
+Slave           :outlook-li-local:archive
+
+Channel         outlook-li-drafts
+Master          :outlook-li-remote:Drafts
+Slave           :outlook-li-local:drafts
+
+Channel         outlook-li-junk
+Master          :outlook-li-remote:Junk
+Slave           :outlook-li-local:junk
+
+Channel         outlook-li-trash
+Master          :outlook-li-remote:Deleted
+Slave           :outlook-li-local:trash
+
+Channel         outlook-li-chats
+Master          :outlook-li-remote:Chats
+Slave           :outlook-li-local:chats
+
+Group           outlook-li
+Channels        outlook-li-inbox outlook-li-sent outlook-li-archive outlook-li-drafts outlook-li-junk outlook-li-trash outlook-li-chats
+## "outlook-li" }}}
+
+
+## Account "sjtu" {{{
+IMAPAccount     sjtu
+Host            imap.sjtu.edu.cn
+User            liweitianux@sjtu.edu.cn
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/sjtu.gpg"
+UseIMAPS        yes
+
+IMAPStore       sjtu-remote
+Account         sjtu
+
+MaildirStore    sjtu-local
+Path            ~/mail/sjtu/
+
+Channel         sjtu-inbox
+Master          :sjtu-remote:INBOX
+Slave           :sjtu-local:inbox
+
+Channel         sjtu-sent
+Master          :sjtu-remote:Sent
+Slave           :sjtu-local:sent
+
+Channel         sjtu-archive
+Master          :sjtu-remote:Archive
+Slave           :sjtu-local:archive
+
+Channel         sjtu-drafts
+Master          :sjtu-remote:Drafts
+Slave           :sjtu-local:drafts
+
+Channel         sjtu-junk
+Master          :sjtu-remote:Junk
+Slave           :sjtu-local:junk
+
+Channel         sjtu-trash
+Master          :sjtu-remote:Trash
+Slave           :sjtu-local:trash
+
+Group           sjtu
+Channels        sjtu-inbox sjtu-sent sjtu-archive sjtu-drafts sjtu-junk sjtu-trash
+## "sjtu" }}}
+
+
+## Account "autistici" {{{
+IMAPAccount     autistici
+Host            mail.autistici.org
+User            liweitianux@autistici.org
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/autistici.gpg"
+UseIMAPS        yes
+CertificateFile ~/.private/ca-autistici.crt
+
+IMAPStore       autistici-remote
+Account         autistici
+
+MaildirStore    autistici-local
+Path            ~/mail/autistici/
+
+Channel         autistici-inbox
+Master          :autistici-remote:INBOX
+Slave           :autistici-local:inbox
+
+Channel         autistici-sent
+Master          :autistici-remote:Sent
+Slave           :autistici-local:sent
+
+Channel         autistici-archive
+Master          :autistici-remote:Archive
+Slave           :autistici-local:archive
+
+Channel         autistici-drafts
+Master          :autistici-remote:Drafts
+Slave           :autistici-local:drafts
+
+Channel         autistici-junk
+Master          :autistici-remote:Spam
+Slave           :autistici-local:junk
+
+Channel         autistici-trash
+Master          :autistici-remote:Trash
+Slave           :autistici-local:trash
+
+Group           autistici
+Channels        autistici-inbox autistici-sent autistici-archive autistici-drafts autistici-junk autistici-trash
+## "autistici" }}}
+
+
+## Account "foxmail" {{{
+IMAPAccount     foxmail
+Host            imap.qq.com
+User            liweitianux@foxmail.com
+PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/foxmail.gpg"
+UseIMAPS        yes
+
+IMAPStore       foxmail-remote
+Account         foxmail
+
+MaildirStore    foxmail-local
+Path            ~/mail/foxmail/
+
+Channel         foxmail-inbox
+Master          :foxmail-remote:INBOX
+Slave           :foxmail-local:inbox
+
+Channel         foxmail-sent
+Master          :foxmail-remote:"Sent Messages"
+Slave           :foxmail-local:sent
+
+Channel         foxmail-archive
+Master          :foxmail-remote:Archive
+Slave           :foxmail-local:archive
+
+Channel         foxmail-drafts
+Master          :foxmail-remote:Drafts
+Slave           :foxmail-local:drafts
+
+Channel         foxmail-junk
+Master          :foxmail-remote:Junk
+Slave           :foxmail-local:junk
+
+Channel         foxmail-trash
+Master          :foxmail-remote:"Deleted Messages"
+Slave           :foxmail-local:trash
+
+Group           foxmail
+Channels        foxmail-inbox foxmail-sent foxmail-archive foxmail-drafts foxmail-junk foxmail-trash
+## "foxmail" }}}
+
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=conf: #

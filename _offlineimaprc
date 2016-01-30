@@ -1,0 +1,448 @@
+##
+## ~/.offlineimaprc
+## OfflineIMAP configuration
+##
+## Reference:
+## [1] OfflineIMAP documentation
+##     https://offlineimap.readthedocs.org/en/latest/index.html
+## [2] ArchWiki - OfflineIMAP
+##     https://wiki.archlinux.org/index.php/OfflineIMAP
+## [3] The Homely Mutt / Steve Losh
+##     http://stevelosh.com/blog/2012/10/the-homely-mutt/
+## [4] Gmail - How actions sync in IMAP
+##     https://support.google.com/mail/answer/77657
+## [5] Gmail - Deleting IMAP messages
+##     https://support.google.com/mail/answer/78755
+##
+## * How to rename a local OfflineIMAP managed folder
+##   Credits: https://www.preining.info/blog/2015/09/rename-offlineimap-folder/
+##
+## Aaron LI <aaronly.me@gmail.com>
+## Created: 2015-02-03
+## Updated: 2016-01-29
+##
+
+
+[general]
+# Store metadata aside with maildir
+metadata            = ~/mail/offlineimap
+# Function 'mailpasswd': invoke gpg2 to decrypt passwords.
+pythonfile          = ~/.offlineimap/offlineimap.py
+#
+# List of accounts to be synced, separated by a comma.
+accounts            = gmail-aly, gmail-li, outlook-aly, outlook-li, sjtu, autistici, foxmail
+#
+# Control how many accuonts may be synced simulaneously
+# NOTE: if you are using autorefresh and have more than one account,
+# your must set this number to be >= to the number of accounts you
+# have; since any given sync run never "finishes" due to a timer,
+# you will never sync your additional accounts if this is 1.
+maxsyncaccounts     = 7
+#
+# UI: blinkenlights, ttyui, quiet (suppress anything but errors)
+ui                  = ttyui
+
+
+[Account example]  ## {{{
+localrepository     = example-local
+remoterepository    = example-remote
+# Supported historical backend: plain, sqlite
+status_backend      = sqlite
+# Minutes between sycns
+autorefresh         = 15
+# Number of quick-syncs between autorefreshes.
+# Quick-syncs do not update if the only changes were to IMAP flags.
+quick               = 5
+# pre and post sync hook to execute a external command.
+#presynchook         = imapfilter
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository example-local]
+# Supported local repository types: Maildir, GmailMaildir, IMAP
+type                = Maildir
+localfolders        = ~/mail/example
+# Translate local folder names to remote folder names
+#nametrans = ???
+#
+[Repository example-remote]
+# Remote repository type: IMAP, Gmail
+type                = IMAP
+remotehost          = imap.example.com
+remoteport          = 993
+remoteuser          = username@example.com
+#remotepass          = password
+remotepasseval      = mailpasswd("example")
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+#cert_fingerprint    = <SHA1_40_hex_digits>[, ...]
+# Hold the connection open, instead of closing the connection once
+# a sync is complete. (unit: seconds)
+keepalive           = 60
+# Keep connection open between refreshes.
+holdconnectionopen  = yes
+# Disable remote folder creation to match the local repository
+#createfolders = True
+# Filter the IMAP folders to be sync'ed
+# NOTE: operates on the *untranslated* folder name (i.e., before nametrans)
+#folderfilter = ???
+# Translate remote folder names to local folder names
+# Do NOT forget the *reverse nametrans* for local repository
+#nametrans = ???
+## example }}}
+
+
+[Account gmail-aly]  ## {{{
+localrepository     = gmail-aly-local
+remoterepository    = gmail-aly-remote
+status_backend      = sqlite
+# Sync GMail labels with the local repository.
+synclabels          = yes
+# Name of the header to use for label storage.
+# X-Label: space-separated
+# X-Keywords: comma-separated
+labelsheader        = X-Keywords
+autorefresh         = 30
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository gmail-aly-local]
+type                = GmailMaildir
+localfolders        = ~/mail/gmail-aly
+# Translate local folder names to remote folder names
+nametrans           = lambda folder: {
+                          'inbox'   : 'INBOX',
+                          'sent'    : '[Gmail]/Sent Mail',
+                          'archive' : '[Gmail]/All Mail',
+                          'flagged' : '[Gmail]/Starred',
+                          'drafts'  : '[Gmail]/Drafts',
+                          'junk'    : '[Gmail]/Spam',
+                          'trash'   : '[Gmail]/Trash',
+                      }.get(folder, folder)
+#
+[Repository gmail-aly-remote]
+type                = Gmail
+remoteuser          = aaronly.me@gmail.com
+remotepasseval      = mailpasswd("gmail-aly")
+keepalive           = 60
+holdconnectionopen  = yes
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+# Validity: Jan 20 12:35:31 2016 GMT - Apr 19 00:00:00 2016 GMT
+cert_fingerprint    = 3d767a9418d07d2bc8655c14da03db47f0ace05d
+# Filter the IMAP folders to be sync'ed
+# NOTE: operates on the *untranslated* folder name (i.e., before nametrans)
+#folderfilter        = lambda folder: folder in [
+#                          'INBOX', '[Gmail]/Sent Mail', '[Gmail]/All Mail',
+#                          '[Gmail]/Starred', '[Gmail]/Drafts',
+#                          '[Gmail]/Spam', '[Gmail]/Trash',
+#                          'aly', 'google', 'test'
+#                      ]
+# Sync 'All Mail'/' and handle tags/labels with notmuch;
+# also sync 'Spam' and 'Trash' to manage spam and message deletion.
+# NOTE: Gmail do NOT allow delete message from 'All Mail';
+#       however, if a message deleted from 'Spam' or 'Trash', it will be
+#       deleted permanently.
+folderfilter        = lambda folder: folder in [
+                          '[Gmail]/All Mail', '[Gmail]/Drafts',
+                          '[Gmail]/Spam', '[Gmail]/Trash',
+                      ]
+# Translate remote folder names to local folder names
+# Do NOT forget the *reverse nametrans* for local repository
+nametrans           = lambda folder: {
+                          'INBOX'             : 'inbox',
+                          '[Gmail]/Sent Mail' : 'sent',
+                          '[Gmail]/All Mail'  : 'archive',
+                          '[Gmail]/Starred'   : 'flagged',
+                          '[Gmail]/Drafts'    : 'drafts',
+                          '[Gmail]/Spam'      : 'junk',
+                          '[Gmail]/Trash'     : 'trash',
+                      }.get(folder, folder)
+## gmail-aly }}}
+
+
+[Account gmail-li]  ## {{{
+localrepository     = gmail-li-local
+remoterepository    = gmail-li-remote
+status_backend      = sqlite
+synclabels          = yes
+labelsheader        = X-Keywords
+autorefresh         = 15
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository gmail-li-local]
+type                = GmailMaildir
+localfolders        = ~/mail/gmail-li
+nametrans           = lambda folder: {
+                          'inbox'   : 'INBOX',
+                          'sent'    : '[Gmail]/Sent Mail',
+                          'archive' : '[Gmail]/All Mail',
+                          'flagged' : '[Gmail]/Starred',
+                          'drafts'  : '[Gmail]/Drafts',
+                          'junk'    : '[Gmail]/Spam',
+                          'trash'   : '[Gmail]/Trash',
+                      }.get(folder, folder)
+#
+[Repository gmail-li-remote]
+type                = Gmail
+remoteuser          = liweitianux@gmail.com
+remotepasseval      = mailpasswd("gmail-li")
+keepalive           = 60
+holdconnectionopen  = yes
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+# Validity: Jan 20 12:35:31 2016 GMT - Apr 19 00:00:00 2016 GMT
+cert_fingerprint    = 3d767a9418d07d2bc8655c14da03db47f0ace05d
+folderfilter        = lambda folder: folder in [
+                          '[Gmail]/All Mail', '[Gmail]/Drafts',
+                          '[Gmail]/Spam', '[Gmail]/Trash',
+                      ]
+nametrans           = lambda folder: {
+                          'INBOX'             : 'inbox',
+                          '[Gmail]/Sent Mail' : 'sent',
+                          '[Gmail]/All Mail'  : 'archive',
+                          '[Gmail]/Starred'   : 'flagged',
+                          '[Gmail]/Drafts'    : 'drafts',
+                          '[Gmail]/Spam'      : 'junk',
+                          '[Gmail]/Trash'     : 'trash',
+                      }.get(folder, folder)
+## gmail-li }}}
+
+
+[Account outlook-aly]  ## {{{
+localrepository     = outlook-aly-local
+remoterepository    = outlook-aly-remote
+status_backend      = sqlite
+autorefresh         = 30
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository outlook-aly-local]
+type                = Maildir
+localfolders        = ~/mail/outlook-aly
+nametrans           = lambda folder: {
+                          'inbox'   : 'Inbox',
+                          'sent'    : 'Sent',
+                          'drafts'  : 'Drafts',
+                          'archive' : 'Archive',
+                          'junk'    : 'Junk',
+                          'trash'   : 'Deleted',
+                      }.get(folder, folder)
+#
+[Repository outlook-aly-remote]
+type                = IMAP
+remotehost          = imap-mail.outlook.com
+remoteport          = 993
+remoteuser          = aaronly.me@outlook.com
+remotepasseval      = mailpasswd("outlook-aly")
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+# Validity: Dec 15 22:26:11 2015 GMT - Dec 15 22:26:11 2016 GMT
+cert_fingerprint    = c914dd966dbd0912c36ec294f83d8d3b5a434729
+keepalive           = 60
+holdconnectionopen  = yes
+folderfilter        = lambda folder: folder in [
+                          'Inbox', 'Sent', 'Archive',
+                          'Drafts', 'Junk', 'Deleted',
+                          'FreeBSD', 'OpenBSD',
+                      ]
+nametrans           = lambda folder: {
+                          'Inbox'   : 'inbox',
+                          'Sent'    : 'sent',
+                          'Archive' : 'archive',
+                          'Drafts'  : 'drafts',
+                          'Junk'    : 'junk',
+                          'Deleted' : 'trash',
+                      }.get(folder, folder)
+## outlook-aly }}}
+
+
+[Account outlook-li]  ## {{{
+localrepository     = outlook-li-local
+remoterepository    = outlook-li-remote
+status_backend      = sqlite
+autorefresh         = 15
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository outlook-li-local]
+type                = Maildir
+localfolders        = ~/mail/outlook-li
+nametrans           = lambda folder: {
+                          'inbox'   : 'Inbox',
+                          'sent'    : 'Sent',
+                          'drafts'  : 'Drafts',
+                          'archive' : 'Archive',
+                          'junk'    : 'Junk',
+                          'trash'   : 'Deleted',
+                      }.get(folder, folder)
+#
+[Repository outlook-li-remote]
+type                = IMAP
+remotehost          = imap-mail.outlook.com
+remoteport          = 993
+remoteuser          = liweitianux@live.com
+remotepasseval      = mailpasswd("outlook-li")
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+# Validity: Dec 15 22:26:11 2015 GMT - Dec 15 22:26:11 2016 GMT
+cert_fingerprint    = c914dd966dbd0912c36ec294f83d8d3b5a434729
+keepalive           = 60
+holdconnectionopen  = yes
+folderfilter        = lambda folder: folder in [
+                          'Inbox', 'Sent', 'Archive',
+                          'Drafts', 'Junk', 'Deleted', 'Chats'
+                      ]
+nametrans           = lambda folder: {
+                          'Inbox'   : 'inbox',
+                          'Sent'    : 'sent',
+                          'Archive' : 'archive',
+                          'Drafts'  : 'drafts',
+                          'Junk'    : 'junk',
+                          'Deleted' : 'trash',
+                      }.get(folder, folder)
+## outlook-li }}}
+
+
+[Account sjtu]  ## {{{
+localrepository     = sjtu-local
+remoterepository    = sjtu-remote
+status_backend      = sqlite
+autorefresh         = 15
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository sjtu-local]
+type                = Maildir
+localfolders        = ~/mail/sjtu
+nametrans           = lambda folder: {
+                          'inbox'   : 'INBOX',
+                          'sent'    : 'Sent',
+                          'drafts'  : 'Drafts',
+                          'archive' : 'Archive',
+                          'junk'    : 'Junk',
+                          'trash'   : 'Trash',
+                      }.get(folder, folder)
+#
+[Repository sjtu-remote]
+type                = IMAP
+remotehost          = imap.sjtu.edu.cn
+remoteport          = 993
+remoteuser          = liweitianux@sjtu.edu.cn
+remotepasseval      = mailpasswd("sjtu")
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+# Validity: May 22 00:46:47 2014 GMT - Apr  6 06:54:22 2017 GMT
+cert_fingerprint    = b1ec0b44e7aefb983e01dbc3c7432b3aae4910fe
+keepalive           = 60
+holdconnectionopen  = yes
+folderfilter        = lambda folder: folder in [
+                          'INBOX', 'Sent', 'Archive',
+                          'Drafts', 'Junk', 'Trash'
+                      ]
+nametrans           = lambda folder: {
+                          'INBOX'   : 'inbox',
+                          'Sent'    : 'sent',
+                          'Archive' : 'archive',
+                          'Drafts'  : 'drafts',
+                          'Junk'    : 'junk',
+                          'Trash'   : 'trash',
+                      }.get(folder, folder)
+## sjtu }}}
+
+
+[Account autistici]  ## {{{
+localrepository     = autistici-local
+remoterepository    = autistici-remote
+status_backend      = sqlite
+autorefresh         = 60
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository autistici-local]
+type                = Maildir
+localfolders        = ~/mail/autistici
+nametrans           = lambda folder: {
+                          'inbox'   : 'INBOX',
+                          'sent'    : 'Sent',
+                          'drafts'  : 'Drafts',
+                          'archive' : 'Archive',
+                          'junk'    : 'Spam',
+                          'trash'   : 'Trash',
+                      }.get(folder, folder)
+#
+[Repository autistici-remote]
+type                = IMAP
+remotehost          = mail.autistici.org
+remoteport          = 993
+remoteuser          = liweitianux@autistici.org
+remotepasseval      = mailpasswd("autistici")
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-autistici.crt
+# Validity: May 23 09:56:37 2015 GMT - May 22 09:56:37 2017 GMT
+cert_fingerprint    = d59db2e0a7a8a0081d3111d3aaf51ccc7a3f20e2
+keepalive           = 60
+holdconnectionopen  = yes
+folderfilter        = lambda folder: folder in [
+                          'INBOX', 'Sent', 'Archive',
+                          'Drafts', 'Spam', 'Trash'
+                      ]
+nametrans           = lambda folder: {
+                          'INBOX'   : 'inbox',
+                          'Sent'    : 'sent',
+                          'Archive' : 'archive',
+                          'Drafts'  : 'drafts',
+                          'Spam'    : 'junk',
+                          'Trash'   : 'trash',
+                      }.get(folder, folder)
+## autistici }}}
+
+
+[Account foxmail]  ## {{{
+localrepository     = foxmail-local
+remoterepository    = foxmail-remote
+status_backend      = sqlite
+autorefresh         = 60
+quick               = 5
+#postsynchook        = ~/.offlineimap/postsync.sh
+#
+[Repository foxmail-local]
+type                = Maildir
+localfolders        = ~/mail/foxmail
+nametrans           = lambda folder: {
+                          'inbox'   : 'INBOX',
+                          'sent'    : 'Sent Messages',
+                          'drafts'  : 'Drafts',
+                          'archive' : 'Archive',
+                          'junk'    : 'Junk',
+                          'trash'   : 'Deleted Messages',
+                      }.get(folder, folder)
+#
+[Repository foxmail-remote]
+type                = IMAP
+remotehost          = imap.qq.com
+remoteport          = 993
+remoteuser          = liweitianux@foxmail.com
+remotepasseval      = mailpasswd("foxmail")
+ssl                 = yes
+sslcacertfile       = ~/.private/ca-certificates.crt
+# Validity: Jan 27 00:00:00 2016 GMT - Oct 23 23:59:59 2016 GMT
+cert_fingerprint    = 7a845668b97288ad8d265372f6e6e041c73e8d1e
+keepalive           = 60
+holdconnectionopen  = yes
+folderfilter        = lambda folder: folder in [
+                          'INBOX', 'Sent Messages', 'Archive',
+                          'Drafts', 'Junk', 'Deleted Messages'
+                      ]
+nametrans           = lambda folder: {
+                          'INBOX'            : 'inbox',
+                          'Sent Messages'    : 'sent',
+                          'Archive'          : 'archive',
+                          'Drafts'           : 'drafts',
+                          'Junk'             : 'junk',
+                          'Deleted Messages' : 'trash',
+                      }.get(folder, folder)
+## foxmail }}}
+
+
+#  vim: set ts=4 sw=4 tw=0 fenc=utf-8 ft=python: #
