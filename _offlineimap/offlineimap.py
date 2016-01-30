@@ -21,7 +21,7 @@
 #
 # Aaron LI
 # Created: 2015-02-02
-# Updated: 2016-01-11
+# Updated: 2016-01-29
 #
 
 
@@ -31,9 +31,9 @@ import subprocess
 
 def mailpasswd(account):
     account = os.path.basename(account)
-    path = '{0}/.offlineimap/{1}.gpg'.format(os.environ['HOME'], account)
+    passfile = os.path.expanduser('~/.private/{0}.gpg'.format(account))
     args = ['gpg2', '--for-your-eyes-only', '--no-tty',
-            '--quiet', '--batch', '--decrypt', path]
+            '--quiet', '--batch', '--decrypt', passfile]
     try:
         return subprocess.check_output(args).strip()
     except subprocess.CalledProcessError:
