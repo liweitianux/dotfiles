@@ -44,7 +44,7 @@ unsetopt MENU_COMPLETE
 # spelling correction for commands
 setopt CORRECT
 # spelling correction for arguments
-setopt CORRECTALL
+#setopt CORRECTALL
 
 ## Prompt
 # enable parameter expansion, command substitution, and arithmetic expansion

@@ -1,0 +1,22 @@
+#
+# ~/.zlogin
+# *finally* executed by a *login* zsh shell
+# see man zsh(1)
+#
+# Credits:
+# [1] Gentoo Wiki - X without Display Manager
+#     https://wiki.gentoo.org/wiki/X_without_Display_Manager
+#
+# Aaron LI
+# 2016-01-31
+#
+
+## Auto startx if login on tty6
+if (( $EUID != 0 )) && [[ -z $DISPLAY ]] && [[ $TTY = "/dev/tty6" ]]; then
+    if [ -e ~/.xsession-errors ]; then
+        mv -f ~/.xsession-errors ~/.xsession-errors.old
+    fi
+    exec startx ~/.xinitrc openbox >~/.xsession-errors 2>&1
+fi
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
