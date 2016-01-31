@@ -1,21 +1,24 @@
-#!/bin/sh
 #
 # ~/.xinitrc
 #
+# Credits:
+# [1] ArchWiki - xinitrc
+#     https://wiki.archlinux.org/index.php/xinitrc
+#
+# Aaron LI
+# 2016-01-31
+#
 
-# Run all system xinitrc shell scripts.
-xinitdir="/etc/X11/xinit/xinitrc.d"
-if [ -d "$xinitdir" ]; then
-    for script in $xinitdir/*; do
-        echo "Loading xinit script $script"
-        if [ -x "$script" -a ! -d "$script" ]; then
-            . "$script"
-        fi
+# source system xinit scripts
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+    for f in /etc/X11/xinit/xinitrc.d/?* ; do
+        [ -x "$f" ] && . "$f"
     done
-    unset $script
+    unset f
 fi
 
-[ -f ~/.Xresources ] && xrdb -load ~/.Xresources
+# load X resources (do not fork to the background)
+[ -e ~/.Xresources ] && xrdb -load ~/.Xresources
 
 # disable beep
 xset b off
@@ -23,3 +26,16 @@ xset b off
 # disable CapsLock
 setxkbmap -option ctrl:nocaps
 
+# start X session
+session=${1:-openbox}
+case "${session}" in
+    xfce|xfce4)
+        exec dbus-launch --exit-with-session startxfce4;;
+    openbox)
+        exec dbus-launch --exit-with-session openbox-session;;
+    *)
+        echo "ERROR: unknown session" >/dev/stderr
+        ;;
+esac
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #
