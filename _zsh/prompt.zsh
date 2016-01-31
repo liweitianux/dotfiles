@@ -27,8 +27,8 @@ function git_prompt_info {
     fi
 }
 
-PROMPT='%{$fg_bold[blue]%}%~%<< $(git_prompt_info)${PR_BOLD_WHITE}>%{${reset_color}%} '
+PROMPT='%{$fg_bold[blue]%}%~%<< $(git_prompt_info)%{$fg_bold[red]%}%(?..[%?])${PR_BOLD_WHITE}>%{$reset_color%} '
 
-SPROMPT="zsh: correct $fg[red]%R$reset_color to $fg[green]%r$reset_color [(y)es (n)o (a)bort (e)dit]? "
+SPROMPT="zsh: correct %{$fg_bold[red]%}%R%{$reset_color%} to %{$fg_bold[green]%}%r%{$reset_color%} [(y)es (n)o (a)bort (e)dit]? "
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
