@@ -15,11 +15,5 @@ bindkey "[A"    history-search-backward              # up arrow
 bindkey "^D"    delete-char                          # ctrl-d
 bindkey "^F"    forward-char                         # ctrl-f
 bindkey "^B"    backward-char                        # ctrl-b
-bindkey '^P'    up-history
-bindkey '^N'    down-history
-bindkey '^W'    backward-kill-word
-
-## vi mode
-bindkey -v
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
