@@ -19,7 +19,7 @@
 ##
 ## Aaron LI <aaronly.me@gmail.com>
 ## Created: 2015-02-03
-## Updated: 2016-01-29
+## Updated: 2016-01-31
 ##
 
 
@@ -72,6 +72,8 @@ remoteport          = 993
 remoteuser          = username@example.com
 #remotepass          = password
 remotepasseval      = mailpasswd("example")
+# Which authentication/authorization mechanisms and the order should try
+#auth_mechanisms     = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 #cert_fingerprint    = <SHA1_40_hex_digits>[, ...]
@@ -123,12 +125,14 @@ nametrans           = lambda folder: {
 type                = Gmail
 remoteuser          = aaronly.me@gmail.com
 remotepasseval      = mailpasswd("gmail-aly")
-keepalive           = 60
-holdconnectionopen  = yes
+# I do not use OAUTH2
+auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Jan 20 12:35:31 2016 GMT - Apr 19 00:00:00 2016 GMT
 cert_fingerprint    = 3d767a9418d07d2bc8655c14da03db47f0ace05d
+keepalive           = 60
+holdconnectionopen  = yes
 # Filter the IMAP folders to be sync'ed
 # NOTE: operates on the *untranslated* folder name (i.e., before nametrans)
 #folderfilter        = lambda folder: folder in [
@@ -187,12 +191,13 @@ nametrans           = lambda folder: {
 type                = Gmail
 remoteuser          = liweitianux@gmail.com
 remotepasseval      = mailpasswd("gmail-li")
-keepalive           = 60
-holdconnectionopen  = yes
+auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Jan 20 12:35:31 2016 GMT - Apr 19 00:00:00 2016 GMT
 cert_fingerprint    = 3d767a9418d07d2bc8655c14da03db47f0ace05d
+keepalive           = 60
+holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
                           '[Gmail]/All Mail', '[Gmail]/Drafts',
                           '[Gmail]/Spam', '[Gmail]/Trash',
@@ -235,6 +240,7 @@ remotehost          = imap-mail.outlook.com
 remoteport          = 993
 remoteuser          = aaronly.me@outlook.com
 remotepasseval      = mailpasswd("outlook-aly")
+auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Dec 15 22:26:11 2015 GMT - Dec 15 22:26:11 2016 GMT
@@ -283,6 +289,7 @@ remotehost          = imap-mail.outlook.com
 remoteport          = 993
 remoteuser          = liweitianux@live.com
 remotepasseval      = mailpasswd("outlook-li")
+auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Dec 15 22:26:11 2015 GMT - Dec 15 22:26:11 2016 GMT
