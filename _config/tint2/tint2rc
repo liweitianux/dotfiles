@@ -6,7 +6,7 @@
 ##
 ## Aaron LI
 ## Created: 2016-01-08
-## Updated: 2016-01-08
+## Updated: 2016-01-31
 ##
 
 
@@ -63,7 +63,10 @@ taskbar_hide_inactive_tasks = 0
 taskbar_hide_different_monitor = 0
 # Do not show the virtual desktop name.
 taskbar_name = 0
-taskbar_sort_order = none
+# Specify the sort order of the tasks on the taskbar
+#   none, title, center (by the window centers),
+#   mru (most recently used first), lru (most recently used last)
+taskbar_sort_order = center
 task_align = left
 
 
