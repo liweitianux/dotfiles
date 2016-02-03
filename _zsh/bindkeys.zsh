@@ -16,4 +16,9 @@ bindkey "^D"    delete-char                          # ctrl-d
 bindkey "^F"    forward-char                         # ctrl-f
 bindkey "^B"    backward-char                        # ctrl-b
 
+# see zshcontrib(1)
+autoload -U select-word-style
+# bash-style word killing: word characters are alphanumeric characters only
+select-word-style bash
+
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #

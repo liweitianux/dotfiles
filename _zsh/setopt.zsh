@@ -1,16 +1,21 @@
 #
 # zsh/setopt.zsh
+# see man zshoptions(1)
 #
 
 ## Basics
 setopt NO_BEEP
 setopt AUTO_CD
+# make cd push the old directory onto the directory stack
+setopt AUTO_PUSHD
 # don't push multiple copies of the same directory into the directory stack
 setopt PUSHD_IGNORE_DUPS
 # treat #, ~, and ^ as part of patterns for filename generation
 setopt EXTENDED_GLOB
 # allow comments even in interactive shells (especially for Muness)
 setopt INTERACTIVE_COMMENTS
+# display PID when suspending processes as well
+setopt LONG_LIST_JOBS
 
 ## History
 # allow multiple terminal sessions to all append to one zsh command history
@@ -32,6 +37,8 @@ setopt HIST_VERIFY
 
 
 ## Completion
+# * shouldn't match dotfiles. ever.
+setopt NO_GLOB_DOTS
 # allow completion from within a word/phrase
 setopt COMPLETE_IN_WORD
 # when completing from middle of a word, move cursor to the end of the word

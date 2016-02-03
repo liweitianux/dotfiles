@@ -4,8 +4,8 @@
 
 HISTFILE=~/.zsh_history
 
-HISTSIZE=2000
-SAVEHIST=1800
+HISTSIZE=10000
+SAVEHIST=9000
 # ignore these commands without arguments
 HISTIGNORE="cd:ls:ll"
 

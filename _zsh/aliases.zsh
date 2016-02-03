@@ -2,6 +2,8 @@
 # zsh/aliases.zsh
 #
 
+alias zhelp='run-help'
+
 alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
