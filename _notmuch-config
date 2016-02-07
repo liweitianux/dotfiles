@@ -60,7 +60,7 @@ tags=new
 #
 # NOTE: *Every* file/directory that goes by one of those names will be
 # ignored, independent of its depth/location in the mail store.
-ignore=backup;.noindex;
+ignore=backup;offlineimap;
 
 
 # Search configuration
