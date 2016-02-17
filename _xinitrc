@@ -26,6 +26,9 @@ xset b off
 # disable CapsLock
 setxkbmap -option ctrl:nocaps
 
+# gpg-agent
+pgrep -x gpg-agent || eval $(gpg-agent --daemon)
+
 # start X session
 session=${1:-openbox}
 case "${session}" in
