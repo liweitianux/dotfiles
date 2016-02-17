@@ -58,8 +58,11 @@
 ##      picked by ncmpcpp upon next call to readKey function.
 ##      Accepted values: mouse, up, down, page_up, page_down,
 ##      home, end, space, enter, insert, delete, left, right,
-##      tab, shift_tab, ctrl_a, ctrl_b, ..., ctrl_z, f1, f2,
-##      ..., f12, backspace, backspace_2.
+##      tab, ctrl-a, ctrl-b, ..., ctrl-z, ctrl-[, ctrl-\\,
+##      ctrl-], ctrl-^, ctrl-_, f1, f2, ..., f12, backspace.
+##      In addition, most of these names can be prefixed with
+##      alt-/ctrl-/shift- to be recognized with the appropriate
+##      modifier key(s).
 ##
 ##    - push_characters "string" - pushes given string into
 ##      input queue.
@@ -118,11 +121,12 @@
 ##    could be used. Then ncmpcpp will not wait for confirmation
 ##    (enter) and will execute the command the moment it sees it.
 ##
-## Note: Both 'backspace' and 'backspace_2' are used because some
-##       terminals interpret backspace using keycode of 'backspace'
-##       and some the one of 'backspace_2'. You can get away with
-##       binding once if all your terminal emulators use the same
-##       value.
+##    Note: while command chains are executed, internal environment
+##    update (which includes current window refresh and mpd status
+##    update) is not performed for performance reasons. However, it
+##    may be desirable to do so in some situration. Therefore it's
+##    possible to invoke by hand by performing 'update enviroment'
+##    action.
 ##
 ## Note: There is a difference between:
 ##
@@ -151,16 +155,16 @@ def_key "j"
 def_key "k"
   scroll_up
 
-def_key "ctrl_u"
+def_key "ctrl-u"
   page_up
 
-def_key "ctrl_d"
+def_key "ctrl-d"
   page_down
 
-def_key "ctrl_j"
+def_key "ctrl-j"
   move_selected_items_down
 
-def_key "ctrl_k"
+def_key "ctrl-k"
   move_selected_items_up
 
 def_key "h"
