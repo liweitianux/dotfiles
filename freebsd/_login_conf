@@ -1,0 +1,13 @@
+# ~/.login.conf
+# see login.conf(5)
+#
+#me:\
+#	:charset=iso-8859-1:\
+#	:lang=de_DE.ISO8859-1:
+me:\
+    :lang=en_US.UTF-8:\
+    :setenv=LC_COLLATE=POSIX:\
+    :setenv=LC_CTYPE=zh_CN.UTF-8
+    :charset=utf-8:\
+    :xmodifiers="@im=fcitx":
+
