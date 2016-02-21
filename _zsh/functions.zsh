@@ -1,8 +1,10 @@
 #
 # zsh/functions.zsh
 #
+# execute 'functions <func_name>' to show function details.
+#
 
-function zsh_recompile {
+function zsh_recompile() {
     autoload -U zrecompile
     rm -f ~/.zsh/*.zwc
     [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
@@ -20,7 +22,7 @@ function zsh_recompile {
 }
 
 
-function extract {
+function extract() {
   echo Extracting $1 ...
   if [ -f "$1" ] ; then
       case "$1" in
@@ -55,25 +57,25 @@ function extract {
 }
 
 
-function trash () {
-  local path
-  for path in "$@"; do
-    # ignore any arguments
-    if [[ "${path}" = -* ]]; then
-        :
-    else
-      local dst="${path##*/}"
-      # append the time if necessary
-      while [ -e ~/.trash/"${dst}" ]; do
-        dst="${dst} "$(date +%H-%M-%S)
-      done
-      \mv "${path}" ~/.trash/"${dst}"
-    fi
-  done
+function trash() {
+    local path
+    for path in "$@"; do
+        # ignore any arguments
+        if [[ "${path}" = -* ]]; then
+            :
+        else
+        local dst="${path##*/}"
+        # append the time if necessary
+        while [ -e ~/.trash/"${dst}" ]; do
+            dst="${dst} "$(date +%H-%M-%S)
+        done
+        command mv "${path}" ~/.trash/"${dst}"
+        fi
+    done
 }
 
 
-function strip_diff_leading_symbols {
+function strip_diff_leading_symbols() {
     local color_code_regex="(\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K])"
 
     # simplify the unified patch diff header
@@ -86,8 +88,8 @@ function strip_diff_leading_symbols {
 
 
 ## Print a horizontal rule
-rule() {
-    printf "%$(tput cols)s\n" | tr ' ' '─'
+function rule() {
+    printf "%$(tput cols)s\n" | tr ' ' '-'
 }
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
