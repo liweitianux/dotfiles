@@ -1,11 +1,17 @@
-;;; -*- mode: emacs-lisp -*-
-;;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
-;;;
-;;; mu4e (mu for emacs) configurations
-;;;
-;;; Aaron LI
-;;; 2016-02-21
-;;;
+;;; ~/.emacs.d/personal/mu4e.el --- mu4e (mu for Emacs) configurations
+;;
+;; -*- mode: emacs-lisp -*-
+;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
+;;
+;; Aaron LI
+;; 2016-02-21
+;;
+
+;;; Commentary:
+;; mu4e (mu for Emacs) configurations
+;; mu (maildir indexer/searcher): https://github.com/djcb/mu
+
+;;; Code:
 
 ;; mu4e package path
 (add-to-list 'load-path "~/local/emacs/site-lisp/mu4e")
@@ -269,4 +275,3 @@
 
 ;; set `mu4e' as emacs' default email program
 (setq mail-user-agent 'mu4e-user-agent)
-

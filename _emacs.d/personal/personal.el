@@ -1,9 +1,16 @@
-;;;
-;;; ~/.emacs.d/personal/personal.el
-;;;
-;;; Aaron LI
-;;; 2016-02-21
-;;;
+;;; ~/.emacs.d/personal/personal.el --- Custom configurations for Prelude
+;;
+;; -*- mode: emacs-lisp -*-
+;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
+;;
+;; Aaron LI
+;; 2016-02-21
+;;
+
+;;; Commentary:
+;; Custom configurations for Prelude Emacs kit.
+
+;;; Code:
 
 ;; Disable `key-chord-mode' for `evil-mode'
 ;; (or just do not enable the `prelude-key-chord' module)
@@ -14,4 +21,3 @@
 
 ;; Disable `flyspell-mode': do not spellcheck on the fly
 ;(setq prelude-flyspell nil)
-

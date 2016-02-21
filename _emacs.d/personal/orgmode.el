@@ -1,14 +1,19 @@
-;;; -*- mode: emacs-lisp -*-
-;;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
-;;;
-;;; Org-mode configurations
-;;;
-;;; Credit:
-;;; [1] http://www.john2x.com/emacs.html
-;;;
-;;; Aaron LI
-;;; 2016-02-21
-;;;
+;;; ~/.emacs.d/personal/orgmode.el --- Org-mode configurations
+;;
+;; -*- mode: emacs-lisp -*-
+;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
+;;
+;; Credit:
+;; [1] http://www.john2x.com/emacs.html
+;;
+;; Aaron LI
+;; 2016-02-21
+;;
+
+;;; Commentary:
+;; Org-mode configurations for Emacs
+
+;;; Code:
 
 (setq org-directory "~/org")
 (setq org-todo-keywords
