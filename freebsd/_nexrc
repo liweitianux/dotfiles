@@ -1,0 +1,50 @@
+"
+" ~/.nexrc
+" for nvi, default vi on BSDs
+"
+" Credits: http://rubenschade.com/dotfiles/.nexrc
+"
+" Aaron LI
+" Created: 2011-06-20
+" Updated: 2012-02-24
+"
+" nvi doesn't like inline comments or empty lines, be warned!
+"
+" GENERAL SETTINGS
+set extended
+set magic
+set searchincr
+set showmatch
+set matchtime=3
+set showmode
+set ignorecase
+set wrapscan
+"
+" Command-line history and completion
+"
+" USE <TAB>
+set cedit=\
+set filec=\
+" USE <ESC>
+"set cedit=
+"set filec=
+"
+" I LIKE 4 SPACE INDENTATION
+set autoindent
+set shiftwidth=4
+set tabstop=8
+"
+" TELL ME WHEN I DO SOMETHING STUPID
+set errorbells
+set flash
+set verbose
+"
+" SHOW LINE NUMBERS, COLUMN/ROW POSITION
+set number
+set ruler
+"
+" KEY MAPPINGS
+map gg 1G
+"
+"
+" vim: set ts=8 sw=4 tw=78 fenc=utf-8 ft=vim: #
