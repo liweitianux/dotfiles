@@ -22,9 +22,6 @@ alias lsa='ls -lah'
 
 alias grep='grep --color=auto'
 
-alias e='emacs'
-alias v='vim'
-
 alias ta='tmux attach -t'
 alias tl='tmux list-sessions'
 alias ts='tmux new-session -s'
