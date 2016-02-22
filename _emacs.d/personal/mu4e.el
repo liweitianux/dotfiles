@@ -8,14 +8,28 @@
 ;;
 
 ;;; Commentary:
-;; mu4e (mu for Emacs) configurations
+;; mu4e (mu for Emacs) configurations with some extensions.
 ;; mu (maildir indexer/searcher): https://github.com/djcb/mu
 
 ;;; Code:
 
-;; mu4e package path
-(add-to-list 'load-path "~/local/emacs/site-lisp/mu4e")
+;; mu4e package
+;(add-to-list 'load-path "~/local/emacs/site-lisp/mu4e")
+(add-to-list 'load-path (expand-file-name "mu4e" prelude-personal-dir))
 (require 'mu4e)
+
+;; mu4e extensions
+(prelude-require-packages '(evil-mu4e mu4e-maildirs-extension mu4e-alert))
+;; evil-mu4e
+(require 'evil-mu4e)
+;; mu4e-maildirs-extension
+(require 'mu4e-maildirs-extension)
+(mu4e-maildirs-extension)
+;; mu4e-alert
+(mu4e-alert-set-default-style 'libnotify)
+(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+(add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
+
 
 ;; turn on debug: log debug information to the *mu4e-log* buffer
 (setq mu4e-debug t)
@@ -181,6 +195,8 @@
 (setq mu4e-get-mail-command "offlineimap -o -1")
 ;(setq mu4e-get-mail-command "true" nil nil
 ;      "Disable fetching mail as it is done by a daemon")
+;; get mail and update index periodically in the background (unit: seconds)
+(setq mu4e-update-interval 900)
 
 ;; frequent mail folders, with shortcuts
 ;; do not use shortcut `o' as it is used for `[o]ther'
