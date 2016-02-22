@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/personal.el --- Custom configurations for Prelude
+;;; ~/.emacs.d/personal/config.el --- Custom configurations for Prelude
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
