@@ -25,3 +25,6 @@
 ;; Prevent kill and yank commands from accessing the clipboard
 (setq x-select-enable-clipboard nil)
 
+;; Turn off the scroll bar
+(scroll-bar-mode -1)
+
