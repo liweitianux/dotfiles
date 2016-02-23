@@ -3,8 +3,8 @@ dotfiles
 
 Personal & collected dotfiles ~~~
 
-* `linux`: `Linux-specific configurations
-* `freebsd`: FreeBSD-specific configurations
+* ``linux``: Linux-specific configurations
+* ``freebsd``: FreeBSD-specific configurations
 
 
 # Configuration Notes
@@ -26,10 +26,12 @@ home or other paths:
 * ``_config/alot/config``: maildir
 
 
-Distributed under MIT License.
+# License
+Distributed under the MIT License.
 
 
+# Author
 Aaron LI
-GnuPG key: Aaron LI <aaronly.me@gmail.com> <aaronly.me@outlook.com>
-Fingerprint: AC34 64FA DAAE 6321 8609  9CA6 240E 2A63 5D72 729A
+
+GnuPG key fingerprint: ``AC34 64FA DAAE 6321 8609  9CA6 240E 2A63 5D72 729A``
 
