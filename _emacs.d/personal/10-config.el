@@ -21,3 +21,7 @@
 
 ;; Disable `flyspell-mode': do not spellcheck on the fly
 ;(setq prelude-flyspell nil)
+
+;; Prevent kill and yank commands from accessing the clipboard
+(setq x-select-enable-clipboard nil)
+
