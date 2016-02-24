@@ -22,14 +22,6 @@
 (setq inhibit-startup-screen t)
 (setq initial-major-mode 'emacs-lisp-mode)
 
-;; Change the initial buffer to `*Remember*' instead of `*scratch*'
-(setq initial-buffer-choice 'remember-notes)
-(setq remember-notes-initial-major-mode 'org-mode)
-;; Disable the `C-c C-c' keybinding of `remember-notes-mode-map' to avoid
-;; the conflict with `org-mode'
-(with-eval-after-load 'remember
-                      (define-key remember-notes-mode-map (kbd "C-c C-c") nil))
-
 ;; Prevent kill and yank commands from accessing the clipboard
 (setq x-select-enable-clipboard nil)
 
