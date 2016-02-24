@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/mu4e.el --- mu4e (mu for Emacs) configurations
+;;; ~/.emacs.d/personal/50-mu4e.el --- mu4e (mu for Emacs) configurations
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
@@ -291,3 +291,4 @@
 
 ;; set `mu4e' as emacs' default email program
 (setq mail-user-agent 'mu4e-user-agent)
+

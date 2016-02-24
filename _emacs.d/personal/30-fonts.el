@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/fonts.el --- Fonts configurations for Emacs.
+;;; ~/.emacs.d/personal/30-fonts.el --- Fonts configurations for Emacs.
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:

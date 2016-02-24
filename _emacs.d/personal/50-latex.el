@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/latex.el --- LaTeX settings for Prelude Emacs
+;;; ~/.emacs.d/personal/50-latex.el --- LaTeX settings for Prelude Emacs
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
@@ -15,3 +15,4 @@
 ;;; Code:
 
 (setq-default TeX-engine 'xetex)
+

@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/fcitx.el --- Configurations for fcitx.el
+;;; ~/.emacs.d/personal/50-fcitx.el --- Configurations for fcitx.el
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:

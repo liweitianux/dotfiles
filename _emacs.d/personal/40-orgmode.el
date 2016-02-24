@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/orgmode.el --- Org-mode configurations
+;;; ~/.emacs.d/personal/40-orgmode.el --- Org-mode configurations
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
