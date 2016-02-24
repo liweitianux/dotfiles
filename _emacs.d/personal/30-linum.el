@@ -25,6 +25,7 @@
                                       dictionary-mode
                                       erc-mode
                                       browse-kill-ring-mode
+                                      Buffer-menu-mode
                                       etags-select-mode
                                       dired-mode
                                       help-mode
