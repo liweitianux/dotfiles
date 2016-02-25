@@ -16,12 +16,12 @@
 
 ;;; Code:
 
-;;; ESC ALWAYS quits
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+;; ESC *always* quits
+(define-key minibuffer-local-map            [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map         [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map    [escape] 'minibuffer-keyboard-quit)
 (global-set-key [escape] 'keyboard-quit)
 
 ;; Prefer Emacs way after pressing ":" in evil-mode
@@ -46,6 +46,15 @@
   ">"  'org-metaright  ; indent
   (kbd "TAB") 'org-cycle)
 
+;; evil-escape: Escape from anything with a customizable key sequence
+;; https://github.com/syl20bnr/evil-escape
+;(prelude-require-package 'evil-escape)
+;(require 'evil-escape)
+;(setq-default evil-escape-key-sequence "kj")
+;(setq evil-escape-exclude-major-modes '(dired-mode))
+;(evil-escape-mode 1)
+;(global-set-key [escape] 'evil-escape)
+
 ;; evil-leader
 ;; https://github.com/cofi/evil-leader
 (prelude-require-package 'evil-leader)
@@ -60,7 +69,7 @@
   "bf" 'buffer-menu
   "mu" 'mu4e
   "rm" 'remember
-)
+  "rn" 'remember-notes)
 
 ;; evil-matchit: jump between matched tags in Emacs
 ;; https://github.com/redguardtoo/evil-matchit
