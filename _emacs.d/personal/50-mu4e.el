@@ -256,7 +256,7 @@
 ;; also include messages related to the searched messages
 (setq mu4e-headers-include-related t)
 ;; exclude the duplicate messages with the same `Message-ID'
-(setq mu4e-headers-skip-duplicates t)
+;(setq mu4e-headers-skip-duplicates t)
 
 ;; confirm before sending
 (add-hook 'message-send-hook
@@ -291,4 +291,3 @@
 
 ;; set `mu4e' as emacs' default email program
 (setq mail-user-agent 'mu4e-user-agent)
-

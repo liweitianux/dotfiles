@@ -5,6 +5,8 @@
 ;;
 ;; Credits:
 ;; [1] https://github.com/wasamasa/dotemacs/blob/master/init.org
+;; [2] From Vim to Emacs+Evil chaotic migration guide
+;;     http://juanjoalvarez.net/es/detail/2014/sep/19/vim-emacsevil-chaotic-migration-guide/
 ;;
 ;; Aaron LI
 ;; 2016-02-24
@@ -24,8 +26,6 @@
 
 ;; Prevent kill and yank commands from accessing the clipboard
 (setq x-select-enable-clipboard nil)
-
-(setq fill-column 80)
 
 ;; Zero out default splitting thresholds
 (setq split-height-threshold 0
@@ -47,4 +47,8 @@
       auto-save-list-file-prefix prelude-autosave-dir)
 
 (setq-default tab-width 4)
+(setq-default fill-column 78)
+
+;; Auto-indent with the Return key
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
