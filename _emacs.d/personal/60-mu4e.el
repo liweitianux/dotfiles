@@ -1,4 +1,4 @@
-;;; ~/.emacs.d/personal/50-mu4e.el --- mu4e (mu for Emacs) configurations
+;;; ~/.emacs.d/personal/60-mu4e.el --- mu4e (mu for Emacs) configurations
 ;;
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
@@ -10,6 +10,9 @@
 ;;; Commentary:
 ;; mu4e (mu for Emacs) configurations with some extensions.
 ;; mu (maildir indexer/searcher): https://github.com/djcb/mu
+;;
+;; NOTE: some of the following key bindings rely the `evil' and
+;;       `evil-leader' packages, so make this file load later.
 
 ;;; Code:
 
@@ -331,4 +334,4 @@
     "k" 'mu4e-message-kill-buffer
     "a" 'mml-attach-file))
 
-;;; 50-mu4e.el ends here
+;;; 60-mu4e.el ends here

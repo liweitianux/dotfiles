@@ -55,6 +55,7 @@
                                       mu4e-main-mode
                                       mu4e-headers-mode
                                       mu4e-view-mode
+                                      mu4e-compose-mode
                                       gnus-group-mode
                                       gnus-summary-mode
                                       gnus-article-mode
