@@ -33,18 +33,18 @@
 
 ;; Backup and auto save settings
 ;; Credit: https://www.emacswiki.org/emacs/AutoSave
-(defvar prelude-backup-dir (expand-file-name "backup/" prelude-dir))
-(defvar prelude-autosave-dir (expand-file-name "autosave/" prelude-dir))
+(defvar my-backup-dir (expand-file-name "backup/" prelude-dir))
+(defvar my-autosave-dir (expand-file-name "autosave/" prelude-dir))
 ;; Place the backup files in the specified directory under `prelude-dir'
 (setq backup-by-copying t  ;; do not clobber symlinks
-      backup-directory-alist `((".*" . ,prelude-backup-dir))
+      backup-directory-alist `((".*" . ,my-backup-dir))
       version-control t  ;; use versioned backups
       delete-old-versions t
       kept-new-versions 6
       kept-old-versions 2)
 ;; Place both auto-saved files and auto-save-list file in the same directory
-(setq auto-save-file-name-transforms `((".*" ,prelude-autosave-dir t))
-      auto-save-list-file-prefix prelude-autosave-dir)
+(setq auto-save-list-file-prefix my-autosave-dir
+      auto-save-file-name-transforms `((".*" ,my-autosave-dir t)))
 
 (setq-default tab-width 4)
 (setq-default fill-column 78)
