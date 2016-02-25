@@ -18,19 +18,6 @@
 (add-to-list 'load-path (expand-file-name "mu4e" prelude-personal-dir))
 (require 'mu4e)
 
-;; mu4e extensions
-(prelude-require-packages '(evil-mu4e mu4e-maildirs-extension mu4e-alert))
-;; evil-mu4e
-(require 'evil-mu4e)
-;; mu4e-maildirs-extension
-(require 'mu4e-maildirs-extension)
-(mu4e-maildirs-extension)
-;; mu4e-alert
-(mu4e-alert-set-default-style 'libnotify)
-(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
-(add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
-
-
 ;; turn on debug: log debug information to the *mu4e-log* buffer
 (setq mu4e-debug t)
 
@@ -291,3 +278,57 @@
 
 ;; set `mu4e' as emacs' default email program
 (setq mail-user-agent 'mu4e-user-agent)
+
+
+;;; mu4e extensions
+
+;; evil-mu4e
+;; https://github.com/JorisE/evil-mu4e
+(prelude-require-package 'evil-mu4e)
+(require 'evil-mu4e)
+
+;; mu4e-maildirs-extension
+;; https://github.com/agpchil/mu4e-maildirs-extension
+(prelude-require-package 'mu4e-maildirs-extension)
+(require 'mu4e-maildirs-extension)
+(mu4e-maildirs-extension)
+
+;; mu4e-alert
+;; https://github.com/iqbalansari/mu4e-alert
+(prelude-require-package 'mu4e-alert)
+(mu4e-alert-set-default-style 'libnotify)
+(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
+(add-hook 'after-init-hook #'mu4e-alert-enable-mode-line-display)
+
+
+;;; Key bindings for Evil
+;; Credits:
+;; https://github.com/philc/emacs-config - .emacs.d/elisp/mu4e-mode-personal.el
+(with-eval-after-load "mu4e"
+  ;(evil-make-overriding-map mu4e-main-mode-map 'normal t)
+  (evil-define-key 'normal mu4e-main-mode-map
+    "q" 'vimlike-quit)
+  ;;
+  ;(evil-make-overriding-map mu4e-headers-mode-map 'normal t)
+  (evil-define-key 'normal mu4e-headers-mode-map
+    "C" 'mu4e-compose-new
+    "F" 'mu4e-compose-forward
+    "R" 'mu4e-compose-reply
+    "U" '(lambda () (mu4e-update-mail-and-index t)))
+  ;;
+  ;(evil-make-overriding-map mu4e-view-mode-map 'normal t)
+  (evil-define-key 'normal mu4e-view-mode-map
+    "C" 'mu4e-compose-new
+    "F" 'mu4e-compose-forward
+    "R" 'mu4e-compose-reply
+    "U" '(lambda () (mu4e-update-mail-and-index t)))
+  (evil-leader/set-key-for-mode 'mu4e-view-mode
+    "s" 'mu4e-view-raw-message)
+  ;;
+  (evil-leader/set-key-for-mode 'mu4e-compose-mode
+    "," 'message-send-and-exit
+    "c" 'message-send-and-exit
+    "k" 'mu4e-message-kill-buffer
+    "a" 'mml-attach-file))
+
+;;; 50-mu4e.el ends here
