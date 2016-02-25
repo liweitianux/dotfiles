@@ -22,3 +22,6 @@
 ;; Disable `flyspell-mode': do not spellcheck on the fly
 ;(setq prelude-flyspell nil)
 
+;; Set default TeX engine
+(setq-default TeX-engine 'xetex)
+
