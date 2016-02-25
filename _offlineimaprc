@@ -135,8 +135,8 @@ remotepasseval      = mailpasswd("gmail-aly")
 auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
-# Validity: Feb 11 11:03:55 2016 GMT - May 11 00:00:00 2016 GMT
-cert_fingerprint    = 4260032671de93c421d57c3267926f58716650a0
+# Validity: Feb 17 10:27:56 2016 GMT - May 17 00:00:00 2016 GMT
+cert_fingerprint    = 71dfbe124d89ed9218f539a82d4127fbb4bc9997
 keepalive           = 60
 holdconnectionopen  = yes
 # Filter the IMAP folders to be sync'ed
@@ -200,8 +200,8 @@ remotepasseval      = mailpasswd("gmail-li")
 auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
-# Validity: Feb 11 11:03:55 2016 GMT - May 11 00:00:00 2016 GMT
-cert_fingerprint    = 4260032671de93c421d57c3267926f58716650a0
+# Validity: Feb 17 10:27:56 2016 GMT - May 17 00:00:00 2016 GMT
+cert_fingerprint    = 71dfbe124d89ed9218f539a82d4127fbb4bc9997
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
