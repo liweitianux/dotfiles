@@ -287,8 +287,8 @@
 
 ;; evil-mu4e
 ;; https://github.com/JorisE/evil-mu4e
-(prelude-require-package 'evil-mu4e)
-(require 'evil-mu4e)
+;(prelude-require-package 'evil-mu4e)
+;(require 'evil-mu4e)
 
 ;; mu4e-maildirs-extension
 ;; https://github.com/agpchil/mu4e-maildirs-extension
@@ -307,30 +307,55 @@
 ;;; Key bindings for Evil
 ;; Credits:
 ;; https://github.com/philc/emacs-config - .emacs.d/elisp/mu4e-mode-personal.el
+
+(dolist (mode '(mu4e-mode
+                mu4e-main-mode
+                mu4e-headers-mode
+                mu4e-view-mode
+                mu4e-compose-mode))
+  (evil-set-initial-state mode 'normal))
+
 (with-eval-after-load "mu4e"
-  ;(evil-make-overriding-map mu4e-main-mode-map 'normal t)
+  (evil-make-overriding-map mu4e-main-mode-map 'normal t)
   (evil-define-key 'normal mu4e-main-mode-map
-    "q" 'vimlike-quit)
-  ;;
-  ;(evil-make-overriding-map mu4e-headers-mode-map 'normal t)
+    "J" 'mu4e~headers-jump-to-maildir
+    "j" 'evil-next-line
+    "k" 'evil-previous-line)
+  (evil-make-overriding-map mu4e-headers-mode-map 'normal t)
   (evil-define-key 'normal mu4e-headers-mode-map
+    "J" 'mu4e~headers-jump-to-maildir
+    "j" 'mu4e-headers-next
+    "k" 'mu4e-headers-prev
+    "]" 'mu4e-headers-next-unread
+    "[" 'mu4e-headers-prev-unread
     "C" 'mu4e-compose-new
+    "E" 'mu4e-compose-edit
     "F" 'mu4e-compose-forward
-    "R" 'mu4e-compose-reply
-    "U" '(lambda () (mu4e-update-mail-and-index t)))
+    "R" 'mu4e-compose-reply)
+  (evil-leader/set-key-for-mode 'mu4e-headers-mode
+    "u" '(lambda () (interactive) (mu4e-update-mail-and-index t)))
   ;;
-  ;(evil-make-overriding-map mu4e-view-mode-map 'normal t)
+  (evil-make-overriding-map mu4e-view-mode-map 'normal t)
   (evil-define-key 'normal mu4e-view-mode-map
-    "C" 'mu4e-compose-new
-    "F" 'mu4e-compose-forward
-    "R" 'mu4e-compose-reply
-    "U" '(lambda () (mu4e-update-mail-and-index t)))
+    "j"    'evil-next-line
+    "k"    'evil-previous-line
+    "\C-j" 'mu4e-view-headers-next
+    "\C-k" 'mu4e-view-headers-prev
+    "\C-]" 'mu4e-view-headers-next-unread
+    "\C-[" 'mu4e-view-headers-prev-unread
+    "C"    'mu4e-compose-new
+    "E"    'mu4e-compose-edit
+    "F"    'mu4e-compose-forward
+    "R"    'mu4e-compose-reply)
   (evil-leader/set-key-for-mode 'mu4e-view-mode
+    "u" '(lambda () (interactive) (mu4e-update-mail-and-index t))
     "s" 'mu4e-view-raw-message)
   ;;
+  (evil-make-overriding-map mu4e-compose-mode-map 'normal t)
   (evil-leader/set-key-for-mode 'mu4e-compose-mode
     "," 'message-send-and-exit
     "c" 'message-send-and-exit
+    "d" 'message-dont-send
     "k" 'mu4e-message-kill-buffer
     "a" 'mml-attach-file))
 
