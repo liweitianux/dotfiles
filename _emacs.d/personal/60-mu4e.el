@@ -318,25 +318,27 @@
 (with-eval-after-load "mu4e"
   (evil-make-overriding-map mu4e-main-mode-map 'normal t)
   (evil-define-key 'normal mu4e-main-mode-map
-    "J" 'mu4e~headers-jump-to-maildir
-    "j" 'evil-next-line
-    "k" 'evil-previous-line)
+    "J"  'mu4e~headers-jump-to-maildir
+    "j"  'evil-next-line
+    "k"  'evil-previous-line)
   (evil-make-overriding-map mu4e-headers-mode-map 'normal t)
   (evil-define-key 'normal mu4e-headers-mode-map
-    "J" 'mu4e~headers-jump-to-maildir
-    "j" 'mu4e-headers-next
-    "k" 'mu4e-headers-prev
-    "]" 'mu4e-headers-next-unread
-    "[" 'mu4e-headers-prev-unread
-    "C" 'mu4e-compose-new
-    "E" 'mu4e-compose-edit
-    "F" 'mu4e-compose-forward
-    "R" 'mu4e-compose-reply)
+    "gg" 'evil-goto-first-line
+    "J"  'mu4e~headers-jump-to-maildir
+    "j"  'mu4e-headers-next
+    "k"  'mu4e-headers-prev
+    "]"  'mu4e-headers-next-unread
+    "["  'mu4e-headers-prev-unread
+    "C"  'mu4e-compose-new
+    "E"  'mu4e-compose-edit
+    "F"  'mu4e-compose-forward
+    "R"  'mu4e-compose-reply)
   (evil-leader/set-key-for-mode 'mu4e-headers-mode
     "u" '(lambda () (interactive) (mu4e-update-mail-and-index t)))
   ;;
   (evil-make-overriding-map mu4e-view-mode-map 'normal t)
   (evil-define-key 'normal mu4e-view-mode-map
+    "gg"   'evil-goto-first-line
     "j"    'evil-next-line
     "k"    'evil-previous-line
     "\C-j" 'mu4e-view-headers-next
@@ -349,6 +351,7 @@
     "R"    'mu4e-compose-reply)
   (evil-leader/set-key-for-mode 'mu4e-view-mode
     "u" '(lambda () (interactive) (mu4e-update-mail-and-index t))
+    "x" '(lambda () (interactive) (helm-M-x))
     "s" 'mu4e-view-raw-message)
   ;;
   (evil-make-overriding-map mu4e-compose-mode-map 'normal t)
