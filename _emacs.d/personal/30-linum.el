@@ -19,6 +19,9 @@
 ;; Turn on `linum-mode' globally
 (global-linum-mode t)
 
+;; Separte line numbers from text
+(setq linum-format "%4d\u2502")
+
 ;; Inhibit `linum-mode' for following specified modes
 (setq linum-mode-inhibit-modes-list '(eshell-mode
                                       shell-mode
