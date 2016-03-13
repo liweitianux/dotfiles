@@ -13,5 +13,6 @@
 ;;; Code:
 
 ;; julia
-(prelude-auto-install "\\.jl\\'" julia-mode julia-mode)
+; ERROR: Symbol's value as variable is void: extension
+;(prelude-auto-install "\\.jl\\'" "julia-mode" "julia-mode")
 
