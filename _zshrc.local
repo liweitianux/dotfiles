@@ -27,29 +27,21 @@ function heainit() {
     fi
     export CALDBCONFIG="${CALDB}/software/tools/caldb.config"
     export CALDBALIAS="${CALDB}/software/tools/alias_config.fits"
-    HEA_STATE="`echo $PATH | tr ':' '\n' | grep 'heasoft'`"
-    if [ "x${HEA_STATE}" = "x" ]; then
+    if [ "x${LHEASOFT}" = "x" ]; then
         source $HEADAS/headas-init.sh
     fi
-    unset HEA_STATE
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH_BAK}"
 }
 
 ## CIAO settings
 export CIAO_PATH="$HOME/local/ciao/ciao-4.6"
 function ciaoinit() {
-    HEA_STATE="`echo $PATH | tr ':' '\n' | grep 'heasoft'`"
-    CIAO_STATE="`echo $PATH | tr ':' '\n' | grep 'ciao'`"
-    if [ "x${HEA_STATE}" = "x" ]; then
-        heainit
-    fi
-    if [ "x${CIAO_STATE}" = "x" ]; then
+    heainit
+    if [ "x${ASCDS_INSTALL}" = "x" ]; then
         source $CIAO_PATH/bin/ciao.bash
     else
         source $CIAO_PATH/bin/ciao.bash -o
     fi
-    unset HEA_STATE
-    unset CIAO_STATE
     export CIAO_LD_LIBRARY_PATH="${ASCDS_INSTALL}/ots/lib"
 }
 
