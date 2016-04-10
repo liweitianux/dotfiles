@@ -37,7 +37,7 @@ source ~/.zsh/emacs.zsh
 source ~/.zsh/aliases.zsh
 
 ## Local configurations
-[ -r ~/.zshrc.local ] && source ~/.zshrc.local || exit 0
+[ -r ~/.zshrc.local ] && source ~/.zshrc.local || :
 
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
