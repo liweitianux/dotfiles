@@ -136,7 +136,7 @@ auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Mar  2 11:00:00 2016 GMT - May 31 00:00:00 2016 GMT
-cert_fingerprint    = c1a3bb1a8617af4a28ee2e0cd494533c3cd70bf8
+#cert_fingerprint    = c1a3bb1a8617af4a28ee2e0cd494533c3cd70bf8
 keepalive           = 60
 holdconnectionopen  = yes
 # Filter the IMAP folders to be sync'ed
@@ -201,7 +201,7 @@ auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Mar  2 11:00:00 2016 GMT - May 31 00:00:00 2016 GMT
-cert_fingerprint    = c1a3bb1a8617af4a28ee2e0cd494533c3cd70bf8
+#cert_fingerprint    = c1a3bb1a8617af4a28ee2e0cd494533c3cd70bf8
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
@@ -250,7 +250,7 @@ auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Dec 15 22:26:11 2015 GMT - Dec 15 22:26:11 2016 GMT
-cert_fingerprint    = c914dd966dbd0912c36ec294f83d8d3b5a434729
+#cert_fingerprint    = c914dd966dbd0912c36ec294f83d8d3b5a434729
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
@@ -298,7 +298,7 @@ auth_mechanisms     = GSSAPI, CRAM-MD5, PLAIN, LOGIN
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Dec 15 22:26:11 2015 GMT - Dec 15 22:26:11 2016 GMT
-cert_fingerprint    = c914dd966dbd0912c36ec294f83d8d3b5a434729
+#cert_fingerprint    = c914dd966dbd0912c36ec294f83d8d3b5a434729
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
@@ -345,7 +345,7 @@ remotepasseval      = mailpasswd("sjtu")
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: May 22 00:46:47 2014 GMT - Apr  6 06:54:22 2017 GMT
-cert_fingerprint    = b1ec0b44e7aefb983e01dbc3c7432b3aae4910fe
+#cert_fingerprint    = b1ec0b44e7aefb983e01dbc3c7432b3aae4910fe
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
@@ -392,7 +392,7 @@ remotepasseval      = mailpasswd("autistici")
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-autistici.crt
 # Validity: May 23 09:56:37 2015 GMT - May 22 09:56:37 2017 GMT
-cert_fingerprint    = d59db2e0a7a8a0081d3111d3aaf51ccc7a3f20e2
+#cert_fingerprint    = d59db2e0a7a8a0081d3111d3aaf51ccc7a3f20e2
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
@@ -439,7 +439,7 @@ remotepasseval      = mailpasswd("foxmail")
 ssl                 = yes
 sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: Jan 27 00:00:00 2016 GMT - Oct 23 23:59:59 2016 GMT
-cert_fingerprint    = 7a845668b97288ad8d265372f6e6e041c73e8d1e
+#cert_fingerprint    = 7a845668b97288ad8d265372f6e6e041c73e8d1e
 keepalive           = 60
 holdconnectionopen  = yes
 folderfilter        = lambda folder: folder in [
