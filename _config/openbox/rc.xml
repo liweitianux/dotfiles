@@ -5,7 +5,7 @@
 
   Aaron LI
   Created: 2016-01-09
-  Updated: 2016-01-25
+  Updated: 2016-04-29
 -->
 
 <openbox_config xmlns="http://openbox.org/3.4/rc"
@@ -412,7 +412,7 @@
       <command>thunar</command>
     </action>
   </keybind>
-  <keybind key="W-k">
+  <keybind key="W-S-k">
     <action name="Execute">
       <command>xkill</command>
     </action>
