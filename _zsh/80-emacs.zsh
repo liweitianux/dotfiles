@@ -26,8 +26,6 @@ alias e=emacs
 alias eeval='_emacsclient --eval'
 # Create a new X frame
 alias eframe='_emacsclient --create-frame --no-wait'
-# mu4e
-alias mu4e='eframe -e "(mu4e)" -F "((width . 100) (height . 40))"'
 
 # Write to stdout the path to the file opened in the current buffer
 function efile() {

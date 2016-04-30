@@ -18,26 +18,18 @@
 ##     https://robots.thoughtbot.com/the-unix-shells-humble-if
 ##
 ## Aaron LI
-## Created: 2014-05-31
+## 2014-05-31
 ##
 
 
-source ~/.zsh/checks.zsh
-source ~/.zsh/colors.zsh
-source ~/.zsh/setopt.zsh
-source ~/.zsh/exports.zsh
-source ~/.zsh/prompt.zsh
-source ~/.zsh/completion.zsh
-source ~/.zsh/bindkeys.zsh
-source ~/.zsh/functions.zsh
-source ~/.zsh/history.zsh
-source ~/.zsh/hooks.zsh
-source ~/.zsh/vi-mode.zsh
-source ~/.zsh/emacs.zsh
-source ~/.zsh/aliases.zsh
+for f in ~/.zsh/[0-9][0-9]-*.zsh; do
+    source ${f}
+done
 
 ## Local configurations
-[ -r ~/.zshrc.local ] && source ~/.zshrc.local || :
+if [ -r ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
 
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
