@@ -1,9 +1,10 @@
+# -*- mode: sh; -*-
 #
 # ~/.profile
 # executed by the command interpreter for login shells.
 #
 # Aaron LI
-# Updated: 2016-01-26
+# Updated: 2016-05-02
 #
 
 
@@ -60,6 +61,12 @@ export OSFONTDIR="/usr/local/share/fonts;$HOME/.fonts"
 # CJK support: set this before notmuch/mu indexing
 # Required for correct CJK index and search
 export XAPIAN_CJK_NGRAM=1
+
+
+### Qt
+# Qt5 applications may missing icons etc. when running in DEs other than
+# KDE or GNOME.
+export XDG_CURRENT_DESKTOP=KDE
 
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #
