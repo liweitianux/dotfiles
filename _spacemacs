@@ -28,7 +28,9 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-complete-with-key-sequence "jk"
+                      auto-completion-complete-with-key-sequence-delay 0.1)
      ;; better-defaults
      c-c++
      (chinese :variables chinese-enable-fcitx t)
@@ -279,6 +281,8 @@ layers configuration. You are free to put any user code."
   (setq powerline-default-separator 'arrow)
   ;; Set monospaced font size for Chinese
   (spacemacs//set-monospaced-font "Source Code Pro" "WenQuanYi Zen Hei" 14 16)
+  ;; Complete by typing instead of waiting for the delay timer
+  (setq company-idle-delay 0)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
