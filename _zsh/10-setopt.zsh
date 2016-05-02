@@ -10,6 +10,10 @@ setopt AUTO_CD
 setopt AUTO_PUSHD
 # don't push multiple copies of the same directory into the directory stack
 setopt PUSHD_IGNORE_DUPS
+# exchange meanings of `+` and `-` when specifying a directory in the stack
+setopt PUSHD_MINUS
+# do not print the directory stack after `pushd` or `popd`
+setopt PUSHD_SILENT
 # treat #, ~, and ^ as part of patterns for filename generation
 setopt EXTENDED_GLOB
 # allow comments even in interactive shells (especially for Muness)
