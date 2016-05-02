@@ -4,6 +4,11 @@
 # execute 'functions <func_name>' to show function details.
 #
 
+function exists() {
+    which $1 &> /dev/null
+}
+
+
 function zsh_recompile() {
     autoload -U zrecompile
     rm -f ~/.zsh/*.zwc
