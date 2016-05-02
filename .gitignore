@@ -1,5 +1,6 @@
 ## .gitignore
 
+LOCAL/
 PRIVATE/
 
 *~
@@ -37,4 +38,3 @@ __pycache__/
 *.x86_64
 *.hex
 ### C }}}
-
