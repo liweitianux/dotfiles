@@ -1,3 +1,4 @@
+# -*- mode: sh; -*-
 #
 # ~/.xinitrc
 #
@@ -35,6 +36,8 @@ case "${session}" in
     xfce|xfce4)
         exec dbus-launch --exit-with-session startxfce4;;
     openbox)
+        # Fix Qt5 application appearance when not running under KDE
+        export XDG_CURRENT_DESKTOP=KDE
         exec dbus-launch --exit-with-session openbox-session;;
     *)
         echo "ERROR: unknown session" >/dev/stderr

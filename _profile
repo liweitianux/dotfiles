@@ -63,10 +63,4 @@ export OSFONTDIR="/usr/local/share/fonts;$HOME/.fonts"
 export XAPIAN_CJK_NGRAM=1
 
 
-### Qt
-# Qt5 applications may missing icons etc. when running in DEs other than
-# KDE or GNOME.
-export XDG_CURRENT_DESKTOP=KDE
-
-
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #
