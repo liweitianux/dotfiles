@@ -3,7 +3,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-05-01
+;; Updated: 2016-05-03
 ;;
 
 
@@ -283,6 +283,10 @@ layers configuration. You are free to put any user code."
   (spacemacs//set-monospaced-font "Source Code Pro" "WenQuanYi Zen Hei" 14 16)
   ;; Complete by typing instead of waiting for the delay timer
   (setq company-idle-delay 0)
+  ;; Display tildes in the fringe on empty lines
+  (global-vi-tilde-fringe-mode)
+  ;; Put a newline at the end of file if there isn't already one there
+  (setq-default require-final-newline t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
