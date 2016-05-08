@@ -3,7 +3,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-05-03
+;; Updated: 2016-05-04
 ;;
 
 
@@ -29,8 +29,13 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      (auto-completion :variables
+                      auto-completion-return-key-behavior nil
                       auto-completion-complete-with-key-sequence "jk"
-                      auto-completion-complete-with-key-sequence-delay 0.1)
+                      auto-completion-complete-with-key-sequence-delay 0.1
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      ;; Provided by `company-statistics' when `company' used
+                      auto-completion-enable-sort-by-usage t)
      ;; better-defaults
      c-c++
      (chinese :variables chinese-enable-fcitx t)
@@ -277,8 +282,10 @@ layers configuration. You are free to put any user code."
   ;; Wrap long lines
   ;; Credit: https://emacs.stackexchange.com/a/19364
   (spacemacs/toggle-truncate-lines-off)
+  ;; Explicitly allow wrapping long lines in `org-mode'
+  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
   ;; Change `powerline' separator
-  (setq powerline-default-separator 'arrow)
+  (setq powerline-default-separator nil)
   ;; Set monospaced font size for Chinese
   (spacemacs//set-monospaced-font "Source Code Pro" "WenQuanYi Zen Hei" 14 16)
   ;; Complete by typing instead of waiting for the delay timer
