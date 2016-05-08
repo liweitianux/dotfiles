@@ -12,7 +12,11 @@ alias d='dirs -v | head -10'
 alias po=popd
 alias pu=pushd
 
-alias ls='ls --color=auto'
+if [[ -n "${IS_LINUX}" ]]; then
+    alias ls='ls --color=auto'
+elif [[ -n "${IS_BSD}" ]]; then
+    alias ls='ls -G'
+fi
 alias l='ls -lah'
 alias la='ls -lAh'
 alias ll='ls -lh'
