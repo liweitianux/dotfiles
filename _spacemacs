@@ -3,7 +3,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-05-04
+;; Updated: 2016-05-08
 ;;
 
 
@@ -294,6 +294,12 @@ layers configuration. You are free to put any user code."
   (global-vi-tilde-fringe-mode)
   ;; Put a newline at the end of file if there isn't already one there
   (setq-default require-final-newline t)
+  ;; Prevent the visual selection overriding the system clipboard
+  (fset 'evil-visual-update-x-selection 'ignore)
+  ;; Prevent transferring data to clipboard manager when exiting
+  (setq x-select-enable-clipboard-manager nil)
+  ;; Aggressively prevent `kill' and `yank' from accessing the clipboard
+  (setq x-select-enable-clipboard nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
