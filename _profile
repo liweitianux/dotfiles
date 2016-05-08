@@ -14,7 +14,7 @@
 
 
 ### PATH
-# local installed (python) packages
+# local installed packages (e.g., python)
 if [ -d "$HOME/.local/bin" ]; then
     export PATH="$HOME/.local/bin:$PATH"
 fi
