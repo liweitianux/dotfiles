@@ -1,0 +1,4 @@
+#CXX=clang++
+CXXFLAGS=-O2 -Wall -Wno-unused-variable -Wno-unused-function
+# If g++ >= 4.9
+CXXFLAGS+=-flto -ffat-lto-objects -Wno-unused-local-typedefs
