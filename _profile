@@ -56,14 +56,8 @@ export LC_COLLATE="C"
 ### Input method: fcitx
 export XMODIFIERS="@im=fcitx"
 export INPUT_METHOD="fcitx"
-#export GTK_IM_MODULE="fcitx"
-#export GTK3_IM_MODULE="fcitx"
-#export QT_IM_MODULE="fcitx"
-#export QT4_IM_MODULE="fcitx"
-
-
-### GPG
-export GPG_TTY=$(tty)  # See `gpg-agent(1)'
+export GTK_IM_MODULE="fcitx"
+export QT_IM_MODULE="fcitx"
 
 
 ### LS colors
