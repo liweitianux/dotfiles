@@ -8,6 +8,7 @@ PRIVATE/
 *.orig
 *.bak
 *_bak
+.#*
 
 ### python
 __pycache__/
