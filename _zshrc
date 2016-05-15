@@ -1,3 +1,4 @@
+## -*- mode: sh; -*-
 ##
 ## ~/.zshrc
 ## ZSH configuration file
@@ -18,7 +19,8 @@
 ##     https://robots.thoughtbot.com/the-unix-shells-humble-if
 ##
 ## Aaron LI
-## 2014-05-31
+## Created: 2014-05-31
+## Updated: 2016-05-15
 ##
 
 
@@ -27,9 +29,7 @@ for f in ~/.zsh/[0-9][0-9]-*.zsh; do
 done
 
 ## Local configurations
-if [ -r ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
+[ -r ~/.zshrc.local ] && source ~/.zshrc.local || true
 
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
