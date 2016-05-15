@@ -1,6 +1,5 @@
 #
 # ~/.inputrc
-#
 # readline configurations
 #
 # Reference:
@@ -8,7 +7,8 @@
 #     https://wiki.archlinux.org/index.php/Readline
 #
 # Aaron LI
-# 2015-09-26
+# Created: 2015-09-26
+# Updated: 2016-05-14
 #
 
 #$include /etc/inputrc
@@ -25,6 +25,19 @@ set keymap vi-insert
 "\e[A": history-search-backward
 "\e[B": history-search-forward
 $endif
+
+# The bell style used e.g. on error or tab completion, possible values
+# are `none', `visible', and `audible' the ringing the bell.
+set bell-style none
+
+# If set to on, words which have more than one possible completion without
+# any possible partial completion cause the matches to be listed immediately
+# instead of ringing the bell.
+set show-all-if-unmodified on
+
+# If set to on, words which have more than one possible completion cause the
+# matches to be listed immediately instead of ringing the bell.
+set show-all-if-ambiguous on
 
 
 #  vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=readline: #
