@@ -1,31 +1,50 @@
 # -*- mode: sh; -*-
 #
 # ~/.profile
-# executed by the command interpreter for login shells.
+# executed by the command interpreter for login shells
 #
 # Aaron LI
-# Updated: 2016-05-02
+# Updated: 2016-05-15
 #
 
 
-# the default umask is set in /etc/profile; for setting the umask
+# The default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
 
-### PATH
+### PATH {{{
+# Credit: http://unix.stackexchange.com/a/178822
+# Remove the specified part from PATH
+_path_remove() {
+    PATH=$(echo ":${PATH}:" | sed -e "s|:$1:|:|g" -e "s|^:\(.*\):$|\1|")
+}
+# Prepend the supplied part to PATH
+_path_prepend() {
+    _path_remove "$1"
+    PATH="$1:${PATH}"
+}
+# Append the supplied part to PATH
+_path_append() {
+    _path_remove "$1"
+    PATH="${PATH}:$1"
+}
+
 # local installed packages (e.g., python)
 if [ -d "$HOME/.local/bin" ]; then
-    export PATH="$HOME/.local/bin:$PATH"
+    _path_prepend "${HOME}/.local/bin"
 fi
 # ~/bin
 if [ -d "$HOME/bin" ]; then
-    export PATH="$HOME/bin:$PATH"
+    _path_prepend "$HOME/bin"
 fi
-# admin
+# admin/superuser
 if groups | grep -qE '\b(wheel|adm|sudo)\b'; then
-    export PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+    _path_append "/usr/local/sbin"
+    _path_append "/usr/sbin"
+    _path_append "/sbin"
 fi
+### PATH }}}
 
 
 ### Locale
@@ -36,11 +55,15 @@ export LC_COLLATE="C"
 
 ### Input method: fcitx
 export XMODIFIERS="@im=fcitx"
-#export INPUT_METHOD="fcitx"
+export INPUT_METHOD="fcitx"
 #export GTK_IM_MODULE="fcitx"
 #export GTK3_IM_MODULE="fcitx"
 #export QT_IM_MODULE="fcitx"
 #export QT4_IM_MODULE="fcitx"
+
+
+### GPG
+export GPG_TTY=$(tty)  # See `gpg-agent(1)'
 
 
 ### LS colors
