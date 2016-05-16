@@ -26,7 +26,7 @@
    dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/').
-   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
+   dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load.
    ;; If it is the symbol `all' instead of a list then all discovered
    ;; layers will be installed.
@@ -44,7 +44,9 @@
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip t
                       ;; Provided by `company-statistics'
-                      auto-completion-enable-sort-by-usage t)
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-private-snippets-directory
+                      "~/.spacemacs.d/snippets/")
      ;; better-defaults
      c-c++
      (chinese :variables chinese-enable-fcitx t)
@@ -54,6 +56,8 @@
      git
      latex
      markdown
+     (mu4e :variables
+           mu4e-installation-path "~/.spacemacs.d/local/mu4e")
      octave
      org
      python
@@ -68,6 +72,9 @@
      spell-checking
      syntax-checking
      ;; version-control
+     ;; custom layers
+     ;(aly-mu4e :variables
+     ;          mu4e-installation-path "~/.spacemacs.d/local/mu4e")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer.  If you need some configuration for these
@@ -311,6 +318,9 @@
   (setq x-select-enable-clipboard-manager nil)
   ;; Aggressively prevent `kill' and `yank' from accessing the clipboard
   (setq x-select-enable-clipboard nil)
+  ;; mu4e
+  (push "~/.spacemacs.d/config" load-path)
+  (require 'aly-mu4e-config nil t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
