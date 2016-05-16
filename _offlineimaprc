@@ -390,7 +390,7 @@ remoteport          = 993
 remoteuser          = liweitianux@autistici.org
 remotepasseval      = mailpasswd("autistici")
 ssl                 = yes
-sslcacertfile       = ~/.private/ca-autistici.crt
+sslcacertfile       = ~/.private/ca-certificates.crt
 # Validity: May 23 09:56:37 2015 GMT - May 22 09:56:37 2017 GMT
 #cert_fingerprint    = d59db2e0a7a8a0081d3111d3aaf51ccc7a3f20e2
 keepalive           = 60
