@@ -153,7 +153,7 @@
 
   ;; start with the first (default) context
   ;; default: `ask-if-none' (ask when there's no context yet, and none match)
-  ;(setq mu4e-context-policy 'pick-first)
+  (setq mu4e-context-policy 'pick-first)
   ;; compose with the current context if no context matches
   ;; default: `ask'
   ;(setq mu4e-compose-context-policy nil)
