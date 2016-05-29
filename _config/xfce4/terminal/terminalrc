@@ -19,11 +19,11 @@ ScrollingOnOutput=FALSE
 ScrollingLines=10000
 ShortcutsNoMnemonics=TRUE
 ShortcutsNoMenukey=TRUE
-FontName=Monospace 11
+FontName=Source Code Pro 11
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
 BackgroundDarkness=0.900000
 ColorPalette=#1b1b1d1d1e1e;#b6b600005050;#8888bbbb2222;#c4c47f7f2c2c;#303030309b9b;#7e7e4040a5a5;#46469999afaf;#99999999aaaa;#303030303030;#f9f926267272;#8080ffff0000;#ffffbaba6868;#70707070f0f0;#bbbb8888dddd;#6666d9d9efef;#f8f8f8f8f2f2
 ColorForeground=#f8f8f8f8f2f2
 ColorBackground=#1b1b1d1d1e1e
-ColorCursor=#f8f8f8f8f2f2
+ColorCursor=#4040c8c80000
 
