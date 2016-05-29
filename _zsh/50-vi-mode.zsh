@@ -1,5 +1,9 @@
 #
 # zsh/vi-mode.zsh
+# see zshzle(1)
+#
+# NOTE:
+# This will *reset* previous bindkey settings!
 #
 # Credits:
 # https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh

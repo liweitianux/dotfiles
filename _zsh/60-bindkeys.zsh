@@ -1,9 +1,13 @@
 #
 # zsh/bindkeys.zsh
+# see zshzle(1)
 #
 # To see the key combo you want to use just do:
-# cat > /dev/null
-# And press it
+# $ cat > /dev/null
+# then press it.
+#
+# NOTE:
+# Switching mode (e.g., `bindkey -v`) will *reset* the following settings!
 #
 
 bindkey "^K"    kill-whole-line                      # ctrl-k
