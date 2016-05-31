@@ -214,11 +214,16 @@
   ;; customize bookmarks
   (setq mu4e-bookmarks
         '(("flag:unread AND NOT flag:trashed" "Unread messages"      ?u)
-          ("date:today..now"                  "Today's messages"     ?t)
+          ("date:today..now"                  "Today's messages"     ?T)
           ("date:7d..now"                     "Last 7 days"          ?w)
           ("flag:flagged"                     "Flagged messages"     ?f)
+          ("tag:todo OR tag:task"             "TODO & Task"          ?t)
+          ("tag:work"                         "Work"                 ?W)
           ("tag:astro"                        "Astro"                ?a)
-          ("tag:arxiv"                        "arXiv"                ?x)
+          ("tag:arxiv OR from:arxiv.org"      "arXiv"                ?x)
+          ("tag:SMS"                          "SMS"                  ?S)
+          ("tag:CallLog"                      "Call Log"             ?C)
+          ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?d)
           ("mime:image/*"                     "Messages with images" ?p)))
 
   ;; headers list appearance
