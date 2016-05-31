@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-05-15
+;; Updated: 2016-05-31
 ;;
 
 
@@ -42,7 +42,7 @@
                       auto-completion-complete-with-key-sequence "kj"
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t
+                      ;auto-completion-enable-help-tooltip t
                       ;; Provided by `company-statistics'
                       auto-completion-enable-sort-by-usage t
                       auto-completion-private-snippets-directory
@@ -321,7 +321,10 @@
   ;; mu4e
   (push "~/.spacemacs.d/config" load-path)
   (require 'aly-mu4e-config nil t)
+  ;; Set custom file location instead of using this file
+  (setq custom-file "~/.spacemacs/custom.el")
+  (load custom-file)
   )
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+
+;;; init.el ends here
