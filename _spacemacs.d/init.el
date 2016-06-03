@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-05-31
+;; Updated: 2016-06-03
 ;;
 
 
@@ -284,10 +284,38 @@
   "Configuration function for user code.
   This function is called at the very end of Spacemacs initialization after
   layers configuration. You are free to put any user code."
-  ;; Enable `company' globally
-  (global-company-mode)
+  ;;
   (setq-default tab-width 4)
   (setq-default fill-column 78)
+  ;; Wrap long lines at the space or tab character
+  (setq-default word-wrap t)
+  ;; Put a newline at the end of file if there isn't already one there
+  (setq-default require-final-newline t)
+  ;;
+  ;; Make whitespace visible by enabling the `whitespace-mode'
+  ;; Credit: http://ergoemacs.org/emacs/whitespace-mode.html
+  ;; Make `whitespace-mode' use just basic colors
+  (setq whitespace-style
+        '(face tabs trailing lines-tail indentation
+               space-before-tab space-after-tab newline
+               tab-mark newline-mark))
+  ;; Change the symbols used for different whitespace characters
+  (setq whitespace-display-mappings
+        ;; All numbers are Unicode codepoint in decimal.
+        ;; Try `(insert-char 182)' to see it.
+        '((space-mark 32 [183] [46])  ; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+          (newline-mark 10 [182 10])  ; 10 LINE FEED
+          (tab-mark 9 [9655 9] [92 9])  ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
+          ))
+  ;; Highlight the line part that goes beyond `whitespace-line-column'
+  (setq whitespace-line-column fill-column)
+  (global-whitespace-mode)
+  ;;
+  ;; Enable `company' globally
+  (global-company-mode)
+  ;; Complete by typing instead of waiting for the delay timer
+  (setq company-idle-delay 0)
+  ;;
   ;; Activate column indicator in most mode, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
   (add-hook 'prog-mode-hook 'turn-on-fci-mode)
@@ -295,35 +323,34 @@
   (add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
   ;; Separate line number from text using a vertical line
   (setq linum-format "%4d\u2502")
+  ;;
   ;; Wrap long lines
   ;; Credit: https://emacs.stackexchange.com/a/19364
   (spacemacs/toggle-truncate-lines-off)
   ;; Explicitly allow wrapping long lines in `org-mode'
   (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
-  ;; Wrap long lines at the space or tab character
-  (setq-default word-wrap t)
   ;; Change `powerline' separator
   (setq powerline-default-separator nil)
   ;; Set monospaced font size for Chinese
   (spacemacs//set-monospaced-font "Source Code Pro" "WenQuanYi Zen Hei" 14 16)
-  ;; Complete by typing instead of waiting for the delay timer
-  (setq company-idle-delay 0)
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
-  ;; Put a newline at the end of file if there isn't already one there
-  (setq-default require-final-newline t)
+  ;;
   ;; Prevent the visual selection overriding the system clipboard
   (fset 'evil-visual-update-x-selection 'ignore)
   ;; Prevent transferring data to clipboard manager when exiting
   (setq x-select-enable-clipboard-manager nil)
   ;; Aggressively prevent `kill' and `yank' from accessing the clipboard
   (setq x-select-enable-clipboard nil)
+  ;;
   ;; mu4e
   (push "~/.spacemacs.d/config" load-path)
   (require 'aly-mu4e-config nil t)
+  ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs/custom.el")
-  (load custom-file)
+  (if (file-readable-p custom-file)
+      (load custom-file))
   )
 
 
