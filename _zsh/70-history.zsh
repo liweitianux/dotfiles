@@ -24,6 +24,7 @@ if exists percol; then
     }
 
     zle -N percol_select_history
+    # Override the bindkey settings in `60-bindkeys.zsh`
     bindkey '^R' percol_select_history
 fi
 
