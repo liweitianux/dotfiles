@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-06-03
+;; Updated: 2016-06-16
 ;;
 
 
@@ -108,7 +108,7 @@
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. (default t)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
    ;; One of `vim', `emacs' or `hybrid'.  Evil is always enabled but if
    ;; the variable is `emacs' then the `holy-mode' is enabled at startup.
    ;; `hybrid' uses emacs key bindings for vim's insert mode, but otherwise
@@ -287,8 +287,6 @@
   ;;
   (setq-default tab-width 4)
   (setq-default fill-column 78)
-  ;; Wrap long lines at the space or tab character
-  (setq-default word-wrap t)
   ;; Put a newline at the end of file if there isn't already one there
   (setq-default require-final-newline t)
   ;;
@@ -314,7 +312,7 @@
   ;; Enable `company' globally
   (global-company-mode)
   ;; Complete by typing instead of waiting for the delay timer
-  (setq company-idle-delay 0)
+  (setq company-idle-delay 0.1)
   ;;
   ;; Activate column indicator in most mode, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
@@ -327,8 +325,9 @@
   ;; Wrap long lines
   ;; Credit: https://emacs.stackexchange.com/a/19364
   (spacemacs/toggle-truncate-lines-off)
-  ;; Explicitly allow wrapping long lines in `org-mode'
-  (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
+  ;; Wrap long lines at the space or tab character
+  (setq-default word-wrap t)
+  ;;
   ;; Change `powerline' separator
   (setq powerline-default-separator nil)
   ;; Set monospaced font size for Chinese
