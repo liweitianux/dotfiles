@@ -4,7 +4,7 @@
 # executed by the command interpreter for login shells
 #
 # Aaron LI
-# Updated: 2016-05-15
+# Updated: 2016-06-13
 #
 
 
@@ -45,6 +45,12 @@ if groups | grep -qE '\b(wheel|adm|sudo)\b'; then
     _path_append "/sbin"
 fi
 ### PATH }}}
+
+
+### GnuPG
+if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
+    eval $(gpg-agent --damon --write-env-file "${HOME}/.cache/gpg-agent-info")
+fi
 
 
 ### Locale
