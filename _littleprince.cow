@@ -1,0 +1,33 @@
+##
+## ~/.littleprince.cow
+##
+## Aaron LI
+## 2010-10-25
+##
+## Credits:
+## > aptitude -vvvvv moo
+## Do we need to explain this?
+## An elephant being eaten by a snake, of course.
+##
+
+#$the_cow = <<EOC;
+#       $thoughts
+#        $thoughts  ....
+#          .    ........
+#          .            .
+#          .             .
+#    .......              .........
+#    ..............................
+#Elephant inside ASCII snake
+#EOC
+
+$the_cow = <<EOC;
+           $thoughts
+            $thoughts  ......
+              /      \\.......
+             /               \\
+             |                \\
+    .--------'                 \`-----------------
+   '----------------------------------------------
+
+EOC
