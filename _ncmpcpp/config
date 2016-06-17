@@ -51,7 +51,7 @@ visualizer_in_stereo = yes
 # you need to compile ncmpcpp with fftw3 support.
 # Available values: spectrum, wave.
 #
-visualizer_type = spectrum
+#visualizer_type = spectrum
 #
 #visualizer_look = "◆▋"
 #visualizer_look = "◆│"
