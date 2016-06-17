@@ -1,0 +1,19 @@
+"
+" ~/.vimrc.local
+" Local customizations for `spf13-vim-3`
+" https://github.com/spf13/spf13-vim
+"
+" Aaron LI
+" Created: 2016-05-20
+"
+
+colorscheme molokai
+
+if has('gui_running')
+    set guifont=Source\ Code\ Pro\ Regular\ 11
+endif
+
+set wrap
+" wrap long lines at a character in 'breakat'
+set linebreak
+
