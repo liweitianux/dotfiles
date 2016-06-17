@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-06-16
+;; Updated: 2016-06-17
 ;;
 
 
@@ -65,16 +65,13 @@
      scheme
      (shell :variables
             shell-default-shell 'eshell
-            shell-default-term-shell "/usr/bin/env zsh"
+            shell-default-term-shell "zsh"
             shell-default-height 30
             shell-default-position 'bottom)
      shell-scripts
      spell-checking
      syntax-checking
      ;; version-control
-     ;; custom layers
-     ;(aly-mu4e :variables
-     ;          mu4e-installation-path "~/.spacemacs.d/local/mu4e")
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer.  If you need some configuration for these
@@ -289,6 +286,15 @@
   (setq-default fill-column 78)
   ;; Put a newline at the end of file if there isn't already one there
   (setq-default require-final-newline t)
+  ;; Separate line number from text using a vertical line
+  (setq linum-format "%4d\u2502")
+  ;;
+  ;; Prevent the visual selection overriding the system clipboard
+  (fset 'evil-visual-update-x-selection 'ignore)
+  ;; Prevent transferring data to clipboard manager when exiting
+  (setq x-select-enable-clipboard-manager nil)
+  ;; Aggressively prevent `kill' and `yank' from accessing the clipboard
+  (setq x-select-enable-clipboard nil)
   ;;
   ;; Make whitespace visible by enabling the `whitespace-mode'
   ;; Credit: http://ergoemacs.org/emacs/whitespace-mode.html
@@ -314,14 +320,6 @@
   ;; Complete by typing instead of waiting for the delay timer
   (setq company-idle-delay 0.1)
   ;;
-  ;; Activate column indicator in most mode, except for `org-mode'
-  ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
-  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
-  (add-hook 'text-mode-hook 'turn-on-fci-mode)
-  (add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
-  ;; Separate line number from text using a vertical line
-  (setq linum-format "%4d\u2502")
-  ;;
   ;; Wrap long lines
   ;; Credit: https://emacs.stackexchange.com/a/19364
   (spacemacs/toggle-truncate-lines-off)
@@ -335,12 +333,11 @@
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
   ;;
-  ;; Prevent the visual selection overriding the system clipboard
-  (fset 'evil-visual-update-x-selection 'ignore)
-  ;; Prevent transferring data to clipboard manager when exiting
-  (setq x-select-enable-clipboard-manager nil)
-  ;; Aggressively prevent `kill' and `yank' from accessing the clipboard
-  (setq x-select-enable-clipboard nil)
+  ;; Activate column indicator in most mode, except for `org-mode'
+  ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
+  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  (add-hook 'text-mode-hook 'turn-on-fci-mode)
+  (add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
   ;;
   ;; mu4e
   (push "~/.spacemacs.d/config" load-path)
