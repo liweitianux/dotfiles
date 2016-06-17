@@ -9,7 +9,7 @@
 
 ! Aaron LI <aaronly.me@outlook.com>
 ! Created: 2014-05-10
-! Updated: 2016-01-25
+! Updated: 2016-06-17
 !----------------------------------------------------------
 
 !!! xft settings {{{
@@ -401,5 +401,8 @@ rofi.color-normal:      argb:00111111, #E5DBCF, argb:00111111, #CC9752, #0F3B5F
 rofi.color-urgent:      argb:00111111, #af652f, argb:00111111, #af652f, #0F3B5F
 rofi.color-active:      argb:00111111, #70a16c, argb:00111111, #70a16c, #0F3B5F
 !!! rofi }}}
+
+!! Emacs
+Emacs.geometry:         86x34
 
 ! vim: set ts=8 sw=4 tw=78 ft=xdefaults: !

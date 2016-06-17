@@ -289,6 +289,10 @@
   ;; Separate line number from text using a vertical line
   (setq linum-format "%4d\u2502")
   ;;
+  ;; Set the default size for all frames
+  (add-to-list 'default-frame-alist '(width . 86))
+  (add-to-list 'default-frame-alist '(height . 34))
+  ;;
   ;; Prevent the visual selection overriding the system clipboard
   (fset 'evil-visual-update-x-selection 'ignore)
   ;; Prevent transferring data to clipboard manager when exiting
