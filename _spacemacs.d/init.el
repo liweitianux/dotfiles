@@ -335,9 +335,15 @@
   ;;
   ;; Activate column indicator in most mode, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
-  (add-hook 'prog-mode-hook 'turn-on-fci-mode)
-  (add-hook 'text-mode-hook 'turn-on-fci-mode)
-  (add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
+  ;; WARNING/XXX:
+  ;;   'fci-mode' has issues with 'truncate-lines' and 'company-mode'
+  ;;   * 'fci-mode' will override 'truncate-lines' to 't'
+  ;;   * with 'fci-mode' enabled and 'truncate-lines' set to 'nil',
+  ;;     when the completion triggered, the 'truncate-lines' will be
+  ;;     overridden to 't', which is very annoying.
+  ;(add-hook 'prog-mode-hook 'turn-on-fci-mode)
+  ;(add-hook 'text-mode-hook 'turn-on-fci-mode)
+  ;(add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
   ;;
   ;; mu4e
   (push "~/.spacemacs.d/config" load-path)
