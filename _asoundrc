@@ -1,0 +1,20 @@
+#
+# ~/.asoundrc
+# Gentoo Linux @ ThinkPad T450s
+#
+# Aaron LI
+# 2016-06-13
+#
+
+# http://www.alsa-project.org/main/index.php/Asoundrc
+# see also '/proc/asound/cards'
+
+pcm.!default {
+    type hw
+    card PCH
+}
+
+ctl.!default {
+    type hw
+    card PCH
+}
