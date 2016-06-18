@@ -339,19 +339,17 @@
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
   ;;
-  ;; Activate column indicator in most mode, except for `org-mode'
+  ;; Enable fill column indicator in most modes, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
-  ;; WARNING/XXX:
-  ;;   'fci-mode' has issues with 'truncate-lines' and 'company-mode'
-  ;;   * 'fci-mode' will override 'truncate-lines' to 't'
-  ;;   * with 'fci-mode' enabled and 'truncate-lines' set to 'nil',
-  ;;     when the completion triggered, the 'truncate-lines' will be
-  ;;     overridden to 't', which is very annoying.
+  ;; WARNING:
+  ;;   `fci-mode' has issue with `truncate-lines'
+  ;;   https://github.com/alpaker/Fill-Column-Indicator/issues/26
+  ;(setq fci-handle-truncate-lines nil)
   ;(add-hook 'prog-mode-hook 'turn-on-fci-mode)
   ;(add-hook 'text-mode-hook 'turn-on-fci-mode)
   ;(add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
   ;;
-  ;; mu4e
+  ;; mu4e: https://github.com/djcb/mu
   (push "~/.spacemacs.d/config" load-path)
   (require 'aly-mu4e-config nil t)
   ;;
