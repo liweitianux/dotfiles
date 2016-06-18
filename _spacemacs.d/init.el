@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-06-17
+;; Updated: 2016-06-18
 ;;
 
 
@@ -310,25 +310,27 @@
   ;; Change the symbols used for different whitespace characters
   (setq whitespace-display-mappings
         ;; All numbers are Unicode codepoint in decimal.
-        ;; Try `(insert-char 182)' to see it.
-        '((space-mark 32 [183] [46])  ; 32 SPACE, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
-          (newline-mark 10 [182 10])  ; 10 LINE FEED
-          (tab-mark 9 [9655 9] [92 9])  ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE 「▷」
+        ;; Try `(insert-char <number>)' to see it.
+        ;; 9: tab; 10: line feed; 32: space; 46: full stop 「.」
+        ;; 183: middle dot 「·」; 9655: white right-pointing triangle 「▷」
+        '((space-mark 32 [183] [46])
+          (newline-mark 10 [182 10])
+          (tab-mark 9 [9655 9] [92 9])
           ))
   ;; Highlight the line part that goes beyond `whitespace-line-column'
   (setq whitespace-line-column fill-column)
   (global-whitespace-mode)
   ;;
-  ;; Enable `company' globally
+  ;; Enable `company-mode' globally
   (global-company-mode)
-  ;; Complete by typing instead of waiting for the delay timer
   (setq company-idle-delay 0.1)
   ;;
-  ;; Wrap long lines
-  ;; Credit: https://emacs.stackexchange.com/a/19364
-  (spacemacs/toggle-truncate-lines-off)
   ;; Wrap long lines at the space or tab character
   (setq-default word-wrap t)
+  ;; Wrap long lines & visual line navigation
+  ;; Credit: https://emacs.stackexchange.com/a/19364
+  (spacemacs/toggle-truncate-lines-off)
+  (spacemacs/toggle-visual-line-navigation-on)
   ;;
   ;; Change `powerline' separator
   (setq powerline-default-separator nil)
