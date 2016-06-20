@@ -288,7 +288,7 @@ XTerm.toolBar:              true
 ! Vanilla-DMZ-AA: black
 !Xcursor.theme:              Vanilla-DMZ-AA
 Xcursor.theme:              Vanilla-DMZ
-Xcursor.size:		    32
+Xcursor.size:               32
 !!! Xcursor }}}
 
 !!! xscreensaver settings {{{
