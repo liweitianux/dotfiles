@@ -1,4 +1,33 @@
-#CXX=clang++
-CXXFLAGS=-O2 -Wall -Wno-unused-variable -Wno-unused-function
-# If g++ >= 4.9
-CXXFLAGS+=-flto -ffat-lto-objects -Wno-unused-local-typedefs
+# -*- mode: makefile -*-
+#
+# ~/.R/Makevars
+#
+# Reference:
+# [1] R Installation and Administration, Sec. 6.3.3
+#     https://cran.r-project.org/doc/manuals/r-release/R-admin.html
+# [2] Writing R Extensions, Sec. 1.2.1
+#     https://cran.r-project.org/doc/manuals/r-release/R-exts.html
+#
+#
+# Aaron LI
+# 2016-06-25
+#
+
+# Override the default compilers
+#CC = clang
+#CXX = clang++
+#F77 = ???
+#FC = ???
+
+# C code
+CFLAGS = -O2 -Wall -pedantic
+
+# C++ code
+CXXFLAGS = -O2 -Wall -Wno-unused-variable -Wno-unused-function
+
+# Fortran code
+#FFLAGS = ???
+# Fortran 9x code
+#FCFLAGS = ???
+
+# vim: set ft=make: #
