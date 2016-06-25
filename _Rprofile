@@ -4,7 +4,7 @@
 #
 # Aaron LI
 # Created: 2015-08-20
-# Updated: 2016-01-28
+# Updated: 2016-06-25
 #
 
 # set common options
@@ -30,14 +30,15 @@ local({
 if (interactive()) {
     # Colorize the R output.
     # http://www.lepem.ufc.br/jaa/colorout.html
+    # https://github.com/jalvesaq/colorout
     require(colorout)
     # Adjust the value of options("width") whenever the terminal is resized.
     require(setwidth)
     # "vimcom" creates a server on R to allow the communication with Vim
     # through the "Vim-R-plugin"
     # http://www.lepem.ufc.br/jaa/vimcom.html
-    options(vimcom.verbose=1)
-    require(vimcom)
+    #options(vimcom.verbose=1)
+    #require(vimcom)
 }
 
 
