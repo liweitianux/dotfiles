@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-06-18
+;; Updated: 2016-06-25
 ;;
 
 
@@ -25,7 +25,7 @@
    ;; For now available distributions are `spacemacs-base' or `spacemacs'.
    dotspacemacs-distribution 'spacemacs
    ;; List of additional paths where to look for configuration layers.
-   ;; Paths must have a trailing slash (i.e. `~/.mycontribs/').
+   ;; Paths must have a trailing slash (e.g., `~/.mycontribs/').
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/layers/")
    ;; List of configuration layers to load.
    ;; If it is the symbol `all' instead of a list then all discovered
@@ -52,6 +52,8 @@
      (chinese :variables chinese-enable-fcitx t)
      clojure
      emacs-lisp
+     emoji
+     ess  ; R programming language
      games
      git
      latex
@@ -71,7 +73,10 @@
      shell-scripts
      spell-checking
      syntax-checking
-     ;; version-control
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl
+                      version-control-global-margin t)
+     xkcd
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer.  If you need some configuration for these
@@ -348,6 +353,9 @@
   ;(add-hook 'prog-mode-hook 'turn-on-fci-mode)
   ;(add-hook 'text-mode-hook 'turn-on-fci-mode)
   ;(add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
+  ;;
+  ;; ESS: Turn off the automatic replacement of `_' by `<-'
+  (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
   ;;
   ;; mu4e: https://github.com/djcb/mu
   (push "~/.spacemacs.d/config" load-path)
