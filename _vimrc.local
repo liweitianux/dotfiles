@@ -17,3 +17,6 @@ set wrap
 " wrap long lines at a character in 'breakat'
 set linebreak
 
+" do not use system clipboard
+set clipboard=
+
