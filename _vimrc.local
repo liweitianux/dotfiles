@@ -17,6 +17,9 @@ set wrap
 " wrap long lines at a character in 'breakat'
 set linebreak
 
+" turn off spell check
+set nospell
+
 " do not use system clipboard
 set clipboard=
 
