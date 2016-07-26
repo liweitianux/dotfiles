@@ -1,3 +1,6 @@
 [submodule "dotvim"]
 	path = dotvim
 	url = git@github.com:liweitianux/dotvim.git
+[submodule "tmux-tpm"]
+	path = _tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
