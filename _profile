@@ -49,7 +49,7 @@ fi
 
 ### GnuPG
 if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
-    eval $(gpg-agent --daemon --write-env-file "${HOME}/.cache/gpg-agent-info")
+    eval $(gpg-agent --daemon)
 fi
 
 
