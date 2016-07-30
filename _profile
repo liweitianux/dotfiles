@@ -4,7 +4,7 @@
 # executed by the command interpreter for login shells
 #
 # Aaron LI
-# Updated: 2016-06-13
+# Updated: 2016-07-30
 #
 
 
@@ -49,7 +49,7 @@ fi
 
 ### GnuPG
 if ! pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
-    eval $(gpg-agent --damon --write-env-file "${HOME}/.cache/gpg-agent-info")
+    eval $(gpg-agent --daemon --write-env-file "${HOME}/.cache/gpg-agent-info")
 fi
 
 
