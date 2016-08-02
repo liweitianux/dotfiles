@@ -93,7 +93,7 @@ return the filename."
                 (if (plist-get attachment :temp)
                     (replace-match (format "src=\"%s\"" (plist-get attachment :temp)))
                   (replace-match (format "src=\"%s%s\"" temporary-file-directory (plist-get attachment :name)))
-                  (mu4e~proc-extract 'save (mu4e-message-field :docid) (plist-get attachment :index) mu4e-decryption-policy temporary-file-directory)
+                  (mu4e~proc-extract 'save (mu4e-message-field msg :docid) (plist-get attachment :index) mu4e-decryption-policy temporary-file-directory)
                   (mu4e-remove-file-later (format "%s%s" temporary-file-directory (plist-get attachment :name))))))
             attachments)
       (save-buffer)
@@ -299,13 +299,17 @@ store your org-contacts."
 
 (defun mu4e-action-show-thread (msg)
   "Show all messages that are in the same thread as the message
-at point."
+at point.  Point remains on the message with the message-id where
+the action was invoked.  If invoked in view-mode, continue to
+display the message."
   (let ((msgid (mu4e-message-field msg :message-id)))
     (when msgid
       (let ((mu4e-headers-show-threads t)
 	     (mu4e-headers-include-related t))
         (mu4e-headers-search
-         (format "msgid:%s" msgid))))))
+         (format "msgid:%s" msgid)
+         nil nil nil
+         msgid (eq major-mode 'mu4e-view-mode))))))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
