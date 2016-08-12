@@ -6,11 +6,11 @@
 # 2016-05-29
 #
 
-# Turn off ZLE bracketed paste in dumb term,
+# Turn off ZLE bracketed paste in dumb and cons25 (DFly default console) term,
 # otherwise turn on ZLE bracketed-paste-magic
 # Credit: http://zmwangx.github.io/blog/2015-09-21-zsh-51-and-bracketed-paste.html
 # See also zshparam(1)
-if [[ ${TERM} == dumb ]]; then
+if [[ ${TERM} == dumb ]] || [[ ${TERM} == cons25 ]]; then
     unset zle_bracketed_paste
 else
     autoload -Uz bracketed-paste-magic
