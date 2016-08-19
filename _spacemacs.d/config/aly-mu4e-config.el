@@ -4,7 +4,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-02-21
-;; Updated: 2016-05-15
+;; Updated: 2016-08-19
 ;;
 
 ;;; Commentary:
@@ -222,7 +222,6 @@
           ("tag:astro"                        "Astro"                ?a)
           ("tag:arxiv OR from:arxiv.org"      "arXiv"                ?x)
           ("tag:SMS"                          "SMS"                  ?S)
-          ("tag:CallLog"                      "Call Log"             ?C)
           ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?d)
           ("mime:image/*"                     "Messages with images" ?p)))
 
