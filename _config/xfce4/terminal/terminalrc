@@ -26,4 +26,5 @@ ColorPalette=#1b1b1d1d1e1e;#b6b600005050;#8888bbbb2222;#c4c47f7f2c2c;#303030309b
 ColorForeground=#f8f8f8f8f2f2
 ColorBackground=#1b1b1d1d1e1e
 ColorCursor=#4040c8c80000
+ScrollingSingleLine=FALSE
 
