@@ -362,7 +362,7 @@
   (require 'aly-mu4e-config nil t)
   ;;
   ;; Set custom file location instead of using this file
-  (setq custom-file "~/.spacemacs/custom.el")
+  (setq custom-file "~/.spacemacs.d/custom.el")
   (if (file-readable-p custom-file)
       (load custom-file))
   )
