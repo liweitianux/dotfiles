@@ -22,6 +22,16 @@
   (setq org-agenda-files '("~/org/todo.org"
                            "~/org/task.org"
                            "~/org/astro.org"))
+  ;; active Babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (sh . t)
+     (python . t)
+     (ditaa . t)
+     ))
+  ;; set the path to the `ditaa' program
+  (setq org-ditaa-jar-path "~/.spacemacs.d/local/ditaa/ditaa.jar")
   )  ;; with-eval-after-load 'org
 
 
