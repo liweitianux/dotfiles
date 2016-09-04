@@ -4,7 +4,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-02-21
-;; Updated: 2016-08-19
+;; Updated: 2016-09-03
 ;;
 
 ;;; Commentary:
@@ -175,7 +175,7 @@
         sendmail-program "msmtp")
 
   ;; allow for fetch mail and update index using 'U' in the main view
-  (setq mu4e-get-mail-command "offlineimap -o -1")
+  (setq mu4e-get-mail-command "killall -SIGKILL offlineimap; offlineimap -o -1")
   ;; get mail and update index periodically in the background (unit: seconds)
   (setq mu4e-update-interval 900)
 
