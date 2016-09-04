@@ -11,7 +11,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-06-25
+;; Updated: 2016-09-04
 ;;
 
 
@@ -357,9 +357,11 @@
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
   ;;
-  ;; mu4e: https://github.com/djcb/mu
+  ;; Load additional configurations
   (push "~/.spacemacs.d/config" load-path)
+  ;; mu4e: https://github.com/djcb/mu
   (require 'aly-mu4e-config nil t)
+  (require 'aly-org-config nil t)
   ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs.d/custom.el")
