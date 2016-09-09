@@ -21,11 +21,12 @@
 #
 # Aaron LI
 # Created: 2015-02-02
-# Updated: 2016-01-29
+# Updated: 2016-09-09
 #
 
 
 import os
+import sys
 import subprocess
 
 
@@ -38,21 +39,6 @@ def mailpasswd(account):
         return subprocess.check_output(args).strip()
     except subprocess.CalledProcessError:
         return ''
-
-# subprocess.check_output() only introduced in python 2.7
-# this version of 'mailpasswd' works with older version of python
-#def mailpasswd(account):
-#    account = os.path.basename(account)
-#    path = '{0}/.offlineimap/{1}.gpg'.format(os.environ['HOME'], account)
-#    args = ['gpg2', '--for-your-eyes-only', '--no-tty',
-#            '--quiet', '--batch', '--decrypt', path]
-#    proc = subprocess.Popen(args, stdout=subprocess.PIPE)
-#    output = proc.communicate()[0].strip()
-#    retcode = proc.wait()
-#    if retcode == 0:
-#        return output
-#    else:
-#        return ''
 
 
 # If you have several accounts that get checked simultaneously, and you
@@ -72,5 +58,6 @@ def prime_gpg_agent():
         i += 1
     return ret
 
-prime_gpg_agent()
 
+if __name__ == "__main__":
+    prime_gpg_agent()
