@@ -354,6 +354,17 @@
   It is called immediately after `dotspacemacs/init'.
   You are free to put almost any user code here.  The exception is
   org related code, which should be placed in `dotspacemacs/user-config'."
+  ;;
+  ;; Helm uses Tramp which tries to figure out some SSH/DNS settings at
+  ;; startup.  However, the ISP may redirect non-existing addresses to
+  ;; their own servers, which causes long timeouts and blocks the startup.
+  ;; Credit:
+  ;; + Spacemacs: FAQ: Why is Spacemacs hanging on startup?
+  ;;   https://github.com/syl20bnr/spacemacs/blob/master/doc/FAQ.org
+  (setq tramp-ssh-controlmaster-options
+        (concat "-o ControlPath='tramp.%%C' "
+                "-o ControlMaster=auto "
+                "-o ControlPersist=no"))
   )
 
 
@@ -418,15 +429,6 @@
   (spacemacs//set-monospaced-font "Source Code Pro" "WenQuanYi Zen Hei" 14 16)
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
-  ;;
-  ;; Loading `tramp' may block Emacs for a long time due to network issues
-  ;; Credit:
-  ;; + https://github.com/syl20bnr/spacemacs/issues/3422#issuecomment-148919047
-  ;; + https://github.com/emacs-helm/helm/issues/1000#issuecomment-119487649
-  (setq tramp-ssh-controlmaster-options
-        (concat "-o ControlPath='tramp.%%C' "
-                "-o ControlMaster=auto "
-                "-o ControlPersist=no"))
   ;;
   ;; Enable fill column indicator in most modes, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
