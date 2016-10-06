@@ -11,8 +11,21 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-09-04
+;; Updated: 2016-10-06
 ;;
+
+
+;; DEBUG: time the time required to load a package
+;; Credit:
+;; https://github.com/syl20bnr/spacemacs/issues/2705#issuecomment-133006706
+;(defadvice require (around my-require activate)
+;  (let ((start (current-time))
+;        res delta)
+;    (setq res ad-do-it)
+;    (setq delta (float-time (time-since start)))
+;    (when (> delta 0.001)
+;      (message "Required %s: %s sec" (ad-get-arg 0) delta))
+;    res))
 
 
 (defun dotspacemacs/layers ()
@@ -344,6 +357,15 @@
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
   ;;
+  ;; Loading `tramp' may block Emacs for a long time due to network issues
+  ;; Credit:
+  ;; + https://github.com/syl20bnr/spacemacs/issues/3422#issuecomment-148919047
+  ;; + https://github.com/emacs-helm/helm/issues/1000#issuecomment-119487649
+  (setq tramp-ssh-controlmaster-options
+        (concat "-o ControlPath='tramp.%%C' "
+                "-o ControlMaster=auto "
+                "-o ControlPersist=no"))
+  ;;
   ;; Enable fill column indicator in most modes, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
   ;; WARNING:
@@ -362,6 +384,7 @@
   ;; mu4e: https://github.com/djcb/mu
   (require 'aly-mu4e-config nil t)
   (require 'aly-org-config nil t)
+  ;(require 'aly-firacode-config nil t)
   ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs.d/custom.el")
