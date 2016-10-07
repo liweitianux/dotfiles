@@ -80,7 +80,7 @@
      ;; better-defaults
      c-c++
      (chinese :variables chinese-enable-fcitx t)
-     clojure
+     (clojure :variables clojure-enable-fancify-symbols t)
      emacs-lisp
      emoji
      ess  ; R programming language
@@ -107,6 +107,8 @@
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t)
      xkcd
+     ;; Custom layers
+     music
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer.  If you need some configuration for these
