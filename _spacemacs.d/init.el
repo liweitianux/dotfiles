@@ -93,6 +93,18 @@
      octave
      org
      python
+     (ranger :variables
+             ranger-show-preview t
+             ;; Do not show hidden files by default
+             ranger-show-hidden nil
+             ;; Cleanup opened buffers when disabling the minor mode
+             ranger-cleanup-on-disable t
+             ;; Delay time to update the footer information (default: 0.01 second)
+             ranger-footer-delay 0.1
+             ;; Delay time to preview the file (default: 0.05 second)
+             ranger-preview-delay 0.2
+             ;; File size in MB to prevent preview of files (default: 2)
+             ranger-max-preview-size 1)
      ruby
      scheme
      (shell :variables
