@@ -72,11 +72,10 @@
                       auto-completion-complete-with-key-sequence "kj"
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-enable-snippets-in-popup t
-                      ;auto-completion-enable-help-tooltip t
                       ;; Provided by `company-statistics'
                       auto-completion-enable-sort-by-usage t
                       auto-completion-private-snippets-directory
-                      "~/.spacemacs.d/snippets/")
+                        "~/.spacemacs.d/snippets/")
      ;; better-defaults
      c-c++
      (chinese :variables chinese-enable-fcitx t)
@@ -89,6 +88,7 @@
      latex
      markdown
      (mu4e :variables
+           mu4e-enable-mode-line t
            mu4e-installation-path "~/.spacemacs.d/local/mu4e")
      octave
      org
