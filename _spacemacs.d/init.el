@@ -80,6 +80,8 @@
      c-c++
      (chinese :variables chinese-enable-fcitx t)
      (clojure :variables clojure-enable-fancify-symbols t)
+     (colors :variables
+             colors-enable-nyan-cat-progress-bar t)
      emacs-lisp
      emoji
      ess  ; R programming language
@@ -99,11 +101,11 @@
              ranger-show-hidden nil
              ;; Cleanup opened buffers when disabling the minor mode
              ranger-cleanup-on-disable t
-             ;; Delay time to update the footer information (default: 0.01 second)
+             ;; Delay time to update the footer information
              ranger-footer-delay 0.1
-             ;; Delay time to preview the file (default: 0.05 second)
+             ;; Delay time to preview the file
              ranger-preview-delay 0.2
-             ;; File size in MB to prevent preview of files (default: 2)
+             ;; File size in MB to prevent preview of files
              ranger-max-preview-size 1)
      ruby
      scheme
