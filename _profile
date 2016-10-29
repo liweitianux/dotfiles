@@ -30,6 +30,10 @@ _path_append() {
     PATH="${PATH}:$1"
 }
 
+# local installed npm packages (see also `~/.npmrc`)
+if [ -d "$HOME/.npm-packages/bin" ]; then
+    _path_prepend "${HOME}/.npm-packages/bin"
+fi
 # local installed packages (e.g., python)
 if [ -d "$HOME/.local/bin" ]; then
     _path_prepend "${HOME}/.local/bin"
