@@ -87,6 +87,8 @@
      ess  ; R programming language
      games
      git
+     html
+     javascript
      latex
      markdown
      (mu4e :variables
