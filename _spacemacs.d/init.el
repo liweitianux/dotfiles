@@ -13,7 +13,7 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-10-06
+;; Updated: 2016-10-29
 ;;
 
 
@@ -429,6 +429,18 @@
   ;; Highlight the line part that goes beyond `whitespace-line-column'
   (setq whitespace-line-column fill-column)
   (global-whitespace-mode)
+  ;;
+  ;; Indentation settings
+  (setq-default
+   ;; `js2-mode' (JavaScript)
+   js2-basic-offset 2
+   ;; `js-mode' (JSON)
+   js-indent-level 2
+   ;; `web-mode': http://web-mode.org/
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   )
   ;;
   ;; Enable `company-mode' globally
   (global-company-mode)
