@@ -455,10 +455,13 @@
   ;;
   ;; Change `powerline' separator
   (setq powerline-default-separator nil)
-  ;; Set monospaced font size for Chinese
-  (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
+  ;;
+  ;; Set the font of `variable-pitch'
+  (set-face-font 'variable-pitch "M+ 1C")
+  ;; Set monospaced font size for Chinese (from `chinese' layer)
+  (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
   ;;
   ;; Enable fill column indicator in most modes, except for `org-mode'
   ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
