@@ -463,16 +463,6 @@
   ;; Set monospaced font size for Chinese (from `chinese' layer)
   (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
   ;;
-  ;; Enable fill column indicator in most modes, except for `org-mode'
-  ;; Credit: https://github.com/syl20bnr/spacemacs/issues/4506
-  ;; WARNING:
-  ;;   `fci-mode' has issue with `truncate-lines'
-  ;;   https://github.com/alpaker/Fill-Column-Indicator/issues/26
-  ;(setq fci-handle-truncate-lines nil)
-  ;(add-hook 'prog-mode-hook 'turn-on-fci-mode)
-  ;(add-hook 'text-mode-hook 'turn-on-fci-mode)
-  ;(add-hook 'org-mode-hook  'turn-off-fci-mode 'append)
-  ;;
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
   ;;
