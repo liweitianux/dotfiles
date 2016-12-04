@@ -4,7 +4,6 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-05-31
-;; Updated: 2016-05-31
 ;;
 
 ;;; Commentary:
@@ -19,9 +18,7 @@
 ;; Emacs.  Then, any `org'-related code should NOT be loaded before
 ;; `dotspacemacs/user-config'.
 (with-eval-after-load 'org
-  (setq org-agenda-files '("~/org/todo.org"
-                           "~/org/task.org"
-                           "~/org/astro.org"))
+  (setq org-agenda-files '("~/org"))
   ;; active Babel languages
   (org-babel-do-load-languages
    'org-babel-load-languages
