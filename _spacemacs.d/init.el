@@ -217,7 +217,7 @@
    ;; Default font, or prioritized list of fonts.
    ;; `powerline-scale' allows to quickly tweak the mode-line size to
    ;; make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("M+ 1mn"
                                :size 14
                                :weight normal
                                :width normal
@@ -456,7 +456,7 @@
   ;; Change `powerline' separator
   (setq powerline-default-separator nil)
   ;; Set monospaced font size for Chinese
-  (spacemacs//set-monospaced-font "Source Code Pro" "WenQuanYi Zen Hei" 14 16)
+  (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
   ;;
