@@ -2,14 +2,9 @@
 # zsh/exports.zsh
 #
 
-# set locale and PATH in '~/.profile'
-
-export EDITOR='vim'
-export PAGER='less'
-export LESS='--ignore-case --raw-control-chars'
-
-# Setup terminal, and turn on colors
-#export TERM='xterm-256color'
+# NOTE:
+# Generic environment variables and those needing been set only once
+# should go to `~/.profile'.
 
 # GnuPG: see 'gpg-agent(1)'
 export GPG_TTY=$(tty)
