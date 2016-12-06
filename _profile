@@ -65,6 +65,7 @@ fi
 
 ## Language and locale
 export LANG="en_US.UTF-8"
+export LC_CTYPE="zh_CN.UTF-8"
 export LC_MONETARY="zh_CN.UTF-8"
 export LC_COLLATE="C"
 
