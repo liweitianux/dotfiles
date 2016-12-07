@@ -345,7 +345,7 @@
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names.  Spacemacs uses the first
    ;; installed tool of the list.  Supported tools are `ag', `pt', `ack'
    ;; and `grep'. (default '("ag" "pt" "ack" "grep"))
@@ -462,17 +462,17 @@
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
   ;;
-  ;; Load additional configurations
+  ;; Load custom configurations
   (push "~/.spacemacs.d/config" load-path)
-  ;; mu4e: https://github.com/djcb/mu
-  (require 'aly-mu4e-config nil t)
-  (require 'aly-org-config nil t)
-  ;(require 'aly-firacode-config nil t)
+  (require 'aly-mu4e-config)
+  (require 'aly-org-config)
   ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs.d/custom.el")
   (if (file-readable-p custom-file)
-      (load custom-file))
+      (load-file custom-file))
+  ;;
+  ;; END: `dotspacemacs/user-config'
   )
 
 
