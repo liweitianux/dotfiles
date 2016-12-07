@@ -9,11 +9,10 @@
 ;; ~/.spacemacs
 ;; ~/.spacemacs.d/init.el
 ;;
-;; The template is located at `core/templates/.spaces.template`
+;; The template is located at `core/templates/.spacemacs.template`
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
-;; Updated: 2016-10-29
 ;;
 
 
@@ -72,7 +71,6 @@
                       auto-completion-complete-with-key-sequence "kj"
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-enable-snippets-in-popup t
-                      ;; Provided by `company-statistics'
                       auto-completion-enable-sort-by-usage t
                       auto-completion-private-snippets-directory
                         "~/.spacemacs.d/snippets/")
@@ -124,7 +122,6 @@
                       version-control-global-margin t)
      xkcd
      ;; Custom layers
-     music
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer.  If you need some configuration for these
@@ -205,13 +202,12 @@
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(monokai
-                         spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
                          spacemacs-light
-                         solarized-light
                          solarized-dark
-                         leuven
-                         zenburn)
+                         solarized-light
+                         monokai
+                         leuven)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts.
@@ -454,7 +450,7 @@
   (spacemacs/toggle-visual-line-navigation-on)
   ;;
   ;; Change `powerline' separator
-  (setq powerline-default-separator nil)
+  (setq powerline-default-separator 'slant)
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
   ;;
