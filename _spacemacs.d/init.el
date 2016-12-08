@@ -81,7 +81,6 @@
      (colors :variables
              colors-enable-nyan-cat-progress-bar t)
      emacs-lisp
-     emoji
      ess  ; R programming language
      games
      git
