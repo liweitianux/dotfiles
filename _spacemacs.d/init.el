@@ -78,8 +78,7 @@
      c-c++
      (chinese :variables chinese-enable-fcitx t)
      (clojure :variables clojure-enable-fancify-symbols t)
-     (colors :variables
-             colors-enable-nyan-cat-progress-bar t)
+     colors
      emacs-lisp
      ess  ; R programming language
      games
