@@ -75,6 +75,7 @@
                       auto-completion-private-snippets-directory
                         "~/.spacemacs.d/snippets/")
      ;; better-defaults
+     bibtex
      c-c++
      (chinese :variables chinese-enable-fcitx t)
      (clojure :variables clojure-enable-fancify-symbols t)
@@ -456,6 +457,14 @@
   (set-face-font 'variable-pitch "M+ 1C")
   ;; Set monospaced font size for Chinese (from `chinese' layer)
   (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
+  ;;
+  ;; Configure the BibTeX file for `org-ref' from `bibtex' layer
+  (setq org-ref-default-bibliography '("~/papers/references.bib")
+        org-ref-pdf-directory "~/papers/"
+        org-ref-bibliography-notes "~/papers/notes.org")
+  (setq org-ref-open-pdf-function
+        (lambda (fpath)
+          (start-process "xdg-open" "*helm-bibtex-open*" "xdg-open" fpath)))
   ;;
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
