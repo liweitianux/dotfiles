@@ -74,14 +74,13 @@
                       auto-completion-enable-sort-by-usage t
                       auto-completion-private-snippets-directory
                         "~/.spacemacs.d/snippets/")
-     ;; better-defaults
      bibtex
      c-c++
      (chinese :variables chinese-enable-fcitx t)
      (clojure :variables clojure-enable-fancify-symbols t)
      colors
      emacs-lisp
-     ess  ; R programming language
+     ess  ; For `R' programming language
      games
      git
      html
@@ -458,13 +457,24 @@
   ;; Set monospaced font size for Chinese (from `chinese' layer)
   (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
   ;;
-  ;; Configure the BibTeX file for `org-ref' from `bibtex' layer
+  ;; Configure BibTeX completion for `helm-bibtex'
+  (setq bibtex-completion-bibliography '("~/papers/references.bib"))
+  (setq bibtex-completion-library-path "~/papers/")  ;; where to find PDFs
+  (setq bibtex-completion-notes-path "~/papers/notes.org")
+  (setq bibtex-completion-pdf-field "File")
+  (setq bibtex-completion-pdf-open-function
+        (lambda (fpath)
+          (start-process "xdg-open" "*helm-bibtex-open*" "xdg-open" fpath)))
+  (setq bibtex-completion-display-formats
+        '((article       . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*} ${journal:40}")
+          (inbook        . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+          (incollection  . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+          (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+          (t             . "${=has-pdf=:1}${=has-note=:1} ${=type=:3} ${year:4} ${author:36} ${title:*}")))
+  ;; Configure the BibTeX file for `org-ref'
   (setq org-ref-default-bibliography '("~/papers/references.bib")
         org-ref-pdf-directory "~/papers/"
         org-ref-bibliography-notes "~/papers/notes.org")
-  (setq org-ref-open-pdf-function
-        (lambda (fpath)
-          (start-process "xdg-open" "*helm-bibtex-open*" "xdg-open" fpath)))
   ;;
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
