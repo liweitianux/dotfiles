@@ -36,7 +36,8 @@ metadata            = ~/mail/offlineimap
 pythonfile          = ~/.offlineimap/offlineimap.py
 #
 # List of accounts to be synced, separated by a comma.
-accounts            = gmail-aly, gmail-li, outlook-aly, outlook-li, sjtu, autistici, foxmail
+# accounts            = gmail-aly, gmail-li, outlook-aly, outlook-li, sjtu, autistici, foxmail
+accounts            = gmail-aly, gmail-li, outlook-aly, outlook-li, sjtu, autistici
 #
 # Control how many accuonts may be synced simulaneously
 # NOTE: if you are using autorefresh and have more than one account,
