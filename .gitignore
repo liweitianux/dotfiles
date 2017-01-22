@@ -14,8 +14,9 @@ PRIVATE/
 __pycache__/
 *.py[cod]
 
-### emeacs
+### emeacs & spacemacs
 *.elc
+_spacemacs.d/layers/
 
 ### tmux
 _tmux/resurrect/
