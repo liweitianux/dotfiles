@@ -19,6 +19,10 @@
   (setq mu4e-debug t)
   (setq mu4e-maildir "~/mail")
 
+  ;; speed up indexing
+  (setq mu4e-index-cleanup nil)  ; don't do a full cleanup check
+  (setq mu4e-index-lazy-check t)  ; don't consider up-to-date directories
+
   ;; multiple email accounts: contexts (require mu4e >= 0.9.16)
   (setq mu4e-contexts
     `( ,(make-mu4e-context
@@ -216,8 +220,9 @@
         '(("flag:unread AND NOT flag:trashed" "Unread messages"      ?u)
           ("date:today..now"                  "Today's messages"     ?T)
           ("date:7d..now"                     "Last 7 days"          ?w)
+          ("date:1m..now"                     "Last month"           ?m)
           ("flag:flagged"                     "Flagged messages"     ?f)
-          ("tag:todo OR tag:task"             "TODO & Task"          ?t)
+          ("tag:todo OR tag:task"             "TODO / Task"          ?t)
           ("tag:work"                         "Work"                 ?W)
           ("tag:astro"                        "Astro"                ?a)
           ("tag:arxiv OR from:arxiv.org"      "arXiv"                ?x)

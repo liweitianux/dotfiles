@@ -28,7 +28,8 @@ if exists emacsclient; then
             local create_frame=""
         fi
 
-        command env LC_CTYPE=zh_CN.UTF-8 emacsclient --alternate-editor "" $create_frame "$@"
+        command env LC_CTYPE=zh_CN.UTF-8 \
+            emacsclient --alternate-editor "" $create_frame "$@"
     }
 
     alias emacs='_emacsclient -t'
