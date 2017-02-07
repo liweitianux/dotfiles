@@ -452,11 +452,6 @@
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
   ;;
-  ;; Set the font of `variable-pitch'
-  (set-face-font 'variable-pitch "M+ 1C")
-  ;; Set monospaced font size for Chinese (from `chinese' layer)
-  (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
-  ;;
   ;; Configure BibTeX completion for `helm-bibtex'
   (setq bibtex-completion-bibliography '("~/papers/references.bib"))
   (setq bibtex-completion-library-path "~/papers/")  ;; where to find PDFs
@@ -479,10 +474,19 @@
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
   ;;
+  ;; Set font only after the first GUI frame initialized, to workaround the
+  ;; error when Emacs starts in daemon mode.
+  (spacemacs|do-after-display-system-init
+   ;; Set the font of `variable-pitch'
+   (set-face-font 'variable-pitch "M+ 1C")
+   ;; Set monospaced font size for Chinese (from `chinese' layer)
+   (spacemacs//set-monospaced-font "M+ 1mn" "WenQuanYi Zen Hei" 14 14)
+   )
+  ;;
   ;; Load custom configurations
   (push "~/.spacemacs.d/config" load-path)
-  (require 'aly-mu4e-config)
   (require 'aly-org-config)
+  (require 'aly-mu4e-config)
   ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs.d/custom.el")
