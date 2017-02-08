@@ -26,6 +26,9 @@ if exists percol; then
     zle -N percol_select_history
     # Override the bindkey settings in `60-bindkeys.zsh`
     bindkey '^R' percol_select_history
+    # Override the bindkey settings in `50-vi-mode.zsh`
+    bindkey -M viins '^r' percol_select_history
+    bindkey -M vicmd '^r' percol_select_history
 fi
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #

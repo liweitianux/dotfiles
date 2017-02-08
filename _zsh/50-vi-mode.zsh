@@ -2,11 +2,10 @@
 # zsh/vi-mode.zsh
 # see zshzle(1)
 #
-# NOTE:
-# This will *reset* previous bindkey settings!
-#
 # Credits:
-# https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh
+# * https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh
+# * http://zshwiki.org/home/zle/bindkeys
+#
 # 2015-11-18
 #
 
@@ -25,6 +24,8 @@ zle -N zle-keymap-select
 zle -N edit-command-line
 
 
+# NOTE:
+# This will *reset* previous bindkey settings!
 bindkey -v
 
 # allow v to edit the command line (standard behaviour)
@@ -39,6 +40,10 @@ bindkey '^N' down-history
 bindkey '^?' backward-delete-char
 bindkey '^h' backward-delete-char
 bindkey '^w' backward-kill-word
+
+# allow ctrl-r for incremental history search
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
 
 # if mode indicator wasn't setup by theme, define default
 if [[ "$MODE_INDICATOR" == "" ]]; then
