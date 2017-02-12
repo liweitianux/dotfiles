@@ -14,11 +14,13 @@
 
 ;;; Code:
 
-(with-eval-after-load 'mu4e
-  ;; turn on debug: log debug information to the *mu4e-log* buffer
-  (setq mu4e-debug t)
-  (setq mu4e-maildir "~/mail")
+;; maildir location
+(setq mu4e-maildir "~/mail")
 
+;; turn on debug: log debug information to the *mu4e-log* buffer
+(setq mu4e-debug t)
+
+(with-eval-after-load 'mu4e
   ;; speed up indexing
   (setq mu4e-index-cleanup nil)  ; don't do a full cleanup check
   (setq mu4e-index-lazy-check t)  ; don't consider up-to-date directories
@@ -237,6 +239,10 @@
                               (:from-or-to . 22)
                               (:subject    . nil)))  ;; also :thread-subject
 
+  ;; header fields to be shown in the view buffer
+  (add-to-list 'mu4e-view-fields :size t)
+  (add-to-list 'mu4e-view-fields :user-agent t)
+
   ;; use fancy non-ascii characters in various places
   ;(setq mu4e-use-fancy-chars t)
 
@@ -277,7 +283,9 @@
 
   ;; set `mu4e' as emacs' default email program
   (setq mail-user-agent 'mu4e-user-agent)
-  )  ;; with-eval-after-load 'mu4e
+
+  ;; END: with-eval-after-load 'mu4e
+  )
 
 
 ;;; Key bindings for Evil
