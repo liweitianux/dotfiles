@@ -77,10 +77,8 @@ export QT_IM_MODULE="${INPUT_METHOD}"
 # Enable the CJK N-gram tokenization algorithm for CJK indexing and search
 export XAPIAN_CJK_NGRAM=1
 
-# Default terminal type to enable more colors
-export TERM="xterm-256color"
-
 export EDITOR="vim"
+export VISUAL="${EDITOR}"
 export PAGER="less"
 export LESS="--ignore-case --raw-control-chars"
 
