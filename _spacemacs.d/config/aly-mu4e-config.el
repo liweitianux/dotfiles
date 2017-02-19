@@ -181,7 +181,7 @@
         sendmail-program "msmtp")
 
   ;; allow for fetch mail and update index using 'U' in the main view
-  (setq mu4e-get-mail-command "offlineimap -o -1")
+  (setq mu4e-get-mail-command "mbsync -a")
   ;; get mail and update index periodically in the background (unit: seconds)
   (setq mu4e-update-interval 900)
 
