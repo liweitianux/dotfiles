@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2016-01-29
+# Updated: 2017-02-19
 #
 
 
@@ -13,7 +13,7 @@
 Expunge         Both
 # auto create missing mailboxes, both locally and on the server
 Create          Both
-# save the synchronization state files in the relevant directory
+# save the synchronization state files in corresponding slave mailboxes
 SyncState       *
 
 
@@ -22,7 +22,7 @@ IMAPAccount     gmail-aly
 Host            imap.gmail.com
 User            aaronly.me@gmail.com
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/gmail-aly.gpg"
-UseIMAPS        yes
+SSLType         IMAPS
 
 # remote store
 IMAPStore       gmail-aly-remote
@@ -64,7 +64,7 @@ IMAPAccount     gmail-li
 Host            imap.gmail.com
 User            liweitianux@gmail.com
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/gmail-li.gpg"
-UseIMAPS        yes
+SSLType         IMAPS
 
 IMAPStore       gmail-li-remote
 Account         gmail-li
@@ -102,7 +102,7 @@ IMAPAccount     outlook-aly
 Host            imap-mail.outlook.com
 User            aaronly.me@outlook.com
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/outlook-aly.gpg"
-UseIMAPS        yes
+SSLType         IMAPS
 
 IMAPStore       outlook-aly-remote
 Account         outlook-aly
@@ -134,16 +134,8 @@ Channel         outlook-aly-trash
 Master          :outlook-aly-remote:Deleted
 Slave           :outlook-aly-local:trash
 
-Channel         outlook-aly-freebsd
-Master          :outlook-aly-remote:FreeBSD
-Slave           :outlook-aly-local:freebsd
-
-Channel         outlook-aly-openbsd
-Master          :outlook-aly-remote:openbsd
-Slave           :outlook-aly-local:openbsd
-
 Group           outlook-aly
-Channels        outlook-aly-inbox outlook-aly-sent outlook-aly-archive outlook-aly-drafts outlook-aly-junk outlook-aly-trash outlook-aly-freebsd outlook-aly-openbsd
+Channels        outlook-aly-inbox outlook-aly-sent outlook-aly-archive outlook-aly-drafts outlook-aly-junk outlook-aly-trash
 ## "outlook-aly" }}}
 
 
@@ -152,7 +144,7 @@ IMAPAccount     outlook-li
 Host            imap-mail.outlook.com
 User            liweitianux@live.com
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/outlook-li.gpg"
-UseIMAPS        yes
+SSLType         IMAPS
 
 IMAPStore       outlook-li-remote
 Account         outlook-li
@@ -184,12 +176,8 @@ Channel         outlook-li-trash
 Master          :outlook-li-remote:Deleted
 Slave           :outlook-li-local:trash
 
-Channel         outlook-li-chats
-Master          :outlook-li-remote:Chats
-Slave           :outlook-li-local:chats
-
 Group           outlook-li
-Channels        outlook-li-inbox outlook-li-sent outlook-li-archive outlook-li-drafts outlook-li-junk outlook-li-trash outlook-li-chats
+Channels        outlook-li-inbox outlook-li-sent outlook-li-archive outlook-li-drafts outlook-li-junk outlook-li-trash
 ## "outlook-li" }}}
 
 
@@ -197,8 +185,9 @@ Channels        outlook-li-inbox outlook-li-sent outlook-li-archive outlook-li-d
 IMAPAccount     sjtu
 Host            imap.sjtu.edu.cn
 User            liweitianux@sjtu.edu.cn
+# PassCmd         "python3 -m keyring get email liweitianux@sjtu.edu.cn"
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/sjtu.gpg"
-UseIMAPS        yes
+SSLType         IMAPS
 
 IMAPStore       sjtu-remote
 Account         sjtu
@@ -240,8 +229,7 @@ IMAPAccount     autistici
 Host            mail.autistici.org
 User            liweitianux@autistici.org
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/autistici.gpg"
-UseIMAPS        yes
-CertificateFile ~/.private/ca-autistici.crt
+SSLType         IMAPS
 
 IMAPStore       autistici-remote
 Account         autistici
@@ -283,7 +271,7 @@ IMAPAccount     foxmail
 Host            imap.qq.com
 User            liweitianux@foxmail.com
 PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/foxmail.gpg"
-UseIMAPS        yes
+SSLType         IMAPS
 
 IMAPStore       foxmail-remote
 Account         foxmail
