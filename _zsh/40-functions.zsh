@@ -4,10 +4,15 @@
 # execute 'functions <func_name>' to show function details.
 #
 
+## Check the existence/accessibility of a command
 function exists() {
     which $1 &> /dev/null
 }
 
+## Check whether the program is running
+function is_running() {
+    pgrep -x -u "${USER}" $1 &> /dev/null
+}
 
 function zsh_recompile() {
     autoload -U zrecompile

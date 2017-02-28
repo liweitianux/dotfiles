@@ -37,7 +37,7 @@ _exists() {
 
 ## Check whether the program is running
 _running() {
-    pgrep -x -u ${USER} $1 &> /dev/null
+    pgrep -x -u "${USER}" $1 &> /dev/null
 }
 
 
