@@ -5,8 +5,12 @@
 #
 
 ## Check the existence/accessibility of a command
+# Credit: https://stackoverflow.com/a/677212/4856091
 function exists() {
-    which $1 &> /dev/null
+    # 'command' is POSIX-compliant and more portable;
+    # 'hash' only searches for commands;
+    # while 'type' also considers builtins and keywords.
+    type "$1" >/dev/null 2>&1
 }
 
 ## Check whether the program is running

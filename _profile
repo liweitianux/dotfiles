@@ -31,8 +31,9 @@ _path_append() {
 }
 
 ## Check the existence/accessibility of a command
+# Credit: https://stackoverflow.com/a/677212/4856091
 _exists() {
-    which $1 &> /dev/null
+    command -v "$1" >/dev/null 2>&1
 }
 
 ## Check whether the program is running
