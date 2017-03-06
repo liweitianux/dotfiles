@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2017-02-19
+# Updated: 2017-03-06
 #
 
 
@@ -21,7 +21,7 @@ SyncState       *
 IMAPAccount     gmail-aly
 Host            imap.gmail.com
 User            aaronly.me@gmail.com
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/gmail-aly.gpg"
+PassCmd         "pass show email/gmail/aaronly.me/laptop | head -n1"
 SSLType         IMAPS
 
 # remote store
@@ -63,7 +63,7 @@ Channels        gmail-aly-archive gmail-aly-drafts gmail-aly-junk gmail-aly-tras
 IMAPAccount     gmail-li
 Host            imap.gmail.com
 User            liweitianux@gmail.com
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/gmail-li.gpg"
+PassCmd         "pass show email/gmail/liweitianux/laptop | head -n1"
 SSLType         IMAPS
 
 IMAPStore       gmail-li-remote
@@ -101,7 +101,7 @@ Channels        gmail-li-archive gmail-li-drafts gmail-li-junk gmail-li-trash
 IMAPAccount     outlook-aly
 Host            imap-mail.outlook.com
 User            aaronly.me@outlook.com
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/outlook-aly.gpg"
+PassCmd         "pass show email/outlook/aaronly.me/laptop | head -n1"
 SSLType         IMAPS
 
 IMAPStore       outlook-aly-remote
@@ -143,7 +143,7 @@ Channels        outlook-aly-inbox outlook-aly-sent outlook-aly-archive outlook-a
 IMAPAccount     outlook-li
 Host            imap-mail.outlook.com
 User            liweitianux@live.com
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/outlook-li.gpg"
+PassCmd         "pass show email/outlook/liweitianux/laptop | head -n1"
 SSLType         IMAPS
 
 IMAPStore       outlook-li-remote
@@ -185,8 +185,7 @@ Channels        outlook-li-inbox outlook-li-sent outlook-li-archive outlook-li-d
 IMAPAccount     sjtu
 Host            imap.sjtu.edu.cn
 User            liweitianux@sjtu.edu.cn
-# PassCmd         "python3 -m keyring get email liweitianux@sjtu.edu.cn"
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/sjtu.gpg"
+PassCmd         "pass show email/sjtu | head -n1"
 SSLType         IMAPS
 
 IMAPStore       sjtu-remote
@@ -228,7 +227,7 @@ Channels        sjtu-inbox sjtu-sent sjtu-archive sjtu-drafts sjtu-junk sjtu-tra
 IMAPAccount     autistici
 Host            mail.autistici.org
 User            liweitianux@autistici.org
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/autistici.gpg"
+PassCmd         "pass show email/autistici | head -n1"
 SSLType         IMAPS
 
 IMAPStore       autistici-remote
@@ -270,7 +269,7 @@ Channels        autistici-inbox autistici-sent autistici-archive autistici-draft
 IMAPAccount     foxmail
 Host            imap.qq.com
 User            liweitianux@foxmail.com
-PassCmd         "gpg2 --quiet --for-your-eyes-only --no-tty --decrypt ~/.private/foxmail.gpg"
+PassCmd         "pass show email/qq/527922216/laptop | head -n1"
 SSLType         IMAPS
 
 IMAPStore       foxmail-remote
