@@ -208,6 +208,7 @@
   ;; display rich-text messages
   (require 'mu4e-contrib)
   ;; use `shr' html renderer; reqiure emacs >= 24.4
+  (require 'shr)
   (setq mu4e-html2text-command 'mu4e-shr2text)
   (add-hook 'mu4e-view-mode-hook
             (lambda ()
