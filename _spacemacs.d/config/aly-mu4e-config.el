@@ -80,7 +80,7 @@
                   (mu4e-drafts-folder     . "/outlook-li/drafts")
                   (mu4e-trash-folder      . "/outlook-li/trash")
                   (mu4e-refile-folder     . "/outlook-li/archive")
-                  (mu4e-compose-signature . "Weitian LI")
+                  (mu4e-compose-signature . "Weitian")
                   (mu4e-sent-messages-behavior . delete)))
         ,(make-mu4e-context
           :name "gmail-li"
@@ -97,7 +97,7 @@
                   (mu4e-drafts-folder     . "/gmail-li/drafts")
                   (mu4e-trash-folder      . "/gmail-li/trash")
                   (mu4e-refile-folder     . "/gmail-li/archive")
-                  (mu4e-compose-signature . "Weitian LI")
+                  (mu4e-compose-signature . "Weitian")
                   (mu4e-sent-messages-behavior . delete)))
         ,(make-mu4e-context
           :name "sjtu"
@@ -116,7 +116,6 @@
                   (mu4e-refile-folder     . "/sjtu/archive")
                   (mu4e-compose-signature .
                     (concat "Weitian LI\n"
-                            "Department of Physics and Astronomy\n"
                             "Shanghai Jiao Tong University"))
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
@@ -135,7 +134,7 @@
                   (mu4e-drafts-folder     . "/autistici/drafts")
                   (mu4e-trash-folder      . "/autistici/trash")
                   (mu4e-refile-folder     . "/autistici/archive")
-                  (mu4e-compose-signature . "Weitian LI")
+                  (mu4e-compose-signature . "Weitian")
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
@@ -154,7 +153,7 @@
                   (mu4e-drafts-folder     . "/foxmail/drafts")
                   (mu4e-trash-folder      . "/foxmail/trash")
                   (mu4e-refile-folder     . "/foxmail/archive")
-                  (mu4e-compose-signature . "Weitian LI")
+                  (mu4e-compose-signature . "Weitian")
                   (mu4e-sent-messages-behavior . delete)))))
 
   ;; start with the first (default) context
