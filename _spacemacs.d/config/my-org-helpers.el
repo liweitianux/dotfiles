@@ -1,4 +1,4 @@
-;;; aly-org-helpers.el --- Custom Helper Functions for Org Mode
+;;; my-org-helpers.el --- Custom Helper Functions for Org Mode
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
 ;;
@@ -16,18 +16,18 @@
 ;;; Code:
 
 
-(defun aly/verify-refile-target ()
+(defun my/verify-refile-target ()
   "Exclude todo keywords with a done state from refile targets"
   (not (member (nth 2 (org-heading-components)) org-done-keywords)))
 
-(defun aly/remove-empty-drawer-on-clock-out ()
+(defun my/remove-empty-drawer-on-clock-out ()
   "Remove empty `LOGBOOK' drawers on clock out"
   (interactive)
   (save-excursion
     (beginning-of-line 0)
     (org-remove-empty-drawer-at "LOGBOOK" (point))))
 
-(defun aly/find-project-task ()
+(defun my/find-project-task ()
   "Move point to the parent (project) task if any"
   (save-restriction
     (widen)
@@ -38,7 +38,7 @@
       (goto-char parent-task)
       parent-task)))
 
-(defun aly/is-project-p ()
+(defun my/is-project-p ()
   "Any task with a subtask using a todo keyword"
   (save-restriction
     (widen)
@@ -54,18 +54,18 @@
             (setq has-subtask t))))
       (and is-a-task has-subtask))))
 
-(defun aly/is-project-subtree-p ()
+(defun my/is-project-subtree-p ()
   "Any task with a todo keyword that is in a project subtree.
 Callers of this function already widen the buffer view."
   (let ((task (save-excursion (org-back-to-heading 'invisible-ok)
                               (point))))
     (save-excursion
-      (aly/find-project-task)
+      (my/find-project-task)
       (if (equal (point) task)
           nil
         t))))
 
-(defun aly/is-task-p ()
+(defun my/is-task-p ()
   "Any task with a todo keyword and no subtask"
   (save-restriction
     (widen)
@@ -81,7 +81,7 @@ Callers of this function already widen the buffer view."
             (setq has-subtask t))))
       (and is-a-task (not has-subtask)))))
 
-(defun aly/is-subproject-p ()
+(defun my/is-subproject-p ()
   "Any task which is a subtask of another project"
   (let ((is-subproject)
         (is-a-task (member (nth 2 (org-heading-components)) org-todo-keywords-1)))
@@ -91,7 +91,7 @@ Callers of this function already widen the buffer view."
           (setq is-subproject t))))
     (and is-a-task is-subproject)))
 
-(defun aly/list-sublevels-for-projects-indented ()
+(defun my/list-sublevels-for-projects-indented ()
   "Set org-tags-match-list-sublevels so when restricted to a subtree we list all subtasks.
   This is normally used by skipping functions where this variable is already local to the agenda."
   (if (marker-buffer org-agenda-restrict-begin)
@@ -99,7 +99,7 @@ Callers of this function already widen the buffer view."
     (setq org-tags-match-list-sublevels nil))
   nil)
 
-(defun aly/list-sublevels-for-projects ()
+(defun my/list-sublevels-for-projects ()
   "Set org-tags-match-list-sublevels so when restricted to a subtree we list all subtasks.
   This is normally used by skipping functions where this variable is already local to the agenda."
   (if (marker-buffer org-agenda-restrict-begin)
@@ -107,21 +107,21 @@ Callers of this function already widen the buffer view."
     (setq org-tags-match-list-sublevels nil))
   nil)
 
-(defvar aly/hide-scheduled-and-waiting-next-tasks t)
+(defvar my/hide-scheduled-and-waiting-next-tasks t)
 
-(defun aly/toggle-next-task-display ()
+(defun my/toggle-next-task-display ()
   (interactive)
-  (setq aly/hide-scheduled-and-waiting-next-tasks (not aly/hide-scheduled-and-waiting-next-tasks))
+  (setq my/hide-scheduled-and-waiting-next-tasks (not my/hide-scheduled-and-waiting-next-tasks))
   (when  (equal major-mode 'org-agenda-mode)
     (org-agenda-redo))
-  (message "%s WAITING and SCHEDULED NEXT Tasks" (if aly/hide-scheduled-and-waiting-next-tasks "Hide" "Show")))
+  (message "%s WAITING and SCHEDULED NEXT Tasks" (if my/hide-scheduled-and-waiting-next-tasks "Hide" "Show")))
 
-(defun aly/skip-stuck-projects ()
+(defun my/skip-stuck-projects ()
   "Skip trees that are not stuck projects"
   (save-restriction
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-      (if (aly/is-project-p)
+      (if (my/is-project-p)
           (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
                  (has-next ))
             (save-excursion
@@ -134,13 +134,13 @@ Callers of this function already widen the buffer view."
               next-headline))  ; a stuck project, has subtasks but no next task
         nil))))
 
-(defun aly/skip-non-stuck-projects ()
+(defun my/skip-non-stuck-projects ()
   "Skip trees that are not stuck projects"
-  ;; (aly/list-sublevels-for-projects-indented)
+  ;; (my/list-sublevels-for-projects-indented)
   (save-restriction
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
-      (if (aly/is-project-p)
+      (if (my/is-project-p)
           (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
                  (has-next ))
             (save-excursion
@@ -153,48 +153,48 @@ Callers of this function already widen the buffer view."
               nil))  ; a stuck project, has subtasks but no next task
         next-headline))))
 
-(defun aly/skip-non-projects ()
+(defun my/skip-non-projects ()
   "Skip trees that are not projects"
-  ;; (aly/list-sublevels-for-projects-indented)
-  (if (save-excursion (aly/skip-non-stuck-projects))
+  ;; (my/list-sublevels-for-projects-indented)
+  (if (save-excursion (my/skip-non-stuck-projects))
       (save-restriction
         (widen)
         (let ((subtree-end (save-excursion (org-end-of-subtree t))))
           (cond
-           ((aly/is-project-p)
+           ((my/is-project-p)
             nil)
-           ((and (aly/is-project-subtree-p) (not (aly/is-task-p)))
+           ((and (my/is-project-subtree-p) (not (my/is-task-p)))
             nil)
            (t
             subtree-end))))
     (save-excursion (org-end-of-subtree t))))
 
-(defun aly/skip-non-tasks ()
+(defun my/skip-non-tasks ()
   "Show non-project tasks.
 Skip project and sub-project tasks, habits, and project related tasks."
   (save-restriction
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
-       ((aly/is-task-p)
+       ((my/is-task-p)
         nil)
        (t
         next-headline)))))
 
-(defun aly/skip-project-trees-and-habits ()
+(defun my/skip-project-trees-and-habits ()
   "Skip trees that are projects"
   (save-restriction
     (widen)
     (let ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
-       ((aly/is-project-p)
+       ((my/is-project-p)
         subtree-end)
        ((org-is-habit-p)
         subtree-end)
        (t
         nil)))))
 
-(defun aly/skip-projects-and-habits-and-single-tasks ()
+(defun my/skip-projects-and-habits-and-single-tasks ()
   "Skip trees that are projects, tasks that are habits, single non-project tasks"
   (save-restriction
     (widen)
@@ -202,17 +202,17 @@ Skip project and sub-project tasks, habits, and project related tasks."
       (cond
        ((org-is-habit-p)
         next-headline)
-       ((and aly/hide-scheduled-and-waiting-next-tasks
+       ((and my/hide-scheduled-and-waiting-next-tasks
              (member "WAITING" (org-get-tags-at)))
         next-headline)
-       ((aly/is-project-p)
+       ((my/is-project-p)
         next-headline)
-       ((and (aly/is-task-p) (not (aly/is-project-subtree-p)))
+       ((and (my/is-task-p) (not (my/is-project-subtree-p)))
         next-headline)
        (t
         nil)))))
 
-(defun aly/skip-project-tasks-maybe ()
+(defun my/skip-project-tasks-maybe ()
   "Show tasks related to the current restriction.
 When restricted to a project, skip project and sub project tasks, habits, NEXT tasks, and loose tasks.
 When not restricted, skip project and sub-project tasks, habits, and project related tasks."
@@ -222,37 +222,37 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
            (next-headline (save-excursion (or (outline-next-heading) (point-max))))
            (limit-to-project (marker-buffer org-agenda-restrict-begin)))
       (cond
-       ((aly/is-project-p)
+       ((my/is-project-p)
         next-headline)
        ((org-is-habit-p)
         subtree-end)
        ((and (not limit-to-project)
-             (aly/is-project-subtree-p))
+             (my/is-project-subtree-p))
         subtree-end)
        ((and limit-to-project
-             (aly/is-project-subtree-p)
+             (my/is-project-subtree-p)
              (member (org-get-todo-state) (list "NEXT")))
         subtree-end)
        (t
         nil)))))
 
-(defun aly/skip-project-tasks ()
+(defun my/skip-project-tasks ()
   "Show non-project tasks.
 Skip project and sub-project tasks, habits, and project related tasks."
   (save-restriction
     (widen)
     (let* ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
-       ((aly/is-project-p)
+       ((my/is-project-p)
         subtree-end)
        ((org-is-habit-p)
         subtree-end)
-       ((aly/is-project-subtree-p)
+       ((my/is-project-subtree-p)
         subtree-end)
        (t
         nil)))))
 
-(defun aly/skip-non-project-tasks ()
+(defun my/skip-non-project-tasks ()
   "Show project tasks.
 Skip project and sub-project tasks, habits, and loose non-project tasks."
   (save-restriction
@@ -260,66 +260,66 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (let* ((subtree-end (save-excursion (org-end-of-subtree t)))
            (next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
-       ((aly/is-project-p)
+       ((my/is-project-p)
         next-headline)
        ((org-is-habit-p)
         subtree-end)
-       ((and (aly/is-project-subtree-p)
+       ((and (my/is-project-subtree-p)
              (member (org-get-todo-state) (list "NEXT")))
         subtree-end)
-       ((not (aly/is-project-subtree-p))
+       ((not (my/is-project-subtree-p))
         subtree-end)
        (t
         nil)))))
 
-(defun aly/skip-projects-and-habits ()
+(defun my/skip-projects-and-habits ()
   "Skip trees that are projects and tasks that are habits"
   (save-restriction
     (widen)
     (let ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
-       ((aly/is-project-p)
+       ((my/is-project-p)
         subtree-end)
        ((org-is-habit-p)
         subtree-end)
        (t
         nil)))))
 
-(defun aly/skip-non-subprojects ()
+(defun my/skip-non-subprojects ()
   "Skip trees that are not projects"
   (let ((next-headline (save-excursion (outline-next-heading))))
-    (if (aly/is-subproject-p)
+    (if (my/is-subproject-p)
         nil
       next-headline)))
 
-(setq aly/keep-clock-running nil)
+(setq my/keep-clock-running nil)
 
-(defun aly/clock-in-to-next (kw)
+(defun my/clock-in-to-next (kw)
   "Switch a task from TODO to NEXT when clocking in.
 Skips capture tasks, projects, and subprojects.
 Switch projects and subprojects from NEXT back to TODO"
   (when (not (and (boundp 'org-capture-mode) org-capture-mode))
     (cond
      ((and (member (org-get-todo-state) (list "TODO"))
-           (aly/is-task-p))
+           (my/is-task-p))
       "NEXT")
      ((and (member (org-get-todo-state) (list "NEXT"))
-           (aly/is-project-p))
+           (my/is-project-p))
       "TODO"))))
 
-(defun aly/punch-in (arg)
+(defun my/punch-in (arg)
   "Start continuous clocking and set the default task to the
 selected task.  If no task is selected set the Organization task
 as the default task."
   (interactive "p")
-  (setq aly/keep-clock-running t)
+  (setq my/keep-clock-running t)
   (if (equal major-mode 'org-agenda-mode)
       ;; We are in the agenda
       (let* ((marker (org-get-at-bol 'org-hd-marker))
              (tags (org-with-point-at marker (org-get-tags-at))))
         (if (and (eq arg 4) tags)
             (org-agenda-clock-in '(16))
-          (aly/clock-in-organization-task-as-default)))
+          (my/clock-in-organization-task-as-default)))
     ;; We are NOT in the agenda
     (save-restriction
       (widen)
@@ -328,21 +328,21 @@ as the default task."
                (not (org-before-first-heading-p))
                (eq arg 4))
           (org-clock-in '(16))
-        (aly/clock-in-organization-task-as-default)))))
+        (my/clock-in-organization-task-as-default)))))
 
-(defun aly/punch-out ()
+(defun my/punch-out ()
   (interactive)
-  (setq aly/keep-clock-running nil)
+  (setq my/keep-clock-running nil)
   (when (org-clock-is-active)
     (org-clock-out))
   (org-agenda-remove-restriction-lock))
 
-(defun aly/clock-in-default-task ()
+(defun my/clock-in-default-task ()
   (save-excursion
     (org-with-point-at org-clock-default-task
       (org-clock-in))))
 
-(defun aly/clock-in-parent-task ()
+(defun my/clock-in-parent-task ()
   "Move point to the parent (project) task if any and clock in"
   (let ((parent-task))
     (save-excursion
@@ -354,23 +354,23 @@ as the default task."
         (if parent-task
             (org-with-point-at parent-task
               (org-clock-in))
-          (when aly/keep-clock-running
-            (aly/clock-in-default-task)))))))
+          (when my/keep-clock-running
+            (my/clock-in-default-task)))))))
 
-(defun aly/clock-in-organization-task-as-default ()
+(defun my/clock-in-organization-task-as-default ()
   (interactive)
-  (org-with-point-at (org-id-find aly/organization-task-id 'marker)
+  (org-with-point-at (org-id-find my/organization-task-id 'marker)
     (org-clock-in '(16))))
 
-(defun aly/clock-out-maybe ()
-  (when (and aly/keep-clock-running
+(defun my/clock-out-maybe ()
+  (when (and my/keep-clock-running
              (not org-clock-clocking-in)
              (marker-buffer org-clock-default-task)
              (not org-clock-resolving-clocks-due-to-idleness))
-    (aly/clock-in-parent-task)))
+    (my/clock-in-parent-task)))
 
 
-(defun aly/skip-non-archivable-tasks ()
+(defun my/skip-non-archivable-tasks ()
   "Skip trees that are not available for archiving"
   (save-restriction
     (widen)
@@ -394,6 +394,6 @@ as the default task."
         next-headline))))
 
 
-(provide 'aly-org-helpers)
+(provide 'my-org-helpers)
 
-;;; aly-org-helpers.el ends here
+;;; my-org-helpers.el ends here

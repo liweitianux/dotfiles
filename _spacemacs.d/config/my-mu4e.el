@@ -1,4 +1,4 @@
-;;; aly-mu4e-config.el --- mu4e (mu for Emacs) configurations
+;;; my-mu4e.el --- mu4e (mu for Emacs) configurations
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
 ;;
@@ -348,6 +348,6 @@
   )  ;; with-eval-after-load 'mu4e
 
 
-(provide 'aly-mu4e-config)
+(provide 'my-mu4e)
 
-;;; aly-mu4e-config.el ends here
+;;; my-mu4e.el ends here

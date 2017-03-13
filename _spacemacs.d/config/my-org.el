@@ -1,4 +1,4 @@
-;;; aly-org-config.el --- Custom Configurations for Org Mode
+;;; my-org.el --- Custom Configurations for Org Mode
 ;; -*- mode: emacs-lisp -*-
 ;; vim: set ts=8 sw=2 tw=0 fenc=utf-8 ft=lisp:
 ;;
@@ -18,7 +18,7 @@
 ;;; Code:
 
 ;; Default task to clock in whenever the clock normally stops
-(defvar aly/organization-task-id "bb7f1326-bda4-11e6-a30d-185e0f33a428")
+(defvar my/organization-task-id "bb7f1326-bda4-11e6-a30d-185e0f33a428")
 
 ;; Allow single character alphabetical bullets
 ;; Need to be set before `org.el' is loaded
@@ -34,7 +34,7 @@
   (require 'ox-latex)
 
   ;; Load custom helper functions for Org
-  (require 'aly-org-helpers)
+  (require 'my-org-helpers)
 
   ;; Default location to look for Org files
   (setq org-directory '("~/org"))
@@ -88,13 +88,13 @@
           ))
 
   ;; Remove empty `LOGBOOK' drawers on clock out
-  (add-hook 'org-clock-out-hook 'aly/remove-empty-drawer-on-clock-out 'append)
+  (add-hook 'org-clock-out-hook 'my/remove-empty-drawer-on-clock-out 'append)
 
   ;; More handy shortcuts
   (global-set-key (kbd "<f9>") 'org-agenda)
 
   ;; Exclude `DONE' state tasks from refile targets
-  (setq org-refile-target-verify-function 'aly/verify-refile-target)
+  (setq org-refile-target-verify-function 'my/verify-refile-target)
 
   ;; Do not dim blocked tasks
   (setq org-agenda-dim-blocked-tasks nil)
@@ -116,75 +116,75 @@
                    (org-tags-match-list-sublevels nil)))
             (tags-todo "-CANCELLED/!"
                        ((org-agenda-overriding-header "Stuck Projects")
-                        (org-agenda-skip-function 'aly/skip-non-stuck-projects)
+                        (org-agenda-skip-function 'my/skip-non-stuck-projects)
                         (org-agenda-sorting-strategy
                          '(category-keep))))
             (tags-todo "-HOLD-CANCELLED/!"
                        ((org-agenda-overriding-header "Projects")
-                        (org-agenda-skip-function 'aly/skip-non-projects)
+                        (org-agenda-skip-function 'my/skip-non-projects)
                         (org-tags-match-list-sublevels 'indented)
                         (org-agenda-sorting-strategy
                          '(category-keep))))
             (tags-todo "-CANCELLED/!NEXT"
                        ((org-agenda-overriding-header
                          (concat "Project Next Tasks"
-                                 (if aly/hide-scheduled-and-waiting-next-tasks
+                                 (if my/hide-scheduled-and-waiting-next-tasks
                                      ""
                                    " (including WAITING and SCHEDULED tasks)")))
-                        (org-agenda-skip-function 'aly/skip-projects-and-habits-and-single-tasks)
+                        (org-agenda-skip-function 'my/skip-projects-and-habits-and-single-tasks)
                         (org-tags-match-list-sublevels t)
-                        (org-agenda-todo-ignore-scheduled aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-deadlines aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-with-date aly/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-scheduled my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-with-date my/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-sorting-strategy
                          '(todo-state-down effort-up category-keep))))
             (tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
                        ((org-agenda-overriding-header
                          (concat "Project Subtasks"
-                                 (if aly/hide-scheduled-and-waiting-next-tasks
+                                 (if my/hide-scheduled-and-waiting-next-tasks
                                      ""
                                    " (including WAITING and SCHEDULED tasks)")))
-                        (org-agenda-skip-function 'aly/skip-non-project-tasks)
-                        (org-agenda-todo-ignore-scheduled aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-deadlines aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-with-date aly/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-skip-function 'my/skip-non-project-tasks)
+                        (org-agenda-todo-ignore-scheduled my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-with-date my/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-sorting-strategy
                          '(category-keep))))
             (tags-todo "-REFILE-CANCELLED-WAITING-HOLD/!"
                        ((org-agenda-overriding-header
                          (concat "Standalone Tasks"
-                                 (if aly/hide-scheduled-and-waiting-next-tasks
+                                 (if my/hide-scheduled-and-waiting-next-tasks
                                      ""
                                    " (including WAITING and SCHEDULED tasks)")))
-                        (org-agenda-skip-function 'aly/skip-project-tasks)
-                        (org-agenda-todo-ignore-scheduled aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-deadlines aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-with-date aly/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-skip-function 'my/skip-project-tasks)
+                        (org-agenda-todo-ignore-scheduled my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-with-date my/hide-scheduled-and-waiting-next-tasks)
                         (org-agenda-sorting-strategy
                          '(category-keep))))
             (tags-todo "-CANCELLED+WAITING|HOLD/!"
                        ((org-agenda-overriding-header
                          (concat "Waiting and Postponed Tasks"
-                                 (if aly/hide-scheduled-and-waiting-next-tasks
+                                 (if my/hide-scheduled-and-waiting-next-tasks
                                      ""
                                    " (including WAITING and SCHEDULED tasks)")))
-                        (org-agenda-skip-function 'aly/skip-non-tasks)
+                        (org-agenda-skip-function 'my/skip-non-tasks)
                         (org-tags-match-list-sublevels nil)
-                        (org-agenda-todo-ignore-scheduled aly/hide-scheduled-and-waiting-next-tasks)
-                        (org-agenda-todo-ignore-deadlines aly/hide-scheduled-and-waiting-next-tasks)))
+                        (org-agenda-todo-ignore-scheduled my/hide-scheduled-and-waiting-next-tasks)
+                        (org-agenda-todo-ignore-deadlines my/hide-scheduled-and-waiting-next-tasks)))
             (tags "-REFILE/"
                   ((org-agenda-overriding-header "Tasks to Archive")
-                   (org-agenda-skip-function 'aly/skip-non-archivable-tasks)
+                   (org-agenda-skip-function 'my/skip-non-archivable-tasks)
                    (org-tags-match-list-sublevels nil))))
            nil)))
 
-  (defun aly/org-auto-exclude-function (tag)
+  (defun my/org-auto-exclude-function (tag)
     "Automatic task exclusion in the agenda with `/ RET'"
     (and (cond
           ((string= tag "hold") t)  ; exclude "HOLD" tasks
          )
          (concat "-" tag)))
-  (setq org-agenda-auto-exclude-function 'aly/org-auto-exclude-function)
+  (setq org-agenda-auto-exclude-function 'my/org-auto-exclude-function)
 
   ;; Clocking
   ;;
@@ -202,7 +202,7 @@
   ;; Resume clocking task on clock-in if the clock is open
   (setq org-clock-in-resume t)
   ;; Change tasks to `NEXT' when clocking in
-  (setq org-clock-in-switch-to-state 'aly/clock-in-to-next)
+  (setq org-clock-in-switch-to-state 'my/clock-in-to-next)
   ;; Separate drawers for clocking and logs
   (setq org-drawers '("PROPERTIES" "LOGBOOK"))
   ;; Save clock data and state changes and notes in the `LOGBOOK' drawer
@@ -211,7 +211,7 @@
   (setq org-clock-out-remove-zero-time-clocks t)
   ;; Clock out when moving task to a done state
   (setq org-clock-out-when-done t)
-  (add-hook 'org-clock-out-hook 'aly/clock-out-maybe 'append)
+  (add-hook 'org-clock-out-hook 'my/clock-out-maybe 'append)
   ;; Use discrete minute intervals (no rounding) increments for time editing
   (setq org-time-stamp-rounding-minutes '(1 1))
 
@@ -281,6 +281,6 @@
   )
 
 
-(provide 'aly-org-config)
+(provide 'my-org)
 
-;;; aly-org-config.el ends here
+;;; my-org.el ends here

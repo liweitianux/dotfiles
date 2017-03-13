@@ -485,8 +485,8 @@
   ;;
   ;; Load custom configurations
   (push "~/.spacemacs.d/config" load-path)
-  (require 'aly-org-config)
-  (require 'aly-mu4e-config)
+  (require 'my-org)
+  (require 'my-mu4e)
   ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs.d/custom.el")
