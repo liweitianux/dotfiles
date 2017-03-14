@@ -487,6 +487,7 @@
   (push "~/.spacemacs.d/config" load-path)
   (require 'my-org)
   (require 'my-mu4e)
+  (require 'my-calendar)
   ;;
   ;; Set custom file location instead of using this file
   (setq custom-file "~/.spacemacs.d/custom.el")
