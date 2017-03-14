@@ -253,8 +253,10 @@
   ;; Any task with a subtask using a todo keyword is a project.
   ;; Projects are "stuck" if they have no subtask with a `NEXT' todo keyword.
 
-  ;; Only show today's agenda by default
-  (setq org-agenda-span 'day)
+  ;; Start the agenda overview on the current day
+  (setq org-agenda-start-on-weekday nil)
+  ;; Show week's agenda (default)
+  (setq org-agenda-span 'week)
   ;; Disable the default stuck projects agenda view
   (setq org-stuck-projects '("" nil nil ""))
 
@@ -270,6 +272,9 @@
      (python . t)
      (ditaa . t)
      ))
+
+  ;; Enable `org-indent-mode' by default at startup
+  (setq org-startup-indented t)
 
   ;; Set the bullet symbols for `org-bullets'
   (setq org-bullets-bullet-list '("♠" "♥" "♣" "♦"))  ;; "SHoCkeD" ordering
