@@ -4,7 +4,6 @@
 ;;
 ;; Aaron LI
 ;; Created: 2016-02-21
-;; Updated: 2016-09-03
 ;;
 
 ;;; Commentary:
@@ -257,6 +256,11 @@
   ;; compose messages in a separate frame
   (setq mu4e-compose-in-new-frame t)
 
+  ;; customize the reply/quote citation format
+  (setq message-citation-line-format "On %a, %b %d, %Y at %R, %f wrote:\n")
+  ;; choose to use the above formatted string
+  (setq message-citation-line-function 'message-insert-formatted-citation-line)
+
   ;; confirm before sending
   (add-hook 'message-send-hook
             (lambda ()
@@ -274,12 +278,12 @@
   (add-to-list 'mu4e-view-actions
                '("bView in browser" . mu4e-action-view-in-browser) t)
   ;; search for messages by the sender of the opened message
-  (defun search-for-sender (msg)
+  (defun my/search-for-sender (msg)
     "Search for messages sent by the sender of the message at point."
     (mu4e-headers-search
     (concat "from:" (cdar (mu4e-message-field msg :from)))))
   (add-to-list 'mu4e-view-actions
-               '("xSearch for sender" . search-for-sender) t)
+               '("xSearch for sender" . my/search-for-sender) t)
 
   ;; set `mu4e' as emacs' default email program
   (setq mail-user-agent 'mu4e-user-agent)
