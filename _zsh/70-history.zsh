@@ -1,10 +1,10 @@
 #
 # zsh/history.zsh
+# see zshparam(1)
 #
 
 HISTFILE=~/.zsh_history
-
-HISTSIZE=10000
+HISTSIZE=9000
 SAVEHIST=9000
 # ignore these commands without arguments
 HISTIGNORE="cd:ls:ll"

@@ -1,6 +1,6 @@
 #
 # zsh/setopt.zsh
-# see man zshoptions(1)
+# see zshoptions(1)
 #
 
 ## Basics
@@ -20,6 +20,8 @@ setopt EXTENDED_GLOB
 setopt INTERACTIVE_COMMENTS
 # display PID when suspending processes as well
 setopt LONG_LIST_JOBS
+# disable output flow control via start/stop characters (^S/^Q)
+unsetopt FLOW_CONTROL
 
 ## History
 # allow multiple terminal sessions to all append to one zsh command history
@@ -41,7 +43,7 @@ setopt HIST_VERIFY
 
 
 ## Completion
-# * shouldn't match dotfiles. ever.
+# `*' shouldn't match dotfiles. ever.
 setopt NO_GLOB_DOTS
 # allow completion from within a word/phrase
 setopt COMPLETE_IN_WORD
@@ -50,6 +52,8 @@ setopt ALWAYS_TO_END
 # show completion menu on successive tab press (needs 'unsetopt MENU_COMPLETE')
 setopt AUTO_MENU
 unsetopt MENU_COMPLETE
+# make the completion list compact
+setopt LIST_PACKED
 
 ## Correction
 # spelling correction for commands

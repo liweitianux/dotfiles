@@ -13,10 +13,12 @@ function exists() {
     type "$1" >/dev/null 2>&1
 }
 
+
 ## Check whether the program is running
 function is_running() {
-    pgrep -x -u "${USER}" $1 &> /dev/null
+    pgrep -x -u "${USER}" "$1" /dev/null 2>&1
 }
+
 
 function zsh_recompile() {
     autoload -U zrecompile
@@ -24,6 +26,7 @@ function zsh_recompile() {
     [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
     [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
 
+    local f
     for f in ~/.zsh/**/*.zsh; do
         [[ -f $f ]] && zrecompile -p $f
         [[ -f $f.zwc.old ]] && rm -f $f.zwc.old
@@ -37,7 +40,7 @@ function zsh_recompile() {
 
 
 function extract() {
-  echo Extracting $1 ...
+  echo "Extracting '$1' ..."
   if [ -f "$1" ] ; then
       case "$1" in
           *.tar.bz2)
@@ -63,10 +66,10 @@ function extract() {
           *.7z)
               7z x "$1";;
           *)
-              echo "'$1' cannot be extracted via extract()" ;;
+              echo "Unable to extract: '$1'" ;;
       esac
   else
-      echo "'$1' is not a valid file"
+      echo "Invalid file: '$1'"
   fi
 }
 
@@ -89,21 +92,45 @@ function trash() {
 }
 
 
-function strip_diff_leading_symbols() {
-    local color_code_regex="(\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K])"
-
-    # simplify the unified patch diff header
-    sed -r "s/^($color_code_regex)diff --git .*$//g" | \
-        sed -r "s/^($color_code_regex)index .*$/\n\1$(rule)/g" | \
-        sed -r "s/^($color_code_regex)\+\+\+(.*)$/\1+++\5\n\1$(rule)\x1B\[m/g" |\
-        # actually strips the leading symbols
-        sed -r "s/^($color_code_regex)[\+\-]/\1 /g"
-}
-
-
 ## Print a horizontal rule
 function rule() {
     printf "%$(tput cols)s\n" | tr ' ' '-'
+}
+
+
+## Interactive move/rename: making renaming long filenames less sucks
+# Credit: http://chneukirchen.org/dotfiles/.zshrc
+function imv() {
+    local src dst
+    for src; do
+        [[ -e "$src" ]] || { print -u2 "$src: does not exist"; continue }
+        dst="$src"
+        vared dst
+        [[ "$src" != "$dst" ]] && mkdir -p ${dst:h} && mv -n $src $dst
+    done
+}
+
+
+## Print pre-defined C macros
+# Credit: http://chneukirchen.org/dotfiles/.zshrc
+ccdef() {
+    ${1:-cc} $@[2,-1] -dM -E - </dev/null
+}
+
+
+## Run up to N CMD in parallel with ARGS
+#    zapply [-jN] [-iv] CMD... -- ARGS...
+#    CMD will be run as zsh command if it contains a $
+#    without explicit '--', assume CMD is first argument
+#    {} (or $1) may be used to access argument
+# Credit: http://chneukirchen.org/dotfiles/.zshrc
+zapply() {
+    local s="$@[(i)--]" xopt=
+    (( s > $# )) && argv[2]=(-- "$argv[2]") && s=2
+    zparseopts -D -M -A xopt n: p t P: j:=P v=t i=p   # map to xargs(1) flags
+    (( $@[(i){}] < s )) && xopt[-I]={}
+    [[ $1 = *'$'* ]] && argv[1]=(zsh -c "$1" --) && (( s += 3 ))
+    printf '%s\0' "$@[s+1,-1]" | xargs -0 -r -n1 ${(kv)=xopt} "$@[1,s-1]"
 }
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
