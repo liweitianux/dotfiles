@@ -32,11 +32,6 @@ function gitpwd() {
 
 
 function myprompt() {
-    case "$TERM" in
-    xterm*|rxvt*)
-        precmd()  { [[ -t 1 ]] && print -Pn "\e]0;%m: %~\a" }
-        preexec() { [[ -t 1 ]] && print -n "\e]0;$HOST: ${(q)1//(#m)[$'\000-\037\177-']/${(q)MATCH}}\a" }
-    esac
     setopt PROMPT_SUBST
     nbsp=$'\u00A0'
     PROMPT='%B%F{green}%m%(?.. %F{red}%??)%(1j. %F{yellow}%j&.)%b%f $(gitpwd)%B%(!.%F{red}.%F{green})%#${SSH_CONNECTION:+%#}$nbsp%b%f'
@@ -46,7 +41,7 @@ function myprompt() {
 }
 
 
-# Setup prompts
+# Set prompts
 myprompt
 
 
