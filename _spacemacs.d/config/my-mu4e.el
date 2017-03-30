@@ -183,19 +183,22 @@
   ;; get mail and update index periodically in the background (unit: seconds)
   (setq mu4e-update-interval 900)
 
-  ;; frequent mail folders, with shortcuts
+  ;; set shortcuts for frequent mail folders (also used by moving messages)
   ;; NOTE: do not use shortcut `o' as it is used for `[o]ther'
-  ;(setq mu4e-maildir-shortcuts
-  ;      '(("/important"         . ?i)
-  ;        ("/archive"           . ?a)
-  ;        ("/gmail-aly/archive" . ?G)
-  ;        ("/gmail-li/archive"  . ?g)
-  ;        ("/outlook-aly/inbox" . ?l)
-  ;        ("/outlook-li/inbox"  . ?L)
-  ;        ("/sjtu/inbox"        . ?s)))
+  (setq mu4e-maildir-shortcuts
+        '(("/important"         . ?i)
+          ("/archive"           . ?a)
+          ("/gmail-aly/archive" . ?G)
+          ("/gmail-li/archive"  . ?g)
+          ("/outlook-aly/inbox" . ?l)
+          ("/outlook-li/inbox"  . ?L)
+          ("/sjtu/inbox"        . ?s)))
 
-  ;; do not keep message buffers around
-  (setq message-kill-buffer-on-exit t)
+  ;; kill the buffer after sending a message
+  ;(setq message-kill-buffer-on-exit t)
+
+  ;; exclude myself when replying to all
+  (setq mu4e-compose-dont-reply-to-self t)
 
   ;; enable inline images
   (setq mu4e-view-show-images t)
@@ -216,20 +219,49 @@
   ;; change the luminosity form dark theme
   (setq shr-color-visible-luminance-min 70)
 
-  ;; customize bookmarks
-  (setq mu4e-bookmarks
-        '(("flag:unread AND NOT flag:trashed" "Unread messages"      ?u)
-          ("date:today..now"                  "Today's messages"     ?T)
-          ("date:7d..now"                     "Last 7 days"          ?w)
-          ("date:1m..now"                     "Last month"           ?m)
-          ("flag:flagged"                     "Flagged messages"     ?f)
-          ("tag:todo OR tag:task"             "TODO / Task"          ?t)
-          ("tag:work"                         "Work"                 ?W)
-          ("tag:astro"                        "Astro"                ?a)
-          ("tag:arxiv OR from:arxiv.org"      "arXiv"                ?x)
-          ("tag:SMS"                          "SMS"                  ?S)
-          ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?d)
-          ("mime:image/*"                     "Messages with images" ?p)))
+  ;; add custom bookmarks
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "Last month"
+                :query "date:1m..now"
+                :key ?m))
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "Flagged messages"
+                :query "flag:flagged"
+                :key ?f))
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "arXiv"
+                :query "tag:arxiv OR from:arxiv.org"
+                :key ?x))
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "Astro"
+                :query "tag:astro"
+                :key ?a))
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "Work"
+                :query "tag:work"
+                :key ?W))
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "TODO / Task"
+                :query "tag:todo OR tag:task"
+                :key ?t))
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "SMS"
+                :query "tag:SMS"
+                :key ?S)
+               t)  ; append
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
+                :name "Deleted"
+                :query "flag:trashed OR tag:\\\\Trash"
+                :key ?d)
+               t)  ; append
 
   ;; headers list appearance
   (setq mu4e-headers-date-format "%Y-%m-%d %H:%M"
