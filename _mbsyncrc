@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2017-03-06
+# Updated: 2017-04-06
 #
 
 
@@ -221,6 +221,48 @@ Slave           :sjtu-local:trash
 Group           sjtu
 Channels        sjtu-inbox sjtu-sent sjtu-archive sjtu-drafts sjtu-junk sjtu-trash
 ## "sjtu" }}}
+
+
+## Account "lavabit" {{{
+IMAPAccount     lavabit
+Host            imap.lavabit.com
+User            liweitianux@lavabit.com
+PassCmd         "pass show email/lavabit | head -n1"
+SSLType         IMAPS
+
+IMAPStore       lavabit-remote
+Account         lavabit
+
+MaildirStore    lavabit-local
+Path            ~/mail/lavabit/
+
+Channel         lavabit-inbox
+Master          :lavabit-remote:Inbox
+Slave           :lavabit-local:inbox
+
+Channel         lavabit-sent
+Master          :lavabit-remote:Sent
+Slave           :lavabit-local:sent
+
+Channel         lavabit-archive
+Master          :lavabit-remote:Archive
+Slave           :lavabit-local:archive
+
+Channel         lavabit-drafts
+Master          :lavabit-remote:Drafts
+Slave           :lavabit-local:drafts
+
+Channel         lavabit-trash
+Master          :lavabit-remote:Trash
+Slave           :lavabit-local:trash
+
+Channel         lavabit-private
+Master          :lavabit-remote:Private
+Slave           :lavabit-local:private
+
+Group           lavabit
+Channels        lavabit-inbox lavabit-sent lavabit-archive lavabit-drafts lavabit-trash lavabit-private
+## "lavabit" }}}
 
 
 ## Account "autistici" {{{
