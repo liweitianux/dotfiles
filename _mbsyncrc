@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2017-04-06
+# Updated: 2017-04-19
 #
 
 
@@ -15,6 +15,90 @@ Expunge         Both
 Create          Both
 # save the synchronization state files in corresponding slave mailboxes
 SyncState       *
+
+
+## Account "aly@aaronly.me" {{{
+IMAPAccount     aly
+Host            mail.aaronly.me
+User            aly@aaronly.me
+PassCmd         "pass show email/self/aly | head -n1"
+SSLType         IMAPS
+
+IMAPStore       aly-remote
+Account         aly
+
+MaildirStore    aly-local
+Path            ~/mail/aly/
+
+Channel         aly-inbox
+Master          :aly-remote:Inbox
+Slave           :aly-local:inbox
+
+Channel         aly-sent
+Master          :aly-remote:Sent
+Slave           :aly-local:sent
+
+Channel         aly-archive
+Master          :aly-remote:Archive
+Slave           :aly-local:archive
+
+Channel         aly-drafts
+Master          :aly-remote:Drafts
+Slave           :aly-local:drafts
+
+Channel         aly-junk
+Master          :aly-remote:Junk
+Slave           :aly-local:junk
+
+Channel         aly-trash
+Master          :aly-remote:Trash
+Slave           :aly-local:trash
+
+Group           aly
+Channels        aly-inbox aly-sent aly-archive aly-drafts aly-junk aly-trash
+## "aly@aaronly.me" }}}
+
+
+## Account "webmaster@aaronly.me" {{{
+IMAPAccount     webmaster
+Host            mail.aaronly.me
+User            webmaster@aaronly.me
+PassCmd         "pass show email/self/webmaster | head -n1"
+SSLType         IMAPS
+
+IMAPStore       webmaster-remote
+Account         webmaster
+
+MaildirStore    webmaster-local
+Path            ~/mail/webmaster/
+
+Channel         webmaster-inbox
+Master          :webmaster-remote:Inbox
+Slave           :webmaster-local:inbox
+
+Channel         webmaster-sent
+Master          :webmaster-remote:Sent
+Slave           :webmaster-local:sent
+
+Channel         webmaster-archive
+Master          :webmaster-remote:Archive
+Slave           :webmaster-local:archive
+
+Channel         webmaster-drafts
+Master          :webmaster-remote:Drafts
+Slave           :webmaster-local:drafts
+
+Channel         webmaster-junk
+Master          :webmaster-remote:Junk
+Slave           :webmaster-local:junk
+
+Channel         webmaster-trash
+Master          :webmaster-remote:Trash
+Slave           :webmaster-local:trash
+
+Group           webmaster
+Channels        webmaster-inbox webmaster-sent webmaster-archive webmaster-drafts webmaster-junk webmaster-trash
+## "webmaster@aaronly.me" }}}
 
 
 ## Account "gmail-aly" {{{
