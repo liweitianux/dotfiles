@@ -242,54 +242,20 @@
   (setq shr-color-visible-luminance-min 70)
 
   ;; add custom bookmarks
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Last month"
-                :query "date:1m..now"
-                :key ?m))
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Flagged messages"
-                :query "flag:flagged"
-                :key ?f))
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "arXiv"
-                :query "tag:arxiv OR from:arxiv.org"
-                :key ?x))
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Astro"
-                :query "tag:astro"
-                :key ?a))
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Work"
-                :query "tag:work"
-                :key ?W))
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "TODO / Task"
-                :query "tag:todo OR tag:task"
-                :key ?t))
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "SMS"
-                :query "tag:SMS"
-                :key ?S)
-               t)  ; append
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Drafts"
-                :query "flag:draft"
-                :key ?d)
-               t)  ; append
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Deleted"
-                :query "flag:trashed OR tag:\\\\Trash"
-                :key ?D)
-               t)  ; append
+  (setq mu4e-bookmarks
+        '(("flag:unread AND NOT flag:trashed" "Unread messages"      ?u)
+          ("flag:draft"                       "Drafts"               ?f)
+          ("tag:todo OR tag:task"             "TODO / Task"          ?t)
+          ("tag:work"                         "Work"                 ?W)
+          ("date:today..now"                  "Today's messages"     ?T)
+          ("date:7d..now"                     "Last 7 days"          ?w)
+          ("date:1m..now"                     "Last month"           ?m)
+          ("flag:flagged"                     "Flagged messages"     ?f)
+          ("tag:astro"                        "Astro"                ?a)
+          ("tag:arxiv OR from:arxiv.org"      "arXiv"                ?x)
+          ("tag:SMS"                          "SMS"                  ?S)
+          ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?d)
+          ("mime:image/*"                     "Messages with images" ?p)))
 
   ;; headers list appearance
   (setq mu4e-headers-date-format "%Y-%m-%d %H:%M"
