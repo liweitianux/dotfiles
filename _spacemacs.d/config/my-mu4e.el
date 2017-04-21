@@ -26,7 +26,26 @@
 
   ;; multiple email accounts: contexts (require mu4e >= 0.9.16)
   (setq mu4e-contexts
-    `( ,(make-mu4e-context
+     `( ,(make-mu4e-context
+          :name "aly"
+          :enter-func (lambda ()
+                        (mu4e-message "Switched to context: aly"))
+          ;; `leave-func' not defined
+          ;; `match-func' is invoked just before `mu4e-compose-pre-hook'
+          :match-func (lambda (msg)
+                        (when msg
+                          (mu4e-message-contact-field-matches
+                           msg :to "aly@aaronly.me")))
+          :vars '((user-mail-address      . "aly@aaronly.me")
+                  (user-full-name         . "Aaron LI")
+                  (mu4e-sent-folder       . "/aly/sent")
+                  (mu4e-drafts-folder     . "/aly/drafts")
+                  (mu4e-trash-folder      . "/aly/trash")
+                  (mu4e-refile-folder     . "/aly/archive")
+                  (mu4e-compose-signature . "Aly")
+                  ;; copy message to sent folder
+                  (mu4e-sent-messages-behavior . sent)))
+        ,(make-mu4e-context
           :name "Outlook-aly"
           :enter-func (lambda ()
                         (mu4e-message "Switched to context: outlook-aly"))
@@ -119,7 +138,7 @@
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
-          :name "autistici"
+          :name "Autistici"
           :enter-func (lambda ()
                         (mu4e-message "Switched to context: autistici"))
           ;; `leave-func' not defined
@@ -194,6 +213,9 @@
           ("/outlook-li/inbox"  . ?L)
           ("/sjtu/inbox"        . ?s)))
 
+  ;; This works better with 'mbsync'
+  (setq mu4e-change-filenames-when-moving t)
+
   ;; kill the buffer after sending a message
   ;(setq message-kill-buffer-on-exit t)
 
@@ -258,9 +280,15 @@
                t)  ; append
   (add-to-list 'mu4e-bookmarks
                (make-mu4e-bookmark
+                :name "Drafts"
+                :query "flag:draft"
+                :key ?d)
+               t)  ; append
+  (add-to-list 'mu4e-bookmarks
+               (make-mu4e-bookmark
                 :name "Deleted"
                 :query "flag:trashed OR tag:\\\\Trash"
-                :key ?d)
+                :key ?D)
                t)  ; append
 
   ;; headers list appearance
@@ -361,6 +389,8 @@
     "gg"   'evil-goto-first-line
     "j"    'evil-next-line
     "k"    'evil-previous-line
+    "y"    'evil-yank
+    "Y"    'evil-yank-line
     "\C-j" 'mu4e-view-headers-next
     "\C-k" 'mu4e-view-headers-prev
     "\C-]" 'mu4e-view-headers-next-unread
