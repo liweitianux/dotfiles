@@ -20,8 +20,8 @@ SyncState       *
 ## Account "aly@aaronly.me" {{{
 IMAPAccount     aly
 Host            mail.aaronly.me
-User            aly@aaronly.me
-PassCmd         "pass show email/self/aly | head -n1"
+User            aly@aaronly.me@laptop
+PassCmd         "pass show email/self/aly/laptop | head -n1"
 SSLType         IMAPS
 
 IMAPStore       aly-remote
@@ -57,6 +57,48 @@ Slave           :aly-local:trash
 Group           aly
 Channels        aly-inbox aly-sent aly-archive aly-drafts aly-junk aly-trash
 ## "aly@aaronly.me" }}}
+
+
+## Account "weitian@aaronly.me" {{{
+IMAPAccount     weitian
+Host            mail.aaronly.me
+User            weitian@aaronly.me@laptop
+PassCmd         "pass show email/self/weitian/laptop | head -n1"
+SSLType         IMAPS
+
+IMAPStore       weitian-remote
+Account         weitian
+
+MaildirStore    weitian-local
+Path            ~/mail/weitian/
+
+Channel         weitian-inbox
+Master          :weitian-remote:Inbox
+Slave           :weitian-local:inbox
+
+Channel         weitian-sent
+Master          :weitian-remote:Sent
+Slave           :weitian-local:sent
+
+Channel         weitian-archive
+Master          :weitian-remote:Archive
+Slave           :weitian-local:archive
+
+Channel         weitian-drafts
+Master          :weitian-remote:Drafts
+Slave           :weitian-local:drafts
+
+Channel         weitian-junk
+Master          :weitian-remote:Junk
+Slave           :weitian-local:junk
+
+Channel         weitian-trash
+Master          :weitian-remote:Trash
+Slave           :weitian-local:trash
+
+Group           weitian
+Channels        weitian-inbox weitian-sent weitian-archive weitian-drafts weitian-junk weitian-trash
+## "weitian@aaronly.me" }}}
 
 
 ## Account "webmaster@aaronly.me" {{{

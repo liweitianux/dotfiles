@@ -46,6 +46,25 @@
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
+          :name "weitian"
+          :enter-func (lambda ()
+                        (mu4e-message "Switched to context: weitian"))
+          ;; `leave-func' not defined
+          ;; `match-func' is invoked just before `mu4e-compose-pre-hook'
+          :match-func (lambda (msg)
+                        (when msg
+                          (mu4e-message-contact-field-matches
+                           msg :to "weitian@aaronly.me")))
+          :vars '((user-mail-address      . "weitian@aaronly.me")
+                  (user-full-name         . "Weitian LI")
+                  (mu4e-sent-folder       . "/weitian/sent")
+                  (mu4e-drafts-folder     . "/weitian/drafts")
+                  (mu4e-trash-folder      . "/weitian/trash")
+                  (mu4e-refile-folder     . "/weitian/archive")
+                  (mu4e-compose-signature . "Weitian")
+                  ;; copy message to sent folder
+                  (mu4e-sent-messages-behavior . sent)))
+        ,(make-mu4e-context
           :name "Outlook-aly"
           :enter-func (lambda ()
                         (mu4e-message "Switched to context: outlook-aly"))
