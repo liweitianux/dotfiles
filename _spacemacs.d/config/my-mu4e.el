@@ -38,10 +38,10 @@
                            msg :to "aly@aaronly.me")))
           :vars '((user-mail-address      . "aly@aaronly.me")
                   (user-full-name         . "Aaron LI")
-                  (mu4e-sent-folder       . "/aly/sent")
                   (mu4e-drafts-folder     . "/aly/drafts")
                   (mu4e-trash-folder      . "/aly/trash")
                   (mu4e-refile-folder     . "/aly/archive")
+                  (mu4e-sent-folder       . "/aly/sent")
                   (mu4e-compose-signature . "Aly")
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
@@ -57,10 +57,10 @@
                            msg :to "weitian@aaronly.me")))
           :vars '((user-mail-address      . "weitian@aaronly.me")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-sent-folder       . "/weitian/sent")
                   (mu4e-drafts-folder     . "/weitian/drafts")
                   (mu4e-trash-folder      . "/weitian/trash")
                   (mu4e-refile-folder     . "/weitian/archive")
+                  (mu4e-sent-folder       . "/weitian/sent")
                   (mu4e-compose-signature . "Weitian")
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
@@ -76,12 +76,12 @@
                             :to "aaronly.me@outlook.com")))
           :vars '((user-mail-address      . "aaronly.me@outlook.com")
                   (user-full-name         . "Aaron LI")
-                  (mu4e-sent-folder       . "/outlook-aly/sent")
                   (mu4e-drafts-folder     . "/outlook-aly/drafts")
                   (mu4e-trash-folder      . "/outlook-aly/trash")
                   (mu4e-refile-folder     . "/outlook-aly/archive")
+                  (mu4e-sent-folder       . "/local-sent")
                   (mu4e-compose-signature . "Aly")
-                  (mu4e-sent-messages-behavior . delete)))
+                  (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
           :name "Gmail-aly"
           :enter-func (lambda ()
@@ -94,13 +94,13 @@
           :vars '((user-mail-address      . "aaronly.me@gmail.com")
                   (user-full-name         . "Aaron LI")
                   ;; special folders
-                  (mu4e-sent-folder       . "/sent")
                   (mu4e-drafts-folder     . "/gmail-aly/drafts")
                   (mu4e-trash-folder      . "/gmail-aly/trash")
                   (mu4e-refile-folder     . "/gmail-aly/archive")
+                  (mu4e-sent-folder       . "/local-sent")
                   (mu4e-compose-signature . "Aly")
-                  ;; do NOT save message to 'sent-folder'
-                  (mu4e-sent-messages-behavior . delete)))
+                  ;; save message to local sent folder for safety
+                  (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
           :name "outlook-li"
           :enter-func (lambda ()
@@ -113,12 +113,12 @@
                                   "liweitianux@outlook.com"))))
           :vars '((user-mail-address      . "liweitianux@live.com")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-sent-folder       . "/outlook-li/sent")
                   (mu4e-drafts-folder     . "/outlook-li/drafts")
                   (mu4e-trash-folder      . "/outlook-li/trash")
                   (mu4e-refile-folder     . "/outlook-li/archive")
+                  (mu4e-sent-folder       . "/local-sent")
                   (mu4e-compose-signature . "Weitian")
-                  (mu4e-sent-messages-behavior . delete)))
+                  (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
           :name "gmail-li"
           :enter-func (lambda ()
@@ -130,12 +130,12 @@
                             :to "liweitianux@gmail.com")))
           :vars '((user-mail-address      . "liweitianux@gmail.com")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-sent-folder       . "/sent")
                   (mu4e-drafts-folder     . "/gmail-li/drafts")
                   (mu4e-trash-folder      . "/gmail-li/trash")
                   (mu4e-refile-folder     . "/gmail-li/archive")
+                  (mu4e-sent-folder       . "/local-sent")
                   (mu4e-compose-signature . "Weitian")
-                  (mu4e-sent-messages-behavior . delete)))
+                  (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
           :name "sjtu"
           :enter-func (lambda ()
@@ -147,10 +147,10 @@
                             :to "liweitianux@sjtu.edu.cn")))
           :vars '((user-mail-address      . "liweitianux@sjtu.edu.cn")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-sent-folder       . "/sjtu/sent")
                   (mu4e-drafts-folder     . "/sjtu/drafts")
                   (mu4e-trash-folder      . "/sjtu/trash")
                   (mu4e-refile-folder     . "/sjtu/archive")
+                  (mu4e-sent-folder       . "/sjtu/sent")
                   (mu4e-compose-signature .
                     (concat "Weitian LI\n"
                             "Shanghai Jiao Tong University"))
@@ -167,10 +167,10 @@
                             :to "liweitianux@autistici.org")))
           :vars '((user-mail-address      . "liweitianux@autistici.org")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-sent-folder       . "/autistici/sent")
                   (mu4e-drafts-folder     . "/autistici/drafts")
                   (mu4e-trash-folder      . "/autistici/trash")
                   (mu4e-refile-folder     . "/autistici/archive")
+                  (mu4e-sent-folder       . "/autistici/sent")
                   (mu4e-compose-signature . "Weitian")
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
@@ -186,12 +186,12 @@
                                   "527922216@qq.com"))))
           :vars '((user-mail-address      . "liweitianux@foxmail.com")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-sent-folder       . "/foxmail/sent")
                   (mu4e-drafts-folder     . "/foxmail/drafts")
                   (mu4e-trash-folder      . "/foxmail/trash")
                   (mu4e-refile-folder     . "/foxmail/archive")
+                  (mu4e-sent-folder       . "/local-sent")
                   (mu4e-compose-signature . "Weitian")
-                  (mu4e-sent-messages-behavior . delete)))))
+                  (mu4e-sent-messages-behavior . sent)))))
 
   ;; start with the first (default) context
   ;; default: `ask-if-none' (ask when there's no context yet, and none match)
