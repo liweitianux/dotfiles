@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2017-04-19
+# Updated: 2017-04-30
 #
 
 
@@ -31,7 +31,7 @@ MaildirStore    aly-local
 Path            ~/mail/aly/
 
 Channel         aly-inbox
-Master          :aly-remote:Inbox
+Master          :aly-remote:INBOX
 Slave           :aly-local:inbox
 
 Channel         aly-sent
@@ -54,8 +54,12 @@ Channel         aly-trash
 Master          :aly-remote:Trash
 Slave           :aly-local:trash
 
+Channel         aly-sms
+Master          :aly-remote:SMS
+Slave           :aly-local:sms
+
 Group           aly
-Channels        aly-inbox aly-sent aly-archive aly-drafts aly-junk aly-trash
+Channels        aly-inbox aly-sent aly-archive aly-drafts aly-junk aly-trash aly-sms
 ## "aly@aaronly.me" }}}
 
 
@@ -73,7 +77,7 @@ MaildirStore    weitian-local
 Path            ~/mail/weitian/
 
 Channel         weitian-inbox
-Master          :weitian-remote:Inbox
+Master          :weitian-remote:INBOX
 Slave           :weitian-local:inbox
 
 Channel         weitian-sent
@@ -115,7 +119,7 @@ MaildirStore    webmaster-local
 Path            ~/mail/webmaster/
 
 Channel         webmaster-inbox
-Master          :webmaster-remote:Inbox
+Master          :webmaster-remote:INBOX
 Slave           :webmaster-local:inbox
 
 Channel         webmaster-sent
