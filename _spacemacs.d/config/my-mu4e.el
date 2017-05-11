@@ -196,9 +196,8 @@
   ;; start with the first (default) context
   ;; default: `ask-if-none' (ask when there's no context yet, and none match)
   (setq mu4e-context-policy 'pick-first)
-  ;; compose with the current context if no context matches
-  ;; default: `ask'
-  ;(setq mu4e-compose-context-policy nil)
+  ;; compose with the current context if no context matches (default: `ask')
+  (setq mu4e-compose-context-policy nil)
 
   ;; auto construct addresses list by extracting addresses from contexts
   (setq mu4e-user-mail-address-list
@@ -236,10 +235,19 @@
   (setq mu4e-change-filenames-when-moving t)
 
   ;; kill the buffer after sending a message
-  ;(setq message-kill-buffer-on-exit t)
+  (setq message-kill-buffer-on-exit t)
+
+  ;; compose messages in a separate frame
+  (setq mu4e-compose-in-new-frame t)
 
   ;; exclude myself when replying to all
   (setq mu4e-compose-dont-reply-to-self t)
+
+  ;; Apply `format=flowed' to outgoing messages, which transform the message
+  ;; into the proper format at the time of sending. (mu4e >= 0.9.17)
+  ;; Then each paragraph should be written as a long line, or use `M-q' to
+  ;; reformat the paragraph into a single line.
+  (setq mu4e-compose-format-flowed t)
 
   ;; enable inline images
   (setq mu4e-view-show-images t)
@@ -297,9 +305,6 @@
   (setq mu4e-headers-include-related t)
   ;; exclude the duplicate messages with the same `Message-ID'
   ;(setq mu4e-headers-skip-duplicates t)
-
-  ;; compose messages in a separate frame
-  (setq mu4e-compose-in-new-frame t)
 
   ;; customize the reply/quote citation format
   (setq message-citation-line-format "On %a, %b %d, %Y at %R, %f wrote:\n")
