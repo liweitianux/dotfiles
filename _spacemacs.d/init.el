@@ -10,6 +10,7 @@
 ;; ~/.spacemacs.d/init.el
 ;;
 ;; The template is located at `core/templates/.spacemacs.template`
+;; Sync date: 2017-05-16
 ;;
 ;; Aaron LI
 ;; Created: 2016-04-30
@@ -325,10 +326,24 @@
    ;; scrolling overrides the default behavior of Emacs which re-centers the
    ;; point when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
-   ;; If non nil line numbers are turned on in all `prog-mode' and
-   ;; `text-mode' derivatives.  If set to `relative', also turns on relative
-   ;; line numbers. (default nil)
+   ;; Control line numbers activation.
+   ;; If set to `t' or `relative' line numbers are turned on in all
+   ;; `prog-mode' and `text-mode' derivatives.  If set to `relative',
+   ;; line numbers are relative.
+   ;; This variable can also be set to a property list for finer control:
+   ;; '(:relative nil
+   ;;   :disabled-for-modes dired-mode
+   ;;                       doc-view-mode
+   ;;                       markdown-mode
+   ;;                       org-mode
+   ;;                       pdf-view-mode
+   ;;                       text-mode
+   ;;   :size-limit-kb 1000)
+   ;; (default nil)
    dotspacemacs-line-numbers nil
+   ;; Code folding method.  Possible values are `evil' and `origami'.
+   ;; (default 'evil)
+   dotspacemacs-folding-method 'evil
    ;; If non nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
