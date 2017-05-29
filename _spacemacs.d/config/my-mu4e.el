@@ -215,10 +215,11 @@
         message-sendmail-extra-arguments '("--read-envelope-from")
         sendmail-program "msmtp")
 
-  ;; allow for fetch mail and update index using 'U' in the main view
-  (setq mu4e-get-mail-command "mbsync -a")
-  ;; get mail and update index periodically in the background (unit: seconds)
-  (setq mu4e-update-interval 900)
+  ;; Allow for fetch mail and update index using 'U' in the main view
+  ;; NOTE: I use own cron/shell task to get/sync email
+  (setq mu4e-get-mail-command "true")
+  ;; Get mail and update index periodically in the background (unit: seconds)
+  (setq mu4e-update-interval 300)
 
   ;; set shortcuts for frequent mail folders (also used by moving messages)
   ;; NOTE: do not use shortcut `o' as it is used for `[o]ther'
