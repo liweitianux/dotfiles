@@ -372,7 +372,12 @@
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'trailing
+   ;; NOTE: Currently, cannot *locally* disable whitespace cleanup when it
+   ;;       is globally enabled with modes `all' or `trailing', but `changed'
+   ;;       mode works OK.
+   ;;       See: https://github.com/syl20bnr/spacemacs/issues/8221
+   ;dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-whitespace-cleanup 'changed
    ))
 
 
