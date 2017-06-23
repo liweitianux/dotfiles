@@ -175,31 +175,6 @@ xscreensaver.fadeTicks:                     20
 xscreensaver.newLoginCommand:               dm-tool switch-to-greeter
 !!! xscreensaver }}}
 
-!!! Tcl/Tk {{{
-*TkTheme:                           clam
-
-*Text.background:                   white
-*Text.selectForeground:             white
-*Text.selectBackground:             #4a6984
-
-*Listbox.background:                white
-*Listbox.selectForeground:          white
-*Listbox.selectBackground:          #4a6984
-
-*Entry.background:                  white
-*Entry.foreground:                  black
-*Entry.selectForeground:            white
-*Entry.selectBackground:            #4a6984
-
-*Menu.activeBackground:             #4a6984
-*Menu.activeForeground:             white
-
-*MenuButton.activeBackground:       #4a6984
-*MenuButton.activeForeground:       white
-
-*troughColor:                       #bdb6ad
-!!! Tcl/Tk }}}
-
 !!! rofi {{{
 ! Location on screen
 !   1 2 3
