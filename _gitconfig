@@ -1,12 +1,18 @@
 #
 # ~/.gitconfig
-# User Git configuration file
+# User's global Git configuration file
 #
 # Credit:
 # * https://gist.github.com/pksunkara/988716
 #
+# References:
+# [1] A Git Horror Story: Repository Integrity with Signed Commits
+#     https://mikegerwitz.com/papers/git-horror-story.html
+# [2] What are the advantages and disadvantages of cryptographically
+#     signing commits and tags in Git?
+#     https://softwareengineering.stackexchange.com/a/212216
+#
 # Aaron LI
-# 2017-05-27
 #
 
 [user]
@@ -18,6 +24,11 @@
     default = simple
 
 [commit]
+    # Sign every commit
+    #gpgSign = true
+
+[tag]
+    # Sign every tag
     gpgSign = true
 
 [color]
