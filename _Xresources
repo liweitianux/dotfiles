@@ -27,10 +27,11 @@ Xft.hintstyle:      hintmedium
 URxvt.depth:                32
 ! transparent=0000, opaque=ffff
 URxvt.background:           rgba:1111/1111/1111/dddd
+URxvt.foreground:           #f8f8f2
 !
 !! urxvt font settings
-!URxvt.font:                 xft:DejaVu Sans Mono:pixelsize=16,xft:WenQuanYi Micro Hei Mono:pixelsize=16
-URxvt.font:                 xft:Terminus:size=12,xft:WenQuanYi Bitmap Song:size=10
+URxvt.font:                 xft:M+ 1mn:pixelsize=16,xft:WenQuanYi Zen Hei:pixelsize=14
+!URxvt.font:                 xft:Terminus:size=12,xft:WenQuanYi Bitmap Song:size=10
 !URxvt.font:                 xft:xos4 Terminus:size=12,xft:WenQuanYi WenQuanYi Bitmap Song:size=10
 !URxvt.font:                 -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
 URxvt.xftAntialias:         true
@@ -216,7 +217,7 @@ rofi.xoffset:           0
 ! Padding
 rofi.padding:           5
 ! Font to use
-rofi.font:              terminus 11
+rofi.font:              M+ 1mn 11
 ! Separator style (none, dash, solid)
 rofi.separator-style:   dash
 ! Hide scroll-bar
