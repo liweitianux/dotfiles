@@ -26,6 +26,8 @@
 [commit]
     # Sign every commit
     #gpgSign = true
+    # Use a message template
+    template = ~/.gitmessage
 
 [tag]
     # Sign every tag
