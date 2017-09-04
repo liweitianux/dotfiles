@@ -24,7 +24,7 @@ alias lsa='ls -lah'
 
 alias grep='grep --color=auto'
 
-# git
+# Git
 alias gita='git add'
 alias gitc='git commit'
 alias gitd='git diff'
