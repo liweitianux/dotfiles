@@ -3,10 +3,10 @@ dotfiles
 
 Personal & collected dotfiles ~~~
 
-* ``linux``: Linux-specific configurations
 * ``freebsd``: FreeBSD-specific configurations
 
-# Usage
+Usage
+-----
 To enable a dotfile and/or dot directory:
 * ``$ ./_bin/enable.sh _zshrc _zsh``
 
@@ -14,10 +14,10 @@ To disable:
 * ``$ ./_bin/disable.sh _zshrc _zsh``
 
 
-# Configuration Notes
-
+Configuration Notes
+-------------------
 ## Gmail IMAP
-* 'Auto-Expunge' => off: for better performance
+* "Auto-Expunge" => off: for better performance
 
 ## msmtp: TLS
 * ``tls_fingerprint``:
@@ -26,20 +26,14 @@ To disable:
 ## offlineimap: fingerprint
 Use the little script ``_bin/get_cert.sh``
 
-# Explicit home or other path
+## Explicit home or other path
 Following files contains (at least currently) the *explicit*
 home or other paths:
 * ``_notmuch-config``: ``database.path``
 * ``_config/alot/config``: ``maildir``
-* ``_rtorrent.rc``: ``cfg.basedir```
+* ``_rtorrent.rc``: ``cfg.basedir``
 
 
-# License
+License
+-------
 Distributed under the MIT License.
-
-
-# Author
-Aaron LI
-
-GnuPG key fingerprint: ``AC34 64FA DAAE 6321 8609  9CA6 240E 2A63 5D72 729A``
-
