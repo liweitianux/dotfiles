@@ -90,7 +90,7 @@ fi
 
 ## gpg-agent: start it if not running
 if ! _running gpg-agent; then
-    gpgconf --lanuch gpg-agent
+    gpgconf --launch gpg-agent
 fi
 
 ## Set SSH to use 'gpg-agent'
