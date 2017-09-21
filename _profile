@@ -2,10 +2,15 @@
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh:
 #
 # ~/.profile
-# Executed by the login shell
+# Source by the login shell, or source by the Xsession(5) through the
+# `~/.xsessionrc`.
 #
 # Aaron LI
 #
+
+# Avoid this file being sourced again
+[ -n "${PROFILE_SOURCED}" ] && return
+
 
 # Set file creation mask: be more private!
 umask 027
@@ -38,7 +43,7 @@ _exists() {
 
 ## Check whether the program is running
 _running() {
-    pgrep -x -u "${USER}" $1 &> /dev/null
+    pgrep -x -u "${USER}" "$1" >/dev/null 2>&1
 }
 
 
@@ -88,13 +93,15 @@ if _exists dircolors; then
     eval $(dircolors -b)
 fi
 
-## gpg-agent: start it if not running
+## Start `gpg-agent` if not running
 if ! _running gpg-agent; then
     gpgconf --launch gpg-agent
 fi
 
-## Set SSH to use 'gpg-agent'
+## Set SSH to use `gpg-agent` as the SSH agent is enabled
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
     export SSH_AUTH_SOCK="/run/user/${UID}/gnupg/S.gpg-agent.ssh"
 fi
+
+PROFILE_SOURCED=yes

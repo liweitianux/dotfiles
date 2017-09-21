@@ -1,0 +1,25 @@
+#
+# ~/.xsessionrc
+#
+# Some display managers (e.g., lightdm) do NOT source ~/.profile
+# or ~/.xprofile, but some other display managers do.  Therefore,
+# it is better to use this ~/.xsessionrc to do the initializations,
+# as it will be *sourced* by Xsession(5), making the results more
+# consistent among different display managers.
+#
+# See Xsession(5) for more details.
+#
+# References:
+# [1] XFCE/lightdm startup configuration files
+#     https://superuser.com/a/687401
+# [2] lightdm forgets to source /etc/profile and ~/.profile
+#     https://bugs.launchpad.net/ubuntu/+source/lightdm/+bug/794315
+#
+#
+# Aaron LI
+# 2017-09-20
+#
+
+[ -e ${HOME}/.profile ] && . ${HOME}/.profile || true
+
+# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh: #
