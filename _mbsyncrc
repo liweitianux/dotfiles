@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2017-04-30
+# Updated: 2017-09-28
 #
 
 
@@ -105,46 +105,46 @@ Channels        weitian-inbox weitian-sent weitian-archive weitian-drafts weitia
 ## "weitian@aaronly.me" }}}
 
 
-## Account "webmaster@aaronly.me" {{{
-IMAPAccount     webmaster
+## Account "postmaster@aaronly.me" {{{
+IMAPAccount     postmaster
 Host            mail.aaronly.me
-User            webmaster@aaronly.me
-PassCmd         "pass show email/self/webmaster | head -n1"
+User            postmaster@aaronly.me
+PassCmd         "pass show email/self/postmaster | head -n1"
 SSLType         IMAPS
 
-IMAPStore       webmaster-remote
-Account         webmaster
+IMAPStore       postmaster-remote
+Account         postmaster
 
-MaildirStore    webmaster-local
-Path            ~/mail/webmaster/
+MaildirStore    postmaster-local
+Path            ~/mail/postmaster/
 
-Channel         webmaster-inbox
-Master          :webmaster-remote:INBOX
-Slave           :webmaster-local:inbox
+Channel         postmaster-inbox
+Master          :postmaster-remote:INBOX
+Slave           :postmaster-local:inbox
 
-Channel         webmaster-sent
-Master          :webmaster-remote:Sent
-Slave           :webmaster-local:sent
+Channel         postmaster-sent
+Master          :postmaster-remote:Sent
+Slave           :postmaster-local:sent
 
-Channel         webmaster-archive
-Master          :webmaster-remote:Archive
-Slave           :webmaster-local:archive
+Channel         postmaster-archive
+Master          :postmaster-remote:Archive
+Slave           :postmaster-local:archive
 
-Channel         webmaster-drafts
-Master          :webmaster-remote:Drafts
-Slave           :webmaster-local:drafts
+Channel         postmaster-drafts
+Master          :postmaster-remote:Drafts
+Slave           :postmaster-local:drafts
 
-Channel         webmaster-junk
-Master          :webmaster-remote:Junk
-Slave           :webmaster-local:junk
+Channel         postmaster-junk
+Master          :postmaster-remote:Junk
+Slave           :postmaster-local:junk
 
-Channel         webmaster-trash
-Master          :webmaster-remote:Trash
-Slave           :webmaster-local:trash
+Channel         postmaster-trash
+Master          :postmaster-remote:Trash
+Slave           :postmaster-local:trash
 
-Group           webmaster
-Channels        webmaster-inbox webmaster-sent webmaster-archive webmaster-drafts webmaster-junk webmaster-trash
-## "webmaster@aaronly.me" }}}
+Group           postmaster
+Channels        postmaster-inbox postmaster-sent postmaster-archive postmaster-drafts postmaster-junk postmaster-trash
+## "postmaster@aaronly.me" }}}
 
 
 ## Account "gmail-aly" {{{
