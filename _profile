@@ -88,11 +88,6 @@ export VISUAL="${EDITOR}"
 export PAGER="less"
 export LESS="--ignore-case --raw-control-chars"
 
-## LS colors
-if _exists dircolors; then
-    eval $(dircolors -b)
-fi
-
 ## Start `gpg-agent` if not running
 if ! _running gpg-agent; then
     gpgconf --launch gpg-agent
