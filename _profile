@@ -88,15 +88,11 @@ export VISUAL="${EDITOR}"
 export PAGER="less"
 export LESS="--ignore-case --raw-control-chars"
 
-## Start `gpg-agent` if not running
+## Start `gpg-agent' if it is not running
 if ! _running gpg-agent; then
     gpgconf --launch gpg-agent
 fi
 
-## Set SSH to use `gpg-agent` as the SSH agent is enabled
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-    export SSH_AUTH_SOCK="/run/user/${UID}/gnupg/S.gpg-agent.ssh"
-fi
-
 PROFILE_SOURCED=yes
+
+# EOF
