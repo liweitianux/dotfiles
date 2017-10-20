@@ -215,7 +215,7 @@
         message-sendmail-extra-arguments '("--read-envelope-from")
         sendmail-program "msmtp")
 
-  ;; Allow for fetch mail and update index using 'U' in the main view
+  ;; Allow mu4e to fetch mail and update index
   ;; NOTE: I use own cron/shell task to get/sync email
   (setq mu4e-get-mail-command "true")
   ;; Get mail and update index periodically in the background (unit: seconds)
@@ -269,9 +269,9 @@
   ;; change the luminosity form dark theme
   (setq shr-color-visible-luminance-min 70)
 
-  ;; add custom bookmarks
+  ;; Set bookmarks
   (setq mu4e-bookmarks
-        '(("flag:unread AND NOT flag:trashed" "Unread messages"      ?u)
+        '(("flag:unread AND NOT flag:trashed" "INBOX"                ?b)
           ("flag:draft"                       "Drafts"               ?f)
           ("tag:todo OR tag:task"             "TODO / Task"          ?t)
           ("tag:work"                         "Work"                 ?W)
@@ -285,7 +285,7 @@
           ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?d)
           ("mime:image/*"                     "Messages with images" ?p)))
 
-  ;; headers list appearance
+  ;; Headers list appearance
   (setq mu4e-headers-date-format "%Y-%m-%d %H:%M"
         mu4e-headers-fields '((:date       . 18)  ;; also :human-date
                               (:flags      .  5)
@@ -307,9 +307,9 @@
   ;; exclude the duplicate messages with the same `Message-ID'
   ;(setq mu4e-headers-skip-duplicates t)
 
-  ;; customize the reply/quote citation format
-  (setq message-citation-line-format "On %a, %b %d, %Y at %R, %f wrote:\n")
-  ;; choose to use the above formatted string
+  ;; Customize the reply/quote citation format
+  (setq message-citation-line-format "On %a, %Y-%b-%d at %R %Z, %f wrote:\n")
+  ;; Choose to use the above formatted string
   (setq message-citation-line-function 'message-insert-formatted-citation-line)
 
   ;; confirm before sending
