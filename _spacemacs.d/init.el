@@ -509,6 +509,8 @@
   ;;
   ;; Load custom configurations
   (push "~/.spacemacs.d/config" load-path)
+  (push "~/.spacemacs.d/local" load-path)
+  (require 'my-crypt)
   (require 'my-org)
   (require 'my-mu4e)
   (require 'my-calendar)
