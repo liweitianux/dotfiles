@@ -1,9 +1,16 @@
 #
 # ~/.zlogout
-# executed when a login zsh shell exits
+# Executed when a *login* zsh shell exits
+#
+# Aaron LI
 #
 
-# clear console
+# Flush the cached passphrases on logout, but except for SSH connections
+if [[ -z ${SSH_CONNECTION} ]]; then
+    gpgconf --reload gpg-agent
+fi
+
+# Clear console
 if which clear >/dev/null 2>&1; then
     clear
 elif which tput >/dev/null 2>&1; then
