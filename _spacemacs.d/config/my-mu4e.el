@@ -345,64 +345,91 @@
 
 ;;; Key bindings for Evil
 ;; Credits:
-;; https://github.com/philc/emacs-config - .emacs.d/elisp/mu4e-mode-personal.el
-
-(dolist (mode '(mu4e-mode
-                mu4e-main-mode
-                mu4e-headers-mode
-                mu4e-view-mode
-                mu4e-compose-mode))
-  (evil-set-initial-state mode 'normal))
+;; * https://github.com/philc/emacs-config
+;;   .emacs.d/elisp/mu4e-mode-personal.el
+;; * https://github.com/JorisE/evil-mu4e
+;; * Guide for using Emacs with Evil
+;;   https://github.com/noctuid/evil-guide
+;;
 
 (with-eval-after-load 'mu4e
-  (evil-make-overriding-map mu4e-main-mode-map 'normal t)
-  (evil-define-key 'normal mu4e-main-mode-map
+  (require 'evil)
+  (require 'evil-leader)
+
+  ;; Set all mu4e modes (except for `mu4e-compose-mode') to start in
+  ;; `evil-motion-state'.
+  ;; NOTE: The `evil-leader' by default does not work in `evil-motion-state'!
+  ;;       (see: https://github.com/cofi/evil-leader/issues/1 )
+  (dolist (mode '(mu4e-main-mode
+                  mu4e-headers-mode
+                  mu4e-view-mode
+                  mu4e-org-mode))
+    (evil-set-initial-state mode 'motion))
+  ;; Set `mu4e-compose-mode' to start in `evil-normal-state'
+  (evil-set-initial-state 'mu4e-compose-mode 'normal)
+
+  ;; mu4e main mode
+  ;;
+  ;; Copy the original `mu4e-main-mode-map' and give it precedence over
+  ;; evil's default `motion' keymap, therefore, we only need to define
+  ;; several necessary keys as done below.
+  ;; See: https://github.com/syl20bnr/spacemacs/wiki/Keymaps-guide
+  ;;
+  (evil-make-overriding-map mu4e-main-mode-map 'motion t)
+  ;;
+  ;; Override the above copied `mu4e-main-mode-map'
+  (evil-define-key 'motion mu4e-main-mode-map
+    (kbd "TAB") 'evil-forward-paragraph
+    "0"  'evil-beginning-of-line
+    "$"  'evil-end-of-line
     "J"  'mu4e~headers-jump-to-maildir
     "j"  'evil-next-line
     "k"  'evil-previous-line)
-  (evil-make-overriding-map mu4e-headers-mode-map 'normal t)
-  (evil-define-key 'normal mu4e-headers-mode-map
+
+  ;; mu4e headers mode
+  (evil-make-overriding-map mu4e-headers-mode-map 'motion t)
+  (evil-define-key 'motion mu4e-headers-mode-map
     "gg" 'evil-goto-first-line
+    "gl" 'mu4e-show-log
+    "gr" 'mu4e-headers-rerun-search
     "J"  'mu4e~headers-jump-to-maildir
-    "j"  'mu4e-headers-next
-    "k"  'mu4e-headers-prev
-    "]"  'mu4e-headers-next-unread
-    "["  'mu4e-headers-prev-unread
-    "C"  'mu4e-compose-new
-    "E"  'mu4e-compose-edit
-    "F"  'mu4e-compose-forward
-    "R"  'mu4e-compose-reply)
-  (evil-leader/set-key-for-mode 'mu4e-headers-mode
-    "u" '(lambda () (interactive) (mu4e-update-mail-and-index t)))
-  ;;
-  (evil-make-overriding-map mu4e-view-mode-map 'normal t)
-  (evil-define-key 'normal mu4e-view-mode-map
+    "j"  'evil-next-line
+    "k"  'evil-previous-line
+    "0"  'evil-beginning-of-line
+    "$"  'evil-end-of-line
+    "v"  'evil-visual-line)
+
+  ;; mu4e view mode
+  (evil-make-overriding-map mu4e-view-mode-map 'motion t)
+  (evil-define-key 'motion mu4e-view-mode-map
     "gg"   'evil-goto-first-line
-    "j"    'evil-next-line
-    "k"    'evil-previous-line
-    "y"    'evil-yank
-    "Y"    'evil-yank-line
+    "gl"   'mu4e-show-log
+    "gu"   'mu4e-view-go-to-url
     "\C-j" 'mu4e-view-headers-next
     "\C-k" 'mu4e-view-headers-prev
-    "\C-]" 'mu4e-view-headers-next-unread
-    "\C-[" 'mu4e-view-headers-prev-unread
-    "C"    'mu4e-compose-new
-    "E"    'mu4e-compose-edit
-    "F"    'mu4e-compose-forward
-    "R"    'mu4e-compose-reply)
-  (evil-leader/set-key-for-mode 'mu4e-view-mode
-    "u" '(lambda () (interactive) (mu4e-update-mail-and-index t))
-    "x" '(lambda () (interactive) (helm-M-x))
-    "s" 'mu4e-view-raw-message)
-  ;;
+    "H"    'mu4e-view-toggle-html
+    "j"    'evil-next-line
+    "k"    'evil-previous-line
+    "0"    'evil-beginning-of-line
+    "$"    'evil-end-of-line
+    "v"    'evil-visual-char
+    "V"    'evil-visual-line
+    "y"    'evil-yank)
+
+  ;; mu4e compose mode (start in `evil-normal-state')
   (evil-make-overriding-map mu4e-compose-mode-map 'normal t)
   (evil-leader/set-key-for-mode 'mu4e-compose-mode
     "," 'message-send-and-exit
     "c" 'message-send-and-exit
     "d" 'message-dont-send
     "k" 'mu4e-message-kill-buffer
-    "a" 'mml-attach-file)
-  )  ;; with-eval-after-load 'mu4e
+    "a" 'mml-attach-file
+    "s" 'mml-secure-message-sign
+    "e" 'mml-secure-message-encrypt
+    ";" 'mu4e-context-switch)
+
+  ;; END: with-eval-after-load 'mu4e
+  )
 
 
 (provide 'my-mu4e)
