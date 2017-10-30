@@ -2,8 +2,9 @@
 ## ~/.tcshrc
 ##
 ## Aaron LI
-## Created: 2011-06-30
-## Updated: 2016-01-06
+## 2011-06-30
+##
+## 2017-10-30: Cleanups; add new keybindings
 ##
 
 
@@ -84,13 +85,18 @@ set prompt3="CORRECT> %B%R%b (y|n|e)? "
 
 
 ### bindkey ###
+# Credit: http://www.ibb.net/~anne/keyboard.html
 bindkey '\e[1~' beginning-of-line        # Home
+bindkey '\e[2~' overwrite-mode           # Insert
 bindkey '\e[3~' delete-char              # Delete
 bindkey '\e[4~' end-of-line              # End
-bindkey "^W"    backward-delete-word     # Delete
+bindkey '\e[7~' beginning-of-line        # Home (rxvt)
+bindkey '\e[8~' end-of-line              # End (rxvt)
+bindkey '^W'    backward-delete-word     # Delete
 bindkey -k up   history-search-backward  # PageUp
 bindkey -k down history-search-forward   # PageDown
-# vi-style key bindings
+
+# Vi-style key bindings
 #bindkey -v
 
 
@@ -160,28 +166,11 @@ set echo_style=both
 alias la    'ls -lAh'
 alias ll    'ls -lh'
 
-# for security
-alias del   'mv \!* ~/tmp'
 
-
-## Tcsh completion
-if ( -d ~/.tcsh/completion ) then
-    foreach tcsh_comp ( ~/.tcsh/completion/*.tcsh )
-        source $tcsh_comp
-    end
-endif
-unset tcsh_comp
-
-
-## local settings
+## Local settings
 if ( -e ~/.tcshrc.local ) then
     source ~/.tcshrc.local
 endif
-
-
-## run commands
-#fortune -s | cowsay -f ~/.littleprince.cow -W 48
-#calendar
 
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=tcsh: #
