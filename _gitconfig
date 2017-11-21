@@ -15,6 +15,10 @@
 # Aaron LI
 #
 
+[core]
+    # Use 'less' as the pager and display tabs of width 8
+    pager = less -x1,9
+
 [user]
     name = Aaron LI
     email = aly@aaronly.me
@@ -35,6 +39,11 @@
 
 [color]
     ui = auto
+
+[diff]
+    # Show space and tabs
+    # Credit: https://stackoverflow.com/a/30803980
+    wsErrorHighlight = all
 
 [alias]
     a = add --all
