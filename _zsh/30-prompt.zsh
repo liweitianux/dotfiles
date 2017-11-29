@@ -5,7 +5,10 @@
 #
 
 
-# gitpwd - print %~, limited to $NDIR segments, with inline git branch
+# gitpwd - format the current path with inline git branch for the
+#          prompt; the current path is limited to $NDIR segments,
+#          meanwhile long segments are shortened to be
+#          '<prefix>…<suffix>'.
 NDIRS=3
 function gitpwd() {
     local -a segs splitprefix
