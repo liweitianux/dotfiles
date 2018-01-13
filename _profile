@@ -88,11 +88,6 @@ export VISUAL="${EDITOR}"
 export PAGER="less"
 export LESS="--ignore-case --raw-control-chars"
 
-## Start `gpg-agent' if it is not running
-if ! _running gpg-agent; then
-    gpgconf --launch gpg-agent
-fi
-
 PROFILE_SOURCED=yes
 
 # EOF

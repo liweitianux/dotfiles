@@ -11,8 +11,14 @@
 # 2016-01-31
 #
 
-## Auto startx if login on tty6
-if (( $EUID != 0 )) && [[ -z $DISPLAY ]] && [[ $TTY = "/dev/tty6" ]]; then
+## Start `gpg-agent' on login (non-SSH connections)
+GPG_AGENT_SOCKET="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent"
+if [[ -z ${SSH_CONNECTION} ]] && [[ ! -S "${GPG_AGENT_SOCKET}" ]]; then
+    gpgconf --launch gpg-agent
+fi
+
+## Auto start X if login on tty6
+if (( ${EUID} != 0 )) && [[ -z ${DISPLAY} ]] && [[ ${TTY} = "/dev/tty6" ]]; then
     if [ -e ~/.xsession-errors ]; then
         mv -f ~/.xsession-errors ~/.xsession-errors.old
     fi
