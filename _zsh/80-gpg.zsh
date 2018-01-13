@@ -15,6 +15,13 @@ if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
     export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
 
+# Restart `gpg-agent'
+restart-gpg-agent() {
+    gpgconf --kill gpg-agent >/dev/null 2>&1
+    gpg-agent --daemon --enable-ssh-support \
+        --pinentry-program ${HOME}/bin/pinentry >/dev/null 2>&1
+}
+
 # Let pinentry know which console to display in for `ssh-agent'.
 #
 # Since the 'ssh-agent' protocol does not contain a mechanism for telling
