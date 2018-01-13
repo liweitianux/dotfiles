@@ -399,7 +399,7 @@ Channels        lavabit-inbox lavabit-sent lavabit-archive lavabit-drafts lavabi
 IMAPAccount     autistici
 Host            mail.autistici.org
 User            liweitianux@autistici.org
-PassCmd         "pass show email/autistici | head -n1"
+PassCmd         "pass show email/autistici/laptop | head -n1"
 SSLType         IMAPS
 
 IMAPStore       autistici-remote
