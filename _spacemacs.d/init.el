@@ -90,7 +90,7 @@
      markdown
      (mu4e :variables
            mu4e-enable-mode-line t
-           mu4e-installation-path "~/.spacemacs.d/local/mu4e")
+           mu4e-installation-path "~/local/mu/share/emacs/site-lisp/mu4e")
      octave
      org
      python
@@ -409,7 +409,7 @@
   This function is called at the very end of Spacemacs initialization after
   layers configuration. You are free to put any user code."
   ;;
-  (setq-default tab-width 4)
+  (setq-default tab-width 8)
   (setq-default fill-column 78)
   ;; Put a newline at the end of file if there isn't already one there
   (setq-default require-final-newline t)
@@ -470,12 +470,12 @@
   ;; Credit: https://emacs.stackexchange.com/a/19364
   (spacemacs/toggle-truncate-lines-off)
   (spacemacs/toggle-visual-line-navigation-on)
-  ;;
+
   ;; Change `powerline' separator
   (setq powerline-default-separator 'slant)
   ;; Display tildes in the fringe on empty lines
   (global-vi-tilde-fringe-mode)
-  ;;
+
   ;; Configure BibTeX completion for `helm-bibtex'
   (setq bibtex-completion-bibliography '("~/papers/references.bib"))
   (setq bibtex-completion-library-path "~/papers/")  ;; where to find PDFs
@@ -494,10 +494,16 @@
   (setq org-ref-default-bibliography '("~/papers/references.bib")
         org-ref-pdf-directory "~/papers/"
         org-ref-bibliography-notes "~/papers/notes.org")
-  ;;
+
+  ;; C++ mode
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (setq flycheck-gcc-language-standard "c++14"
+                    flycheck-clang-language-standard "c++14")))
+
   ;; ESS: Turn off the automatic replacement of `_' by `<-'
   (add-hook 'ess-mode-hook (lambda () (ess-toggle-underscore nil)))
-  ;;
+
   ;; Set font only after the first GUI frame initialized, to workaround the
   ;; error when Emacs starts in daemon mode.
   (spacemacs|do-after-display-system-init
