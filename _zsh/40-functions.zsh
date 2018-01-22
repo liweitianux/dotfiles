@@ -94,7 +94,7 @@ function trash() {
 
 ## Print a horizontal rule
 function rule() {
-    printf "%$(tput cols)s\n" | tr ' ' '-'
+    printf "%$(tput cols)s\n" | tr ' ' "${1:-=}"
 }
 
 
