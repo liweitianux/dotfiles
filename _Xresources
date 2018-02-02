@@ -7,9 +7,9 @@
 ! References:
 ! [1] https://wiki.archlinux.org/index.php/X_resources
 
-! Aaron LI <aaronly.me@outlook.com>
+! Aaron LI <aly@aaronly.me>
 ! Created: 2014-05-10
-! Updated: 2017-02-06
+! Updated: 2018-02-02
 !----------------------------------------------------------
 
 !!! xft settings {{{
@@ -151,28 +151,6 @@ xscreensaver.passwd.thermometer.background: #000000
 xscreensaver.passwd.thermometer.width:      8
 !! datestamp format - see strftime(3) manual page for details
 xscreensaver.dateFormat:                    %I:%M%P %a %b %d, %Y
-!! preferences
-xscreensaver.mode:                          blank
-xscreensaver.timeout:                       0:10:00
-xscreensaver.cycle:                         0:10:00
-xscreensaver.lock:                          True
-xscreensaver.lockTimeout:                   0:01:00
-xscreensaver.passwdTimeout:                 0:00:30
-xscreensaver.dpmsEnabled:                   True
-xscreensaver.dpmsQuickoff:                  True
-xscreensaver.dpmsStandby:                   0:10:00
-xscreensaver.dpmsSuspend:                   0:10:00
-xscreensaver.dpmsOff:                       0:15:00
-xscreensaver.fade:                          True
-xscreensaver.unfade:                        False
-xscreensaver.fadeSeconds:                   0:00:03
-xscreensaver.fadeTicks:                     20
-!! user switching from lock screen
-! Lightdm: dm-tool switch-to-greeter
-! LXDM:    lxdm -c USER_SWITCH
-! GDM:     gdmflexiserver -ls
-! KDM:     kdmctl reverse
-xscreensaver.newLoginCommand:               dm-tool switch-to-greeter
 !!! xscreensaver }}}
 
 !!! rofi {{{
