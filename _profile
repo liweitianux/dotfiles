@@ -83,6 +83,10 @@ export QT_IM_MODULE="${INPUT_METHOD}"
 # Enable the CJK N-gram tokenization algorithm for CJK indexing and search
 export XAPIAN_CJK_NGRAM=1
 
+## Password store
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export PASSWORD_STORE_GENERATED_LENGTH=16
+
 export EDITOR="vim"
 export VISUAL="${EDITOR}"
 export PAGER="less"
