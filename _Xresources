@@ -115,15 +115,7 @@ XTerm.multiScroll:          true
 XTerm.toolBar:              true
 !!! xterm settings }}}
 
-!!! Xcursor {{{
-! Vanilla-DMZ: white
-! Vanilla-DMZ-AA: black
-!Xcursor.theme:              Vanilla-DMZ-AA
-Xcursor.theme:              Vanilla-DMZ
-Xcursor.size:               32
-!!! Xcursor }}}
-
-!!! xscreensaver settings {{{
+!!! XScreenSaver settings {{{
 !! font settings
 xscreensaver.Dialog.headingFont:            -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*
 xscreensaver.Dialog.bodyFont:               -*-dina-medium-r-*-*-12-*-*-*-*-*-*-*
