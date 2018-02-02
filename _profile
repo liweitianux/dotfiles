@@ -58,16 +58,10 @@ fi
 if [ -d "${HOME}/.local/bin" ]; then
     _path_prepend "${HOME}/.local/bin"
 fi
-# ~/bin
-if [ -d "${HOME}/bin" ]; then
-    _path_prepend "${HOME}/bin"
-fi
-# System administration programs
-if groups | grep -qE '\b(wheel|adm|sudo)\b'; then
-    _path_append "/usr/local/sbin"
-    _path_append "/usr/sbin"
-    _path_append "/sbin"
-fi
+_path_prepend "${HOME}/bin"
+_path_append "/usr/local/sbin"
+_path_append "/usr/sbin"
+_path_append "/sbin"
 
 ## Language and locale
 export LANG="en_US.UTF-8"
