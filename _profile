@@ -2,14 +2,13 @@
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=sh:
 #
 # ~/.profile
-# Source by the login shell, or source by the Xsession(5) through the
-# `~/.xsessionrc`.
+# Source by login shells, or by Xsession(5) through `~/.xsessionrc`.
 #
 # Aaron LI
 #
 
 # Avoid this file being sourced again
-[ -n "${PROFILE_SOURCED}" ] && return
+[ -n "${_PROFILE_SOURCED}" ] && return
 
 
 # Set file creation mask: be more private!
@@ -86,6 +85,8 @@ export VISUAL="${EDITOR}"
 export PAGER="less"
 export LESS="--ignore-case --raw-control-chars"
 
-PROFILE_SOURCED=yes
+
+# Set flag to avoid being sourced again
+_PROFILE_SOURCED=yes
 
 # EOF
