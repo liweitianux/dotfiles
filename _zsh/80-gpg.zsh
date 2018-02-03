@@ -17,9 +17,12 @@ fi
 
 # Restart `gpg-agent'
 restart-gpg-agent() {
-    gpgconf --kill gpg-agent >/dev/null 2>&1
-    gpg-agent --daemon --enable-ssh-support \
-        --pinentry-program ${HOME}/bin/pinentry >/dev/null 2>&1
+    local pinentry_arg
+    [ -x "${HOME}/bin/pinentry" ] && \
+        pinentry_arg="--pinentry-program ${HOME}/bin/pinentry" || \
+        pinentry_arg=""
+    gpgconf --kill gpg-agent >/dev/null
+    gpg-agent --daemon --enable-ssh-support ${pinentry_arg} >/dev/null
 }
 
 # Let pinentry know which console to display in for `ssh-agent'.
