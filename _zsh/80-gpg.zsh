@@ -44,7 +44,7 @@ restart-gpg-agent() {
 # * `gpg-agent(1)': option `--enable-ssh-support'
 #
 update-gpg-tty() {
-    gpg-connect-agent updatestartuptty /bye >/dev/null
+    gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1
 }
 
 update-pinentry-app() {
@@ -57,8 +57,7 @@ update-pinentry-app() {
 #
 autoload -U add-zsh-hook
 zsh-preexec() {
-    update-gpg-tty
-    update-pinentry-app
+    update-gpg-tty && update-pinentry-app || true
 }
 add-zsh-hook preexec zsh-preexec
 
