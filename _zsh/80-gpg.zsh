@@ -26,6 +26,31 @@ if [ -n "${SSH_CONNECTION}" ] ;then
     export PINENTRY_USER_DATA="USE_CURSES=1"
 fi
 
+# Let pinentry know which console to display in for `ssh-agent'.
+#
+# Since the 'ssh-agent' protocol does not contain a mechanism for telling
+# the agent on which terminal/display it is running, gpg-agent's
+# ssh-support can just use the TTY or X display when `gpg-agent' has been
+# started, which may be before the X session startup.  Therefore, when the
+# switched to the X session, or login remotely through SSH, the `pinentry'
+# will get popped up on whatever display the `gpg-agent' has been started
+# or may just fail.  In this case, a manual update is necessary.
+#
+# This will set startup TTY and X11 DISPLAY variables to the values of
+# this session.
+#
+# Credits:
+# * GnuPG: Commonly Seen Problems
+#   https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
+# * `gpg-agent(1)': option `--enable-ssh-support'
+# * http://blog.mrloop.com/workflow/2017/02/09/pin-entry.html
+#
+update-gpg-tty() {
+    gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1 || true
+}
+autoload -U add-zsh-hook
+add-zsh-hook preexec update-gpg-tty
+
 # Delete all identities from the `gpg-agent', which is similar to
 # `ssh-add -D`.
 # Credit: http://blog.mrloop.com/workflow/2017/02/09/pin-entry.html
