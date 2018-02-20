@@ -14,7 +14,7 @@
 ## Start `gpg-agent' on login (non-SSH connections)
 GPG_AGENT_SOCKET="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent"
 if [[ -z ${SSH_CONNECTION} ]] && [[ ! -S "${GPG_AGENT_SOCKET}" ]]; then
-    restart-gpg-agent
+    gpgconf --launch gpg-agent
 fi
 
 ## Auto start X if login on tty6
