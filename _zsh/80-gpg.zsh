@@ -2,7 +2,12 @@
 # zsh/gpg.zsh
 #
 
-# NOTE: `gpg-agent' is configured to be launched in `~/.profile'.
+# NOTE:
+# ZSH is configured to launch `gpg-agent' on login, so it may be necessary
+# to disable its launch by systemd, e.g.,
+#     $ systemctl --global --user mask --now \
+#           gpg-agent.service gpg-agent.socket gpg-agent-ssh.socket \
+#           gpg-agent-extra.socket gpg-agent-browser.socket
 
 # This `GPG_TTY' variable should be set to the correct TTY where the shell
 # is running.  See `gpg-agent(1)' for more details.
