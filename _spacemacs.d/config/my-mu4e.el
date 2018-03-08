@@ -35,14 +35,15 @@
           :match-func (lambda (msg)
                         (when msg
                           (mu4e-message-contact-field-matches
-                           msg :to "aly@aaronly.me")))
+                           msg :to ("aly@aaronly.me"
+                                    "aly@liwt.net"))))
           :vars '((user-mail-address      . "aly@aaronly.me")
                   (user-full-name         . "Aaron LI")
                   (mu4e-drafts-folder     . "/aly/drafts")
                   (mu4e-trash-folder      . "/aly/trash")
                   (mu4e-refile-folder     . "/aly/archive")
                   (mu4e-sent-folder       . "/aly/sent")
-                  (mu4e-compose-signature . "Aly")
+                  (mu4e-compose-signature . "Aaron")
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
         ,(make-mu4e-context
@@ -54,13 +55,15 @@
           :match-func (lambda (msg)
                         (when msg
                           (mu4e-message-contact-field-matches
-                           msg :to "weitian@aaronly.me")))
-          :vars '((user-mail-address      . "weitian@aaronly.me")
+                           msg :to '("wt@liwt.net"
+                                     "weitian@liwt.net"
+                                     "weitian@aaronly.me"))))
+          :vars '((user-mail-address      . "wt@liwt.net")
                   (user-full-name         . "Weitian LI")
-                  (mu4e-drafts-folder     . "/weitian/drafts")
-                  (mu4e-trash-folder      . "/weitian/trash")
-                  (mu4e-refile-folder     . "/weitian/archive")
-                  (mu4e-sent-folder       . "/weitian/sent")
+                  (mu4e-drafts-folder     . "/wt/drafts")
+                  (mu4e-trash-folder      . "/wt/trash")
+                  (mu4e-refile-folder     . "/wt/archive")
+                  (mu4e-sent-folder       . "/wt/sent")
                   (mu4e-compose-signature . "Weitian")
                   ;; copy message to sent folder
                   (mu4e-sent-messages-behavior . sent)))
