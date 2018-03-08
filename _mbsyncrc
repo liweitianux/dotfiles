@@ -105,7 +105,46 @@ Channels        wt-inbox wt-sent wt-archive wt-drafts wt-junk wt-trash
 ## "wt@aaronly.me" }}}
 
 
+## Account "lulu@liwt.net" {{{
+IMAPAccount     lulu
+Host            mail.liwt.net
+User            lulu@liwt.net
+PassCmd         "pass show email/self/lulu | head -n1"
+SSLType         IMAPS
 
+IMAPStore       lulu-remote
+Account         lulu
+
+MaildirStore    lulu-local
+Path            ~/mail/lulu/
+
+Channel         lulu-inbox
+Master          :lulu-remote:INBOX
+Slave           :lulu-local:inbox
+
+Channel         lulu-sent
+Master          :lulu-remote:Sent
+Slave           :lulu-local:sent
+
+Channel         lulu-archive
+Master          :lulu-remote:Archive
+Slave           :lulu-local:archive
+
+Channel         lulu-drafts
+Master          :lulu-remote:Drafts
+Slave           :lulu-local:drafts
+
+Channel         lulu-junk
+Master          :lulu-remote:Junk
+Slave           :lulu-local:junk
+
+Channel         lulu-trash
+Master          :lulu-remote:Trash
+Slave           :lulu-local:trash
+
+Group           lulu
+Channels        lulu-inbox lulu-sent lulu-archive lulu-drafts lulu-junk lulu-trash
+## "lulu@liwt.net" }}}
 
 
 ## Account "root@liwt.net" {{{
