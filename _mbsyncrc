@@ -19,7 +19,7 @@ SyncState       *
 
 ## Account "aly@aaronly.me" {{{
 IMAPAccount     aly
-Host            mail.aaronly.me
+Host            mail.liwt.net
 User            aly@aaronly.me@laptop
 PassCmd         "pass show email/self/aly/laptop | head -n1"
 SSLType         IMAPS
@@ -63,46 +63,49 @@ Channels        aly-inbox aly-sent aly-archive aly-drafts aly-junk aly-trash aly
 ## "aly@aaronly.me" }}}
 
 
-## Account "weitian@aaronly.me" {{{
-IMAPAccount     weitian
-Host            mail.aaronly.me
-User            weitian@aaronly.me@laptop
-PassCmd         "pass show email/self/weitian/laptop | head -n1"
+## Account "wt@liwt.net" {{{
+IMAPAccount     wt
+Host            mail.liwt.net
+User            wt@liwt.net@laptop
+PassCmd         "pass show email/self/wt/laptop | head -n1"
 SSLType         IMAPS
 
-IMAPStore       weitian-remote
-Account         weitian
+IMAPStore       wt-remote
+Account         wt
 
-MaildirStore    weitian-local
-Path            ~/mail/weitian/
+MaildirStore    wt-local
+Path            ~/mail/wt/
 
-Channel         weitian-inbox
-Master          :weitian-remote:INBOX
-Slave           :weitian-local:inbox
+Channel         wt-inbox
+Master          :wt-remote:INBOX
+Slave           :wt-local:inbox
 
-Channel         weitian-sent
-Master          :weitian-remote:Sent
-Slave           :weitian-local:sent
+Channel         wt-sent
+Master          :wt-remote:Sent
+Slave           :wt-local:sent
 
-Channel         weitian-archive
-Master          :weitian-remote:Archive
-Slave           :weitian-local:archive
+Channel         wt-archive
+Master          :wt-remote:Archive
+Slave           :wt-local:archive
 
-Channel         weitian-drafts
-Master          :weitian-remote:Drafts
-Slave           :weitian-local:drafts
+Channel         wt-drafts
+Master          :wt-remote:Drafts
+Slave           :wt-local:drafts
 
-Channel         weitian-junk
-Master          :weitian-remote:Junk
-Slave           :weitian-local:junk
+Channel         wt-junk
+Master          :wt-remote:Junk
+Slave           :wt-local:junk
 
-Channel         weitian-trash
-Master          :weitian-remote:Trash
-Slave           :weitian-local:trash
+Channel         wt-trash
+Master          :wt-remote:Trash
+Slave           :wt-local:trash
 
-Group           weitian
-Channels        weitian-inbox weitian-sent weitian-archive weitian-drafts weitian-junk weitian-trash
-## "weitian@aaronly.me" }}}
+Group           wt
+Channels        wt-inbox wt-sent wt-archive wt-drafts wt-junk wt-trash
+## "wt@aaronly.me" }}}
+
+
+
 
 
 ## Account "postmaster@aaronly.me" {{{
