@@ -108,46 +108,46 @@ Channels        wt-inbox wt-sent wt-archive wt-drafts wt-junk wt-trash
 
 
 
-## Account "postmaster@aaronly.me" {{{
-IMAPAccount     postmaster
-Host            mail.aaronly.me
-User            postmaster@aaronly.me
-PassCmd         "pass show email/self/postmaster | head -n1"
+## Account "root@liwt.net" {{{
+IMAPAccount     root
+Host            mail.liwt.net
+User            root@liwt.net
+PassCmd         "pass show email/self/root | head -n1"
 SSLType         IMAPS
 
-IMAPStore       postmaster-remote
-Account         postmaster
+IMAPStore       root-remote
+Account         root
 
-MaildirStore    postmaster-local
-Path            ~/mail/postmaster/
+MaildirStore    root-local
+Path            ~/mail/root/
 
-Channel         postmaster-inbox
-Master          :postmaster-remote:INBOX
-Slave           :postmaster-local:inbox
+Channel         root-inbox
+Master          :root-remote:INBOX
+Slave           :root-local:inbox
 
-Channel         postmaster-sent
-Master          :postmaster-remote:Sent
-Slave           :postmaster-local:sent
+Channel         root-sent
+Master          :root-remote:Sent
+Slave           :root-local:sent
 
-Channel         postmaster-archive
-Master          :postmaster-remote:Archive
-Slave           :postmaster-local:archive
+Channel         root-archive
+Master          :root-remote:Archive
+Slave           :root-local:archive
 
-Channel         postmaster-drafts
-Master          :postmaster-remote:Drafts
-Slave           :postmaster-local:drafts
+Channel         root-drafts
+Master          :root-remote:Drafts
+Slave           :root-local:drafts
 
-Channel         postmaster-junk
-Master          :postmaster-remote:Junk
-Slave           :postmaster-local:junk
+Channel         root-junk
+Master          :root-remote:Junk
+Slave           :root-local:junk
 
-Channel         postmaster-trash
-Master          :postmaster-remote:Trash
-Slave           :postmaster-local:trash
+Channel         root-trash
+Master          :root-remote:Trash
+Slave           :root-local:trash
 
-Group           postmaster
-Channels        postmaster-inbox postmaster-sent postmaster-archive postmaster-drafts postmaster-junk postmaster-trash
-## "postmaster@aaronly.me" }}}
+Group           root
+Channels        root-inbox root-sent root-archive root-drafts root-junk root-trash
+## "root@liwt.net" }}}
 
 
 ## Account "gmail-aly" {{{
