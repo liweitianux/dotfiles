@@ -120,6 +120,7 @@
                       version-control-diff-tool 'diff-hl
                       version-control-global-margin t)
      xkcd
+     yaml
      ;; Custom layers
      )
    ;; List of additional packages that will be installed without being
@@ -390,7 +391,7 @@
   It is called immediately after `dotspacemacs/init'.
   You are free to put almost any user code here.  The exception is
   org related code, which should be placed in `dotspacemacs/user-config'."
-  ;;
+
   ;; Helm uses Tramp which tries to figure out some SSH/DNS settings at
   ;; startup.  However, the ISP may redirect non-existing addresses to
   ;; their own servers, which causes long timeouts and blocks the startup.
@@ -401,6 +402,12 @@
         (concat "-o ControlPath='tramp.%%C' "
                 "-o ControlMaster=auto "
                 "-o ControlPersist=no"))
+
+  ;; Set the customization file path; must be done here in `user-init'.
+  ;; See: https://github.com/syl20bnr/spacemacs/commit/6212795
+  (setq custom-file "~/.spacemacs.d/custom.el")
+
+  ;; END: `dotspacemacs/user-init'
   )
 
 
@@ -520,12 +527,11 @@
   (require 'my-org)
   (require 'my-mu4e)
   (require 'my-calendar)
-  ;;
-  ;; Set custom file location instead of using this file
-  (setq custom-file "~/.spacemacs.d/custom.el")
+
+  ;; Load customization file
   (if (file-readable-p custom-file)
       (load-file custom-file))
-  ;;
+
   ;; END: `dotspacemacs/user-config'
   )
 
