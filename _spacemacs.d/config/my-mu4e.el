@@ -250,6 +250,10 @@
   ;; reformat the paragraph into a single line.
   (setq mu4e-compose-format-flowed t)
 
+  ;; Do not cleanup trailing whitespaces
+  (add-hook 'mu4e-compose-mode-hook
+            'spacemacs/toggle-whitespace-cleanup-off)
+
   ;; enable inline images
   (setq mu4e-view-show-images t)
   ;; use imagemagick if available
@@ -272,7 +276,7 @@
   ;; Set bookmarks
   (setq mu4e-bookmarks
         '(("flag:unread AND NOT flag:trashed" "INBOX"                ?b)
-          ("flag:draft"                       "Drafts"               ?f)
+          ("flag:draft"                       "Drafts"               ?d)
           ("tag:todo OR tag:task"             "TODO / Task"          ?t)
           ("tag:work"                         "Work"                 ?W)
           ("date:today..now"                  "Today's messages"     ?T)
@@ -282,7 +286,7 @@
           ("tag:astro"                        "Astro"                ?a)
           ("tag:arxiv OR from:arxiv.org"      "arXiv"                ?x)
           ("tag:SMS"                          "SMS"                  ?S)
-          ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?d)
+          ("flag:trashed OR tag:\\\\Trash"    "Deleted"              ?D)
           ("mime:image/*"                     "Messages with images" ?p)))
 
   ;; Headers list appearance
