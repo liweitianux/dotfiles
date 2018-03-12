@@ -5,7 +5,7 @@
 #
 # Aaron LI
 # Created: 2016-01-29
-# Updated: 2017-09-28
+# Updated: 2018-03-12
 #
 
 
@@ -395,48 +395,6 @@ Channels        sjtu-inbox sjtu-sent sjtu-archive sjtu-drafts sjtu-junk sjtu-tra
 ## "sjtu" }}}
 
 
-## Account "lavabit" {{{
-IMAPAccount     lavabit
-Host            imap.lavabit.com
-User            liweitianux@lavabit.com
-PassCmd         "pass show email/lavabit | head -n1"
-SSLType         IMAPS
-
-IMAPStore       lavabit-remote
-Account         lavabit
-
-MaildirStore    lavabit-local
-Path            ~/mail/lavabit/
-
-Channel         lavabit-inbox
-Master          :lavabit-remote:Inbox
-Slave           :lavabit-local:inbox
-
-Channel         lavabit-sent
-Master          :lavabit-remote:Sent
-Slave           :lavabit-local:sent
-
-Channel         lavabit-archive
-Master          :lavabit-remote:Archive
-Slave           :lavabit-local:archive
-
-Channel         lavabit-drafts
-Master          :lavabit-remote:Drafts
-Slave           :lavabit-local:drafts
-
-Channel         lavabit-trash
-Master          :lavabit-remote:Trash
-Slave           :lavabit-local:trash
-
-Channel         lavabit-private
-Master          :lavabit-remote:Private
-Slave           :lavabit-local:private
-
-Group           lavabit
-Channels        lavabit-inbox lavabit-sent lavabit-archive lavabit-drafts lavabit-trash lavabit-private
-## "lavabit" }}}
-
-
 ## Account "autistici" {{{
 IMAPAccount     autistici
 Host            mail.autistici.org
@@ -519,6 +477,26 @@ Slave           :foxmail-local:trash
 Group           foxmail
 Channels        foxmail-inbox foxmail-sent foxmail-archive foxmail-drafts foxmail-junk foxmail-trash
 ## "foxmail" }}}
+
+
+## Account "lavabit" {{{
+IMAPAccount     lavabit
+Host            lavabit.com
+User            liweitianux@lavabit.com
+PassCmd         "pass show email/lavabit | head -n1"
+SSLType         IMAPS
+
+IMAPStore       lavabit-remote
+Account         lavabit
+
+MaildirStore    lavabit-local
+Path            ~/mail/lavabit/
+
+Channel         lavabit
+Master          :lavabit-remote:
+Slave           :lavabit-local:
+Patterns        *
+## "lavabit" }}}
 
 
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=conf: #
