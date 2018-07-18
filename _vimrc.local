@@ -13,6 +13,7 @@ if has('gui_running')
     set guifont=Source\ Code\ Pro\ Regular\ 11
 endif
 
+set tabstop=8
 set wrap
 " wrap long lines at a character in 'breakat'
 set linebreak
@@ -24,8 +25,7 @@ set nospell
 set clipboard=
 
 " syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
+"let g:syntastic_check_on_wq = 0
