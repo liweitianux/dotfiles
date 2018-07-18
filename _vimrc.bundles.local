@@ -13,4 +13,5 @@
 " Custom plugins
 Bundle 'mbbill/fencview'
 Bundle 'fcitx.vim'
+Bundle 'Konfekt/FastFold'
 
