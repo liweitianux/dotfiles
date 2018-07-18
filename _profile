@@ -12,7 +12,7 @@
 
 
 # Set file creation mask: be more private!
-umask 027
+#umask 027
 
 
 ### Functions ----------------------------------------------------------
