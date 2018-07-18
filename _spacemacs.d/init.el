@@ -484,7 +484,12 @@
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
    )
-  ;;
+
+  (add-hook 'c-mode-common-hook
+            (lambda ()
+              (setq indent-tabs-mode t)
+              (c-set-style "bsd")))
+
   ;; Enable `company-mode' globally
   (global-company-mode)
   (setq company-idle-delay 0.1)
