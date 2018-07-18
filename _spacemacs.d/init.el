@@ -433,28 +433,46 @@
   (setq x-select-enable-clipboard-manager nil)
   ;; Aggressively prevent `kill' and `yank' from accessing the clipboard
   (setq x-select-enable-clipboard nil)
-  ;;
-  ;; Make whitespace visible by enabling the `whitespace-mode'
-  ;; Credit: http://ergoemacs.org/emacs/whitespace-mode.html
-  ;; Make `whitespace-mode' use just basic colors
-  (setq whitespace-style
-        '(face tabs trailing lines-tail indentation
-               space-before-tab space-after-tab newline
-               tab-mark newline-mark))
-  ;; Change the symbols used for different whitespace characters
-  (setq whitespace-display-mappings
-        ;; All numbers are Unicode codepoint in decimal.
-        ;; Try `(insert-char <number>)' to see it.
-        ;; 9: tab; 10: line feed; 32: space; 46: full stop 「.」
-        ;; 183: middle dot 「·」; 9655: white right-pointing triangle 「▷」
-        '((space-mark 32 [183] [46])
-          (newline-mark 10 [182 10])
-          (tab-mark 9 [9655 9] [92 9])
-          ))
-  ;; Highlight the line part that goes beyond `whitespace-line-column'
-  (setq whitespace-line-column fill-column)
+
+  (with-eval-after-load 'whitespace
+    ;; Make whitespace visible by enabling the `whitespace-mode'
+    ;; Credit: http://ergoemacs.org/emacs/whitespace-mode.html
+    ;; Make `whitespace-mode' use just basic colors
+    (setq whitespace-style
+          '(face tabs trailing lines-tail indentation
+                spaces space-before-tab space-after-tab newline
+                tab-mark newline-mark))
+    ;; Set the marks used for different whitespace characters
+    (setq whitespace-display-mappings
+          '((space-mark   ?\     [?·]     [?.])  ; space - middle dot
+            (space-mark   ?\xA0  [?¤]     [?_])  ; hard space - currency sign
+            (newline-mark ?\n    [?↵ ?\n]  [?$ ?\n])  ; eol - downwards arrow
+            ;(newline-mark ?\n    [?$ ?\n])  ; eol - dollar sign
+            ;(newline-mark ?\n    [?¶ ?\n]  [?$ ?\n])  ; eol - pilcrow
+            ;(newline-mark ?\n    [?¬ ?\n]  [?$ ?\n])  ; eol - negation
+            ;; WARNING: the mapping below has a problem:
+            ;; When a TAB occupies exactly one column, it will display the
+            ;; character ?\xBB at that column followed by a TAB which goes
+            ;; to the next TAB column.
+            ;(tab-mark     ?\t    [?» ?\t] [?\\ ?\t])  ; tab - right guillemet
+            ))
+    ;; Set the faces for different whitespace characters
+    (set-face-attribute 'whitespace-space-before-tab nil
+                        :underline t
+                        :background nil
+                        :foreground (face-attribute 'font-lock-warning-face
+                                                    :foreground))
+    (set-face-attribute 'whitespace-space-after-tab nil
+                        :underline t
+                        :background nil
+                        :foreground (face-attribute 'font-lock-warning-face
+                                                    :foreground))
+    ;; Highlight the line part that goes beyond `whitespace-line-column'
+    (setq whitespace-line-column fill-column)
+    ;; END 'whitespace
+    )
   (global-whitespace-mode)
-  ;;
+
   ;; Indentation settings
   (setq-default
    ;; `js2-mode' (JavaScript)
