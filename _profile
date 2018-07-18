@@ -53,6 +53,17 @@ _running() {
 if [ -d "${HOME}/.npm-packages/bin" ]; then
     _path_prepend "${HOME}/.npm-packages/bin"
 fi
+# Miniconda/Anaconda
+if [ -d "${HOME}/miniconda3/bin" ]; then
+    _CONDA_DIR="${HOME}/miniconda3"
+elif [ -d "${HOME}/anaconda3/bin" ]; then
+    _CONDA_DIR="${HOME}/anaconda3"
+fi
+if [ -n "${_CONDA_DIR}" ]; then
+    _path_prepend "${_CONDA_DIR}/bin"
+    . "${_CONDA_DIR}/etc/profile.d/conda.sh"
+    unset _CONDA_DIR
+fi
 # Locally installed programs (e.g., Python)
 if [ -d "${HOME}/.local/bin" ]; then
     _path_prepend "${HOME}/.local/bin"
