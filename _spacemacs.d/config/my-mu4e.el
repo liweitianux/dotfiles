@@ -35,8 +35,8 @@
           :match-func (lambda (msg)
                         (when msg
                           (mu4e-message-contact-field-matches
-                           msg :to ("aly@aaronly.me"
-                                    "aly@liwt.net"))))
+                           msg :to '("aly@aaronly.me"
+                                     "aly@liwt.net"))))
           :vars '((user-mail-address      . "aly@aaronly.me")
                   (user-full-name         . "Aaron LI")
                   (mu4e-drafts-folder     . "/aly/drafts")
