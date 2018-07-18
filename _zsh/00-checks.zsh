@@ -6,6 +6,8 @@
 
 if [[ $(uname) = 'Linux' ]]; then
     IS_LINUX=1
+elif [[ $(uname) = 'Darwin' ]]; then
+    IS_MAC=1
 elif [[ $(uname) = 'FreeBSD' ]]; then
     IS_FREEBSD=1
     IS_BSD=1

@@ -14,7 +14,7 @@ alias pu=pushd
 
 if [[ -n "${IS_LINUX}" ]]; then
     alias ls='ls --color=auto'
-elif [[ -n "${IS_BSD}" ]]; then
+elif [[ -n "${IS_BSD}" ]] || [[ -n "${IS_MAC}" ]]; then
     alias ls='ls -G'
 fi
 alias l='ls -lah'
