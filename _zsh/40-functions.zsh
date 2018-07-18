@@ -133,4 +133,12 @@ zapply() {
     printf '%s\0' "$@[s+1,-1]" | xargs -0 -r -n1 ${(kv)=xopt} "$@[1,s-1]"
 }
 
+
+## Generate random password/string
+randpass() {
+    local len=${1:-16}
+    tr -dc '[:alnum:]' </dev/urandom | head -c ${len} | xargs
+}
+
+
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
