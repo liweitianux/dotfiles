@@ -490,6 +490,9 @@
               (setq indent-tabs-mode t)
               (c-set-style "bsd")))
 
+  ;; Python
+  (setq python-shell-interpreter "python3")
+
   ;; Enable `company-mode' globally
   (global-company-mode)
   (setq company-idle-delay 0.1)
