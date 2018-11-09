@@ -475,11 +475,8 @@
 
   ;; Indentation settings
   (setq-default
-   ;; `js2-mode' (JavaScript)
-   js2-basic-offset 2
-   ;; `js-mode' (JSON)
-   js-indent-level 2
-   ;; `web-mode': http://web-mode.org/
+   js2-basic-offset 4
+   js-indent-level 4
    web-mode-markup-indent-offset 2
    web-mode-css-indent-offset 2
    web-mode-code-indent-offset 2
