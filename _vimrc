@@ -99,23 +99,24 @@ set foldcolumn=1
 " Enable syntax highlighting
 syntax enable
 
-" Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
+set t_Co=256
+if $COLORTERM == 'truecolor'
+    set termguicolors
+endif
+if &term =~# '^screen'
+    " Set terminal sequences for true colors (:help xterm-true-color)
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-try
-    colorscheme desert
-catch
-endtry
-
-set background=dark
+colorscheme flattened_light
 
 " Set extra options when running in GUI mode
 if has("gui_running")
     set guioptions-=T
     set guioptions-=e
-    set t_Co=256
+    set guioptions-=m
+    set guifont=IBM\ Plex\ Mono\ Medium\ 11
     set guitablabel=%M\ %t
 endif
 
