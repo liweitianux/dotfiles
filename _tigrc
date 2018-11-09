@@ -1,0 +1,4 @@
+# ~/.tigrc
+
+bind main R !git rebase -i %(commit)
+bind main M !git merge --ff-only %(commit)
