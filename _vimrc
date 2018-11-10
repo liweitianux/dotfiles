@@ -48,9 +48,6 @@ set wildmenu
 set wildignore=*.o,*~,*.pyc
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
-"Always show current position
-set ruler
-
 " Height of the command bar
 set cmdheight=1
 
@@ -86,6 +83,9 @@ endif
 " Add a bit extra margin to the left
 set foldcolumn=1
 
+" Highlight the current line
+set cursorline
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -114,6 +114,7 @@ if has("gui_running")
     set guioptions-=R  " No right scrollbar
     set guifont=IBM\ Plex\ Mono\ Medium\ 11
     set guitablabel=%M\ %t
+    set guicursor+=a:blinkoff0  " Disable cursor blinking
 endif
 
 
@@ -137,13 +138,13 @@ set smarttab
 set tabstop=8
 set shiftwidth=4
 
-" Linebreak on 500 characters
-set linebreak
-set textwidth=500
-
 set autoindent
 set smartindent
 set wrap
+
+set linebreak
+set textwidth=75
+set formatoptions+=m  " Break at multi-byte characters (e.g., CJK)
 
 
 """"""""""""""""""""""""""""""
@@ -158,7 +159,6 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <c-space> ?
 
@@ -213,9 +213,17 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 " Always show the status line
 set laststatus=2
 
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return '[PASTE] '
+    endif
+    return ''
+endfunction
+
 " Format the status line
-set statusline=\ %{HasPaste()}%f%m%r%h\ %w
-set statusline+=\ %=%y\ %{&fileencoding?&fileencoding:&encoding}\ %l:%c\ %P
+set statusline=\ %{HasPaste()}%f%m%r%h\ %w\ %=
+set statusline+=%{&fileencoding?&fileencoding:&encoding}\ %y\ %l,%c%V\ %P
 set statusline+=\  " blank space
 
 
@@ -285,14 +293,6 @@ imap <F1> <Esc>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
-
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
