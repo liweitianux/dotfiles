@@ -289,6 +289,10 @@ noremap <leader>pp :setlocal paste!<cr>
 noremap  <F1> <Esc>
 inoremap <F1> <Esc>
 
+" Copy to and paste from the system clipboard
+vnoremap <leader>y "+y
+noremap  <leader>p "+p
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
