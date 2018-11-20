@@ -1,99 +1,82 @@
-##
-## ~/.config/alot/config
-## Configuration for alot MUA
-##
-## Aaron LI
-## Created: 2016-01-11
-## Updated: 2016-01-25
-##
+#
+# ~/.config/alot/config
+# Configuration for alot MUA
+#
 
 
-### Global configurations {{{
-# ask for subject when compose
-#ask_subject = False
-
-# confirm exit
 bug_on_exit = True
-
-# headers that get displayed by default
-displayed_headers = From, To, Cc, Bcc, Subject
-
-# editor command
-# if unset, alot will first try the `EDITOR`, then `/usr/bin/editor`
-editor_cmd = 'gvim -f -c "set tw=72 spell"'
-# call editor in separate thread.
-# In case your editor doesn't run in the same window as alot, setting true here
-# will make alot non-blocking during edits
-editor_in_thread = True
-
-# prefer plaintext alternatives over html content in multipart/alternative
 prefer_plaintext = True
+displayed_headers = From, To, Cc, Bcc, Subject
+editor_cmd = 'gvim -f'
+editor_in_thread = True
+handle_mouse = True
+theme = solarized_light
 
-# number of spaces used to replace tab characters
-tabwidth = 4
-
-# set terminal command used for spawning shell commands
-terminal_cmd = urxvt -e
-
-# name of the theme to use
-theme = solarized_dark
-
-### Global }}}
-
-
-# The list of addresses associated to the mailinglists you are subscribed to
-mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbsd.org, tech@openbsd.org
-
-
-# NOTE: blocks should be placed *AFTER* the global configurations
 
 [accounts]
+    [[aly]]
+        realname = Aaron LI
+        address = aly@aaronly.me
+        sendmail_command = msmtp --read-recipients --account=aly
+        sent_box = maildir:///home/aly/mail/sent
+        draft_box = maildir:///home/aly/mail/drafts
+
+    [[wt]]
+        realname = Weitian LI
+        address = wt@liwt.net
+        sendmail_command = msmtp --read-recipients --account=wt
+        sent_box = maildir:///home/aly/mail/sent
+        draft_box = maildir:///home/aly/mail/drafts
+
+    [[autistici]]
+        realname = Weitian LI
+        address = liweitianux@autistici.org
+        sendmail_command = msmtp --read-recipients --account=autistici
+        sent_box = maildir:///home/aly/mail/autistici/sent
+        draft_box = maildir:///home/aly/mail/drafts
 
     [[gmail-aly]]
         realname = Aaron LI
         address = aaronly.me@gmail.com
-        gpg_key = 5D72729A
         sendmail_command = msmtp --read-recipients --account=gmail-aly
         sent_box = maildir:///home/aly/mail/sent
         draft_box = maildir:///home/aly/mail/drafts
-        signature = ~/.signature-aly
 
     [[outlook-aly]]
         realname = Aaron LI
         address = aaronly.me@outlook.com
-        gpg_key = 5D72729A
         sendmail_command = msmtp --read-recipients --account=outlook-aly
         sent_box = maildir:///home/aly/mail/sent
         draft_box = maildir:///home/aly/mail/drafts
-        signature = ~/.signature-aly
 
     [[gmail-li]]
         realname = Weitian LI
         address = liweitianux@gmail.com
-        gpg_key = 5F26EBF6
         sendmail_command = msmtp --read-recipients --account=gmail-li
         sent_box = maildir:///home/aly/mail/sent
         draft_box = maildir:///home/aly/mail/drafts
-        signature = ~/.signature-li
 
     [[outlook-li]]
         realname = Weitian LI
         address = liweitianux@live.com
         aliases = liweitianux@live.cn, liweitianux@outlook.com
-        gpg_key = 5F26EBF6
         sendmail_command = msmtp --read-recipients --account=outlook-li
         sent_box = maildir:///home/aly/mail/sent
         draft_box = maildir:///home/aly/mail/drafts
-        signature = ~/.signature-li
 
     [[sjtu]]
         realname = Weitian LI
         address = liweitianux@sjtu.edu.cn
-        gpg_key = 5F26EBF6
         sendmail_command = msmtp --read-recipients --account=sjtu
         sent_box = maildir:///home/aly/mail/sjtu/sent
-        draft_box = maildir:///home/aly/mail/sjtu/drafts
-        signature = ~/.signature-li
+        draft_box = maildir:///home/aly/mail/drafts
+
+    [[foxmail]]
+        realname = Weitian LI
+        address = liweitianux@foxmail.com
+        sendmail_command = msmtp --read-recipients --account=foxmail
+        sent_box = maildir:///home/aly/mail/foxmail/sent
+        draft_box = maildir:///home/aly/mail/drafts
 
 
 [tags]
@@ -101,53 +84,38 @@ mailinglists = freebsd-current@freebsd.org, freebsd-x11@freebsd.org, misc@openbs
         translated = ⚑
         normal = '', '', 'light red', '', 'light red', ''
         focus  = '', '', 'light red', '', 'light red', ''
-
     [[todo]]
         translated = TODO
         normal = '', '', 'white', 'light red', 'white', '#d66'
-
     [[inbox]]
         translated = ¶
-
     [[unread]]
         translated = ✉
-
     [[to-me]]
         translated = ☻
-
     [[drafts]]
         translated = ✎
-
     [[replied]]
         translated = ✓
-
     [[sent]]
         translated = ➥
-
     [[signed]]
         translated = §
-
     [[encrypted]]
         translated = ⚷
-
     [[killed]]
         translated = ✗
-
     [[attachment]]
         translated = @
 
 
-### Key bindings
 [bindings]
-c = compose
-F = search tag:flagged
-I = search tag:inbox AND tag:unread AND NOT tag:killed
-i = search tag:inbox AND NOT tag:killed
-S = search tag:sent
-T = search tag:todo
-
-    [[envelope]]
-    E = toggleencrypt
+    c = compose
+    F = search tag:flagged
+    I = search tag:inbox AND tag:unread AND NOT tag:killed
+    i = search tag:inbox AND NOT tag:killed
+    S = search tag:sent
+    T = search tag:todo
 
     [[search]]
     A = toggletags archived
@@ -158,6 +126,3 @@ T = search tag:todo
     A = toggletags archived
     a = toggletags inbox
     t = toggletags todo
-
-
-# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=python: #
