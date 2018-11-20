@@ -7,6 +7,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
@@ -338,3 +340,11 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Local configurations
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if filereadable("~/.vimrc.local")
+    source ~/.vimrc.local
+endif
