@@ -37,14 +37,13 @@ function gitpwd() {
 function myprompt() {
     setopt PROMPT_SUBST
     nbsp=$'\u00A0'
-    PROMPT='%B%F{green}%m%(?.. %F{red}%??)%(1j. %F{yellow}%j&.)%b%f $(gitpwd)%B%(!.%F{red}.%F{green})%#${SSH_CONNECTION:+%#}$nbsp%b%f'
+    PROMPT='%S%B%F{green}%m%(?.. %F{red}%??)%(1j. %F{yellow}%j&.)%b%f $(gitpwd)%B%(!.%F{red}.%F{green})%#${SSH_CONNECTION:+%#}%s$nbsp%b%f'
     RPROMPT=''
     # Prompt for spelling correction
     SPROMPT='zsh: correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [(y)es (n)o (a)bort (e)dit]? '
 }
 
 
-# Set prompts
 myprompt
 
 
