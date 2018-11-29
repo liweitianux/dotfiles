@@ -1,0 +1,12 @@
+/*
+ * ~/.calendar/calendar
+ */
+
+LANG=utf-8
+
+#include <calendar.usholiday>
+
+/*
+ * anniversary
+ */
+6/25	233233
