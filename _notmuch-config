@@ -34,7 +34,7 @@ tags=unread;inbox;
 # searched for messages by "notmuch new".
 # NOTE: *every* file/directory that goes by one of those names will be
 # ignored, independent of its location in the mail store.
-ignore=backup;
+ignore=backup;.noindex;.mbsyncstate;.uidvalidity;
 
 
 [search]
