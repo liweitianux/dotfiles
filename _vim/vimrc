@@ -145,7 +145,6 @@ set smartindent
 set wrap
 
 set linebreak
-set textwidth=75
 set formatoptions+=m  " Break at multi-byte characters (e.g., CJK)
 
 
