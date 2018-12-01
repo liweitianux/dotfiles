@@ -1,0 +1,124 @@
+#
+# ~/.cshrc
+#
+# Aaron LI
+# 2011-06-30
+#
+
+set echo_style=both
+set backslash_quote
+set parseoctal
+unset noclobber
+
+# Skip remaining settings if not an interactive shell
+if ( $?USER == 0 || $?prompt == 0 ) exit
+
+
+# Options
+# -------
+set inputmode=insert
+set autolist
+set autoexpand
+set autocorrect
+set correct=cmd
+set complete=enhance
+set padhour
+set color
+set colorcat
+set nobeep
+set cdtohome
+set autorehash
+set printexitvalue
+
+set histdup
+set histlit
+set nohistclop
+
+unset compat_expr
+unset noglob
+unset autologout
+unset time
+unset tperiod
+
+set prompt = "%S[%m]%s %B%~%b%# "
+
+
+# Systems
+# -------
+if ( `uname -s` == "Linux" ) then
+    set _os = "linux"
+else
+    set _os = "bsd"
+endif
+
+
+# PATH
+# ----
+echo $path | fgrep -q '/sbin'
+if ( $status != 0 ) then
+    set path = ( $path /sbin /usr/sbin /usr/local/sbin )
+endif
+if ( -d ~/.local/bin ) then
+    set path = ( ~/.local/bin $path )
+endif
+if ( -d ~/bin ) then
+    set path = ( ~/bin $path )
+endif
+
+
+# Locale
+# ------
+# NOTE: mosh (https://github.com/mobile-shell/mosh) requires UTF-8.
+# NOTE: login.conf(5) is ignored by SSH since it handles the login by its own
+setenv  LANG        en_US.UTF-8
+setenv  MM_CHARSET  UTF-8
+setenv  LC_COLLATE  C
+
+# Environments
+# ------------
+setenv  PAGER       less
+setenv  EDITOR      vi
+
+if ( "${_os}" == "linux" ) then
+    alias   ls          ls --color=auto
+else
+    setenv  CLICOLOR    yes
+    setenv  LSCOLORS    ExGxFxdxCxegedabagExEx
+    alias   ls          ls -G
+endif
+
+
+# Aliases
+# -------
+alias rm    rm -I
+alias h     history 25
+alias j     jobs -l
+alias la    ls -aF
+alias lf    ls -FA
+alias ll    ls -lAF
+
+
+# Keybindings
+# -----------
+if ( $?tcsh ) then
+    bindkey    "^W" backward-delete-word
+    bindkey -k up   history-search-backward
+    bindkey -k down history-search-forward
+
+    # Credit:
+    # * https://stackoverflow.com/a/1912527/4856091
+    # * http://www.ibb.net/~anne/keyboard/keyboard.html#Tcsh
+    bindkey "\e[1~" beginning-of-line  # Home
+    bindkey "\e[7~" beginning-of-line  # Home rxvt
+    bindkey "\e[2~" overwrite-mode     # Insert
+    bindkey "\e[3~" delete-char        # Delete
+    bindkey "\e[4~" end-of-line        # End
+    bindkey "\e[8~" end-of-line        # End rxvt
+endif
+
+
+# Local settings
+# --------------
+if ( -e ~/.cshrc.local ) then
+    source ~/.cshrc.local
+endif
