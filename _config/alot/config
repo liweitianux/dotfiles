@@ -4,6 +4,7 @@
 #
 
 
+initial_command = 'search tag:unread AND NOT tag:killed'
 bug_on_exit = True
 prefer_plaintext = True
 displayed_headers = From, To, Cc, Bcc, Subject
@@ -111,11 +112,15 @@ theme = solarized_light
 
 [bindings]
     c = compose
+    / = prompt 'search '
+    i = search tag:unread AND NOT tag:killed
+    I = search tag:inbox AND NOT tag:killed
     F = search tag:flagged
-    I = search tag:inbox AND tag:unread AND NOT tag:killed
-    i = search tag:inbox AND NOT tag:killed
     S = search tag:sent
     T = search tag:todo
+    'g y' = search date:yesterday..
+    'g w' = search date:last_week..
+    'g m' = search date:last_month..
 
     [[search]]
     A = toggletags archived
@@ -123,6 +128,8 @@ theme = solarized_light
     t = toggletags todo
 
     [[thread]]
+    '=' = toggletags flagged
     A = toggletags archived
+    D = toggletags deleted
     a = toggletags inbox
     t = toggletags todo
