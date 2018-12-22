@@ -181,6 +181,7 @@ noremap <leader>bd :Bclose<cr>:tabclose<cr>gT
 " Close all the buffers
 noremap <leader>ba :bufdo bd<cr>
 
+noremap <leader>b :buffers<cr>:buffer<space>
 noremap <leader>l :bnext<cr>
 noremap <leader>h :bprevious<cr>
 
@@ -300,6 +301,7 @@ noremap  <leader>p "+p
 " Mappings for vim-fugitive
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gb :Gblame<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
