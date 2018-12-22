@@ -88,6 +88,8 @@ set foldcolumn=1
 " Highlight the current line
 set cursorline
 
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -146,6 +148,7 @@ set wrap
 
 set linebreak
 set formatoptions+=m  " Break at multi-byte characters (e.g., CJK)
+set formatoptions+=j  " Delete comment character when joining commented lines
 
 
 """"""""""""""""""""""""""""""
