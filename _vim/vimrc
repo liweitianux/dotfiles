@@ -298,10 +298,16 @@ inoremap <F1> <Esc>
 vnoremap <leader>y "+y
 noremap  <leader>p "+p
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings for vim-fugitive
 nnoremap <leader>gs :Gstatus<cr>
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gb :Gblame<cr>
+
+autocmd BufReadPost fugitive://* setlocal bufhidden=delete
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
