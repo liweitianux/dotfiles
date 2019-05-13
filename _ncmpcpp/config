@@ -80,13 +80,12 @@ autocenter_mode = yes
 ## be used to build 'empty' part of progressbar.
 #
 #progressbar_look = "=>"
-#progressbar_look = "▪▪▫"
+progressbar_look = "▪▪▫"
 #progressbar_look = "♪♪ "
-#progressbar_look = "=>"
 #progressbar_look = "─- "
 #progressbar_look = "▒▒░"
 #progressbar_look = "┅┅┄"
-progressbar_look = "─⊙┄"
+#progressbar_look = "─⊙┄"
 #progressbar_look = "─➞─"
 #progressbar_look = "─┅─"
 #progressbar_look = "▪▪▪"
@@ -95,8 +94,6 @@ progressbar_look = "─⊙┄"
 #progressbar_look = "‒‒‒"
 #progressbar_look = "■◣ "
 #progressbar_look = "◈◆◇"
-#
-progressbar_boldness = yes
 
 ## Available values: database, playlist.
 #default_place_to_search_in = database
