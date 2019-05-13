@@ -141,4 +141,15 @@ randpass() {
 }
 
 
+## Fix terminal
+# Credit: https://unix.stackexchange.com/a/299922
+fix() {
+    reset
+    stty sane
+    tput rs1
+    clear
+    echo -e "\033c"
+}
+
+
 # vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
