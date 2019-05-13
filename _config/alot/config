@@ -94,7 +94,7 @@ theme = solarized_light
         translated = ✉
     [[to-me]]
         translated = ☻
-    [[drafts]]
+    [[draft]]
         translated = ✎
     [[replied]]
         translated = ✓

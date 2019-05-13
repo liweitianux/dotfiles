@@ -12,6 +12,7 @@ import alot
 
 # Check for missing attachment before sending
 #
+"""
 async def pre_envelope_send(ui, dbm, __):
     p = r'.*([Aa]ttach|附件|附图|已附|所附)'
     e = ui.current_buffer.envelope
@@ -19,6 +20,7 @@ async def pre_envelope_send(ui, dbm, __):
         msg = 'No attachments. Send anyway?'
         if not (await ui.choice(msg, select='yes')) == 'yes':
             raise Exception()
+"""
 
 
 # Save marked position in search buffer
