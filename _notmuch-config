@@ -11,7 +11,8 @@
 
 
 [database]
-path=/home/aly/mail
+# Relative to $HOME
+path=mail
 
 
 # User configuration
