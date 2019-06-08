@@ -69,6 +69,11 @@ if [ -d "${HOME}/.local/bin" ]; then
     _path_prepend "${HOME}/.local/bin"
 fi
 _path_prepend "${HOME}/bin"
+## Plan 9 from User Space
+if [ -d "${HOME}/local/plan9" ]; then
+    export PLAN9="${HOME}/local/plan9"
+    _path_append ${PLAN9}/bin
+fi
 _path_append "/usr/local/sbin"
 _path_append "/usr/sbin"
 _path_append "/sbin"
