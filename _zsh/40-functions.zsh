@@ -16,7 +16,7 @@ function exists() {
 
 ## Check whether the program is running
 function is_running() {
-    pgrep -x -u "${USER}" "$1" /dev/null 2>&1
+    pgrep -x -u "${USER}" "$1" >/dev/null 2>&1
 }
 
 
