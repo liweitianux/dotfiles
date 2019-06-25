@@ -49,10 +49,12 @@ _running() {
 ### Environment Settings -----------------------------------------------
 
 ## PATH
+
 # Locally installed NPM packages (see also `~/.npmrc`)
 if [ -d "${HOME}/.npm-packages/bin" ]; then
     _path_prepend "${HOME}/.npm-packages/bin"
 fi
+
 # Miniconda/Anaconda
 if [ -d "${HOME}/miniconda3/bin" ]; then
     _CONDA_DIR="${HOME}/miniconda3"
@@ -64,16 +66,26 @@ if [ -n "${_CONDA_DIR}" ]; then
     . "${_CONDA_DIR}/etc/profile.d/conda.sh"
     unset _CONDA_DIR
 fi
+
 # Locally installed programs (e.g., Python)
 if [ -d "${HOME}/.local/bin" ]; then
     _path_prepend "${HOME}/.local/bin"
 fi
+
+# Go
+if [ -d "${HOME}/go" ]; then
+    export GOPATH="${HOME}/go"
+    _path_prepend "${GOPATH}/bin"
+fi
+
 _path_prepend "${HOME}/bin"
-## Plan 9 from User Space
+
+# Plan 9 from User Space
 if [ -d "${HOME}/local/plan9" ]; then
     export PLAN9="${HOME}/local/plan9"
     _path_append "${PLAN9}/bin"
 fi
+
 _path_append "/usr/local/sbin"
 _path_append "/usr/sbin"
 _path_append "/sbin"
