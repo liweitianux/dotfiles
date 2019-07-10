@@ -38,6 +38,10 @@
     # Show space and tabs
     wsErrorHighlight = all
 
+[alias]
+    ref-next = !sh -c 'git log --ancestry-path --format=%H ${1:-HEAD}..master | tail -n 1' -
+    log-next = !git ref-next $1 | xargs git log
+
 # Large file storage
 [filter "lfs"]
     clean = git-lfs clean -- %f
