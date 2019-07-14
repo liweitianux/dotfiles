@@ -1,3 +1,7 @@
 [submodule "_vim/pack/aly/start/vim-fugitive"]
 	path = _vim/pack/aly/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
+
+[submodule "_vim/pack/aly/start/ctrlp.vim"]
+	path = _vim/pack/aly/start/ctrlp.vim
+	url = https://github.com/ctrlpvim/ctrlp.vim
