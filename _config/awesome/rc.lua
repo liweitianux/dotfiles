@@ -1,3 +1,7 @@
+--
+-- ~/.config/awesome/rc.lua
+--
+
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -49,14 +53,12 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vi"
 editor_cmd = terminal .. " -e " .. editor
+lock_cmd = "slock"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -91,7 +93,8 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+                                    { "lock screen", lock_cmd }
                                   }
                         })
 
@@ -101,9 +104,6 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
-
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -230,7 +230,7 @@ root.buttons(gears.table.join(
 -- {{{ Key bindings
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
+              {description = "show help", group = "awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
               {description = "view previous", group = "tag"}),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
@@ -324,9 +324,24 @@ globalkeys = gears.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"}),
+
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+
+    -- Custom
+    awful.key({                 }, "Print",
+              function() awful.spawn.with_shell( "scrot -e 'mv $f ~/screenshots/' 2>/dev/null" ) end),
+    -- Wait for the key release so that scrot can grab the X server.
+    -- Credit: https://bbs.archlinux.org/viewtopic.php?pid=1698946#p1698946
+    awful.key({         "Shift" }, "Print",
+              function() awful.spawn.with_shell( "sleep 0.5 && scrot -s -e 'mv $f ~/screenshots/' 2>/dev/null" ) end),
+    awful.key({         "Mod1"  }, "F2",
+              function() awful.spawn.with_shell( "rofi -show run" ) end),
+    awful.key({         "Mod1"  }, "F3",
+              function() awful.spawn.with_shell( "rofi -show window" ) end),
+    awful.key({ modkey,         }, "l",
+              function() awful.spawn.with_shell( lock_cmd ) end)
 )
 
 clientkeys = gears.table.join(
@@ -339,6 +354,8 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
+              {description = "toggle floating", group = "client"}),
+    awful.key({ modkey,           }, "f",      awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
