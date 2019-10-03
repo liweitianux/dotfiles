@@ -300,6 +300,9 @@ inoremap <F1> <Esc>
 vnoremap <leader>y "+y
 noremap  <leader>p "+p
 
+" Grep the word under cursor
+nnoremap <leader>* :grep! "\b<C-r><C-w>\b"<cr>:cw<cr>
+
 " Use the Silver Searcher
 if executable("ag")
     set grepprg=ag\ --nogroup\ --nocolor
