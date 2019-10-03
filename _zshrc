@@ -1,36 +1,516 @@
-## -*- mode: sh; -*-
-##
-## ~/.zshrc
-## ZSH configuration file
-## oh-my-zsh: http://ohmyz.sh/
-##
-## ZSH reads this file in all interactive shells, whether they are
-## login shells or not.
-##
-## Credits:
-## [1] https://github.com/spicycode/ze-best-zsh-config
-## [2] Zsh Configuration from the Ground Up
-##     http://zanshin.net/2013/02/02/zsh-configuration-from-the-ground-up/
-## [3] GRML Zsh
-##     http://grml.org/zsh/
-##
-## References:
-## [1] The Unix Shell's Humble if
-##     https://robots.thoughtbot.com/the-unix-shells-humble-if
-##
-## Aaron LI
-## Created: 2014-05-31
-## Updated: 2016-05-15
-##
+#
+# ~/.zshrc
+# ZSH configuration file
+#
+# Credits:
+# [1] https://github.com/spicycode/ze-best-zsh-config
+# [2] Zsh Configuration from the Ground Up
+#     http://zanshin.net/2013/02/02/zsh-configuration-from-the-ground-up/
+# [3] GRML Zsh
+#     http://grml.org/zsh/
+#
+# References:
+# [1] The Unix Shell's Humble if
+#     https://robots.thoughtbot.com/the-unix-shells-humble-if
+#
+
+#
+# OS checks
+#
+
+OS=$(uname -s)
+if [[ "${OS}" = 'Linux' ]]; then
+    IS_LINUX=1
+elif [[ "${OS}" = 'Darwin' ]]; then
+    IS_MAC=1
+elif [[ "${OS}" = 'DragonFly' ]] || [[ "${OS}" =~ '.*BSD' ]]; then
+    IS_BSD=1
+fi
+
+#
+# Zsh Parameters
+# See zshparam(1)
+#
+
+# Ask only if the top of the listing would scroll off the screen
+LISTMAX=0
+# Report consuming time statistics if user+system greater than 60 seconds
+REPORTTIME=60
+# Format of process time reports with the `time' keyword
+TIMEFMT="%J  %U user %S system %P cpu %MM memory %*E total"
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=9000
+SAVEHIST=9000
+# Ignore these commands without arguments
+HISTIGNORE="cd:ls:ll"
+
+#
+# Zsh Options
+# See zshoptions(1)
+#
+
+## Basics
+setopt NO_BEEP
+setopt AUTO_CD
+# make cd push the old directory onto the directory stack
+setopt AUTO_PUSHD
+# don't push multiple copies of the same directory into the directory stack
+setopt PUSHD_IGNORE_DUPS
+# exchange meanings of `+` and `-` when specifying a directory in the stack
+setopt PUSHD_MINUS
+# do not print the directory stack after `pushd` or `popd`
+setopt PUSHD_SILENT
+# treat #, ~, and ^ as part of patterns for filename generation
+setopt EXTENDED_GLOB
+# allow comments even in interactive shells (especially for Muness)
+setopt INTERACTIVE_COMMENTS
+# display PID when suspending processes as well
+setopt LONG_LIST_JOBS
+# disable output flow control via start/stop characters (^S/^Q)
+unsetopt FLOW_CONTROL
+
+## History
+# allow multiple terminal sessions to all append to one zsh command history
+setopt APPEND_HISTORY
+# include timestamp of command and duration to history
+setopt EXTENDED_HISTORY
+# add comamnds as they are typed, don't wait until shell exit
+setopt INC_APPEND_HISTORY
+# do not write events to history that are duplicates of previous events
+setopt HIST_IGNORE_DUPS
+# remove command line from history list when it begins a space
+setopt HIST_IGNORE_SPACE
+# when searching history don't display results already cycled through twice
+setopt HIST_FIND_NO_DUPS
+# remove extra blanks from each command line being added to history
+setopt HIST_REDUCE_BLANKS
+# don't execute, just expand history
+setopt HIST_VERIFY
+
+## Completion
+# `*' shouldn't match dotfiles. ever.
+setopt NO_GLOB_DOTS
+# allow completion from within a word/phrase
+setopt COMPLETE_IN_WORD
+# when completing from middle of a word, move cursor to the end of the word
+setopt ALWAYS_TO_END
+# show completion menu on successive tab press (needs 'unsetopt MENU_COMPLETE')
+setopt AUTO_MENU
+unsetopt MENU_COMPLETE
+# make the completion list compact
+setopt LIST_PACKED
+
+## Correction
+# spelling correction for commands
+setopt CORRECT
+# spelling correction for arguments
+#setopt CORRECTALL
+
+#
+# Prompt
+# Credit: http://chneukirchen.org/dotfiles/.zshrc
+#
+
+# enable parameter expansion, command substitution, and arithmetic expansion
+setopt PROMPT_SUBST
+# remove any right prompt from display when accepting a command line
+setopt TRANSIENT_RPROMPT
+
+# gitpwd - format the current path with inline git branch for the
+#          prompt; the current path is limited to $NDIR segments,
+#          meanwhile long segments are shortened to be
+#          '<prefix>…<suffix>'.
+NDIRS=3
+function gitpwd() {
+    local -a segs splitprefix
+    local prefix branch
+    segs=("${(Oas:/:)${(D)PWD}}")
+    segs=("${(@)segs/(#b)(?(#c10))??*(?(#c5))/${(j:\u2026:)match}}")
+
+    if gitprefix=$(git rev-parse --show-prefix 2>/dev/null); then
+        splitprefix=("${(s:/:)gitprefix}")
+        if ! branch=$(git symbolic-ref -q --short HEAD); then
+           branch=$(git name-rev --name-only HEAD 2>/dev/null)
+           [[ $branch = *\~* ]] || branch+="~0"    # distinguish detached HEAD
+        fi
+        if (( $#splitprefix > NDIRS )); then
+           print -n "${segs[$#splitprefix]}@$branch "
+        else
+           segs[$#splitprefix]+=@$branch
+        fi
+    fi
+
+    (( $#segs == NDIRS+1 )) && [[ $segs[-1] == "" ]] && print -n /
+    print "${(j:/:)${(@Oa)segs[1,NDIRS]}}"
+}
+
+PROMPT='%S%B%F{green}[%m]%s%(?.. %F{red}%??)%(1j. %F{yellow}%j&.)%b%f $(gitpwd)%B%(!.%F{red}.%F{green})%#${SSH_CONNECTION:+%#} %b%f'
+RPROMPT=''
+SPROMPT='zsh: correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [(y)es (n)o (a)bort (e)dit]? '
+
+#
+# Completion
+#
+
+fpath=(~/.zsh.completions $fpath)
+autoload -U compinit && compinit
+zmodload -i zsh/complist
+
+# enable completion caching, use rehash to clear
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path ~/.cache/zsh/${HOST}
+
+# make the selection prompt friendly when there are a lot of choices
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+
+# list of completers to use
+zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select=1 _complete _ignored _approximate
+
+# match uppercase from lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+#
+# Functions
+#
+
+## Fix terminal
+# Credit: https://unix.stackexchange.com/a/299922
+fix() {
+    reset
+    stty sane
+    tput rs1
+    clear
+    echo -e "\033c"
+}
+
+## Check the existence/accessibility of a command
+# Credit: https://stackoverflow.com/a/677212/4856091
+function exists() {
+    # 'command' is POSIX-compliant and more portable;
+    # 'hash' only searches for commands;
+    # while 'type' also considers builtins and keywords.
+    type "$1" >/dev/null 2>&1
+}
+
+## Check whether the program is running
+function is_running() {
+    pgrep -x -u "${USER}" "$1" >/dev/null 2>&1
+}
+
+## Interactive move/rename: making renaming long filenames less sucks
+# Credit: http://chneukirchen.org/dotfiles/.zshrc
+function imv() {
+    local src dst
+    for src; do
+        [[ -e "$src" ]] || { print -u2 "$src: does not exist"; continue }
+        dst="$src"
+        vared dst
+        [[ "$src" != "$dst" ]] && mkdir -p ${dst:h} && mv -n $src $dst
+    done
+}
+
+## Print pre-defined C macros
+# Credit: http://chneukirchen.org/dotfiles/.zshrc
+ccdef() {
+    ${1:-cc} $@[2,-1] -dM -E - </dev/null
+}
+
+#
+# Terminal settings
+#
+
+# disable sending of start (Ctrl-Q) and stop (Ctrl-S) characters
+stty -ixoff
+# disable XON/XOFF flow control
+stty -ixon
+
+#
+# Vi-mode
+#
+# Credits:
+# * https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/vi-mode/vi-mode.plugin.zsh
+# * http://zshwiki.org/home/zle/bindkeys
+#
+
+# Updates editor information when the keymap changes.
+function zle-keymap-select() {
+    zle reset-prompt
+    zle -R
+}
+
+# Ensure that the prompt is redrawn when the terminal size changes.
+TRAPWINCH() {
+    zle && { zle reset-prompt; zle -R }
+}
+
+zle -N zle-keymap-select
+zle -N edit-command-line
 
 
-for _f in ~/.zsh/[0-9][0-9]-*.zsh; do
-    source ${_f}
-done
-unset _f
+# NOTE: This will *reset* previous bindkey settings!
+bindkey -v
 
-## Local configurations
+# allow v to edit the command line (standard behaviour)
+autoload -Uz edit-command-line
+bindkey -M vicmd 'v' edit-command-line
+
+# allow ctrl-p, ctrl-n for navigate history (standard behaviour)
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+# allow ctrl-h, ctrl-w, ctrl-? for char and word deletion (standard behaviour)
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
+
+# allow ctrl-r for incremental history search
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
+
+# if mode indicator wasn't setup by theme, define default
+if [[ "$MODE_INDICATOR" == "" ]]; then
+    MODE_INDICATOR="%{$fg_bold[red]%}<%{$fg[red]%}<<%{$reset_color%}"
+fi
+
+function vi_mode_prompt_info() {
+    echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+}
+
+# define right prompt, if it wasn't defined by a theme
+if [[ "$RPS1" == "" && "$RPROMPT" == "" ]]; then
+    RPS1='$(vi_mode_prompt_info)'
+fi
+
+#
+# Key bindings
+# See zshzle(1)
+#
+# Credit:
+# * oh-my-zsh: https://github.com/robbyrussell/oh-my-zsh
+#   lib/key-bindings.zsh
+#
+
+# Make sure that the terminal is in application mode when zle is active,
+# since only then values from $terminfo are valid
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-line-init() {
+        echoti smkx
+    }
+    function zle-line-finish() {
+        echoti rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
+fi
+
+# [Ctrl-r] - Search backward incrementally for a specified string.
+# The string may begin with ^ to anchor the search to the beginning of the line.
+bindkey '^r' history-incremental-search-backward
+
+# [PageUp] - Up a line of history
+if [[ "${terminfo[kpp]}" != "" ]]; then
+    bindkey "${terminfo[kpp]}" up-line-or-history
+fi
+# [PageDown] - Down a line of history
+if [[ "${terminfo[knp]}" != "" ]]; then
+    bindkey "${terminfo[knp]}" down-line-or-history
+fi
+
+# Start typing + [Up-Arrow] - fuzzy find history forward
+if [[ "${terminfo[kcuu1]}" != "" ]]; then
+    autoload -U up-line-or-beginning-search
+    zle -N up-line-or-beginning-search
+    bindkey "${terminfo[kcuu1]}" up-line-or-beginning-search
+fi
+# Start typing + [Down-Arrow] - fuzzy find history backward
+if [[ "${terminfo[kcud1]}" != "" ]]; then
+    autoload -U down-line-or-beginning-search
+    zle -N down-line-or-beginning-search
+    bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
+fi
+
+# [Home] - Go to beginning of line
+if [[ "${terminfo[khome]}" != "" ]]; then
+    bindkey "${terminfo[khome]}" beginning-of-line
+fi
+# [End] - Go to end of line
+if [[ "${terminfo[kend]}" != "" ]]; then
+    bindkey "${terminfo[kend]}"  end-of-line
+fi
+
+# [Space] - do history expansion
+bindkey ' ' magic-space
+# [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5C' forward-word
+# [Ctrl-LeftArrow] - move backward one word
+bindkey '^[[1;5D' backward-word
+
+# [Shift-Tab] - move through the completion menu backwards
+if [[ "${terminfo[kcbt]}" != "" ]]; then
+    bindkey "${terminfo[kcbt]}" reverse-menu-complete
+fi
+
+# [Backspace] - delete backward
+bindkey '^?' backward-delete-char
+# [Delete] - delete forward
+if [[ "${terminfo[kdch1]}" != "" ]]; then
+    bindkey "${terminfo[kdch1]}" delete-char
+else
+    bindkey "^[[3~" delete-char
+    bindkey "^[3;5~" delete-char
+    bindkey "\e[3~" delete-char
+fi
+
+# Emacs style line editing
+bindkey "^K"    kill-whole-line                      # ctrl-k
+bindkey "^R"    history-incremental-search-backward  # ctrl-r
+bindkey "^A"    beginning-of-line                    # ctrl-a
+bindkey "^E"    end-of-line                          # ctrl-e
+bindkey "[B"    history-search-forward               # down arrow
+bindkey "[A"    history-search-backward              # up arrow
+bindkey "^D"    delete-char                          # ctrl-d
+bindkey "^F"    forward-char                         # ctrl-f
+bindkey "^B"    backward-char                        # ctrl-b
+
+# Bash-style word killing: word characters are alphanumeric characters only
+# see zshcontrib(1)
+autoload -U select-word-style
+select-word-style bash
+
+#
+# ZLE generic settings
+# See zshzle(1)
+#
+
+# Turn off ZLE bracketed paste in dumb and cons25 (DFly default console) term,
+# otherwise turn on ZLE bracketed-paste-magic
+# Credit: http://zmwangx.github.io/blog/2015-09-21-zsh-51-and-bracketed-paste.html
+# See also zshparam(1)
+if [[ ${TERM} == dumb ]] || [[ ${TERM} == cons25 ]]; then
+    unset zle_bracketed_paste
+else
+    autoload -Uz bracketed-paste-magic
+    zle -N bracketed-paste bracketed-paste-magic
+fi
+
+#
+# GnuPG integration
+#
+
+# NOTE:
+# Install both the `pinentry-gtk-2' and `pinentry-curses', and symlink
+# `pinentry-gtk-2' to `pinentry' as the default pinentry program, which
+# will fallback to the text mode when X11 is not avaiable (i.e.,
+# `$DISPLAY' is not set), e.g., through SSH logins.
+# `pinentry-gnome3' seems to have problem that cannot fallback to the
+# text mode ... (for unkown reasons ...)
+
+# This `GPG_TTY' variable should be set to the correct TTY where the shell
+# is running.  See `gpg-agent(1)' for more details.
+export GPG_TTY=$(tty)
+
+# Make SSH to use `gpg-agent'.
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
+# Use curses-based pinentry for SSH logins
+# Credit: https://wiki.gentoo.org/wiki/GnuPG
+if [ -n "${SSH_CONNECTION}" ] ;then
+    export PINENTRY_USER_DATA="USE_CURSES=1"
+fi
+
+# Let pinentry know which console to display in for `ssh-agent'.
+#
+# Since the 'ssh-agent' protocol does not contain a mechanism for telling
+# the agent on which terminal/display it is running, gpg-agent's
+# ssh-support can just use the TTY or X display when `gpg-agent' has been
+# started, which may be before the X session startup.  Therefore, when the
+# switched to the X session, or login remotely through SSH, the `pinentry'
+# will get popped up on whatever display the `gpg-agent' has been started
+# or may just fail.  In this case, a manual update is necessary.
+#
+# This will set startup TTY and X11 DISPLAY variables to the values of
+# this session.
+#
+# Credits:
+# * GnuPG: Commonly Seen Problems
+#   https://www.gnupg.org/documentation/manuals/gnupg/Common-Problems.html
+# * `gpg-agent(1)': option `--enable-ssh-support'
+# * http://blog.mrloop.com/workflow/2017/02/09/pin-entry.html
+#
+update-gpg-tty() {
+    gpg-connect-agent updatestartuptty /bye >/dev/null 2>&1 || true
+}
+autoload -U add-zsh-hook
+add-zsh-hook preexec update-gpg-tty
+
+# Delete all identities from the `gpg-agent', which is similar to
+# `ssh-add -D`.
+# Credit: http://blog.mrloop.com/workflow/2017/02/09/pin-entry.html
+ssh-delete() {
+    grep -o '^[A-Z0-9]*' ${HOME}/.gnupg/sshcontrol | \
+        xargs -I'%' rm ${HOME}/.gnupg/private-keys-v1.d/'%'.key
+    echo "" > ${HOME}/.gnupg/sshcontrol
+}
+
+#
+# Aliases
+#
+
+alias zhelp='run-help'
+
+alias ..='cd ../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias cd..='cd ..'
+alias d='dirs -v | head -10'
+alias po=popd
+alias pu=pushd
+
+if [[ -n "${IS_LINUX}" ]]; then
+    alias ls='ls --color=auto'
+elif [[ -n "${IS_BSD}" ]] || [[ -n "${IS_MAC}" ]]; then
+    alias ls='ls -G'
+fi
+alias l='ls -lah'
+alias la='ls -lAh'
+alias ll='ls -lh'
+alias lsa='ls -lah'
+
+# Do not use `GREP_OPTIONS`
+alias grep='grep --color=auto'
+
+exists "vi" || alias vi=vim
+exists "safe-rm" && alias rm=safe-rm
+
+#
+# Evnironment variables
+#
+
+# NOTE:
+# Generic environment variables and those needing been set only once
+# should go to `~/.profile'.
+
+# colors for BSD ls
+if [[ -n "${IS_BSD}" ]]; then
+    export CLICOLOR=1
+    export LSCOLORS=exfxcxdxbxegedabagacad
+fi
+
+# Color setup for `ls': `LS_COLORS'
+# NOTE: For unknown reason, the `LS_COLORS' variable get overridden when
+#       it is set in `~/.profile'.
+if exists dircolors; then
+    eval $(dircolors -b)
+fi
+
+#
+# Local configurations
+#
+
 [ -r ~/.zshrc.local ] && source ~/.zshrc.local || true
-
-
-# vim: set ts=8 sw=4 tw=0 fenc=utf-8 ft=zsh: #
