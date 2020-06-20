@@ -18,13 +18,16 @@
 # OS checks
 #
 
+IS_LINUX=false
+IS_MAC=false
+IS_BSD=false
 OS=$(uname -s)
 if [[ "${OS}" = 'Linux' ]]; then
-    IS_LINUX=1
+    IS_LINUX=true
 elif [[ "${OS}" = 'Darwin' ]]; then
-    IS_MAC=1
+    IS_MAC=true
 elif [[ "${OS}" = 'DragonFly' ]] || [[ "${OS}" =~ '.*BSD' ]]; then
-    IS_BSD=1
+    IS_BSD=true
 fi
 
 #
@@ -468,13 +471,13 @@ alias ..='cd ../'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias cd..='cd ..'
-alias d='dirs -v | head -10'
+alias d='dirs -v | head -n 10'
 alias po=popd
 alias pu=pushd
 
-if [[ -n "${IS_LINUX}" ]]; then
+if ${IS_LINUX} ]]; then
     alias ls='ls --color=auto'
-elif [[ -n "${IS_BSD}" ]] || [[ -n "${IS_MAC}" ]]; then
+elif ${IS_BSD} || ${IS_MAC}; then
     alias ls='ls -G'
 fi
 alias l='ls -lah'
@@ -497,7 +500,7 @@ exists "safe-rm" && alias rm=safe-rm
 # should go to `~/.profile'.
 
 # colors for BSD ls
-if [[ -n "${IS_BSD}" ]]; then
+if ${IS_BSD}; then
     export CLICOLOR=1
     export LSCOLORS=exfxcxdxbxegedabagacad
 fi
