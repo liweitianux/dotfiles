@@ -221,6 +221,15 @@ ccdef() {
     ${1:-cc} $@[2,-1] -dM -E - </dev/null
 }
 
+## Convert IP between dotted-decimal and hexdecimal notation
+# Credit: https://stackoverflow.com/a/6149254
+ip2hex() {
+    printf '%02X' $(echo "$1" | sed 's/\./ /g')
+}
+hex2ip() {
+    printf '%d.%d.%d.%d' $(echo "${1#0[xX]}" | sed 's/\(..\)/0x\1 /g')
+}
+
 #
 # Terminal settings
 #
