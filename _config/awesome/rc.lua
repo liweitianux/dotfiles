@@ -332,10 +332,10 @@ globalkeys = gears.table.join(
     -- Custom
     awful.key({                 }, "Print",
               function() awful.spawn.with_shell( "scrot -e 'mv $f ~/screenshots/' 2>/dev/null" ) end),
-    -- Wait for the key release so that scrot can grab the X server.
-    -- Credit: https://bbs.archlinux.org/viewtopic.php?pid=1698946#p1698946
-    awful.key({         "Shift" }, "Print",
-              function() awful.spawn.with_shell( "sleep 0.5 && scrot -s -e 'mv $f ~/screenshots/' 2>/dev/null" ) end),
+    awful.key({         "Shift" }, "Print", nil,
+              -- Bind to the key 'release' action
+              -- Credit: https://wiki.archlinux.org/index.php/Awesome#scrot:_Cannot_take_a_mouse_selected_screenshot_with_keyboard_shortcuts
+              function() awful.spawn.with_shell( "scrot -s -e 'mv $f ~/screenshots/' 2>/dev/null" ) end),
     awful.key({         "Mod1"  }, "F2",
               function() awful.spawn.with_shell( "rofi -show run" ) end),
     awful.key({         "Mod1"  }, "F3",
