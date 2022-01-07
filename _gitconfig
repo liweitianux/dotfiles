@@ -44,6 +44,7 @@
 [alias]
     ref-next = !sh -c 'git log --ancestry-path --format=%H ${1:-HEAD}..master | tail -n 1' -
     log-next = !git ref-next $1 | xargs git log
+    cp = cherry-pick
 
 # Large file storage
 [filter "lfs"]
