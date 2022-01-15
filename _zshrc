@@ -240,6 +240,18 @@ dec2ip() {
     printf '%d.%d.%d.%d' $(echo "obase=256; $1" | bc)
 }
 
+## Colorize patch / diff output
+# Credit: https://www.moritz.systems/bsd-tips-and-tricks/show-diff-output-in-color/
+cpatch() {
+    local _c1="$(tput setaf 1)$(tput bold)"  # red bold
+    local _c2="$(tput setaf 2)$(tput bold)"  # green bold
+    local _clr=$(tput sgr0)
+    sed -e 's/^-.*$/'${_c1}'&'${_clr}'/' -e 's/^+.*$/'${_c2}'&'${_clr}'/'
+}
+cdiff() {
+    diff -u "$@" | cpatch
+}
+
 #
 # Terminal settings
 #
