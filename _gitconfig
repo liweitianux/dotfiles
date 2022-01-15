@@ -15,6 +15,9 @@
 # Aaron LI
 #
 
+[init]
+    defaultBranch = master
+
 [core]
     # Use 'less' as the pager and display tabs of width 8
     pager = less -x1,9 -R
