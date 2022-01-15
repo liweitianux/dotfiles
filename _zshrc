@@ -230,6 +230,16 @@ hex2ip() {
     printf '%d.%d.%d.%d' $(echo "${1#0[xX]}" | sed 's/\(..\)/0x\1 /g')
 }
 
+## Convert IP between dotted-decimal and decimal notation
+# Credit: https://stackoverflow.com/a/24136051
+ip2dec() {
+    echo "$1" | awk 'BEGIN { RS = "." } { d = d * 256 + $1 } END { print d }'
+}
+# Credit: https://stackoverflow.com/a/31281331
+dec2ip() {
+    printf '%d.%d.%d.%d' $(echo "obase=256; $1" | bc)
+}
+
 #
 # Terminal settings
 #
