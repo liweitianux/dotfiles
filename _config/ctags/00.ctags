@@ -1,0 +1,15 @@
+#
+# Configuration for Universal Ctags
+# man uctags(1)
+#
+
+--recurse=yes
+--exclude=.git
+--exclude=.svn
+--exclude=build/*
+--exclude=vendor/*
+--exclude=node_modules/*
+--exclude=*.log
+--exclude=*.pyc
+--exclude=*.swp
+--exclude=*.bak
