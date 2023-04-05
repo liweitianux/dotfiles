@@ -5,3 +5,6 @@
 [submodule "_vim/pack/aly/start/ctrlp.vim"]
 	path = _vim/pack/aly/start/ctrlp.vim
 	url = https://github.com/ctrlpvim/ctrlp.vim
+[submodule "_vim/pack/aly/start/editorconfig.vim"]
+	path = _vim/pack/aly/start/editorconfig.vim
+	url = https://github.com/editorconfig/editorconfig-vim
