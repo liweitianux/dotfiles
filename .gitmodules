@@ -13,3 +13,6 @@
 [submodule "_vim/pack/aly/start/tagbar"]
 	path = _vim/pack/aly/start/tagbar
 	url = https://github.com/preservim/tagbar
+[submodule "_vim/pack/aly/start/vim-go"]
+	path = _vim/pack/aly/start/vim-go
+	url = https://github.com/fatih/vim-go
