@@ -36,10 +36,6 @@
 [commit]
     template = ~/.gitmessage
 
-[tag]
-    # Sign every tag
-    gpgSign = true
-
 [diff]
     # Show space and tabs
     wsErrorHighlight = all
