@@ -253,7 +253,7 @@ cdiff() {
     diff -u "$@" | cpatch
 }
 
-## Uncompress zlib data
+## Decompress zlib data
 # Credit: https://unix.stackexchange.com/a/49066
 zlibd() {
     # Prepend the gzip magic number and compress method.
@@ -528,7 +528,6 @@ alias lsa='ls -lah'
 alias grep='grep --color=auto'
 
 exists "vi" || alias vi=vim
-exists "safe-rm" && alias rm=safe-rm
 
 #
 # Evnironment variables
