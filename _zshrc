@@ -149,7 +149,8 @@ function gitpwd() {
     print "${(j:/:)${(@Oa)segs[1,NDIRS]}}"
 }
 
-PROMPT='%S%B%F{green}[%m]%s%(?.. %F{red}%??)%(1j. %F{yellow}%j&.)%b%f $(gitpwd)%B%(!.%F{red}.%F{green})%#${SSH_CONNECTION:+%#} %b%f'
+PROMPT='%S%B%F{green}[%m]%s%(?.. %F{red}%??)%(1j. %F{yellow}%j&.)%b%f $(gitpwd)
+%B%(!.%F{red}.%F{green})%#${SSH_CONNECTION:+%#} %b%f'
 RPROMPT=''
 SPROMPT='zsh: correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [(y)es (n)o (a)bort (e)dit]? '
 
