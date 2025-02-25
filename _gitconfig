@@ -16,7 +16,7 @@
 #
 
 [init]
-    defaultBranch = master
+    defaultBranch = main
 
 [core]
     # Use 'less' as the pager and display tabs of width 8
