@@ -216,6 +216,22 @@ function imv() {
     done
 }
 
+## Accept 'file:line[:]' to auto locate the line.
+function vim() {
+    local v fn line
+    case $1 in
+    *:[0-9]*: | *:[0-9]*)
+        v=${1%:}
+        fn=${v%:*}
+        line=${v##*:}
+        command vim +${line} ${fn}
+        ;;
+    *)
+        command vim "$@"
+        ;;
+    esac
+}
+
 ## Print pre-defined C macros
 # Credit: http://chneukirchen.org/dotfiles/.zshrc
 ccdef() {
